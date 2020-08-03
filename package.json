@@ -9,7 +9,15 @@
     "test": "jest --watchAll"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "moduleFileExtensions": [
+        "ts",
+        "tsx",
+        "js",
+        "json",
+        "jsx",
+        "node"
+    ]
   },
   "dependencies": {
     "@expo/vector-icons": "^10.0.0",
