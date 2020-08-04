@@ -9,22 +9,26 @@ describe('Creating an Order of Battle', () => {
         component = render(<HomeScreen />);
     });
 
-    it('should add the Order of Battle to the list', async () => {
+    it('should add the Order of Battle to the list', () => {
         const title = 'Test Order of Battle';
 
-        const addButton = component.getByTestId('addOrderOfBattleButton');
+        const addButton = component.getByTestId('add-order-of-battle-button');
         fireEvent.press(addButton);
 
-        await waitFor(() => component.getByTestId('addOrderOfBattleModal'));
-
-        const oOBTitle = component.getByTestId('orderOfBattleTitle');
+        const oOBTitle = component.getByPlaceholderText('Title');
         fireEvent.changeText(oOBTitle, title);
 
-        const createButton = component.getByTestId('createOrderOfBattleButton');
+        const createButton = component.getByTestId('create-order-of-battle-button');
         fireEvent.press(createButton);
 
-        await waitForElementToBeRemoved(() => component.queryByTestId('addOrderOfBattleModal'));
+        fireEvent.press(addButton);
 
-        expect(component.queryAllByTestId('orderOfBattle')).toHaveLength(1);
+        fireEvent.changeText(oOBTitle, title);
+
+        fireEvent.press(createButton);
+
+        expect(component.queryAllByTestId('order-of-battle')).toHaveLength(2);
+
+        expect(component.toJSON()).toMatchSnapshot();
     });
 });
