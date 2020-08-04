@@ -1,8 +1,19 @@
 import React from 'react';
-import {View, Button, Modal, TextInput, Text, ColorSchemeName, FlatList} from 'react-native';
+import {
+    View,
+    Button,
+    TextInput,
+    Text,
+    ColorSchemeName,
+    FlatList,
+    ListRenderItem
+} from 'react-native';
+
 
 type HomeState = {
-    isModalOpen: boolean
+    isModalOpen: boolean,
+    title: string,
+    ordersOfBattle: string[]
 }
 
 type HomeProps = {
@@ -14,7 +25,9 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
         super(props);
 
         this.state = {
-            isModalOpen: false
+            isModalOpen: false,
+            title: '',
+            ordersOfBattle: []
         };
     }
 
@@ -24,39 +37,32 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
         });
     }
 
+    _orderOfBattleRenderItem : ListRenderItem<string> = ({item}) : JSX.Element => (
+        <Text>{item}</Text>
+    )
+
     render() : JSX.Element {
         return (
             <View>
-                <Button
-                    title={'add-order-of-battle'}
-                    onPress={() => null}
-                    testID={'add-order-of-battle-button'}
-                >
-                    <Text>{'Add'}</Text>
-                </Button>
+                <View>
+                    <TextInput
+                        placeholder={'Title'}
+                        onChangeText={(title) => this.setState({title})}
+                        value={this.state.title}
+                    />
+                    <Button
+                        title={'create-order-of-battle'}
+                        onPress={() => this.setState({title: ''})}
+                        testID={'create-order-of-battle-button'}
+                    >
+                        <Text>{'Create'}</Text>
+                    </Button>
+                </View>
                 <FlatList
-                    renderItem={null}
+                    renderItem={this._orderOfBattleRenderItem}
                     keyExtractor={(item, index) => index.toString()}
-                    data={null}
+                    data={this.state.ordersOfBattle}
                 />
-                <Modal
-                    visible={this.state.isModalOpen}
-                >
-                    <View>
-                        <TextInput
-                            placeholder={'Title'}
-                            onChangeText={() => null}
-                            value={''}
-                        />
-                        <Button
-                            title={'create-order-of-battle'}
-                            onPress={() => null}
-                            testID={'create-order-of-battle-button'}
-                        >
-                            <Text>{'Create'}</Text>
-                        </Button>
-                    </View>
-                </Modal>
             </View>
         );
     }
