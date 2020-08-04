@@ -18,10 +18,11 @@ describe('Creating an Order of Battle', () => {
 
         expect(component.getByDisplayValue(title1)).toStrictEqual(oOBTitle);
 
-        const createButton = component.getByText('Create');
+        const createButton = component.getByText(/Create/i);
         fireEvent(createButton, 'onPress');
 
-        expect(component.queryByText(title1)).toBeTruthy();
+        const title1RegEx = new RegExp(title1);
+        expect(component.queryByText(title1RegEx)).toBeTruthy();
 
         expect(component.getAllByDisplayValue('')[0]).toStrictEqual(oOBTitle);
 

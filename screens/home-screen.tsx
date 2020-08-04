@@ -11,7 +11,6 @@ import {
 
 
 type HomeState = {
-    isModalOpen: boolean,
     title: string,
     ordersOfBattle: string[]
 }
@@ -25,21 +24,21 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
         super(props);
 
         this.state = {
-            isModalOpen: false,
             title: '',
             ordersOfBattle: []
         };
     }
 
-    toggleModal = () : void => {
-        this.setState({
-            isModalOpen: !this.state.isModalOpen
-        });
-    }
-
     _orderOfBattleRenderItem : ListRenderItem<string> = ({item}) : JSX.Element => (
         <Text>{item}</Text>
     )
+
+    addOrderOfBattle = () :void => {
+        this.setState({
+            ordersOfBattle: this.state.ordersOfBattle.concat(this.state.title),
+            title: ''
+        });
+    }
 
     render() : JSX.Element {
         return (
@@ -52,7 +51,7 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
                     />
                     <Button
                         title={'create-order-of-battle'}
-                        onPress={() => this.setState({title: ''})}
+                        onPress={this.addOrderOfBattle}
                         testID={'create-order-of-battle-button'}
                     >
                         <Text>{'Create'}</Text>
