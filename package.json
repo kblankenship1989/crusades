@@ -18,6 +18,8 @@
       "jsx",
       "node"
     ],
+    "setupFiles": ["react-native-gesture-handler/jestSetup"],
+  
     "setupFilesAfterEnv": ["@testing-library/jest-native/extend-expect"]
   },
   "dependencies": {

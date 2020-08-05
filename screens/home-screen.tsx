@@ -1,13 +1,15 @@
 import React from 'react';
 import {
     View,
-    Button,
     TextInput,
     Text,
-    ColorSchemeName,
     FlatList,
-    ListRenderItem
+    ListRenderItem,
+    TouchableOpacity
 } from 'react-native';
+import {Icon} from 'react-native-elements';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootParamList} from '../types';
 
 
 type HomeState = {
@@ -16,7 +18,7 @@ type HomeState = {
 }
 
 type HomeProps = {
-    colorScheme: ColorSchemeName
+    navigation: StackNavigationProp<RootParamList, 'Home'>
 }
 
 export class HomeScreen extends React.Component<HomeProps, HomeState> {
@@ -30,14 +32,22 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
     }
 
     _orderOfBattleRenderItem : ListRenderItem<string> = ({item}) : JSX.Element => (
-        <Text>{item}</Text>
+        <TouchableOpacity
+            onPress={() => this.props.navigation.navigate('OrderOfBattleSummary', {title: item})}
+        >
+            <Text>{item}</Text>
+        </TouchableOpacity>
     )
 
     addOrderOfBattle = () :void => {
+        const title = this.state.title;
+
         this.setState({
             ordersOfBattle: this.state.ordersOfBattle.concat(this.state.title),
             title: ''
         });
+
+        this.props.navigation.navigate('OrderOfBattleSummary', {title});
     }
 
     render() : JSX.Element {
@@ -49,13 +59,18 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
                         onChangeText={(title) => this.setState({title})}
                         value={this.state.title}
                     />
-                    <Button
-                        title={'create-order-of-battle'}
+                    <TouchableOpacity
                         onPress={this.addOrderOfBattle}
-                        testID={'create-order-of-battle-button'}
+                        disabled={this.state.title === ''}
+                        testID={'create-button'}
                     >
+                        <Icon
+                            name={'plus'}
+                            type={'font-awesome'}
+                            size={24}
+                        />
                         <Text>{'Create'}</Text>
-                    </Button>
+                    </TouchableOpacity>
                 </View>
                 <FlatList
                     renderItem={this._orderOfBattleRenderItem}
