@@ -4,12 +4,17 @@ import {RootParamList} from '../types/root-param-list';
 import {View} from 'react-native';
 import {Input, Icon} from 'react-native-elements';
 import {RequisitionPointsIcon} from '../components/requisition-points-icon';
+import {useColorScheme} from '../hooks/useColorScheme';
+import {appStyles} from '../styles';
 
 type OrderOfBattleSummaryProps = {
     route: RouteProp<RootParamList, 'OrderOfBattleSummary'>
 };
 
 export const OrderOfBattleSummary = ({route} : OrderOfBattleSummaryProps) : JSX.Element => {
+    const colorScheme = useColorScheme();
+    const styles = appStyles(colorScheme);
+
     const {
         title,
         faction,
@@ -29,10 +34,7 @@ export const OrderOfBattleSummary = ({route} : OrderOfBattleSummaryProps) : JSX.
                 placeholder={'Title'}
                 onChangeText={() => null}
                 value={title}
-                style={{
-                    fontSize: 18,
-                    margin: 10
-                }}
+                style={styles.textInput}
             />
             <Input
                 leftIcon={
@@ -45,10 +47,7 @@ export const OrderOfBattleSummary = ({route} : OrderOfBattleSummaryProps) : JSX.
                 placeholder={'Faction'}
                 onChangeText={() => null}
                 value={faction}
-                style={{
-                    fontSize: 18,
-                    margin: 10
-                }}
+                style={styles.textInput}
             />
             <RequisitionPointsIcon
                 currentPoints={requisitionPoints}

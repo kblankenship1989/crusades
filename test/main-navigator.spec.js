@@ -7,7 +7,7 @@ import {act} from 'react-test-renderer';
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
 
 describe('Creating an Order of Battle', () => {
-    it('should create a new order of battle with the title provided when the create button is clicked', async () => {
+    it('should create a new order of battle with the title provided when the create button is clicked and navigate to the summary page', async () => {
         const component = (<NavigationContainer>
             <MainNavigator />
         </NavigationContainer>);
@@ -115,5 +115,11 @@ describe('Creating an Order of Battle', () => {
 
         const titleInput = await queryByDisplayValue(title);
         expect(titleInput).toBeTruthy();
+    });
+
+    describe('and adding a crusade card to the order of battle', () => {
+        it('should create a new crusade card with the provided unit name and and navigate to the summary page', () => {
+            expect(false).toBeTruthy();
+        });
     });
 });

@@ -1699,6 +1699,11 @@
   resolved "https://mli.artifactory.deere.com:443/api/npm/npm/@types/stack-utils/-/stack-utils-1.0.1.tgz#0a851d3bd96498fa25c33ab7278ed3bd65f06c3e"
   integrity sha1-CoUdO9lkmPolwzq3J47TvWXwbD4=
 
+"@types/uuid@^8.0.1":
+  version "8.0.1"
+  resolved "https://mli.artifactory.deere.com:443/api/npm/npm/@types/uuid/-/uuid-8.0.1.tgz#42958a1a880640b139eea97a1640e1a3f61016d2"
+  integrity sha1-QpWKGogGQLE57ql6FkDho/YQFtI=
+
 "@types/yargs-parser@*":
   version "15.0.0"
   resolved "https://mli.artifactory.deere.com:443/api/npm/npm/@types/yargs-parser/-/yargs-parser-15.0.0.tgz#cb3f9f741869e20cce330ffbeb9271590483882d"

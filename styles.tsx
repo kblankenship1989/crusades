@@ -19,5 +19,9 @@ export const appStyles = (colorSchemeName : NonNullable<ColorSchemeName>) => {
             fontSize: 20,
             marginHorizontal: 10
         },
+        row: {
+            flex: 1,
+            flexDirection: 'row'
+        }
     });
 };

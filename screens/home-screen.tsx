@@ -2,9 +2,7 @@ import React from 'react';
 import {
     View,
     FlatList,
-    ListRenderItem,
-    StyleSheet,
-    Appearance
+    ListRenderItem
 } from 'react-native';
 import {Icon, Input, Button} from 'react-native-elements';
 import {StackNavigationProp} from '@react-navigation/stack';
