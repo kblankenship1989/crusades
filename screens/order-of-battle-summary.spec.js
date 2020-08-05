@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, fireEvent} from "@testing-library/react-native";
+import {render} from "@testing-library/react-native";
 import {OrderOfBattleSummary} from './order-of-battle-summary';
 
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
@@ -12,7 +12,8 @@ describe('Given the Order of Battle Summary Screen', () => {
                     orderOfBattle: {
                         id: '123',
                         title: 'Some cool title',
-                        faction: 'Some awesome faction'
+                        faction: 'Some awesome faction',
+                        requisitionPoints: 3
                     }
                 }
             }

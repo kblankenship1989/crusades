@@ -1,5 +1,5 @@
-const tintColorLight = '#2f95dc';
-const tintColorDark = '#fff';
+const tintColorLight = '#404040';
+const tintColorDark = '#8ba4c9';
 
 export default {
   light: {
@@ -11,7 +11,12 @@ export default {
     header: {
         background: '#404040',
         color: '#8ba4c9'
-    }
+    },
+    button: {
+        background: '#404040',
+        titleColor: '#8ba4c9'
+    },
+    iconColor: '#404040'
   },
   dark: {
     text: '#fff',
@@ -22,6 +27,11 @@ export default {
     header: {
         background: '#404040',
         color: '#8ba4c9'
-    }
+    },
+    button: {
+        titleColor: '#404040',
+        background: '#8ba4c9'
+    },
+    iconColor: '#8ba4c9'
   },
 };

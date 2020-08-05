@@ -36,16 +36,14 @@ describe('Given the Home Screen', () => {
         expect(component.toJSON()).toMatchSnapshot();
     });
 
-    it('should disable the create button when the title field is blank', () => {
-        const {component, testProps} = renderComponent();
+    it('should disable the create button when the title field is blank', async () => {
+        const {component} = renderComponent();
 
         const titleField = component.getByPlaceholderText('Title');
         expect(titleField.props.value).toStrictEqual('');
 
-        const createButton = component.getByTestId('create-button');
-        fireEvent(createButton, 'onPress');
-
-        expect(testProps.navigation.navigate).not.toHaveBeenCalled();
+        const createButton = await component.getByTestId('create-button');
+        expect(createButton.props.accessibilityState.disabled).toBe(true);
     });
 
     it('should enable the create button once a value is entered into the title field', () => {
@@ -58,7 +56,7 @@ describe('Given the Home Screen', () => {
 
         fireEvent(titleField, 'onChangeText', title);
 
-        const createButton = component.getByTestId('create-button');
+        const createButton = component.getByText('Create');
         fireEvent(createButton, 'onPress');
 
         const expectedOrderOfBattle = {
@@ -83,7 +81,7 @@ describe('Given the Home Screen', () => {
         fireEvent(titleField, 'onChangeText', title);
         expect(titleField.props.value).toStrictEqual(title);
 
-        const createButton = component.getByTestId('create-button');
+        const createButton = component.getByText('Create');
         fireEvent(createButton, 'onPress');
 
         expect(titleField.props.value).toStrictEqual('');

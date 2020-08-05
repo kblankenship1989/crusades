@@ -1,16 +1,18 @@
 import React from 'react';
 import {
     View,
-    Text,
     FlatList,
     ListRenderItem,
-    TouchableOpacity
+    StyleSheet,
+    Appearance
 } from 'react-native';
-import {Icon, Input} from 'react-native-elements';
+import {Icon, Input, Button} from 'react-native-elements';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList} from '../types/root-param-list';
 import {OrderOfBattle} from '../types/order-of-battle';
 import {v4} from 'uuid';
+import {appStyles} from '../styles';
+import {getColorScheme} from '../helpers/getColorScheme';
 
 
 type HomeState = {
@@ -33,11 +35,10 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
     }
 
     _orderOfBattleRenderItem : ListRenderItem<OrderOfBattle> = ({item}) : JSX.Element => (
-        <TouchableOpacity
+        <Button
             onPress={() => this.props.navigation.navigate('OrderOfBattleSummary', {orderOfBattle: item})}
-        >
-            <Text>{item.title}</Text>
-        </TouchableOpacity>
+            title={item.title}
+        />
     )
 
     addOrderOfBattle = () :void => {
@@ -45,7 +46,8 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
         const orderOfBattle : OrderOfBattle = {
             id: v4(),
             title: title,
-            faction: ''
+            faction: '',
+            requisitionPoints: 5
         };
 
         this.setState({
@@ -57,6 +59,9 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
     }
 
     render() : JSX.Element {
+        const colorScheme = getColorScheme();
+        const styles = appStyles(colorScheme);
+
         return (
             <View>
                 <View>
@@ -71,39 +76,22 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
                         placeholder={'Title'}
                         onChangeText={(title) => this.setState({title})}
                         value={this.state.title}
-                        style={{
-                            fontSize: 18,
-                            margin: 10
-                        }}
+                        style={styles.textInput}
                     />
-                    <TouchableOpacity
+                    <Button
                         onPress={this.addOrderOfBattle}
                         disabled={this.state.title === ''}
                         testID={'create-button'}
-                        style={{
-                            flex: 1,
-                            flexDirection: 'row',
-                            backgroundColor: '#404040',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            margin: 30
-                        }}
-                    >
-                        <Icon
+                        icon={<Icon
                             name={'plus'}
                             type={'font-awesome'}
                             size={18}
-                            color={'#8ba4c9'}
-                            style={{
-                                margin: 10
-                            }}
-                        />
-                        <Text style={{
-                            color: '#8ba4c9',
-                            fontSize: 18,
-                            marginVertical: 10
-                        }}>{'Create'}</Text>
-                    </TouchableOpacity>
+                            color={colorScheme === 'light' ? '#8ba4c9' : '#404040'}
+                        />}
+                        buttonStyle={styles.button}
+                        titleStyle={styles.buttonTitle}
+                        title={'Create'}
+                    />
                 </View>
                 <FlatList
                     renderItem={this._orderOfBattleRenderItem}

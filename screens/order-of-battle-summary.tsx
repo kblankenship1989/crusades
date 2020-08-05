@@ -3,7 +3,7 @@ import {RouteProp} from '@react-navigation/native';
 import {RootParamList} from '../types/root-param-list';
 import {View} from 'react-native';
 import {Input, Icon} from 'react-native-elements';
-import {OrderOfBattle} from '../types/order-of-battle';
+import {RequisitionPointsIcon} from '../components/requisition-points-icon';
 
 type OrderOfBattleSummaryProps = {
     route: RouteProp<RootParamList, 'OrderOfBattleSummary'>
@@ -12,7 +12,8 @@ type OrderOfBattleSummaryProps = {
 export const OrderOfBattleSummary = ({route} : OrderOfBattleSummaryProps) : JSX.Element => {
     const {
         title,
-        faction
+        faction,
+        requisitionPoints
     } = route.params.orderOfBattle;
 
     return (
@@ -48,6 +49,9 @@ export const OrderOfBattleSummary = ({route} : OrderOfBattleSummaryProps) : JSX.
                     fontSize: 18,
                     margin: 10
                 }}
+            />
+            <RequisitionPointsIcon
+                currentPoints={requisitionPoints}
             />
         </View>
     );
