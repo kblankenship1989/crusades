@@ -2,6 +2,7 @@ import React from 'react';
 import {fireEvent, render, waitFor, waitForElementToBeRemoved} from '@testing-library/react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {MainNavigator} from '../navigation/main-navigator';
+import {act} from 'react-test-renderer';
 
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
 
@@ -15,7 +16,8 @@ describe('Creating an Order of Battle', () => {
             queryByText,
             getByPlaceholderText,
             getByDisplayValue,
-            getByText
+            getByText,
+            queryByDisplayValue
         } = render(component);
 
         
@@ -34,8 +36,8 @@ describe('Creating an Order of Battle', () => {
         const oOBHeader = await queryByText('Order of Battle');
         expect(oOBHeader).toBeTruthy();
 
-        const titleDisplay = await queryByText(`Title: ${title}`);
-        expect(titleDisplay).toBeTruthy();
+        const titleInput = await queryByDisplayValue(title);
+        expect(titleInput).toBeTruthy();
     });
 
     it('should show the list of Orders of Battle on the home page', async () => {
@@ -84,7 +86,8 @@ describe('Creating an Order of Battle', () => {
             queryByText,
             getByPlaceholderText,
             getByText,
-            getByTestId
+            getByTestId,
+            queryByDisplayValue
         } = render(component);
 
         
@@ -110,7 +113,7 @@ describe('Creating an Order of Battle', () => {
         const oOBHeader = await queryByText('Order of Battle');
         expect(oOBHeader).toBeTruthy();
 
-        const titleDisplay = await queryByText(`Title: ${title}`);
-        expect(titleDisplay).toBeTruthy();
+        const titleInput = await queryByDisplayValue(title);
+        expect(titleInput).toBeTruthy();
     });
 });

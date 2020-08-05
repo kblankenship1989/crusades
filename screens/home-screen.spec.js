@@ -1,8 +1,13 @@
 import React from 'react';
 import {render, fireEvent} from "@testing-library/react-native";
 import {HomeScreen} from "./home-screen";
+import {v4} from 'uuid';
 
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
+jest.mock('uuid');
+
+const testId = '123';
+v4.mockReturnValue(testId);
 
 describe('Given the Home Screen', () => {
     const renderComponent = (overrides) => {
@@ -56,6 +61,31 @@ describe('Given the Home Screen', () => {
         const createButton = component.getByTestId('create-button');
         fireEvent(createButton, 'onPress');
 
-        expect(testProps.navigation.navigate).toHaveBeenCalledWith('OrderOfBattleSummary', {title});
+        const expectedOrderOfBattle = {
+            id: testId,
+            title,
+            faction: ''
+        };
+
+        expect(testProps.navigation.navigate).toHaveBeenCalledWith('OrderOfBattleSummary', {
+            orderOfBattle: expectedOrderOfBattle
+        });
+    });
+
+    it('should clear the title field afte clicking the create button', () => {
+        const {component} = renderComponent();
+
+        const title = 'test text';
+
+        const titleField = component.getByPlaceholderText('Title');
+        expect(titleField.props.value).toStrictEqual('');
+
+        fireEvent(titleField, 'onChangeText', title);
+        expect(titleField.props.value).toStrictEqual(title);
+
+        const createButton = component.getByTestId('create-button');
+        fireEvent(createButton, 'onPress');
+
+        expect(titleField.props.value).toStrictEqual('');
     });
 });

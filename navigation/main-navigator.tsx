@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator, StackNavigationOptions} from '@react-navigation/stack';
-import {RootParamList} from '../types';
+import {RootParamList} from '../types/root-param-list';
 import {HomeScreen} from '../screens/home-screen';
 import {OrderOfBattleSummary} from '../screens/order-of-battle-summary';
 import Colors from '../constants/Colors';
