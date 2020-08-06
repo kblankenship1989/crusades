@@ -1,11 +1,14 @@
+import { Faction } from "../../types/literals";
+
 export type Player = {
     firstName: string,
     lastName: string,
     middleName?: string,
-    preferredFaction?: string
+    preferredFaction: Faction
 };
 
 export const defaultPlayer : Player = {
     firstName: '',
-    lastName: ''
+    lastName: '',
+    preferredFaction: 'Unaligned'
 };

@@ -11,8 +11,7 @@ export type OrderOfBattle = {
     supplyUsed: number,
     crusadeCards: CrusadeCard[],
     goals?: string,
-    notableVictories?: string,
-    information?: string
+    notableVictories?: string[]
 };
 
 export const defaultOrderOfBattle : OrderOfBattle = {

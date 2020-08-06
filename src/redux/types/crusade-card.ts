@@ -1,26 +1,26 @@
-import {CombatTallies} from './combat-tallies';
+import {CombatTallies, defaultCombatTallies} from './combat-tallies';
 import {NameMessagePair} from "./name-message-pair";
 import {Rank} from './rank';
-import {Faction} from '../../types/literals';
+import {Faction, BattlefieldRoles, UnitType} from '../../types/literals';
 
 export type CrusadeCard = {
-    name: string,
+    name?: string,
     unit: string,
     faction: Faction,
-    battleFieldRole: 'HQ' | 'Troops' | 'Elites' | 'Heavy Support' | 'Flyer' | 'Dedicated Transport' | 'Fast Attack' | 'Fortification' | 'Lord Of War' | 'Select Role',
+    battleFieldRole: BattlefieldRoles,
     powerRating: number,
     experiencePoints: number,
     crusadePoints: number,
     selectableKeywords: string[],
-    unitType: 'Character' | 'Monster' | 'Vehicle' | 'Psyker' | 'Other' | 'Select Type',
+    unitType: UnitType[],
     equipment: string[],
     psychicPowers?: string[],
     warlordTraits?: string[],
     relics?: string[],
-    upgrads?: NameMessagePair[],
-    rules: NameMessagePair[],
+    upgrades?: string[],
+    rules: string[],
     combatTallies: CombatTallies,
-    rank: Rank
+    rank?: Rank
 };
 
 export const defaultCrusadeCard : CrusadeCard = {
@@ -32,9 +32,8 @@ export const defaultCrusadeCard : CrusadeCard = {
     experiencePoints: 0,
     crusadePoints: 0,
     selectableKeywords: [],
-    unitType: 'Select Type',
+    unitType: [],
     equipment: [],
     rules: [],
-    combatTallies: CombatTallies,
-    rank: Rank
+    combatTallies: defaultCombatTallies
 };
