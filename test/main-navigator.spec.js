@@ -2,7 +2,6 @@ import React from 'react';
 import {fireEvent, render, waitFor, waitForElementToBeRemoved} from '@testing-library/react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {MainNavigator} from '../navigation/main-navigator';
-import {act} from 'react-test-renderer';
 
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
 
@@ -11,7 +10,7 @@ describe('Creating an Order of Battle', () => {
         const component = (<NavigationContainer>
             <MainNavigator />
         </NavigationContainer>);
-        
+
         const {
             queryByText,
             getByPlaceholderText,
@@ -20,7 +19,7 @@ describe('Creating an Order of Battle', () => {
             queryByDisplayValue
         } = render(component);
 
-        
+
         const title = 'Test Order of Battle';
 
         await getByText('Crusades!!!');
@@ -44,7 +43,7 @@ describe('Creating an Order of Battle', () => {
         const component = (<NavigationContainer>
             <MainNavigator />
         </NavigationContainer>);
-        
+
         const {
             queryByText,
             getByPlaceholderText,
@@ -53,7 +52,7 @@ describe('Creating an Order of Battle', () => {
             queryByPlaceholderText
         } = render(component);
 
-        
+
         const title = 'Test Order of Battle';
 
         await waitFor(() => queryByText('Crusades!!!'));
@@ -81,7 +80,7 @@ describe('Creating an Order of Battle', () => {
         const component = (<NavigationContainer>
             <MainNavigator />
         </NavigationContainer>);
-        
+
         const {
             queryByText,
             getByPlaceholderText,
@@ -90,7 +89,7 @@ describe('Creating an Order of Battle', () => {
             queryByDisplayValue
         } = render(component);
 
-        
+
         const title = 'Test Order of Battle';
 
         await waitFor(() => queryByText('Crusades!!!'));

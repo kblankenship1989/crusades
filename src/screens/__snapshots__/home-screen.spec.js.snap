@@ -154,12 +154,6 @@ exports[`Given the Home Screen should render correctly 1`] = `
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "alignItems": "center",
-            "backgroundColor": "#404040",
-            "flex": 1,
-            "flexDirection": "row",
-            "justifyContent": "center",
-            "margin": 30,
             "opacity": 1,
           }
         }
@@ -168,7 +162,7 @@ exports[`Given the Home Screen should render correctly 1`] = `
         <View
           style={
             Object {
-              "alignItems": "center",
+              "alignItems": "baseline",
               "backgroundColor": "hsl(208, 8%, 90%)",
               "borderColor": "#2089dc",
               "borderRadius": 3,
@@ -187,11 +181,6 @@ exports[`Given the Home Screen should render correctly 1`] = `
             }
           >
             <View
-              style={
-                Object {
-                  "margin": 10,
-                }
-              }
               theme={
                 Object {
                   "colors": Object {
@@ -247,7 +236,8 @@ exports[`Given the Home Screen should render correctly 1`] = `
             style={
               Object {
                 "color": "hsl(208, 8%, 63%)",
-                "fontSize": 18,
+                "fontSize": 20,
+                "marginHorizontal": 10,
                 "paddingBottom": 1,
                 "paddingTop": 2,
                 "textAlign": "center",

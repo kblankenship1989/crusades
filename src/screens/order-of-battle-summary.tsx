@@ -5,7 +5,7 @@ import {View} from 'react-native';
 import {Input, Icon} from 'react-native-elements';
 import {RequisitionPointsIcon} from '../components/requisition-points-icon';
 import {useColorScheme} from '../hooks/useColorScheme';
-import {appStyles} from '../styles';
+import {appStyles} from '../../styles';
 
 type OrderOfBattleSummaryProps = {
     route: RouteProp<RootParamList, 'OrderOfBattleSummary'>

@@ -7,10 +7,10 @@ import {
 import {Icon, Input, Button} from 'react-native-elements';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList} from '../types/root-param-list';
-import {OrderOfBattle} from '../types/order-of-battle';
 import {v4} from 'uuid';
-import {appStyles} from '../styles';
+import {appStyles} from '../../styles';
 import {getColorScheme} from '../helpers/getColorScheme';
+import {OrderOfBattle, defaultOrderOfBattle} from '../redux/types/order-of-battle';
 
 
 type HomeState = {
@@ -34,7 +34,7 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
 
     _orderOfBattleRenderItem : ListRenderItem<OrderOfBattle> = ({item}) : JSX.Element => (
         <Button
-            onPress={() => this.props.navigation.navigate('OrderOfBattleSummary', {orderOfBattle: item})}
+            onPress={() => this.props.navigation.navigate('OrderOfBattleSummary', {orderOfBattleTitle: item.title})}
             title={item.title}
         />
     )
@@ -42,10 +42,8 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
     addOrderOfBattle = () :void => {
         const title = this.state.title;
         const orderOfBattle : OrderOfBattle = {
-            id: v4(),
-            title: title,
-            faction: '',
-            requisitionPoints: 5
+            ...defaultOrderOfBattle,
+            title
         };
 
         this.setState({
@@ -53,7 +51,7 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
             title: ''
         });
 
-        this.props.navigation.navigate('OrderOfBattleSummary', {orderOfBattle});
+        this.props.navigation.navigate('OrderOfBattleSummary', {orderOfBattleTitle: title});
     }
 
     render() : JSX.Element {

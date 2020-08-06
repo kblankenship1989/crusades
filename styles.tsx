@@ -1,5 +1,5 @@
 import {StyleSheet, ColorSchemeName} from 'react-native';
-import Colors from './constants/Colors';
+import Colors from './src/constants/Colors';
 
 export const appStyles = (colorSchemeName : NonNullable<ColorSchemeName>) => {
     const colorScheme = Colors[colorSchemeName];

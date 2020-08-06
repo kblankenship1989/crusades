@@ -39,6 +39,8 @@
         "no-mixed-spaces-and-tabs": "error",
         "semi": "error",
         "object-curly-spacing": "error",
-        "eol-last": "error"
+        "eol-last": "error",
+        "no-trailing-spaces": "error",
+        "indent": "error"
     }
 }

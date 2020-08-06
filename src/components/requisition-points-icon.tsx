@@ -2,7 +2,7 @@ import React from 'react';
 import {View} from 'react-native';
 import {Icon} from 'react-native-elements';
 import {getColorScheme} from '../helpers/getColorScheme';
-import {appStyles} from '../styles';
+import {appStyles} from '../../styles';
 
 type RequisitionPointsIconProps = {
     currentPoints: number

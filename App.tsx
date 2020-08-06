@@ -2,8 +2,8 @@ import {StatusBar} from 'expo-status-bar';
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
-import {useColorScheme} from './hooks/useColorScheme';
-import {MainNavigator} from './navigation/main-navigator';
+import {useColorScheme} from './src/hooks/useColorScheme';
+import {MainNavigator} from './src/navigation/main-navigator';
 import {NavigationContainer} from '@react-navigation/native';
 
 const App = () : JSX.Element => {
@@ -14,7 +14,7 @@ const App = () : JSX.Element => {
             <NavigationContainer>
                 <MainNavigator/>
             </NavigationContainer>
-            <StatusBar 
+            <StatusBar
                 style={colorScheme}
             />
         </SafeAreaProvider>
