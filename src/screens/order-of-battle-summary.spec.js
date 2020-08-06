@@ -9,12 +9,7 @@ describe('Given the Order of Battle Summary Screen', () => {
         const requiredProps = {
             route: {
                 params: {
-                    orderOfBattle: {
-                        id: '123',
-                        title: 'Some cool title',
-                        faction: 'Some awesome faction',
-                        requisitionPoints: 3
-                    }
+                    orderOfBattleTitle:  'Some cool title'
                 }
             }
         };
@@ -42,7 +37,7 @@ describe('Given the Order of Battle Summary Screen', () => {
         const {component, testProps} = renderComponent();
 
         const titleInput = await component.getByPlaceholderText('Title');
-        expect(titleInput.props.value).toStrictEqual(testProps.route.params.orderOfBattle.title);
+        expect(titleInput.props.value).toStrictEqual(testProps.route.params.orderOfBattleTitle);
     });
 
     it('should have an editable field showing the current faction', async () => {

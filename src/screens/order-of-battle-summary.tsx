@@ -15,11 +15,8 @@ export const OrderOfBattleSummary = ({route} : OrderOfBattleSummaryProps) : JSX.
     const colorScheme = useColorScheme();
     const styles = appStyles(colorScheme);
 
-    const {
-        title,
-        faction,
-        requisitionPoints
-    } = route.params.orderOfBattle;
+    const title = route.params.orderOfBattleTitle;
+
 
     return (
         <View>
@@ -36,7 +33,7 @@ export const OrderOfBattleSummary = ({route} : OrderOfBattleSummaryProps) : JSX.
                 value={title}
                 style={styles.textInput}
             />
-            <Input
+            {/* <Input
                 leftIcon={
                     <Icon
                         size={18}
@@ -51,7 +48,7 @@ export const OrderOfBattleSummary = ({route} : OrderOfBattleSummaryProps) : JSX.
             />
             <RequisitionPointsIcon
                 currentPoints={requisitionPoints}
-            />
+            /> */}
         </View>
     );
 };

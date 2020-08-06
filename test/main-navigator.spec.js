@@ -1,7 +1,7 @@
 import React from 'react';
 import {fireEvent, render, waitFor, waitForElementToBeRemoved} from '@testing-library/react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {MainNavigator} from '../navigation/main-navigator';
+import {MainNavigator} from '../src/navigation/main-navigator';
 
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
 

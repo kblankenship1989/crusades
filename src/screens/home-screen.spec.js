@@ -59,14 +59,9 @@ describe('Given the Home Screen', () => {
         const createButton = component.getByText('Create');
         fireEvent(createButton, 'onPress');
 
-        const expectedOrderOfBattle = {
-            id: testId,
-            title,
-            faction: ''
-        };
 
         expect(testProps.navigation.navigate).toHaveBeenCalledWith('OrderOfBattleSummary', {
-            orderOfBattle: expectedOrderOfBattle
+            orderOfBattleTitle: title
         });
     });
 

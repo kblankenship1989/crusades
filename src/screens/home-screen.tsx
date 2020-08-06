@@ -91,7 +91,7 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
                 </View>
                 <FlatList
                     renderItem={this._orderOfBattleRenderItem}
-                    keyExtractor={(item : OrderOfBattle) => item.id}
+                    keyExtractor={(item : OrderOfBattle) => item.title}
                     data={this.state.ordersOfBattle}
                 />
             </View>
