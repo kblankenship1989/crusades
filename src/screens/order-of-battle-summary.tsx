@@ -6,8 +6,10 @@ import {Input, Icon} from 'react-native-elements';
 import {RequisitionPointsIcon} from '../components/requisition-points-icon';
 import {useColorScheme} from '../hooks/useColorScheme';
 import {appStyles} from '../../styles';
+import { OrderOfBattle } from '../redux/types/order-of-battle';
 
-type OrderOfBattleSummaryProps = {
+export type OrderOfBattleSummaryProps = {
+    ordersOfBattle: OrderOfBattle[],
     route: RouteProp<RootParamList, 'OrderOfBattleSummary'>
 };
 
