@@ -6,19 +6,20 @@ import {Input, Icon} from 'react-native-elements';
 import {RequisitionPointsIcon} from '../components/requisition-points-icon';
 import {useColorScheme} from '../hooks/useColorScheme';
 import {appStyles} from '../../styles';
-import { OrderOfBattle } from '../redux/types/order-of-battle';
+import {OrderOfBattle, defaultOrderOfBattle} from '../redux/types/order-of-battle';
 
 export type OrderOfBattleSummaryProps = {
     ordersOfBattle: OrderOfBattle[],
     route: RouteProp<RootParamList, 'OrderOfBattleSummary'>
 };
 
-export const OrderOfBattleSummary = ({route} : OrderOfBattleSummaryProps) : JSX.Element => {
+export const OrderOfBattleSummary = ({route, ordersOfBattle} : OrderOfBattleSummaryProps) : JSX.Element => {
     const colorScheme = useColorScheme();
     const styles = appStyles(colorScheme);
 
     const title = route.params.orderOfBattleTitle;
 
+    const selectedOrderOfBattle = ordersOfBattle.find((orderOfBattle : OrderOfBattle) => orderOfBattle.title === title) || defaultOrderOfBattle;
 
     return (
         <View>
@@ -35,7 +36,7 @@ export const OrderOfBattleSummary = ({route} : OrderOfBattleSummaryProps) : JSX.
                 value={title}
                 style={styles.textInput}
             />
-            {/* <Input
+            <Input
                 leftIcon={
                     <Icon
                         size={18}
@@ -45,12 +46,12 @@ export const OrderOfBattleSummary = ({route} : OrderOfBattleSummaryProps) : JSX.
                 }
                 placeholder={'Faction'}
                 onChangeText={() => null}
-                value={faction}
+                value={selectedOrderOfBattle.faction}
                 style={styles.textInput}
             />
             <RequisitionPointsIcon
-                currentPoints={requisitionPoints}
-            /> */}
+                currentPoints={selectedOrderOfBattle.requisitionPoints}
+            />
         </View>
     );
 };

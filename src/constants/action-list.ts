@@ -1,0 +1,3 @@
+export const UPDATE_PLAYER  = 'UPDATE_PLAYER';
+
+export const ADD_ORDER_OF_BATTLE = 'ADD_ORDER_OF_BATTLE';

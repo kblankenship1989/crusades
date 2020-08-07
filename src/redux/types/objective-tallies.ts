@@ -14,4 +14,4 @@ export const defaultObjectiveTallies : ObjectiveTallies = {
     enemyUnitsDestroyedWithRanged: 0,
     enemyUnitsDestroyedWithMelee: 0
 
-}
+};

@@ -1,7 +1,7 @@
 import React from 'react';
 import {render, RenderAPI} from "@testing-library/react-native";
 import {OrderOfBattleSummary, OrderOfBattleSummaryProps} from './order-of-battle-summary';
-import { mockOrderOfBattle } from '../../__mocks__/mockStates';
+import {mockOrderOfBattle} from '../../__test_utils__/mockStates';
 
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
 
@@ -21,7 +21,7 @@ const defaultTestProps : OrderOfBattleSummaryProps = {
             orderOfBattleTitle:  'Some cool title'
         }
     }
-}
+};
 
 describe('Given the Order of Battle Summary Screen', () => {
     const renderComponent = (testProps : OrderOfBattleSummaryProps) : Test => {

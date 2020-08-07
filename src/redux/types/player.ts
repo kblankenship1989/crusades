@@ -1,4 +1,4 @@
-import { Faction } from "../../types/literals";
+import {Faction} from "../../types/literals";
 
 export type Player = {
     firstName: string,

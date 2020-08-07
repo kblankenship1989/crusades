@@ -13,3 +13,4 @@ export const defaultCombatTallies : CombatTallies = {
     currentBattleTally: defaultObjectiveTallies,
     totalTally: defaultObjectiveTallies
 }
+;
