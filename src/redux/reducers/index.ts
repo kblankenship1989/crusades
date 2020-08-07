@@ -1,9 +1,8 @@
-import {persistCombineReducers} from 'redux-persist';
+import {persistReducer} from 'redux-persist';
 import storage from 'redux-persist/es/storage';
-import {ReducersMapObject} from 'redux';
+import {combineReducers} from 'redux';
 
 import {player} from './player';
-import {State} from '../types/state';
 import {ordersOfBattle} from './orders-of-battle';
 
 const config = {
@@ -11,9 +10,9 @@ const config = {
     storage,
     debug: true
 };
-const rootReducers : ReducersMapObject<State, any> = {
+const rootReducers = combineReducers({
     player,
     ordersOfBattle
-};
+});
 
-export const rootReducer = persistCombineReducers(config, rootReducers);
+export const rootReducer = persistReducer(config, rootReducers);
