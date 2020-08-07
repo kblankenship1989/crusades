@@ -8,9 +8,10 @@ const addOrderOfBattle = (state: OrderOfBattle[] = [], payload: OrderOfBattle) :
 ]);
 
 export const ordersOfBattle = (state: OrderOfBattle[] = [], action: OrdersOfBattleAction) : OrderOfBattle[] => {
-    const actionMap = {
-        [ADD_ORDER_OF_BATTLE]: addOrderOfBattle
-    };
-
-    return action.type in actionMap ? actionMap[action.type](state,action.payload) : state;
+    switch (action.type) {
+    case ADD_ORDER_OF_BATTLE:
+        return addOrderOfBattle(state, action.payload);
+    default:
+        return state;
+    }
 };

@@ -4,6 +4,10 @@ import {UPDATE_PLAYER} from '../../constants/action-list';
 import {PlayerAction} from '../actions/player';
 
 describe('Given the player reducer', () => {
+    it('should initialize the state when no store is presisted', () => {
+        expect(player(undefined, {type: 'some strange action'})).toStrictEqual(defaultPlayer);
+    });
+
     describe('and an update to the player', () => {
         it('should store the updates to state', () => {
             const initialState : Player = {
@@ -13,7 +17,7 @@ describe('Given the player reducer', () => {
 
             const action : PlayerAction= {
                 type: UPDATE_PLAYER,
-                meta: {
+                payload: {
                     firstName: 'test',
                     middleName: 'test 2'
                 }
@@ -21,7 +25,7 @@ describe('Given the player reducer', () => {
 
             const expectedState : Player = {
                 ...initialState,
-                ...action.meta
+                ...action.payload
             };
 
             const returnedState : Player = player(initialState, action);
