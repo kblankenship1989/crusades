@@ -10,21 +10,27 @@ type Test = {
     component: RenderAPI
 };
 
-const defaultTestProps : OrderOfBattleSummaryProps = {
-    ordersOfBattle: [
-        mockOrderOfBattle()
-    ],
-    route: {
-        key: 'some-key',
-        name: 'OrderOfBattleSummary',
-        params: {
-            orderOfBattleTitle:  'Some cool title'
-        }
-    }
-};
-
 describe('Given the Order of Battle Summary Screen', () => {
-    const renderComponent = (testProps : OrderOfBattleSummaryProps) : Test => {
+    const renderComponent = (overrides? : Partial<OrderOfBattleSummaryProps>) : Test => {
+        const defaultTestProps : OrderOfBattleSummaryProps = {
+            ordersOfBattle: [
+                mockOrderOfBattle()
+            ],
+            route: {
+                key: 'some-key',
+                name: 'OrderOfBattleSummary',
+                params: {
+                    orderOfBattleTitle:  'Some cool title'
+                }
+            },
+            dispatch: jest.fn()
+        };
+
+        const testProps = {
+            ...defaultTestProps,
+            ...overrides
+        };
+
         const component = render(<OrderOfBattleSummary {...testProps} />);
 
         return {component, testProps};
@@ -37,14 +43,14 @@ describe('Given the Order of Battle Summary Screen', () => {
     // });
 
     it('should have an editable field showing the current title', async () => {
-        const {component, testProps} = renderComponent(defaultTestProps);
+        const {component, testProps} = renderComponent();
 
         const titleInput = await component.getByPlaceholderText('Title');
         expect(titleInput.props.value).toStrictEqual(testProps.route.params.orderOfBattleTitle);
     });
 
     it('should have an editable field showing the current faction', async () => {
-        const {component, testProps} = renderComponent(defaultTestProps);
+        const {component, testProps} = renderComponent();
 
         const factionInput = await component.getByPlaceholderText('Faction');
         expect(factionInput.props.value).toStrictEqual(testProps.ordersOfBattle[0].faction);

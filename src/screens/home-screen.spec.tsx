@@ -1,27 +1,23 @@
 import React from 'react';
-import {render, fireEvent} from "@testing-library/react-native";
-import {HomeScreen} from "./home-screen";
-import {v4} from 'uuid';
+import {render, fireEvent, RenderAPI} from "@testing-library/react-native";
+import {HomeScreen, HomeProps} from "./home-screen";
+import {mockNavigation} from '../../__test_utils__/mockNavigation';
 
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
-jest.mock('uuid');
 
-const testId = '123';
-v4.mockReturnValue(testId);
+type Test = {
+    testProps: HomeProps,
+    component: RenderAPI
+};
 
 describe('Given the Home Screen', () => {
-    const renderComponent = (overrides) => {
-        const requiredProps = {
-            navigation: {
-                navigate: jest.fn()
-            }
+    const renderComponent = (overrides? : Partial<HomeProps>) : Test => {
+        const defaultTestProps : HomeProps = {
+            navigation: mockNavigation
         };
 
-        const optionalProps = {};
-
         const testProps = {
-            ...requiredProps,
-            ...optionalProps,
+            ...defaultTestProps,
             ...overrides
         };
 

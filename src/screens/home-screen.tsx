@@ -18,7 +18,7 @@ type HomeState = {
     ordersOfBattle: OrderOfBattle[]
 }
 
-type HomeProps = {
+export type HomeProps = {
     navigation: StackNavigationProp<RootParamList, 'Home'>
 }
 
