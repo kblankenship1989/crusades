@@ -1,7 +1,8 @@
 import React from 'react';
-import {render, fireEvent, RenderAPI} from "@testing-library/react-native";
-import {HomeScreen, HomeProps} from "./home-screen";
+import {render, fireEvent, RenderAPI} from '@testing-library/react-native';
+import {HomeScreen, HomeProps} from './home-screen';
 import {mockNavigation} from '../../__test_utils__/mockNavigation';
+import {mockOrderOfBattle} from '../../__test_utils__/mockStates';
 
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
 
@@ -13,7 +14,12 @@ type Test = {
 describe('Given the Home Screen', () => {
     const renderComponent = (overrides? : Partial<HomeProps>) : Test => {
         const defaultTestProps : HomeProps = {
-            navigation: mockNavigation
+            navigation: mockNavigation,
+            createOrderOfBattle: jest.fn(),
+            ordersOfBattle: [
+                mockOrderOfBattle(),
+                mockOrderOfBattle()
+            ]
         };
 
         const testProps = {
@@ -56,9 +62,7 @@ describe('Given the Home Screen', () => {
         fireEvent(createButton, 'onPress');
 
 
-        expect(testProps.navigation.navigate).toHaveBeenCalledWith('OrderOfBattleSummary', {
-            orderOfBattleTitle: title
-        });
+        expect(testProps.navigation.navigate).toHaveBeenCalledWith('OrderOfBattleSummary');
     });
 
     it('should clear the title field afte clicking the create button', () => {

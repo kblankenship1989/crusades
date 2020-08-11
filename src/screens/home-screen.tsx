@@ -7,10 +7,11 @@ import {
 import {Icon, Input, Button} from 'react-native-elements';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList} from '../types/root-param-list';
-import {v4} from 'uuid';
 import {appStyles} from '../../styles';
 import {getColorScheme} from '../helpers/getColorScheme';
 import {OrderOfBattle, defaultOrderOfBattle} from '../redux/types/order-of-battle';
+import {homeScreenConnector} from './home-screen-connector';
+import {ConnectedProps} from 'react-redux';
 
 
 type HomeState = {
@@ -18,7 +19,7 @@ type HomeState = {
     ordersOfBattle: OrderOfBattle[]
 }
 
-export type HomeProps = {
+export type HomeProps = ConnectedProps<typeof homeScreenConnector> & {
     navigation: StackNavigationProp<RootParamList, 'Home'>
 }
 
@@ -34,7 +35,7 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
 
     _orderOfBattleRenderItem : ListRenderItem<OrderOfBattle> = ({item}) : JSX.Element => (
         <Button
-            onPress={() => this.props.navigation.navigate('OrderOfBattleSummary', {orderOfBattleTitle: item.title})}
+            onPress={() => this.props.navigation.navigate('OrderOfBattleSummary')}
             title={item.title}
         />
     )
@@ -51,7 +52,7 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
             title: ''
         });
 
-        this.props.navigation.navigate('OrderOfBattleSummary', {orderOfBattleTitle: title});
+        this.props.navigation.navigate('OrderOfBattleSummary');
     }
 
     render() : JSX.Element {

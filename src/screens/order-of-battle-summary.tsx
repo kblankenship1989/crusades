@@ -8,20 +8,13 @@ import {Input, Icon} from 'react-native-elements';
 import {RequisitionPointsIcon} from '../components/requisition-points-icon';
 import {useColorScheme} from '../hooks/useColorScheme';
 import {appStyles} from '../../styles';
-import {OrderOfBattle, defaultOrderOfBattle} from '../redux/types/order-of-battle';
 import {orderOfBattleSummaryConnector} from './order-of-battle-summary-connector';
 
-export type OrderOfBattleSummaryProps = ConnectedProps<typeof orderOfBattleSummaryConnector> & {
-    route: RouteProp<RootParamList, 'OrderOfBattleSummary'>
-};
+export type OrderOfBattleSummaryProps = ConnectedProps<typeof orderOfBattleSummaryConnector>;
 
-export const OrderOfBattleSummary = ({route, ordersOfBattle} : OrderOfBattleSummaryProps) : JSX.Element => {
+export const OrderOfBattleSummary = ({currentOrderOfBattle} : OrderOfBattleSummaryProps) : JSX.Element => {
     const colorScheme = useColorScheme();
     const styles = appStyles(colorScheme);
-
-    const title = route.params.orderOfBattleTitle;
-
-    const selectedOrderOfBattle = ordersOfBattle.find((orderOfBattle : OrderOfBattle) => orderOfBattle.title === title) || defaultOrderOfBattle;
 
     return (
         <View>
@@ -35,7 +28,7 @@ export const OrderOfBattleSummary = ({route, ordersOfBattle} : OrderOfBattleSumm
                 }
                 placeholder={'Title'}
                 onChangeText={() => null}
-                value={title}
+                value={currentOrderOfBattle.title}
                 style={styles.textInput}
             />
             <Input
@@ -48,11 +41,11 @@ export const OrderOfBattleSummary = ({route, ordersOfBattle} : OrderOfBattleSumm
                 }
                 placeholder={'Faction'}
                 onChangeText={() => null}
-                value={selectedOrderOfBattle.faction}
+                value={currentOrderOfBattle.faction}
                 style={styles.textInput}
             />
             <RequisitionPointsIcon
-                currentPoints={selectedOrderOfBattle.requisitionPoints}
+                currentPoints={currentOrderOfBattle.requisitionPoints}
             />
         </View>
     );

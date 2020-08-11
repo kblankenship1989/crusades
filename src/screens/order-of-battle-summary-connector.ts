@@ -1,9 +1,9 @@
-import {connect} from "react-redux";
-import {State} from "../redux/types/state";
-import {OrderOfBattleSummary} from "./order-of-battle-summary";
+import {connect} from 'react-redux';
+import {State} from '../redux/types/state';
+import {OrderOfBattleSummary} from './order-of-battle-summary';
 
 const mapStateToProps = (state: State) => ({
-    ordersOfBattle: state.ordersOfBattle
+    currentOrderOfBattle: state.currentOrderOfBattle,
 });
 
 export const orderOfBattleSummaryConnector = connect(mapStateToProps);

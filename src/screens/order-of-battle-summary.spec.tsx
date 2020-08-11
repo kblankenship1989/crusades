@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, RenderAPI} from "@testing-library/react-native";
+import {render, RenderAPI} from '@testing-library/react-native';
 import {OrderOfBattleSummary, OrderOfBattleSummaryProps} from './order-of-battle-summary';
 import {mockOrderOfBattle} from '../../__test_utils__/mockStates';
 
@@ -13,16 +13,7 @@ type Test = {
 describe('Given the Order of Battle Summary Screen', () => {
     const renderComponent = (overrides? : Partial<OrderOfBattleSummaryProps>) : Test => {
         const defaultTestProps : OrderOfBattleSummaryProps = {
-            ordersOfBattle: [
-                mockOrderOfBattle()
-            ],
-            route: {
-                key: 'some-key',
-                name: 'OrderOfBattleSummary',
-                params: {
-                    orderOfBattleTitle:  'Some cool title'
-                }
-            },
+            currentOrderOfBattle: mockOrderOfBattle(),
             dispatch: jest.fn()
         };
 
@@ -46,13 +37,13 @@ describe('Given the Order of Battle Summary Screen', () => {
         const {component, testProps} = renderComponent();
 
         const titleInput = await component.getByPlaceholderText('Title');
-        expect(titleInput.props.value).toStrictEqual(testProps.route.params.orderOfBattleTitle);
+        expect(titleInput.props.value).toStrictEqual(testProps.currentOrderOfBattle.title);
     });
 
     it('should have an editable field showing the current faction', async () => {
         const {component, testProps} = renderComponent();
 
         const factionInput = await component.getByPlaceholderText('Faction');
-        expect(factionInput.props.value).toStrictEqual(testProps.ordersOfBattle[0].faction);
+        expect(factionInput.props.value).toStrictEqual(testProps.currentOrderOfBattle.faction);
     });
 });

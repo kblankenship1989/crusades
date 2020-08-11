@@ -1,3 +1,8 @@
-import {rootReducer} from "../reducers";
+import {Player} from './player';
+import {OrderOfBattle} from './order-of-battle';
 
-export type State = ReturnType<typeof rootReducer>;
+export type State = {
+    player: Player,
+    ordersOfBattle: OrderOfBattle[],
+    currentOrderOfBattle: OrderOfBattle
+};
