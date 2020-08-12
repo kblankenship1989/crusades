@@ -1,10 +1,10 @@
-import {Faction} from '../../types/literals';
+import {Factions} from '../../types/consts';
 import {LoadCurrentOrderOfBattleActions} from '../actions/load-current-order-of-battle';
 import {LOAD_CURRENT_ORDER_OF_BATTLE} from '../../constants/action-list';
 import {defaultOrderOfBattle} from '../types/order-of-battle';
 import {AppThunk} from '../thunk';
 
-export const createOrderOfBattle = (title: string, faction : Faction) : AppThunk => (dispatch) : void => {
+export const createOrderOfBattle = (title: string, faction : Factions) : AppThunk => (dispatch) : void => {
     const action : LoadCurrentOrderOfBattleActions = {
         type: LOAD_CURRENT_ORDER_OF_BATTLE,
         payload: {

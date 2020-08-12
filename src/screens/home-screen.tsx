@@ -2,7 +2,8 @@ import React from 'react';
 import {
     View,
     FlatList,
-    ListRenderItem
+    ListRenderItem,
+    Picker
 } from 'react-native';
 import {Icon, Input, Button} from 'react-native-elements';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -12,10 +13,12 @@ import {getColorScheme} from '../helpers/getColorScheme';
 import {OrderOfBattle, defaultOrderOfBattle} from '../redux/types/order-of-battle';
 import {homeScreenConnector} from './home-screen-connector';
 import {ConnectedProps} from 'react-redux';
+import {Factions, factions} from '../types/consts';
 
 
 type HomeState = {
     title: string,
+    faction: Factions,
     ordersOfBattle: OrderOfBattle[]
 }
 
@@ -29,6 +32,7 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
 
         this.state = {
             title: '',
+            faction: factions[0],
             ordersOfBattle: []
         };
     }
@@ -75,6 +79,26 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
                         value={this.state.title}
                         style={styles.textInput}
                     />
+                    <View style={styles.pickerRow}>
+                        <Icon
+                            size={18}
+                            name={'sword-cross'}
+                            type={'material-community'}
+                        />
+                        <Picker
+                            style={styles.picker}
+                            selectedValue={factions.indexOf(this.state.faction)}
+                            onValueChange={(selectedValue : number) => this.setState({faction: factions[selectedValue]})}
+                        >
+                            {factions.map((faction, index) => (
+                                <Picker.Item
+                                    label={faction}
+                                    value={index}
+                                    key={faction}
+                                />
+                            ))}
+                        </Picker>
+                    </View>
                     <Button
                         onPress={this.addOrderOfBattle}
                         disabled={this.state.title === ''}

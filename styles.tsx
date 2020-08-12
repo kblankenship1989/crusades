@@ -22,6 +22,16 @@ export const appStyles = (colorSchemeName : NonNullable<ColorSchemeName>) => {
         row: {
             flex: 1,
             flexDirection: 'row'
+        },
+        picker: {
+            fontSize: 18,
+            marginHorizontal: 10,
+            flex: 1
+        },
+        pickerRow: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            margin: 10
         }
     });
 };

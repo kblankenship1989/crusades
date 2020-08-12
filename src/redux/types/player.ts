@@ -1,14 +1,14 @@
-import {Faction} from "../../types/literals";
+import {Factions, factions} from '../../types/consts';
 
 export type Player = {
     firstName: string,
     lastName: string,
     middleName?: string,
-    preferredFaction: Faction
+    preferredFaction: Factions
 };
 
 export const defaultPlayer : Player = {
     firstName: '',
     lastName: '',
-    preferredFaction: 'Unaligned'
+    preferredFaction: factions[0]
 };

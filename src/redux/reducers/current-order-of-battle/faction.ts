@@ -1,13 +1,13 @@
-import {Faction} from '../../../types/literals';
+import {Factions} from '../../../types/consts';
 import {defaultOrderOfBattle} from '../../types/order-of-battle';
 import {LoadCurrentOrderOfBattleActions} from '../../actions/load-current-order-of-battle';
 import {LOAD_CURRENT_ORDER_OF_BATTLE} from '../../../constants/action-list';
 
-const setFaction = (state : Faction , faction : Faction) : Faction => {
+const setFaction = (state : Factions , faction : Factions) : Factions => {
     return faction || state;
 };
 
-export const faction = (state : Faction = defaultOrderOfBattle.faction, action : LoadCurrentOrderOfBattleActions) : Faction => {
+export const faction = (state : Factions = defaultOrderOfBattle.faction, action : LoadCurrentOrderOfBattleActions) : Factions => {
     switch (action.type) {
     case LOAD_CURRENT_ORDER_OF_BATTLE:
         return setFaction(state, action.payload.faction);

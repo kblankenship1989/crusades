@@ -2,7 +2,7 @@ import {LOAD_CURRENT_ORDER_OF_BATTLE} from '../../../constants/action-list';
 import {faction} from './faction';
 import {LoadCurrentOrderOfBattleActions} from '../../actions/load-current-order-of-battle';
 import {mockOrderOfBattle} from '../../../../__test_utils__/mockStates';
-import {Faction} from '../../../types/literals';
+import {Factions, factions} from '../../../types/consts';
 import {defaultOrderOfBattle} from '../../types/order-of-battle';
 
 describe('Given the faction reducer', () => {
@@ -11,7 +11,7 @@ describe('Given the faction reducer', () => {
     });
 
     it('should update the current order of battle state to the select order\'s faction', () => {
-        const expectedFaction : Faction = 'Orks';
+        const expectedFaction : Factions = factions[2];
         const selectedOrderOfBattle = mockOrderOfBattle({
             faction: expectedFaction
         });
@@ -19,7 +19,7 @@ describe('Given the faction reducer', () => {
             type: LOAD_CURRENT_ORDER_OF_BATTLE,
             payload: selectedOrderOfBattle
         };
-        const state : Faction = 'Aeldari';
+        const state : Factions = factions[4];
         const actualFaction = faction(state, action);
 
         expect(actualFaction).toStrictEqual(expectedFaction);

@@ -1,21 +1,21 @@
 Arguments: 
-  /home/pi/.nvm/versions/node/v14.6.0/bin/node /usr/share/yarn/bin/yarn.js install --freeze-lockfile
+  /Users/kb06257/.nvm/versions/node/v12.9.0/bin/node /Users/kb06257/.yarn/bin/yarn.js add @react-native-community/picker
 
 PATH: 
-  /home/pi/.nvm/versions/node/v14.6.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games
+  /Users/kb06257/.jabba/jdk/zulu@1.8.212/Contents/Home/bin:/opt/apache-maven/bin:/Users/kb06257/spring-2.1.6.RELEASE/bin:/Users/kb06257/.yarn/bin:/Users/kb06257/.config/yarn/global/node_modules/.bin:/Users/kb06257/.nvm/versions/node/v12.9.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/apache-maven/bin:/Users/kb06257/spring-2.1.6.RELEASE/bin:/Users/kb06257/.yarn/bin:/Users/kb06257/.config/yarn/global/node_modules/.bin:/Users/kb06257/.nvm/versions/node/v12.9.0/bin
 
 Yarn version: 
-  1.22.4
+  1.17.3
 
 Node version: 
-  14.6.0
+  12.9.0
 
 Platform: 
-  linux arm
+  darwin x64
 
 Trace: 
   Error: connect ECONNREFUSED 192.43.65.163:443
-      at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1144:16)
+      at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1056:14)
 
 npm manifest: 
   {
@@ -363,9 +363,9 @@ Lockfile:
       js-tokens "^4.0.0"
   
   "@babel/parser@^7.0.0", "@babel/parser@^7.1.0", "@babel/parser@^7.10.4", "@babel/parser@^7.11.0", "@babel/parser@^7.11.1":
-    version "7.11.2"
-    resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.11.2.tgz#0882ab8a455df3065ea2dcb4c753b2460a24bead"
-    integrity sha512-Vuj/+7vLo6l1Vi7uuO+1ngCDNeVmNbTngcJFKCR/oEtz8tKz0CJxZEGmPt9KcIloZhOZ3Zit6xbpXT2MDlS9Vw==
+    version "7.11.3"
+    resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.11.3.tgz#9e1eae46738bcd08e23e867bab43e7b95299a8f9"
+    integrity sha512-REo8xv7+sDxkKvoxEywIdsNFiZLybwdI7hcT5uEPyQrSMB4YQ973BfC9OOrD/81MaIjh6UxdulIQXkjmiH3PcA==
   
   "@babel/plugin-external-helpers@^7.0.0":
     version "7.10.4"
@@ -1724,8 +1724,8 @@ Lockfile:
   
   "@types/hoist-non-react-statics@^3.3.0":
     version "3.3.1"
-    resolved "https://mli.artifactory.deere.com:443/api/npm/npm/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz#1124aafe5118cb591977aeb1ceaaed1070eb039f"
-    integrity sha1-ESSq/lEYy1kZd66xzqrtEHDrA58=
+    resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz#1124aafe5118cb591977aeb1ceaaed1070eb039f"
+    integrity sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==
     dependencies:
       "@types/react" "*"
       hoist-non-react-statics "^3.3.0"
@@ -1792,9 +1792,9 @@ Lockfile:
       "@types/react-native" "*"
   
   "@types/react-native@*":
-    version "0.63.4"
-    resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.63.4.tgz#4610b0df0e5f0db4c68d495754ad9f8bc3b8893f"
-    integrity sha512-IkQax0q5z5P4ttScELhrfrXtnFuADs/SP9kNwx2rfEuVjwF5xqhGjcY/YkiH2mSx+9QjI5S4zhxXOi3+kcnOkw==
+    version "0.63.6"
+    resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.63.6.tgz#ba3f9c9ed6f066cb964424cacc844ea58eac5148"
+    integrity sha512-qAv/VOyXAk4it9MOsQoyUjUnEJ3kAW1FCRGi0OvfQDKLH1/FFogVFvoB6xAlBNc6lPyBtCg+nvzj/ScYe0PqCQ==
     dependencies:
       "@types/react" "*"
   
@@ -1807,8 +1807,8 @@ Lockfile:
   
   "@types/react-redux@^7.1.9":
     version "7.1.9"
-    resolved "https://mli.artifactory.deere.com:443/api/npm/npm/@types/react-redux/-/react-redux-7.1.9.tgz#280c13565c9f13ceb727ec21e767abe0e9b4aec3"
-    integrity sha1-KAwTVlyfE863J+wh52er4Om0rsM=
+    resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.9.tgz#280c13565c9f13ceb727ec21e767abe0e9b4aec3"
+    integrity sha512-mpC0jqxhP4mhmOl3P4ipRsgTgbNofMRXJb08Ms6gekViLj61v1hOZEKWDCyWsdONr6EjEA6ZHXC446wdywDe0w==
     dependencies:
       "@types/hoist-non-react-statics" "^3.3.0"
       "@types/react" "*"
@@ -1816,9 +1816,9 @@ Lockfile:
       redux "^4.0.0"
   
   "@types/react@*", "@types/react@~16.9.23":
-    version "16.9.44"
-    resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.44.tgz#da84b179c031aef67dc92c33bd3401f1da2fa3bc"
-    integrity sha512-BtLoJrXdW8DVZauKP+bY4Kmiq7ubcJq+H/aCpRfvPF7RAT3RwR73Sg8szdc2YasbAlWBDrQ6Q+AFM0KwtQY+WQ==
+    version "16.9.45"
+    resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.45.tgz#b43ccf3d8a3d2020e6a48c8c8492e5a4bc10f097"
+    integrity sha512-vv950slTF5UZ5eDOf13b8qC1SD4rTvkqg3HfaUKzr17U97oeJZAa+dUaIHn0QoOJflNTIt6Pem9MmapULs9dkA==
     dependencies:
       "@types/prop-types" "*"
       csstype "^3.0.2"
@@ -2015,9 +2015,9 @@ Lockfile:
       uri-js "^4.2.2"
   
   anser@^1.4.9:
-    version "1.4.9"
-    resolved "https://registry.yarnpkg.com/anser/-/anser-1.4.9.tgz#1f85423a5dcf8da4631a341665ff675b96845760"
-    integrity sha512-AI+BjTeGt2+WFk4eWcqbQ7snZpDBt8SaLlj0RT2h5xfdWaiy51OjYvqwMrNzJLGy8iOAL6nKDITWO+rd4MkYEA==
+    version "1.4.10"
+    resolved "https://registry.yarnpkg.com/anser/-/anser-1.4.10.tgz#befa3eddf282684bd03b63dcda3927aef8c2e35b"
+    integrity sha512-hCv9AqTQ8ycjpSd3upOJd7vFwW1JaoYQ7tpham03GJ1ca8/65rqn0RpaWpItOAd6ylW9wAw6luXYPJIyPFVOww==
   
   ansi-colors@^1.0.1:
     version "1.1.0"
@@ -2535,14 +2535,14 @@ Lockfile:
       resolve "1.1.7"
   
   browserslist@^4.12.0, browserslist@^4.8.5:
-    version "4.13.0"
-    resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.13.0.tgz#42556cba011e1b0a2775b611cba6a8eca18e940d"
-    integrity sha512-MINatJ5ZNrLnQ6blGvePd/QOz9Xtu+Ne+x29iQSCHfkU5BugKVJwZKn/iiL8UbpIpa3JhviKjz+XxMo0m2caFQ==
+    version "4.14.0"
+    resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.14.0.tgz#2908951abfe4ec98737b72f34c3bcedc8d43b000"
+    integrity sha512-pUsXKAF2lVwhmtpeA3LJrZ76jXuusrNyhduuQs7CDFf9foT4Y38aQOserd2lMe5DSSrjf3fx34oHwryuvxAUgQ==
     dependencies:
-      caniuse-lite "^1.0.30001093"
-      electron-to-chromium "^1.3.488"
-      escalade "^3.0.1"
-      node-releases "^1.1.58"
+      caniuse-lite "^1.0.30001111"
+      electron-to-chromium "^1.3.523"
+      escalade "^3.0.2"
+      node-releases "^1.1.60"
   
   bs-logger@0.x:
     version "0.2.6"
@@ -2635,10 +2635,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
     integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
   
-  caniuse-lite@^1.0.30001093:
-    version "1.0.30001111"
-    resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001111.tgz#dd0ce822c70eb6c7c068e4a55c22e19ec1501298"
-    integrity sha512-xnDje2wchd/8mlJu8sXvWxOGvMgv+uT3iZ3bkIAynKOzToCssWCmkz/ZIkQBs/2pUB4uwnJKVORWQ31UkbVjOg==
+  caniuse-lite@^1.0.30001111:
+    version "1.0.30001112"
+    resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001112.tgz#0fffc3b934ff56ff0548c37bc9dad7d882bcf672"
+    integrity sha512-J05RTQlqsatidif/38aN3PGULCLrg8OYQOlJUKbeYVzC2mGZkZLIztwRlB3MtrfLmawUmjFlNJvy/uhwniIe1Q==
   
   capture-exit@^2.0.0:
     version "2.0.0"
@@ -3231,10 +3231,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
     integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
   
-  electron-to-chromium@^1.3.488:
-    version "1.3.523"
-    resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.523.tgz#494080b318ba929614eebd04405b94c359ea9333"
-    integrity sha512-D4/3l5DpciddD92IDRtpLearQSGzly8FwBJv+nITvLH8YJrFabpDFe4yuiOJh2MS4/EsXqyQTXyw1toeYPtshQ==
+  electron-to-chromium@^1.3.523:
+    version "1.3.526"
+    resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.526.tgz#0e004899edf75afc172cce1b8189aac5dca646aa"
+    integrity sha512-HiroW5ZbGwgT8kCnoEO8qnGjoTPzJxduvV/Vv/wH63eo2N6Zj3xT5fmmaSPAPUM05iN9/5fIEkIg3owTtV6QZg==
   
   emoji-regex@^7.0.1:
     version "7.0.3"
@@ -3324,7 +3324,7 @@ Lockfile:
       is-date-object "^1.0.1"
       is-symbol "^1.0.2"
   
-  escalade@^3.0.1:
+  escalade@^3.0.2:
     version "3.0.2"
     resolved "https://registry.yarnpkg.com/escalade/-/escalade-3.0.2.tgz#6a580d70edb87880f22b4c91d0d56078df6962c4"
     integrity sha512-gPYAU37hYCUhW5euPeR+Y74F7BL+IBsV93j5cvGriSaD1aG6MGsqsV1yamRdrWrb2j3aiZvb0X+UBOWpx3JWtQ==
@@ -4134,9 +4134,9 @@ Lockfile:
       pump "^3.0.0"
   
   get-stream@^5.0.0:
-    version "5.1.0"
-    resolved "https://registry.yarnpkg.com/get-stream/-/get-stream-5.1.0.tgz#01203cdc92597f9b909067c3e656cc1f4d3c4dc9"
-    integrity sha512-EXr1FOzrzTfGeL0gQdeFEvOMm2mzMOglyiOXSTpPC+iAjAKftbr3jpCMWynogwYnM+eSj9sHGc6wjIcDvYiygw==
+    version "5.2.0"
+    resolved "https://registry.yarnpkg.com/get-stream/-/get-stream-5.2.0.tgz#4966a1795ee5ace65e706c4b7beb71257d6e22d3"
+    integrity sha512-nBF+F1rAZVCu/p7rjzgA+Yb4lfYXrpl7a6VmJrU8wF9I1CKvP/QwPNZHnOlwbTkY6dvtFIzFMSyQXbLoTQPRpA==
     dependencies:
       pump "^3.0.0"
   
@@ -6268,7 +6268,7 @@ Lockfile:
       shellwords "^0.1.1"
       which "^1.3.1"
   
-  node-releases@^1.1.58:
+  node-releases@^1.1.60:
     version "1.1.60"
     resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.60.tgz#6948bdfce8286f0b5d0e5a88e8384e954dfe7084"
     integrity sha512-gsO4vjEdQaTusZAEebUWp2a5d7dF5DYoIpDG7WySnk7BuZDW+GPpHXoXXuYawRBr/9t5q54tirPz79kFIWg4dA==
@@ -6470,9 +6470,9 @@ Lockfile:
       mimic-fn "^1.0.0"
   
   onetime@^5.1.0:
-    version "5.1.1"
-    resolved "https://registry.yarnpkg.com/onetime/-/onetime-5.1.1.tgz#5c8016847b0d67fcedb7eef254751cfcdc7e9418"
-    integrity sha512-ZpZpjcJeugQfWsfyQlshVoowIIQ1qBGSVll4rfDq6JJVO//fesjoX808hXWfBjY+ROZgpKDI5TRSRBSoJiZ8eg==
+    version "5.1.2"
+    resolved "https://registry.yarnpkg.com/onetime/-/onetime-5.1.2.tgz#d0e96ebb56b07476df1dd9c4806e5237985ca45e"
+    integrity sha512-kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==
     dependencies:
       mimic-fn "^2.1.0"
   
@@ -6933,9 +6933,9 @@ Lockfile:
       use-subscription "^1.0.0"
   
   react-native-elements@^2.1.0:
-    version "2.1.0"
-    resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-2.1.0.tgz#d1e6a72d105336d3b32c8c05f5b6141f962fae9b"
-    integrity sha512-X487S6794bwQm3HPyYKuNB7cDhZWwmUKiPdPiacVas3AYqKWIEcPuGpVt6+JzSsnV6xWQe9c5lxST8y6e31kcg==
+    version "2.2.0"
+    resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-2.2.0.tgz#18e1269d31530fbbd079e5cc285b83b2bbf27676"
+    integrity sha512-OkXH96ecqDFcrjxzOWw2h3nt8TxX1ghzvJ/W4OGaxm7u7LC0LzE3SMAx/rh/Zyp/jkdXap032ZLm1mSrxrBuuQ==
     dependencies:
       "@types/react-native-vector-icons" "^6.4.5"
       color "^3.1.0"
@@ -7045,8 +7045,8 @@ Lockfile:
   
   react-redux@^7.2.1:
     version "7.2.1"
-    resolved "https://mli.artifactory.deere.com:443/api/npm/npm/react-redux/-/react-redux-7.2.1.tgz#8dedf784901014db2feca1ab633864dee68ad985"
-    integrity sha1-je33hJAQFNsv7KGrYzhk3uaK2YU=
+    resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-7.2.1.tgz#8dedf784901014db2feca1ab633864dee68ad985"
+    integrity sha512-T+VfD/bvgGTUA74iW9d2i5THrDQWbweXP0AVNI8tNd1Rk5ch1rnMiJkDD67ejw7YBKM4+REvcvqRuWJb7BLuEg==
     dependencies:
       "@babel/runtime" "^7.5.5"
       hoist-non-react-statics "^3.3.0"
@@ -7140,18 +7140,18 @@ Lockfile:
   
   redux-persist@^6.0.0:
     version "6.0.0"
-    resolved "https://mli.artifactory.deere.com:443/api/npm/npm/redux-persist/-/redux-persist-6.0.0.tgz#b4d2972f9859597c130d40d4b146fecdab51b3a8"
-    integrity sha1-tNKXL5hZWXwTDUDUsUb+zatRs6g=
+    resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-6.0.0.tgz#b4d2972f9859597c130d40d4b146fecdab51b3a8"
+    integrity sha512-71LLMbUq2r02ng2We9S215LtPu3fY0KgaGE0k8WRgl6RkqxtGfl7HUozz1Dftwsb0D/5mZ8dwAaPbtnzfvbEwQ==
   
   redux-thunk@^2.3.0:
     version "2.3.0"
-    resolved "https://mli.artifactory.deere.com:443/api/npm/npm/redux-thunk/-/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
-    integrity sha1-UcLBmhhe1Rh6qpotCLZm0NZGdiI=
+    resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
+    integrity sha512-km6dclyFnmcvxhAcrQV2AkZmPQjzPDjgVlQtR0EQjxZPyJ0BnMf3in1ryuR8A2qU0HldVRfxYXbFSKlI3N7Slw==
   
   redux@^4.0.0, redux@^4.0.5:
     version "4.0.5"
-    resolved "https://mli.artifactory.deere.com:443/api/npm/npm/redux/-/redux-4.0.5.tgz#4db5de5816e17891de8a80c424232d06f051d93f"
-    integrity sha1-TbXeWBbheJHeioDEJCMtBvBR2T8=
+    resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.5.tgz#4db5de5816e17891de8a80c424232d06f051d93f"
+    integrity sha512-VSz1uMAH24DM6MF72vcojpYPtrTUu3ByVWfPL1nPfVRb5mZVTve5GnNCUV53QM/BZ66xfWrm0CTWoM+Xlz8V1w==
     dependencies:
       loose-envify "^1.4.0"
       symbol-observable "^1.2.0"
@@ -8015,8 +8015,8 @@ Lockfile:
   
   symbol-observable@^1.2.0:
     version "1.2.0"
-    resolved "https://mli.artifactory.deere.com:443/api/npm/npm/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
-    integrity sha1-wiaIrtTqs83C3+rLtWFmBWCgCAQ=
+    resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
+    integrity sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==
   
   symbol-tree@^3.2.2:
     version "3.2.4"
@@ -8533,9 +8533,9 @@ Lockfile:
       iconv-lite "0.4.24"
   
   whatwg-fetch@>=0.10.0, whatwg-fetch@^3.0.0:
-    version "3.3.1"
-    resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-3.3.1.tgz#6c1acf37dec176b0fd6bc9a74b616bec2f612935"
-    integrity sha512-faXTmGDcLuEPBpJwb5LQfyxvubKiE+RlbmmweFGKjvIPFj4uHTTfdtTIkdTRhC6OSH9S9eyYbx8kZ0UEaQqYTA==
+    version "3.4.0"
+    resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-3.4.0.tgz#e11de14f4878f773fbebcde8871b2c0699af8b30"
+    integrity sha512-rsum2ulz2iuZH08mJkT0Yi6JnKhwdw4oeyMjokgxd+mmqYSd9cPpOQf01TIWgjxG/U4+QR+AwKq6lSbXVxkyoQ==
   
   whatwg-mimetype@^2.2.0, whatwg-mimetype@^2.3.0:
     version "2.3.0"

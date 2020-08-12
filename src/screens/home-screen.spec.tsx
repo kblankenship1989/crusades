@@ -3,6 +3,7 @@ import {render, fireEvent, RenderAPI} from '@testing-library/react-native';
 import {HomeScreen, HomeProps} from './home-screen';
 import {mockNavigation} from '../../__test_utils__/mockNavigation';
 import {mockOrderOfBattle} from '../../__test_utils__/mockStates';
+import {factions} from '../types/consts';
 
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
 
@@ -48,24 +49,30 @@ describe('Given the Home Screen', () => {
         expect(createButton.props.accessibilityState.disabled).toBe(true);
     });
 
-    it('should enable the create button once a value is entered into the title field', () => {
+    it('should enable the create button once a value is entered into the title and faction fields', async () => {
         const {component, testProps} = renderComponent();
 
         const title = 'test text';
+        const selectedFaction = 'Orks';
 
         const titleField = component.getByPlaceholderText('Title');
         expect(titleField.props.value).toStrictEqual('');
 
         fireEvent(titleField, 'onChangeText', title);
 
-        const createButton = component.getByText('Create');
+        const factionField = component.getByDisplayValue(factions[0]);
+
+        fireEvent(factionField, 'onValueChange', selectedFaction);
+
+        const createButton = await component.getByTestId('create-button');
+        expect(createButton.props.accessibilityState.disabled).toBe(false);
         fireEvent(createButton, 'onPress');
 
-
+        expect(testProps.createOrderOfBattle).toHaveBeenCalledWith(title, selectedFaction);
         expect(testProps.navigation.navigate).toHaveBeenCalledWith('OrderOfBattleSummary');
     });
 
-    it('should clear the title field afte clicking the create button', () => {
+    it('should clear the title field after clicking the create button', () => {
         const {component} = renderComponent();
 
         const title = 'test text';

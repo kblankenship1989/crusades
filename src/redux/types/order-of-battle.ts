@@ -1,9 +1,10 @@
 // import {CrusadeCard} from './crusade-card';
-import {Faction, RequisitionPoints} from '../../types/literals';
+import {RequisitionPoints} from '../../types/literals';
+import {Factions, factions} from '../../types/consts';
 
 export type OrderOfBattle = {
     title: string,
-    faction: Faction,
+    faction: Factions,
     requisitionPoints: RequisitionPoints,
     // battleTally: number,
     // battlesWon: number,
@@ -16,7 +17,7 @@ export type OrderOfBattle = {
 
 export const defaultOrderOfBattle : OrderOfBattle = {
     title: '',
-    faction: 'Unaligned',
+    faction: factions[0],
     requisitionPoints: 5,
     // battleTally: 0,
     // battlesWon: 0,
