@@ -2,15 +2,15 @@ import React from 'react';
 import {
     View,
     FlatList,
-    ListRenderItem,
-    Picker
+    ListRenderItem
 } from 'react-native';
+import {Picker} from '@react-native-community/picker';
 import {Icon, Input, Button} from 'react-native-elements';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList} from '../types/root-param-list';
 import {appStyles} from '../../styles';
 import {getColorScheme} from '../helpers/getColorScheme';
-import {OrderOfBattle, defaultOrderOfBattle} from '../redux/types/order-of-battle';
+import {OrderOfBattle} from '../redux/types/order-of-battle';
 import {homeScreenConnector} from './home-screen-connector';
 import {ConnectedProps} from 'react-redux';
 import {Factions, factions} from '../types/consts';
@@ -45,15 +45,10 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
     )
 
     addOrderOfBattle = () :void => {
-        const title = this.state.title;
-        const orderOfBattle : OrderOfBattle = {
-            ...defaultOrderOfBattle,
-            title
-        };
-
+        this.props.createOrderOfBattle(this.state.title, this.state.faction);
         this.setState({
-            ordersOfBattle: this.state.ordersOfBattle.concat(orderOfBattle),
-            title: ''
+            title: '',
+            faction: factions[0]
         });
 
         this.props.navigation.navigate('OrderOfBattleSummary');
@@ -86,14 +81,16 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
                             type={'material-community'}
                         />
                         <Picker
+                            accessibilityLabel={'Faction'}
+                            testID={'faction-picker'}
                             style={styles.picker}
-                            selectedValue={factions.indexOf(this.state.faction)}
-                            onValueChange={(selectedValue : number) => this.setState({faction: factions[selectedValue]})}
+                            selectedValue={this.state.faction}
+                            onValueChange={(itemValue, itemIndex) => this.setState({faction: factions[itemIndex]})}
                         >
-                            {factions.map((faction, index) => (
+                            {factions.map((faction) => (
                                 <Picker.Item
                                     label={faction}
-                                    value={index}
+                                    value={faction}
                                     key={faction}
                                 />
                             ))}
