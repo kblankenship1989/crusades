@@ -4,7 +4,7 @@ import {Icon} from 'react-native-elements';
 import {getColorScheme} from '../helpers/getColorScheme';
 import {appStyles} from '../../styles';
 
-type RequisitionPointsIconProps = {
+type RequisitionPointsSelectorProps = {
     currentPoints: number
 };
 
@@ -22,7 +22,7 @@ const getIconToRender = (index : number, currentPoints : number) : JSX.Element =
     );
 };
 
-export const RequisitionPointsIcon = ({currentPoints} : RequisitionPointsIconProps) : JSX.Element => {
+export const RequisitionPointsSelector = ({currentPoints} : RequisitionPointsSelectorProps) : JSX.Element => {
     return (
         <View
             testID={'requisition-points'}

@@ -1,11 +1,11 @@
 import React from 'react';
 import {createStackNavigator, StackNavigationOptions} from '@react-navigation/stack';
 import {RootParamList} from '../types/root-param-list';
-import {HomeScreen} from '../screens/home-screen';
-import {OrderOfBattleSummary} from '../screens/order-of-battle-summary';
 import Colors from '../constants/Colors';
 import {ColorSchemeName} from 'react-native';
 import {useColorScheme} from '../hooks/useColorScheme';
+import {OrderOfBattleSummaryConnector} from '../screens/order-of-battle-summary-connector';
+import {HomeScreenConnector} from '../screens/home-screen-connector';
 
 const MainStack = createStackNavigator<RootParamList>();
 
@@ -25,8 +25,8 @@ export const MainNavigator = () : JSX.Element => {
 
     return (
         <MainStack.Navigator initialRouteName={'Home'}>
-            <MainStack.Screen options={navigationOptions(colorScheme, 'Crusades!!!')} name={'Home'} component={HomeScreen}/>
-            <MainStack.Screen options={navigationOptions(colorScheme, 'Order of Battle')} name={'OrderOfBattleSummary'} component={OrderOfBattleSummary}/>
+            <MainStack.Screen options={navigationOptions(colorScheme, 'Crusades!!!')} name={'Home'} component={HomeScreenConnector}/>
+            <MainStack.Screen options={navigationOptions(colorScheme, 'Order of Battle')} name={'OrderOfBattleSummary'} component={OrderOfBattleSummaryConnector}/>
         </MainStack.Navigator>
     );
 };

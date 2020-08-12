@@ -22,8 +22,8 @@ describe('Given the orders of battle reducer', () => {
             };
 
             const expectedState : OrderOfBattle[] = [
-                ...initialState,
-                action.payload
+                action.payload,
+                ...initialState
             ];
 
             const returnedState : OrderOfBattle[] = ordersOfBattle(initialState, action);

@@ -1,52 +1,47 @@
 import React from 'react';
-import {RouteProp} from '@react-navigation/native';
 import {ConnectedProps} from 'react-redux';
 
-import {RootParamList} from '../types/root-param-list';
 import {View} from 'react-native';
-import {Input, Icon} from 'react-native-elements';
-import {RequisitionPointsIcon} from '../components/requisition-points-icon';
-import {useColorScheme} from '../hooks/useColorScheme';
-import {appStyles} from '../../styles';
+import {RequisitionPointsSelector} from '../components/requisition-points-selector';
 import {orderOfBattleSummaryConnector} from './order-of-battle-summary-connector';
+import {TitleInput} from '../components/title-input';
+import {FactionPicker} from '../components/faction-picker';
+import {factions} from '../types/consts';
+import {OrderOfBattle} from '../redux/types/order-of-battle';
+
+type OrderOfBattleSummaryState = OrderOfBattle & {
+    isDirty: boolean
+}
 
 export type OrderOfBattleSummaryProps = ConnectedProps<typeof orderOfBattleSummaryConnector>;
 
-export const OrderOfBattleSummary = ({currentOrderOfBattle} : OrderOfBattleSummaryProps) : JSX.Element => {
-    const colorScheme = useColorScheme();
-    const styles = appStyles(colorScheme);
+export class OrderOfBattleSummary extends React.Component<OrderOfBattleSummaryProps, OrderOfBattleSummaryState> {
+    constructor(props : OrderOfBattleSummaryProps) {
+        super(props);
 
-    return (
-        <View>
-            <Input
-                leftIcon={
-                    <Icon
-                        size={18}
-                        name={'format-title'}
-                        type={'material-community'}
-                    />
-                }
-                placeholder={'Title'}
-                onChangeText={() => null}
-                value={currentOrderOfBattle.title}
-                style={styles.textInput}
-            />
-            <Input
-                leftIcon={
-                    <Icon
-                        size={18}
-                        name={'sword-cross'}
-                        type={'material-community'}
-                    />
-                }
-                placeholder={'Faction'}
-                onChangeText={() => null}
-                value={currentOrderOfBattle.faction}
-                style={styles.textInput}
-            />
-            <RequisitionPointsIcon
-                currentPoints={currentOrderOfBattle.requisitionPoints}
-            />
-        </View>
-    );
-};
+        this.state = {
+            ...props.currentOrderOfBattle,
+            isDirty: false
+        };
+    }
+
+    render() : JSX.Element {
+        return (
+            <View>
+                <TitleInput
+                    value={this.state.title}
+                    onChangeText={(title) => this.setState({title, isDirty: true})}
+                    placeholder={'Order Of Battle'}
+                />
+                <FactionPicker
+                    selectedFaction={this.state.faction}
+                    onValueChange={(itemValue, itemIndex) => this.setState({faction: factions[itemIndex], isDirty: true})}
+                />
+
+                <RequisitionPointsSelector
+                    currentPoints={this.state.requisitionPoints}
+                />
+            </View>
+        );
+    }
+}

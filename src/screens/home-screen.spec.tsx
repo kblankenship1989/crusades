@@ -43,7 +43,7 @@ describe('Given the Home Screen', () => {
     it('should disable the create button when the title field is blank', async () => {
         const {component} = renderComponent();
 
-        const titleField = component.getByPlaceholderText('Title');
+        const titleField = component.getByPlaceholderText('Order Of Battle');
         expect(titleField.props.value).toStrictEqual('');
 
         const createButton = await component.getByTestId('create-button');
@@ -51,13 +51,13 @@ describe('Given the Home Screen', () => {
     });
 
     it('should enable the create button once a value is entered into the title and faction fields', async () => {
-        const {component, testProps} = renderComponent();
+        const {component} = renderComponent();
 
         const title = 'test text';
         const selectedFactionIndex = 6;
         const selectedFaction = factions[selectedFactionIndex];
 
-        const titleField = component.getByPlaceholderText('Title');
+        const titleField = component.getByPlaceholderText('Order Of Battle');
         expect(titleField.props.value).toStrictEqual('');
 
         fireEvent(titleField, 'onChangeText', title);
@@ -72,26 +72,5 @@ describe('Given the Home Screen', () => {
 
         const createButton = await component.getByTestId('create-button');
         expect(createButton).not.toBeDisabled();
-        fireEvent(createButton, 'onPress');
-
-        expect(testProps.createOrderOfBattle).toHaveBeenCalledWith(title, selectedFaction);
-        expect(testProps.navigation.navigate).toHaveBeenCalledWith('OrderOfBattleSummary');
-    });
-
-    it('should clear the title field after clicking the create button', () => {
-        const {component} = renderComponent();
-
-        const title = 'test text';
-
-        const titleField = component.getByPlaceholderText('Title');
-        expect(titleField.props.value).toStrictEqual('');
-
-        fireEvent(titleField, 'onChangeText', title);
-        expect(titleField.props.value).toStrictEqual(title);
-
-        const createButton = component.getByText('Create');
-        fireEvent(createButton, 'onPress');
-
-        expect(titleField.props.value).toStrictEqual('');
     });
 });

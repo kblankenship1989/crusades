@@ -1,10 +1,10 @@
-import {OrderOfBattle} from "../types/order-of-battle";
-import {OrdersOfBattleAction} from "../actions/orders-of-battle";
-import {ADD_ORDER_OF_BATTLE} from "../../constants/action-list";
+import {OrderOfBattle} from '../types/order-of-battle';
+import {OrdersOfBattleAction} from '../actions/orders-of-battle';
+import {ADD_ORDER_OF_BATTLE} from '../../constants/action-list';
 
 const addOrderOfBattle = (state: OrderOfBattle[] = [], payload: OrderOfBattle) : OrderOfBattle[] => ([
-    ...state,
-    payload
+    payload,
+    ...state
 ]);
 
 export const ordersOfBattle = (state: OrderOfBattle[] = [], action: OrdersOfBattleAction) : OrderOfBattle[] => {

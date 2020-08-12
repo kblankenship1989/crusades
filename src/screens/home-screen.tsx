@@ -14,12 +14,13 @@ import {OrderOfBattle} from '../redux/types/order-of-battle';
 import {homeScreenConnector} from './home-screen-connector';
 import {ConnectedProps} from 'react-redux';
 import {Factions, factions} from '../types/consts';
+import {FactionPicker} from '../components/faction-picker';
+import {TitleInput} from '../components/title-input';
 
 
 type HomeState = {
     title: string,
-    faction: Factions,
-    ordersOfBattle: OrderOfBattle[]
+    faction: Factions
 }
 
 export type HomeProps = ConnectedProps<typeof homeScreenConnector> & {
@@ -32,8 +33,7 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
 
         this.state = {
             title: '',
-            faction: factions[0],
-            ordersOfBattle: []
+            faction: factions[0]
         };
     }
 
@@ -61,41 +61,15 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
         return (
             <View>
                 <View>
-                    <Input
-                        leftIcon={
-                            <Icon
-                                size={18}
-                                name={'format-title'}
-                                type={'material-community'}
-                            />
-                        }
-                        placeholder={'Title'}
-                        onChangeText={(title) => this.setState({title})}
+                    <TitleInput
                         value={this.state.title}
-                        style={styles.textInput}
+                        onChangeText={(title) => this.setState({title})}
+                        placeholder={'Order Of Battle'}
                     />
-                    <View style={styles.pickerRow}>
-                        <Icon
-                            size={18}
-                            name={'sword-cross'}
-                            type={'material-community'}
-                        />
-                        <Picker
-                            accessibilityLabel={'Faction'}
-                            testID={'faction-picker'}
-                            style={styles.picker}
-                            selectedValue={this.state.faction}
-                            onValueChange={(itemValue, itemIndex) => this.setState({faction: factions[itemIndex]})}
-                        >
-                            {factions.map((faction) => (
-                                <Picker.Item
-                                    label={faction}
-                                    value={faction}
-                                    key={faction}
-                                />
-                            ))}
-                        </Picker>
-                    </View>
+                    <FactionPicker
+                        selectedFaction={this.state.faction}
+                        onValueChange={(itemValue, itemIndex) => this.setState({faction: factions[itemIndex]})}
+                    />
                     <Button
                         onPress={this.addOrderOfBattle}
                         disabled={this.state.title === ''}
@@ -108,13 +82,12 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
                         />}
                         buttonStyle={styles.button}
                         titleStyle={styles.buttonTitle}
-                        title={'Create'}
                     />
                 </View>
                 <FlatList
                     renderItem={this._orderOfBattleRenderItem}
                     keyExtractor={(item : OrderOfBattle) => item.title}
-                    data={this.state.ordersOfBattle}
+                    data={this.props.ordersOfBattle}
                 />
             </View>
         );

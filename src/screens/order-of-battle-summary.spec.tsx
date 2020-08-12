@@ -27,23 +27,9 @@ describe('Given the Order of Battle Summary Screen', () => {
         return {component, testProps};
     };
 
-    // it('should render correctly', () => {
-    //     const {component} = renderComponent();
+    it('should render correctly', () => {
+        const {component} = renderComponent();
 
-    //     expect(component.toJSON()).toMatchSnapshot();
-    // });
-
-    it('should have an editable field showing the current title', async () => {
-        const {component, testProps} = renderComponent();
-
-        const titleInput = await component.getByPlaceholderText('Title');
-        expect(titleInput.props.value).toStrictEqual(testProps.currentOrderOfBattle.title);
-    });
-
-    it('should have an editable field showing the current faction', async () => {
-        const {component, testProps} = renderComponent();
-
-        const factionInput = await component.getByPlaceholderText('Faction');
-        expect(factionInput.props.value).toStrictEqual(testProps.currentOrderOfBattle.faction);
+        expect(component.toJSON()).toMatchSnapshot();
     });
 });
