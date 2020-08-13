@@ -2,10 +2,10 @@ import React from 'react';
 import {
     View,
     FlatList,
-    ListRenderItem
+    ListRenderItem,
+    Text
 } from 'react-native';
-import {Picker} from '@react-native-community/picker';
-import {Icon, Input, Button} from 'react-native-elements';
+import {Icon, Button, ListItem} from 'react-native-elements';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList} from '../types/root-param-list';
 import {appStyles} from '../../styles';
@@ -16,6 +16,7 @@ import {ConnectedProps} from 'react-redux';
 import {Factions, factions} from '../types/consts';
 import {FactionPicker} from '../components/faction-picker';
 import {TitleInput} from '../components/title-input';
+import {Icons40k, factionsIconMap} from '../configs/40k-icons';
 
 
 type HomeState = {
@@ -37,12 +38,20 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
         };
     }
 
-    _orderOfBattleRenderItem : ListRenderItem<OrderOfBattle> = ({item}) : JSX.Element => (
-        <Button
-            onPress={() => this.props.navigation.navigate('OrderOfBattleSummary')}
-            title={item.title}
-        />
-    )
+    _orderOfBattleRenderItem : ListRenderItem<OrderOfBattle> = ({item}) : JSX.Element => {
+        const IconToRender = factionsIconMap[item.faction];
+
+        return (
+            <ListItem
+                leftAvatar={<IconToRender
+                    size={18}
+                    color={'#8ba4c9'}
+                />}
+                onPress={() => this.props.navigation.navigate('OrderOfBattleSummary')}
+                title={`${item.title} (${item.faction})`}
+            />
+        );
+    }
 
     addOrderOfBattle = () :void => {
         this.props.createOrderOfBattle(this.state.title, this.state.faction);
@@ -88,6 +97,7 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
                     renderItem={this._orderOfBattleRenderItem}
                     keyExtractor={(item : OrderOfBattle) => item.title}
                     data={this.props.ordersOfBattle}
+                    ListHeaderComponent={<Text>{'Saved Orders of Battle'}</Text>}
                 />
             </View>
         );

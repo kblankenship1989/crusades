@@ -11,27 +11,30 @@ export const  factions = [
 
 export type Factions = typeof factions[number];
 
-export enum BattlefieldRoles {
-    HQ = 'HQ',
-    TROOPS = 'Troops',
-    ELITES = 'Elites',
-    HEAVY_SUPPORT = 'Heavy Support',
-    FLYER = 'Flyer',
-    DEDICATED_TRANSPORT = 'Dedicated Transport',
-    FAST_ATTACK = 'Fast Attack',
-    FORTIFICATION = 'Fortification',
-    LORD_OF_WAR = 'Lord Of War',
-    SELECT_ROLE = 'Select Battlefield Role'
-}
+export const battlefieldRoles = [
+    'HQ',
+    'Troops',
+    'Elites',
+    'Heavy Support',
+    'Flyer',
+    'Dedicated Transport',
+    'Fast Attack',
+    'Fortification',
+    'Lord Of War',
+    'Select Battlefield Role'
+] as const;
 
-export enum UnitTypes {
-    CHARACTER = 'Character',
-    MONSTER = 'Monster',
-    VEHICLE = 'Vehicle',
-    PSYKER = 'Psyker',
-    OTHER = 'Other',
-    SWARM = 'Swarm',
-    DRONE = 'Drone',
-    NAMED_CHARACTER = 'Named Character'
-}
+export type BattlefieldRoles = typeof battlefieldRoles[number];
 
+export const unitTypes = [
+    'Character',
+    'Monster',
+    'Vehicle',
+    'Psyker',
+    'Other',
+    'Swarm',
+    'Drone',
+    'Named Character'
+] as const;
+
+export type UnitTypes = typeof unitTypes[number];
