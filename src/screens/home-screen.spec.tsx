@@ -19,8 +19,12 @@ describe('Given the Home Screen', () => {
             navigation: mockNavigation,
             createOrderOfBattle: jest.fn(),
             ordersOfBattle: [
-                mockOrderOfBattle(),
-                mockOrderOfBattle()
+                mockOrderOfBattle({
+                    title: 'title 1'
+                }),
+                mockOrderOfBattle({
+                    title: 'title 2'
+                })
             ]
         };
 

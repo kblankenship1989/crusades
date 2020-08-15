@@ -6,6 +6,7 @@ import {ColorSchemeName} from 'react-native';
 import {useColorScheme} from '../hooks/useColorScheme';
 import {OrderOfBattleSummaryConnector} from '../screens/order-of-battle-summary-connector';
 import {HomeScreenConnector} from '../screens/home-screen-connector';
+import {NavigationContainer} from '@react-navigation/native';
 
 const MainStack = createStackNavigator<RootParamList>();
 
@@ -24,9 +25,11 @@ export const MainNavigator = () : JSX.Element => {
     const colorScheme = useColorScheme();
 
     return (
-        <MainStack.Navigator initialRouteName={'Home'}>
-            <MainStack.Screen options={navigationOptions(colorScheme, 'Crusades!!!')} name={'Home'} component={HomeScreenConnector}/>
-            <MainStack.Screen options={navigationOptions(colorScheme, 'Order of Battle')} name={'OrderOfBattleSummary'} component={OrderOfBattleSummaryConnector}/>
-        </MainStack.Navigator>
+        <NavigationContainer>
+            <MainStack.Navigator initialRouteName={'Home'}>
+                <MainStack.Screen options={navigationOptions(colorScheme, 'Crusades!!!')} name={'Home'} component={HomeScreenConnector}/>
+                <MainStack.Screen options={navigationOptions(colorScheme, 'Order of Battle')} name={'OrderOfBattleSummary'} component={OrderOfBattleSummaryConnector}/>
+            </MainStack.Navigator>
+        </NavigationContainer>
     );
 };
