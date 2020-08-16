@@ -2,6 +2,43 @@
 
 exports[`Given the Order of Battle Summary Screen should render correctly 1`] = `
 <View>
+  <View>
+    <Text>
+      Summary
+    </Text>
+    <View
+      style={
+        Object {
+          "overflow": "hidden",
+        }
+      }
+    >
+      <View
+        accessible={true}
+        focusable={true}
+        onClick={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        testID="close-order-of-battle-summary"
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "transparent",
+              "justifyContent": "center",
+            }
+          }
+        >
+          <Text />
+        </View>
+      </View>
+    </View>
+  </View>
   <View
     style={
       Object {

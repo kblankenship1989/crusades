@@ -1,122 +1,151 @@
-// import React from 'react';
-// import {fireEvent, render, waitFor, waitForElementToBeRemoved} from '@testing-library/react-native';
-// import {App} from '../src/App';
+import React from 'react';
+import {fireEvent, render, waitFor, act} from '@testing-library/react-native';
+import {Provider} from 'react-redux';
+import {MainNavigator} from '../src/navigation/main-navigator';
+import {rootReducer} from '../src/redux/reducers';
+import {configureStore} from '../src/redux/store';
 
-// jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
+jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
 
-// describe('Creating an Order of Battle', () => {
-//     it('should create a new order of battle with the title provided when the create button is clicked and navigate to the summary page', async () => {
-//         const component = (<App/>);
+describe('Creating an Order of Battle', () => {
+    it('should create a new order of battle with the title provided when the create button is clicked and navigate to the summary page', async () => {
+        const mockStore = configureStore(rootReducer);
+        const component = (<Provider store={mockStore}>
+            <MainNavigator/>
+        </Provider>);
 
-//         const {
-//             queryByText,
-//             getByPlaceholderText,
-//             getByDisplayValue,
-//             getByText,
-//             queryByDisplayValue,
-//             queryByPlaceholderText,
-//             debug
-//         } = render(component);
-
-
-//         const title = 'Test Order of Battle';
-
-//         await waitFor(() => queryByText('Crusades!!!'));
-//         await waitFor(() => queryByPlaceholderText('Order Of Battle'));
-//         debug();
-//         const oOBTitle = await getByPlaceholderText('Order Of Battle');
-//         fireEvent(oOBTitle, 'onChangeText', title);
-
-//         const input = await getByDisplayValue(title);
-//         expect(input).toStrictEqual(oOBTitle);
-
-//         const createButton = getByText('Create');
-//         fireEvent(createButton, 'onPress');
-
-//         const oOBHeader = await queryByText('Order of Battle');
-//         expect(oOBHeader).toBeTruthy();
-
-//         const titleInput = await queryByDisplayValue(title);
-//         expect(titleInput).toBeTruthy();
-//     });
-
-//     it('should show the list of Orders of Battle on the home page', async () => {
-//         const component = (<App/>);
-
-//         const {
-//             queryByText,
-//             getByPlaceholderText,
-//             getByText,
-//             getByTestId,
-//             queryByPlaceholderText
-//         } = render(component);
+        const {
+            queryByText,
+            getByPlaceholderText,
+            getByText,
+            queryByDisplayValue,
+            getByTestId
+        } = render(component);
 
 
-//         const title = 'Test Order of Battle';
+        const title = 'Test Order of Battle';
 
-//         await waitFor(() => queryByText('Crusades!!!'));
-//         await waitFor(() => queryByPlaceholderText('Order Of Battle'));
-//         const oOBTitle = await getByPlaceholderText('Order Of Battle');
-//         fireEvent(oOBTitle, 'onChangeText', title);
+        await act(async () => {
+            getByText('Crusades!!!');
+            const oOBTitle = await getByPlaceholderText('Order Of Battle');
+            fireEvent(oOBTitle, 'onChangeText', title);
+        });
 
-//         const createButton = getByText('Create');
-//         fireEvent(createButton, 'onPress');
+        const input = await queryByDisplayValue(title);
+        expect(input).toBeTruthy();
 
-//         await waitFor(() => queryByText('Order of Battle'));
+        await act(async () => {
+            const createButton = getByTestId('create-button');
+            fireEvent(createButton, 'onPress');
+        });
+        const oOBHeader = await queryByText('Order of Battle');
+        expect(oOBHeader).toBeTruthy();
 
-//         const backButton = await getByTestId('header-back');
-//         fireEvent(backButton, 'onPress');
+        const titleInput = await queryByDisplayValue(title);
+        expect(titleInput).toBeTruthy();
+    });
 
-//         await waitForElementToBeRemoved(() => queryByText('Order of Battle'));
+    it('should show the list of Orders of Battle on the home page', async () => {
+        const mockStore = configureStore(rootReducer);
+        const component = (<Provider store={mockStore}>
+            <MainNavigator/>
+        </Provider>);
 
-//         const clearedTitle = await queryByPlaceholderText('Order Of Battle');
-//         expect(clearedTitle.props.value).toStrictEqual('');
-
-//         const oOBList = await queryByText(title);
-//         expect(oOBList).toBeTruthy();
-//     });
-
-//     it('should navigate to the Order of Battle Summary when a Order is clicked on the home page', async () => {
-//         const component = (<App/>);
-
-//         const {
-//             queryByText,
-//             getByPlaceholderText,
-//             getByText,
-//             getByTestId,
-//             queryByDisplayValue
-//         } = render(component);
+        const {
+            queryByText,
+            getByPlaceholderText,
+            getByTestId,
+            getByText,
+            queryAllByPlaceholderText
+        } = render(component);
 
 
-//         const title = 'Test Order of Battle';
+        const title = 'Test Order of Battle';
 
-//         await waitFor(() => queryByText('Crusades!!!'));
-//         const oOBTitle = await getByPlaceholderText('Order Of Battle');
-//         fireEvent(oOBTitle, 'onChangeText', title);
+        await act(async () => {
+            getByText('Crusades!!!');
+            const oOBTitle = await getByPlaceholderText('Order Of Battle');
+            fireEvent(oOBTitle, 'onChangeText', title);
+        });
 
-//         const createButton = getByText('Create');
-//         fireEvent(createButton, 'onPress');
+        await act(async () => {
+            const createButton = await getByTestId('create-button');
+            fireEvent(createButton, 'onPress');
+        });
 
-//         await waitFor(() => queryByText('Order of Battle'));
+        await act(async () => {
+            const cancelButton = await getByTestId('order-of-battle-cancel');
+            fireEvent(cancelButton, 'onPress');
+        });
 
-//         const backButton = await getByTestId('header-back');
-//         fireEvent(backButton, 'onPress');
+        const clearedTitle = await queryAllByPlaceholderText('Order Of Battle');
+        expect(clearedTitle[0].props.value).toStrictEqual('');
 
-//         await waitForElementToBeRemoved(() => queryByText('Order of Battle'));
+        const oOBList = await queryByText(title);
+        expect(oOBList).toBeTruthy();
+    });
 
-//         const oOBList = await getByText(title);
-//         fireEvent(oOBList, 'onPress');
+    it('should navigate to the Order of Battle Summary when a Order is clicked on the home page', async () => {
+        const mockStore = configureStore(rootReducer);
+        const component = (<Provider store={mockStore}>
+            <MainNavigator/>
+        </Provider>);
 
-//         const oOBHeader = await queryByText('Order of Battle');
-//         expect(oOBHeader).toBeTruthy();
+        const {
+            getByPlaceholderText,
+            getAllByPlaceholderText,
+            getByText,
+            getByTestId,
+            queryByDisplayValue
+        } = render(component);
 
-//         const titleInput = await queryByDisplayValue(title);
-//         expect(titleInput).toBeTruthy();
-//     });
 
-//     // describe('and adding a crusade card to the order of battle', () => {
-//     //     it('should create a new crusade card with the provided unit name and and navigate to the summary page', () => {
-//     //         expect(false).toBeTruthy();
-//     //     });
-//     // });
-// });
+        const title = 'Test Order of Battle';
+        const title2 = 'Test Other Order of Battle';
+
+        await act(async () => {
+            getByText('Crusades!!!');
+            const oOBTitle = await getByPlaceholderText('Order Of Battle');
+            fireEvent(oOBTitle, 'onChangeText', title);
+        });
+
+        await act(async () => {
+            const createButton = await getByTestId('create-button');
+            fireEvent(createButton, 'onPress');
+        });
+
+        await act(async () => {
+            const cancelButton = await getByTestId('order-of-battle-cancel');
+            fireEvent(cancelButton, 'onPress');
+        });
+
+        await act(async () => {
+            const oOBTitle = await getAllByPlaceholderText('Order Of Battle');
+            fireEvent(oOBTitle[0], 'onChangeText', title2);
+        });
+
+        await act(async () => {
+            const createButton = await getByTestId('create-button');
+            fireEvent(createButton, 'onPress');
+        });
+
+        await act(async () => {
+            const cancelButton = await getByTestId('order-of-battle-cancel');
+            fireEvent(cancelButton, 'onPress');
+        });
+
+        await act(async () => {
+            const oOBList = await getByText(title);
+            fireEvent(oOBList, 'onPress');
+        });
+
+        const titleInput = await queryByDisplayValue(title);
+        expect(titleInput).toBeTruthy();
+    });
+
+    // describe('and adding a crusade card to the order of battle', () => {
+    //     it('should create a new crusade card with the provided unit name and and navigate to the summary page', () => {
+    //         expect(false).toBeTruthy();
+    //     });
+    // });
+});

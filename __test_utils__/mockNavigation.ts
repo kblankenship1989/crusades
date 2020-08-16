@@ -1,5 +1,5 @@
-import {StackNavigationProp} from "@react-navigation/stack";
-import {RootParamList} from "../src/types/root-param-list";
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootParamList} from '../src/types/root-param-list';
 
 export const mockNavigation : StackNavigationProp<RootParamList, any> = {
     navigate: jest.fn(),

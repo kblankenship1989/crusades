@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {Icon, Button, ListItem, Card} from 'react-native-elements';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {RootParamList} from '../types/root-param-list';
+import {RootParamList} from '../navigation/root-param-list';
 import {appStyles} from '../../styles';
 import {getColorScheme} from '../helpers/getColorScheme';
 import {OrderOfBattle} from '../redux/types/order-of-battle';
@@ -18,6 +18,7 @@ import {Factions, factions} from '../types/consts';
 import {FactionPicker} from '../components/faction-picker';
 import {TitleInput} from '../components/title-input';
 import {factionsIconMap} from '../configs/40k-icons';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 
 type HomeState = {
@@ -48,9 +49,10 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
                     size={18}
                     color={'#8ba4c9'}
                 />}
-                onPress={() => this.props.navigation.navigate('OrderOfBattleSummary')}
+                onPress={() => this.props.navigation.push('OrderOfBattleSummary')}
                 title={item.title}
                 bottomDivider
+                testID={item.title}
             />
         );
     }
@@ -62,7 +64,7 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
             faction: factions[0]
         });
 
-        this.props.navigation.navigate('OrderOfBattleSummary');
+        this.props.navigation.push('OrderOfBattleSummary');
     }
 
     render() : JSX.Element {
@@ -70,39 +72,41 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
         const styles = appStyles(colorScheme);
 
         return (
-            <ScrollView>
-                <View>
-                    <TitleInput
-                        value={this.state.title}
-                        onChangeText={(title) => this.setState({title})}
-                        placeholder={'Order Of Battle'}
-                    />
-                    <FactionPicker
-                        selectedFaction={this.state.faction}
-                        onValueChange={(itemValue, itemIndex) => this.setState({faction: factions[itemIndex]})}
-                    />
-                    <Button
-                        onPress={this.addOrderOfBattle}
-                        disabled={this.state.title === ''}
-                        testID={'create-button'}
-                        icon={<Icon
-                            name={'plus'}
-                            type={'font-awesome'}
-                            size={18}
-                            color={colorScheme === 'light' ? '#8ba4c9' : '#404040'}
-                        />}
-                        buttonStyle={styles.button}
-                        titleStyle={styles.buttonTitle}
-                    />
-                </View>
-                <Card>
-                    <FlatList
-                        renderItem={this._orderOfBattleRenderItem}
-                        keyExtractor={(item : OrderOfBattle) => item.title}
-                        data={this.props.ordersOfBattle}
-                    />
-                </Card>
-            </ScrollView>
+            <SafeAreaView>
+                <ScrollView>
+                    <View>
+                        <TitleInput
+                            value={this.state.title}
+                            onChangeText={(title) => this.setState({title})}
+                            placeholder={'Order Of Battle'}
+                        />
+                        <FactionPicker
+                            selectedFaction={this.state.faction}
+                            onValueChange={(itemValue, itemIndex) => this.setState({faction: factions[itemIndex]})}
+                        />
+                        <Button
+                            onPress={this.addOrderOfBattle}
+                            disabled={this.state.title === ''}
+                            testID={'create-button'}
+                            icon={<Icon
+                                name={'plus'}
+                                type={'font-awesome'}
+                                size={18}
+                                color={colorScheme === 'light' ? '#8ba4c9' : '#404040'}
+                            />}
+                            buttonStyle={styles.button}
+                            titleStyle={styles.buttonTitle}
+                        />
+                    </View>
+                    <Card>
+                        <FlatList
+                            renderItem={this._orderOfBattleRenderItem}
+                            keyExtractor={(item : OrderOfBattle) => item.title}
+                            data={this.props.ordersOfBattle}
+                        />
+                    </Card>
+                </ScrollView>
+            </SafeAreaView>
         );
     }
 }
