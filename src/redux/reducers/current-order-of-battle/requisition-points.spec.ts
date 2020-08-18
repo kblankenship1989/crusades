@@ -17,7 +17,10 @@ describe('Given the requisition points reducer', () => {
         });
         const action : LoadCurrentOrderOfBattle = {
             type: LOAD_CURRENT_ORDER_OF_BATTLE,
-            payload: selectedOrderOfBattle
+            payload: {
+                currentOrderOfBattle: selectedOrderOfBattle,
+                ordersOfBattle: []
+            }
         };
         const state : RequisitionPoints = 1;
         const actualRequisitionPoints = requisitionPoints(state, action);
@@ -32,7 +35,9 @@ describe('Given the requisition points reducer', () => {
         });
         const action : AddOrderOfBattle = {
             type: ADD_ORDER_OF_BATTLE,
-            payload: newOrderOfBattle
+            payload: {
+                currentOrderOfBattle: newOrderOfBattle
+            }
         };
         const state : RequisitionPoints = 4;
         const actualRequisitionPoints = requisitionPoints(state, action);

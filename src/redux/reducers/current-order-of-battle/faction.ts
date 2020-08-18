@@ -11,7 +11,7 @@ export const faction = (state : Factions = defaultOrderOfBattle.faction, action 
     switch (action.type) {
     case ADD_ORDER_OF_BATTLE:
     case LOAD_CURRENT_ORDER_OF_BATTLE:
-        return setFaction(state, action.payload.faction);
+        return setFaction(state, action.payload.currentOrderOfBattle.faction);
     default:
         return state;
     }

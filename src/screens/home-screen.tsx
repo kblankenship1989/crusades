@@ -4,8 +4,10 @@ import {
     FlatList,
     ListRenderItem,
     Text,
-    ScrollView
+    ScrollView,
+    Alert
 } from 'react-native';
+import Swipeout, {SwipeoutButtonProperties} from 'react-native-swipeout';
 import {Icon, Button, ListItem, Card} from 'react-native-elements';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList} from '../navigation/root-param-list';
@@ -31,6 +33,26 @@ export type HomeProps = ConnectedProps<typeof homeScreenConnector> & {
 }
 
 export class HomeScreen extends React.Component<HomeProps, HomeState> {
+    prompDeleteOrderOfBattle = (title: string, index: number): void => {
+        console.log(title, index);
+        Alert.alert(
+            'Delete Order Of Battle?',
+            `Are you sure you want to delete: ${title}?`,
+            [
+                {
+                    text: 'Cancel',
+                    style: 'cancel'
+                },
+                {
+                    text: 'Delete',
+                    onPress: () => this.props.deleteSelectedOrderOfBattle(index)
+                }
+            ],
+            {
+                cancelable: false
+            }
+        );
+    }
     constructor(props : HomeProps) {
         super(props);
 
@@ -40,20 +62,42 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
         };
     }
 
-    _orderOfBattleRenderItem : ListRenderItem<OrderOfBattle> = ({item}) : JSX.Element => {
+    selectOrderOfBattle = (index: number) : void => {
+        this.props.loadSelectedOrderOfBattle(index);
+        this.props.navigation.push('OrderOfBattleSummary');
+    }
+
+    _orderOfBattleRenderItem : ListRenderItem<OrderOfBattle> = ({item, index}) : JSX.Element => {
         const IconToRender = factionsIconMap[item.faction];
 
+        const rightButtons : SwipeoutButtonProperties[] = [
+            {
+                text:'Delete',
+                type:'delete',
+                onPress: () => this.prompDeleteOrderOfBattle(item.title, index)
+            }
+        ];
+
         return (
-            <ListItem
-                leftAvatar={<IconToRender
-                    size={18}
-                    color={'#8ba4c9'}
-                />}
-                onPress={() => this.props.navigation.push('OrderOfBattleSummary')}
-                title={item.title}
-                bottomDivider
-                testID={item.title}
-            />
+            <Swipeout
+                right={rightButtons}
+                autoClose={true}
+                onOpen={(section, item, direction) => {
+                    console.log(section, item, direction);
+                }}
+            >
+                <ListItem
+                    leftAvatar={<IconToRender
+                        size={18}
+                        color={'#8ba4c9'}
+                    />}
+                    onPress={() => this.selectOrderOfBattle(index)}
+                    onLongPress={() => this.prompDeleteOrderOfBattle(item.title, index)}
+                    title={item.title}
+                    bottomDivider
+                    testID={item.title}
+                />
+            </Swipeout>
         );
     }
 
@@ -94,8 +138,6 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
                                 size={18}
                                 color={colorScheme === 'light' ? '#8ba4c9' : '#404040'}
                             />}
-                            buttonStyle={styles.button}
-                            titleStyle={styles.buttonTitle}
                         />
                     </View>
                     <Card>

@@ -17,7 +17,10 @@ describe('Given the title reducer', () => {
         });
         const action : LoadCurrentOrderOfBattle = {
             type: LOAD_CURRENT_ORDER_OF_BATTLE,
-            payload: selectedOrderOfBattle
+            payload: {
+                currentOrderOfBattle: selectedOrderOfBattle,
+                ordersOfBattle: []
+            }
         };
         const state = 'A much less awesome title';
         const actualTitle = title(state, action);
@@ -32,7 +35,9 @@ describe('Given the title reducer', () => {
         });
         const action : AddOrderOfBattle = {
             type: ADD_ORDER_OF_BATTLE,
-            payload: selectedOrderOfBattle
+            payload: {
+                currentOrderOfBattle: selectedOrderOfBattle
+            }
         };
         const state = 'A much less awesome title';
         const actualTitle = title(state, action);

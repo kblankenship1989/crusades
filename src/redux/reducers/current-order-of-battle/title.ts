@@ -10,7 +10,7 @@ export const title = (state : string = defaultOrderOfBattle.title, action : Orde
     switch (action.type) {
     case ADD_ORDER_OF_BATTLE:
     case LOAD_CURRENT_ORDER_OF_BATTLE:
-        return setTitle(state, action.payload.title);
+        return setTitle(state, action.payload.currentOrderOfBattle.title);
     default:
         return state;
     }

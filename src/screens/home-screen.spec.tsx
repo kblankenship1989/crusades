@@ -18,6 +18,8 @@ describe('Given the Home Screen', () => {
         const defaultTestProps : HomeProps = {
             navigation: mockNavigation,
             createOrderOfBattle: jest.fn(),
+            loadSelectedOrderOfBattle: jest.fn(),
+            deleteSelectedOrderOfBattle: jest.fn(),
             ordersOfBattle: [
                 mockOrderOfBattle({
                     title: 'title 1'

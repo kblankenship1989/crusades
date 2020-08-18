@@ -11,7 +11,7 @@ export const requisitionPoints = (state : RequisitionPoints = defaultOrderOfBatt
     switch (action.type) {
     case ADD_ORDER_OF_BATTLE:
     case LOAD_CURRENT_ORDER_OF_BATTLE:
-        return setRequisitionPoints(state, action.payload.requisitionPoints);
+        return setRequisitionPoints(state, action.payload.currentOrderOfBattle.requisitionPoints);
     default:
         return state;
     }

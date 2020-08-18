@@ -17,7 +17,10 @@ describe('Given the faction reducer', () => {
         });
         const action : LoadCurrentOrderOfBattle = {
             type: LOAD_CURRENT_ORDER_OF_BATTLE,
-            payload: selectedOrderOfBattle
+            payload: {
+                currentOrderOfBattle: selectedOrderOfBattle,
+                ordersOfBattle: []
+            }
         };
         const state : Factions = factions[4];
         const actualFaction = faction(state, action);
@@ -32,7 +35,9 @@ describe('Given the faction reducer', () => {
         });
         const action : AddOrderOfBattle = {
             type: ADD_ORDER_OF_BATTLE,
-            payload: newOrderOfBattle
+            payload: {
+                currentOrderOfBattle: newOrderOfBattle
+            }
         };
         const state : Factions = factions[4];
         const actualFaction = faction(state, action);
