@@ -1,8 +1,8 @@
 import {ordersOfBattle} from './orders-of-battle';
 import {OrderOfBattle} from '../types/order-of-battle';
 import {mockOrderOfBattle} from '../../../__test_utils__/mockStates';
-import {LoadCurrentOrderOfBattle, AddOrderOfBattle, DeleteOrderOfBattle} from '../actions/orders-of-battle';
-import {ADD_ORDER_OF_BATTLE, LOAD_CURRENT_ORDER_OF_BATTLE, DELETE_ORDER_OF_BATTLE} from '../../constants/action-list';
+import {LoadCurrentOrderOfBattle, AddOrderOfBattle, DeleteOrderOfBattle, SaveCurrentOrderOfBattle} from '../actions/orders-of-battle';
+import {ADD_ORDER_OF_BATTLE, LOAD_CURRENT_ORDER_OF_BATTLE, DELETE_ORDER_OF_BATTLE, SAVE_CURRENT_ORDER_OF_BATTLE} from '../../constants/action-list';
 
 describe('Given the orders of battle reducer', () => {
     it('should initialize the state when no store is presisted', () => {
@@ -71,6 +71,34 @@ describe('Given the orders of battle reducer', () => {
                 type: DELETE_ORDER_OF_BATTLE,
                 payload: {
                     ordersOfBattle: [
+                        initialState[1]
+                    ]
+                }
+            };
+
+            const expectedState : OrderOfBattle[] = action.payload.ordersOfBattle;
+
+            const returnedState : OrderOfBattle[] = ordersOfBattle(initialState, action);
+
+            expect(returnedState).toStrictEqual(expectedState);
+        });
+    });
+
+    describe('and an action to save the currently selected order of battle', () => {
+        it('should store the reordered list', () => {
+            const initialState : OrderOfBattle[] = [
+                mockOrderOfBattle({title: 'Title 1'}),
+                mockOrderOfBattle({title: 'Title 2'})
+            ];
+
+            const updatedOrderOfBattle = mockOrderOfBattle({title: 'Title 3'});
+
+            const action : SaveCurrentOrderOfBattle= {
+                type: SAVE_CURRENT_ORDER_OF_BATTLE,
+                payload: {
+                    currentOrderOfBattle: updatedOrderOfBattle,
+                    ordersOfBattle: [
+                        updatedOrderOfBattle,
                         initialState[1]
                     ]
                 }

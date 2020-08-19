@@ -3,7 +3,7 @@ import {Input, Icon} from 'react-native-elements';
 import {getColorScheme} from '../helpers/getColorScheme';
 import {appStyles} from '../../styles';
 
-type TitleInputProps = {
+export type TitleInputProps = {
     value: string,
     placeholder?: string,
     onChangeText: (title: string) => void

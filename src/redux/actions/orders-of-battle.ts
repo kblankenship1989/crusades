@@ -1,6 +1,6 @@
 import {OrderOfBattle} from '../types/order-of-battle';
 import {Action, AnyAction} from 'redux';
-import {ADD_ORDER_OF_BATTLE, LOAD_CURRENT_ORDER_OF_BATTLE, DELETE_ORDER_OF_BATTLE} from '../../constants/action-list';
+import {ADD_ORDER_OF_BATTLE, LOAD_CURRENT_ORDER_OF_BATTLE, DELETE_ORDER_OF_BATTLE, SAVE_CURRENT_ORDER_OF_BATTLE} from '../../constants/action-list';
 
 type Payload = {
     currentOrderOfBattle?: OrderOfBattle
@@ -19,4 +19,8 @@ export interface DeleteOrderOfBattle extends Action<typeof DELETE_ORDER_OF_BATTL
     payload: Payload
 }
 
-export type OrdersOfBattleAction = AddOrderOfBattle | LoadCurrentOrderOfBattle | DeleteOrderOfBattle | AnyAction;
+export interface SaveCurrentOrderOfBattle extends Action<typeof SAVE_CURRENT_ORDER_OF_BATTLE> {
+    payload: Payload
+}
+
+export type OrdersOfBattleAction = AddOrderOfBattle | LoadCurrentOrderOfBattle | DeleteOrderOfBattle | SaveCurrentOrderOfBattle | AnyAction;

@@ -1,9 +1,9 @@
 
-import {LOAD_CURRENT_ORDER_OF_BATTLE, ADD_ORDER_OF_BATTLE} from '../../../constants/action-list';
+import {LOAD_CURRENT_ORDER_OF_BATTLE, ADD_ORDER_OF_BATTLE, SAVE_CURRENT_ORDER_OF_BATTLE} from '../../../constants/action-list';
 import {title} from './title';
 import {mockOrderOfBattle} from '../../../../__test_utils__/mockStates';
 import {defaultOrderOfBattle} from '../../types/order-of-battle';
-import {LoadCurrentOrderOfBattle, AddOrderOfBattle} from '../../actions/orders-of-battle';
+import {LoadCurrentOrderOfBattle, AddOrderOfBattle, SaveCurrentOrderOfBattle} from '../../actions/orders-of-battle';
 
 describe('Given the title reducer', () => {
     it('should default to an empty string on application load', () => {
@@ -35,6 +35,23 @@ describe('Given the title reducer', () => {
         });
         const action : AddOrderOfBattle = {
             type: ADD_ORDER_OF_BATTLE,
+            payload: {
+                currentOrderOfBattle: selectedOrderOfBattle
+            }
+        };
+        const state = 'A much less awesome title';
+        const actualTitle = title(state, action);
+
+        expect(actualTitle).toStrictEqual(expectedTitle);
+    });
+
+    it('should update the current order of battle state when saved', () => {
+        const expectedTitle = 'My Awesome Title';
+        const selectedOrderOfBattle = mockOrderOfBattle({
+            title: expectedTitle
+        });
+        const action : SaveCurrentOrderOfBattle = {
+            type: SAVE_CURRENT_ORDER_OF_BATTLE,
             payload: {
                 currentOrderOfBattle: selectedOrderOfBattle
             }

@@ -34,4 +34,6 @@ export default {
         },
         iconColor: '#8ba4c9'
     },
+    deleteColor: '#F00',
+    bottomBorder: '#000'
 };

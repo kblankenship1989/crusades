@@ -1,8 +1,8 @@
 import {Factions} from '../../types/consts';
-import {ADD_ORDER_OF_BATTLE, DELETE_ORDER_OF_BATTLE, LOAD_CURRENT_ORDER_OF_BATTLE} from '../../constants/action-list';
-import {defaultOrderOfBattle} from '../types/order-of-battle';
+import {ADD_ORDER_OF_BATTLE, DELETE_ORDER_OF_BATTLE, LOAD_CURRENT_ORDER_OF_BATTLE, SAVE_CURRENT_ORDER_OF_BATTLE} from '../../constants/action-list';
+import {defaultOrderOfBattle, OrderOfBattle} from '../types/order-of-battle';
 import {AppThunk} from '../thunk';
-import {AddOrderOfBattle, LoadCurrentOrderOfBattle, DeleteOrderOfBattle} from '../actions/orders-of-battle';
+import {AddOrderOfBattle, LoadCurrentOrderOfBattle, DeleteOrderOfBattle, SaveCurrentOrderOfBattle} from '../actions/orders-of-battle';
 
 export const createOrderOfBattle = (title: string, faction : Factions) : AppThunk => (dispatch) : void => {
     const action : AddOrderOfBattle = {
@@ -54,6 +54,26 @@ export const deleteSelectedOrderOfBattle = (selectedIndex : number) : AppThunk =
         payload: {
             ordersOfBattle: [
                 ...newOrdersOfBattle
+            ]
+        }
+    };
+
+    dispatch(action);
+};
+
+export const saveCurrentOrderOfBattle = (currentOrderOfBattle : OrderOfBattle) : AppThunk => (dispatch, getState) : void => {
+    const {
+        ordersOfBattle
+    } = getState();
+    const updatedOrdersOfBattle = [...ordersOfBattle];
+    updatedOrdersOfBattle.shift();
+    const action : SaveCurrentOrderOfBattle = {
+        type: SAVE_CURRENT_ORDER_OF_BATTLE,
+        payload: {
+            currentOrderOfBattle,
+            ordersOfBattle: [
+                currentOrderOfBattle,
+                ...updatedOrdersOfBattle
             ]
         }
     };

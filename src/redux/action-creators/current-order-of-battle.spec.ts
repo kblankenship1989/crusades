@@ -1,9 +1,9 @@
 import {Factions, factions} from '../../types/consts';
-import {ADD_ORDER_OF_BATTLE, LOAD_CURRENT_ORDER_OF_BATTLE, DELETE_ORDER_OF_BATTLE} from '../../constants/action-list';
+import {ADD_ORDER_OF_BATTLE, LOAD_CURRENT_ORDER_OF_BATTLE, DELETE_ORDER_OF_BATTLE, SAVE_CURRENT_ORDER_OF_BATTLE} from '../../constants/action-list';
 import {defaultOrderOfBattle, OrderOfBattle} from '../types/order-of-battle';
-import {createOrderOfBattle, loadSelectedOrderOfBattle, deleteSelectedOrderOfBattle} from './current-order-of-battle';
+import {createOrderOfBattle, loadSelectedOrderOfBattle, deleteSelectedOrderOfBattle, saveCurrentOrderOfBattle} from './current-order-of-battle';
 import {ThunkDispatch} from 'redux-thunk';
-import {AddOrderOfBattle, OrdersOfBattleAction, LoadCurrentOrderOfBattle, DeleteOrderOfBattle} from '../actions/orders-of-battle';
+import {AddOrderOfBattle, OrdersOfBattleAction, LoadCurrentOrderOfBattle, DeleteOrderOfBattle, SaveCurrentOrderOfBattle} from '../actions/orders-of-battle';
 import {mockState, mockOrderOfBattle} from '../../../__test_utils__/mockStates';
 
 describe('Given the action to add a new order of battle', () => {
@@ -95,6 +95,40 @@ describe('Given the action to delete a selected order of battle', () => {
         };
 
         const action = deleteSelectedOrderOfBattle(selectedIndex);
+        action(dispatchMock, getStateMock, undefined);
+
+        expect(dispatchMock).toHaveBeenCalledTimes(1);
+        expect(dispatchMock).toHaveBeenCalledWith(expectedAction);
+    });
+});
+
+describe('Given the action to save the current changes to the current Order of Battle', () => {
+    it('should dispatch the action with the currently updated order of battle and list of orders', () => {
+        const updatedOrderOfBattle = mockOrderOfBattle();
+
+        const stateMock = mockState({
+            ordersOfBattle: [
+                mockOrderOfBattle(),
+                mockOrderOfBattle()
+            ]
+        });
+        const getStateMock = jest.fn();
+        getStateMock.mockReturnValue(stateMock);
+
+        const dispatchMock = jest.fn();
+
+        const expectedAction : SaveCurrentOrderOfBattle = {
+            type: SAVE_CURRENT_ORDER_OF_BATTLE,
+            payload: {
+                currentOrderOfBattle: updatedOrderOfBattle,
+                ordersOfBattle: [
+                    updatedOrderOfBattle,
+                    stateMock.ordersOfBattle[1]
+                ]
+            }
+        };
+
+        const action = saveCurrentOrderOfBattle(updatedOrderOfBattle);
         action(dispatchMock, getStateMock, undefined);
 
         expect(dispatchMock).toHaveBeenCalledTimes(1);

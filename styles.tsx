@@ -32,6 +32,35 @@ export const appStyles = (colorSchemeName : NonNullable<ColorSchemeName>) => {
             flexDirection: 'row',
             alignItems: 'center',
             margin: 10
+        },
+        swipeOutBackText: {
+            color: colorScheme.text
+        },
+        swipeOutRowFront: {
+            alignItems: 'center',
+            backgroundColor: colorScheme.background,
+            borderBottomColor: Colors.bottomBorder,
+            borderBottomWidth: 1,
+            justifyContent: 'center',
+            height: 50,
+        },
+        swipeOutRowBack: {
+            alignItems: 'center',
+            backgroundColor: Colors.deleteColor,
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            paddingLeft: 15,
+        },
+        swipeoutBackRightBtn: {
+            backgroundColor: Colors.deleteColor,
+            right: 0,
+            alignItems: 'center',
+            bottom: 0,
+            justifyContent: 'center',
+            position: 'absolute',
+            top: 0,
+            width: 75
         }
     });
 };

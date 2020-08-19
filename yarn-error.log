@@ -1,8 +1,8 @@
 Arguments: 
-  /Users/kb06257/.nvm/versions/node/v14.6.0/bin/node /Users/kb06257/.yarn/bin/yarn.js add react-native-swipe-list-view
+  /Users/kb06257/.nvm/versions/node/v14.6.0/bin/node /Users/kb06257/.yarn/bin/yarn.js add react-native-swipeout-listview
 
 PATH: 
-  /Users/kb06257/.nvm/versions/node/v14.6.0/bin:/Users/kb06257/.jabba/jdk/zulu@1.8.212/Contents/Home/bin:/opt/apache-maven/bin:/Users/kb06257/spring-2.1.6.RELEASE/bin:/Users/kb06257/.yarn/bin:/Users/kb06257/.config/yarn/global/node_modules/.bin:/Users/kb06257/.nvm/versions/node/v8.16.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/apache-maven/bin:/Users/kb06257/spring-2.1.6.RELEASE/bin:/Users/kb06257/.yarn/bin:/Users/kb06257/.config/yarn/global/node_modules/.bin:/Users/kb06257/.nvm/versions/node/v8.16.0/bin
+  /Users/kb06257/.jabba/jdk/zulu@1.8.212/Contents/Home/bin:/opt/apache-maven/bin:/Users/kb06257/spring-2.1.6.RELEASE/bin:/Users/kb06257/.yarn/bin:/Users/kb06257/.config/yarn/global/node_modules/.bin:/Users/kb06257/.nvm/versions/node/v14.6.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 Yarn version: 
   1.17.3
@@ -14,8 +14,17 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: connect ECONNREFUSED 192.43.65.163:443
-      at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1144:16)
+  Error: https://npm.deere.com/react-native-swipeout-listview: not_found
+      at Request.params.callback [as _callback] (/Users/kb06257/.yarn/lib/cli.js:66830:18)
+      at Request.self.callback (/Users/kb06257/.yarn/lib/cli.js:140464:22)
+      at Request.emit (events.js:314:20)
+      at Request.<anonymous> (/Users/kb06257/.yarn/lib/cli.js:141436:10)
+      at Request.emit (events.js:314:20)
+      at IncomingMessage.<anonymous> (/Users/kb06257/.yarn/lib/cli.js:141358:12)
+      at Object.onceWrapper (events.js:420:28)
+      at IncomingMessage.emit (events.js:326:22)
+      at endReadableNT (_stream_readable.js:1244:12)
+      at processTicksAndRejections (internal/process/task_queues.js:80:21)
 
 npm manifest: 
   {

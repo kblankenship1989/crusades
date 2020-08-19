@@ -6,7 +6,7 @@ import {View} from 'react-native';
 import {Icon} from 'react-native-elements';
 import {factions} from '../types/consts';
 
-type FactionPickerProps = {
+export type FactionPickerProps = {
     selectedFaction: string,
     onValueChange: (itemValue: string | number, itemIndex: number) => void
 }

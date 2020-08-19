@@ -1,6 +1,6 @@
 import {OrderOfBattle} from '../types/order-of-battle';
 import {OrdersOfBattleAction} from '../actions/orders-of-battle';
-import {ADD_ORDER_OF_BATTLE, LOAD_CURRENT_ORDER_OF_BATTLE, DELETE_ORDER_OF_BATTLE} from '../../constants/action-list';
+import {ADD_ORDER_OF_BATTLE, LOAD_CURRENT_ORDER_OF_BATTLE, DELETE_ORDER_OF_BATTLE, SAVE_CURRENT_ORDER_OF_BATTLE} from '../../constants/action-list';
 
 const addOrderOfBattle = (state: OrderOfBattle[], newOrderOfBattle: OrderOfBattle) : OrderOfBattle[] => ([
     newOrderOfBattle,
@@ -17,6 +17,7 @@ export const ordersOfBattle = (state: OrderOfBattle[] = [], action: OrdersOfBatt
         return addOrderOfBattle(state, action.payload.currentOrderOfBattle);
     case DELETE_ORDER_OF_BATTLE:
     case LOAD_CURRENT_ORDER_OF_BATTLE:
+    case SAVE_CURRENT_ORDER_OF_BATTLE:
         return updateOrdersOfBattle(state, action.payload.ordersOfBattle);
     default:
         return state;
