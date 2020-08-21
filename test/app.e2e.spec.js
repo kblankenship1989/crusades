@@ -91,7 +91,7 @@ describe('Selecting an order of battle on the home page', () => {
         });
 
         await act(async () => {
-            const cancelButton = await getByTestId('order-of-battle-cancel');
+            const cancelButton = await getByTestId('footer-cancel');
             fireEvent(cancelButton, 'onPress');
         });
 
@@ -106,7 +106,7 @@ describe('Selecting an order of battle on the home page', () => {
         });
 
         await act(async () => {
-            const cancelButton = await getByTestId('order-of-battle-cancel');
+            const cancelButton = await getByTestId('footer-cancel');
             fireEvent(cancelButton, 'onPress');
         });
     });
@@ -124,26 +124,6 @@ describe('Selecting an order of battle on the home page', () => {
 
         const titleInput = await queryByDisplayValue(title);
         expect(titleInput).toBeTruthy();
-    });
-
-    it('should prompt to delete the order of battle on a long press', async () => {
-        const {
-            getByText,
-            queryByText
-        } = renderedComponent;
-
-        await act(async () => {
-            const oOBList = await getByText(title);
-            fireEvent(oOBList, 'onOpen', -1, -1, 'right');
-        });
-
-        await act(async () => {
-            const deleteButton = await getByText('Delete');
-            fireEvent(deleteButton, 'onPress');
-        });
-
-        const deletePrompt = await queryByText(`Are you sure you want to delete: ${title}?`);
-        expect(deletePrompt).toBeTruthy();
     });
 });
 

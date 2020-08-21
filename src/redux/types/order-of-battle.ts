@@ -1,16 +1,15 @@
 // import {CrusadeCard} from './crusade-card';
 import {RequisitionPoints} from '../../types/literals';
-import {Factions, factions} from '../../types/consts';
+import {Factions, factions, BattleOutcomes} from '../../types/consts';
+import {CrusadeCard} from './crusade-card';
 
 export type OrderOfBattle = {
     title: string,
     faction: Factions,
     requisitionPoints: RequisitionPoints,
-    // battleTally: number,
-    // battlesWon: number,
-    // supplyLimit: number,
-    // supplyUsed: number,
-    // crusadeCards: CrusadeCard[],
+    battleTally: BattleOutcomes[],
+    supplyLimit: number,
+    crusadeCards: CrusadeCard[],
     // goals?: string,
     // notableVictories?: string[]
 };
@@ -19,9 +18,7 @@ export const defaultOrderOfBattle : OrderOfBattle = {
     title: '',
     faction: factions[0],
     requisitionPoints: 5,
-    // battleTally: 0,
-    // battlesWon: 0,
-    // supplyLimit: 50,
-    // supplyUsed: 0,
-    // crusadeCards: []
+    battleTally: [],
+    supplyLimit: 50,
+    crusadeCards: []
 };

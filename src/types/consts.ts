@@ -38,3 +38,15 @@ export const unitTypes = [
 ] as const;
 
 export type UnitTypes = typeof unitTypes[number];
+
+export const battleOutcomes = [
+    'Tabled',
+    'Major Loss',
+    'Minor Loss',
+    'Draw',
+    'Minor Victory',
+    'Major Victory',
+    'Annihalated'
+] as const;
+
+export type BattleOutcomes = typeof battleOutcomes[number];

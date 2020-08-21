@@ -1,14 +1,13 @@
 import React from 'react';
 import {
     View,
-    FlatList,
     ListRenderItem,
     Text,
     ScrollView,
-    Alert
+    TouchableOpacity
 } from 'react-native';
-import Swipeout, {SwipeoutButtonProperties} from 'react-native-swipeout';
-import {Icon, Button, ListItem, Card} from 'react-native-elements';
+import {SwipeListView} from 'react-native-swipe-list-view';
+import {Icon, Button} from 'react-native-elements';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList} from '../navigation/root-param-list';
 import {appStyles} from '../../styles';
@@ -21,6 +20,8 @@ import {FactionPicker} from '../components/faction-picker';
 import {TitleInput} from '../components/title-input';
 import {factionsIconMap} from '../configs/40k-icons';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {OrderOfBattleListItem} from '../components/order-of-battle-list-item';
+import {SwipeOutDeleteRight} from '../components/swipe-out-delete-right';
 
 
 type HomeState = {
@@ -33,26 +34,6 @@ export type HomeProps = ConnectedProps<typeof homeScreenConnector> & {
 }
 
 export class HomeScreen extends React.Component<HomeProps, HomeState> {
-    prompDeleteOrderOfBattle = (title: string, index: number): void => {
-        console.log(title, index);
-        Alert.alert(
-            'Delete Order Of Battle?',
-            `Are you sure you want to delete: ${title}?`,
-            [
-                {
-                    text: 'Cancel',
-                    style: 'cancel'
-                },
-                {
-                    text: 'Delete',
-                    onPress: () => this.props.deleteSelectedOrderOfBattle(index)
-                }
-            ],
-            {
-                cancelable: false
-            }
-        );
-    }
     constructor(props : HomeProps) {
         super(props);
 
@@ -67,40 +48,6 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
         this.props.navigation.push('OrderOfBattleSummary');
     }
 
-    _orderOfBattleRenderItem : ListRenderItem<OrderOfBattle> = ({item, index}) : JSX.Element => {
-        const IconToRender = factionsIconMap[item.faction];
-
-        const rightButtons : SwipeoutButtonProperties[] = [
-            {
-                text:'Delete',
-                type:'delete',
-                onPress: () => this.prompDeleteOrderOfBattle(item.title, index)
-            }
-        ];
-
-        return (
-            <Swipeout
-                right={rightButtons}
-                autoClose={true}
-                onOpen={(section, item, direction) => {
-                    console.log(section, item, direction);
-                }}
-            >
-                <ListItem
-                    leftAvatar={<IconToRender
-                        size={18}
-                        color={'#8ba4c9'}
-                    />}
-                    onPress={() => this.selectOrderOfBattle(index)}
-                    onLongPress={() => this.prompDeleteOrderOfBattle(item.title, index)}
-                    title={item.title}
-                    bottomDivider
-                    testID={item.title}
-                />
-            </Swipeout>
-        );
-    }
-
     addOrderOfBattle = () :void => {
         this.props.createOrderOfBattle(this.state.title, this.state.faction);
         this.setState({
@@ -113,7 +60,6 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
 
     render() : JSX.Element {
         const colorScheme = getColorScheme();
-        const styles = appStyles(colorScheme);
 
         return (
             <SafeAreaView>
@@ -140,13 +86,13 @@ export class HomeScreen extends React.Component<HomeProps, HomeState> {
                             />}
                         />
                     </View>
-                    <Card>
-                        <FlatList
-                            renderItem={this._orderOfBattleRenderItem}
-                            keyExtractor={(item : OrderOfBattle) => item.title}
-                            data={this.props.ordersOfBattle}
-                        />
-                    </Card>
+                    <SwipeListView
+                        renderItem={OrderOfBattleListItem({selectOrderOfBattle: this.selectOrderOfBattle})}
+                        renderHiddenItem={SwipeOutDeleteRight({onDelete: this.props.deleteSelectedOrderOfBattle})}
+                        keyExtractor={(orderOfBattle) => orderOfBattle.title}
+                        data={this.props.ordersOfBattle}
+                        rightOpenValue={-75}
+                    />
                 </ScrollView>
             </SafeAreaView>
         );

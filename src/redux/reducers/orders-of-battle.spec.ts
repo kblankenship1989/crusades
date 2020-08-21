@@ -1,105 +1,23 @@
 import {ordersOfBattle} from './orders-of-battle';
 import {OrderOfBattle} from '../types/order-of-battle';
 import {mockOrderOfBattle} from '../../../__test_utils__/mockStates';
-import {LoadCurrentOrderOfBattle, AddOrderOfBattle, DeleteOrderOfBattle, SaveCurrentOrderOfBattle} from '../actions/orders-of-battle';
-import {ADD_ORDER_OF_BATTLE, LOAD_CURRENT_ORDER_OF_BATTLE, DELETE_ORDER_OF_BATTLE, SAVE_CURRENT_ORDER_OF_BATTLE} from '../../constants/action-list';
+import {SetOrdersOfBattleAction} from '../actions/orders-of-battle';
+import {SET_ORDERS_OF_BATTLE} from '../../constants/action-list';
 
 describe('Given the orders of battle reducer', () => {
-    it('should initialize the state when no store is presisted', () => {
-        expect(ordersOfBattle(undefined, {type: 'some strange action'})).toStrictEqual([]);
-    });
-
-    describe('and an action to add a new order of battle', () => {
+    describe('and the list of orders of battle is updated', () => {
         it('should store the updates to state', () => {
             const initialState : OrderOfBattle[] = [
                 mockOrderOfBattle({title: 'First Order'}),
                 mockOrderOfBattle({title: 'Second Order'})
             ];
 
-            const action : AddOrderOfBattle= {
-                type: ADD_ORDER_OF_BATTLE,
-                payload: {
-                    currentOrderOfBattle: mockOrderOfBattle({title: 'Added order'})
-                }
-            };
-
-            const expectedState : OrderOfBattle[] = [
-                action.payload.currentOrderOfBattle,
-                ...initialState
-            ];
-
-            const returnedState : OrderOfBattle[] = ordersOfBattle(initialState, action);
-
-            expect(returnedState).toStrictEqual(expectedState);
-        });
-    });
-
-    describe('and an action to select an existing order of battle', () => {
-        it('should store the reordered list', () => {
-            const initialState : OrderOfBattle[] = [
-                mockOrderOfBattle({title: 'First Order'}),
-                mockOrderOfBattle({title: 'Second Order'})
-            ];
-
-            const action : LoadCurrentOrderOfBattle= {
-                type: LOAD_CURRENT_ORDER_OF_BATTLE,
-                payload: {
-                    currentOrderOfBattle: initialState[1],
-                    ordersOfBattle: [
-                        initialState[1],
-                        initialState[0]
-                    ]
-                }
-            };
-
-            const expectedState : OrderOfBattle[] = action.payload.ordersOfBattle;
-
-            const returnedState : OrderOfBattle[] = ordersOfBattle(initialState, action);
-
-            expect(returnedState).toStrictEqual(expectedState);
-        });
-    });
-
-    describe('and an action to delete an existing order of battle', () => {
-        it('should store the reordered updated list with the deleted order removed', () => {
-            const initialState : OrderOfBattle[] = [
-                mockOrderOfBattle({title: 'First Order'}),
-                mockOrderOfBattle({title: 'Second Order'})
-            ];
-
-            const action : DeleteOrderOfBattle= {
-                type: DELETE_ORDER_OF_BATTLE,
+            const action : SetOrdersOfBattleAction= {
+                type: SET_ORDERS_OF_BATTLE,
                 payload: {
                     ordersOfBattle: [
-                        initialState[1]
-                    ]
-                }
-            };
-
-            const expectedState : OrderOfBattle[] = action.payload.ordersOfBattle;
-
-            const returnedState : OrderOfBattle[] = ordersOfBattle(initialState, action);
-
-            expect(returnedState).toStrictEqual(expectedState);
-        });
-    });
-
-    describe('and an action to save the currently selected order of battle', () => {
-        it('should store the reordered list', () => {
-            const initialState : OrderOfBattle[] = [
-                mockOrderOfBattle({title: 'Title 1'}),
-                mockOrderOfBattle({title: 'Title 2'})
-            ];
-
-            const updatedOrderOfBattle = mockOrderOfBattle({title: 'Title 3'});
-
-            const action : SaveCurrentOrderOfBattle= {
-                type: SAVE_CURRENT_ORDER_OF_BATTLE,
-                payload: {
-                    currentOrderOfBattle: updatedOrderOfBattle,
-                    ordersOfBattle: [
-                        updatedOrderOfBattle,
-                        initialState[1]
+                        mockOrderOfBattle({title: 'Added order'}),
+                        ...initialState
                     ]
                 }
             };
