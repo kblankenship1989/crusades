@@ -43,15 +43,15 @@ describe('Creating an Order of Battle', () => {
 
     it('should create a new order of battle with the title provided when the create button is clicked and navigate to the summary page', async () => {
         const {
-            queryByDisplayValue,
-            queryByText
+            queryByText,
+            queryAllByText
         } = renderedComponent;
 
         const oOBHeader = await queryByText('Order of Battle');
         expect(oOBHeader).toBeTruthy();
 
-        const titleInput = await queryByDisplayValue(title);
-        expect(titleInput).toBeTruthy();
+        const titleInput = await queryAllByText(title);
+        expect(titleInput[1]).toBeTruthy();
     });
 });
 
@@ -114,7 +114,7 @@ describe('Selecting an order of battle on the home page', () => {
     it('should navigate to the Order of Battle Summary when a Order is clicked on the home page', async () => {
         const {
             getByText,
-            queryByDisplayValue
+            queryAllByText
         } = renderedComponent;
 
         await act(async () => {
@@ -122,8 +122,8 @@ describe('Selecting an order of battle on the home page', () => {
             fireEvent(oOBList, 'onPress');
         });
 
-        const titleInput = await queryByDisplayValue(title);
-        expect(titleInput).toBeTruthy();
+        const titleInput = await queryAllByText(title);
+        expect(titleInput[0]).toBeTruthy();
     });
 });
 

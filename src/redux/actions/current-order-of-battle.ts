@@ -1,7 +1,6 @@
 import {OrderOfBattle} from '../types/order-of-battle';
 import {Action} from 'redux';
-import {SET_CURRENT_ORDER_OF_BATTLE, SET_CRUSADE_CARDS} from '../../constants/action-list';
-import {CrusadeCard} from '../types/crusade-card';
+import {SET_CURRENT_ORDER_OF_BATTLE} from '../../constants/action-list';
 
 export interface SetCurrentOrderOfBattleAction extends Action<typeof SET_CURRENT_ORDER_OF_BATTLE> {
     payload: {
@@ -9,10 +8,4 @@ export interface SetCurrentOrderOfBattleAction extends Action<typeof SET_CURRENT
     }
 }
 
-export interface SetCrusadeCardsAction extends Action<typeof SET_CRUSADE_CARDS> {
-    payload: {
-        crusadeCards: CrusadeCard[]
-    }
-}
-
-export type CurrentOrderOfBattleActions = SetCurrentOrderOfBattleAction | SetCrusadeCardsAction;
+export type CurrentOrderOfBattleActions = SetCurrentOrderOfBattleAction;

@@ -31,5 +31,8 @@ type IconProps = Icon40kProps & {
 const Icon = createIconSet(customFontGlyph, 'icons-40k', 'icons-40k.ttf');
 
 export const Icon40k = (props: IconProps) : JSX.Element => (
-    <Icon {...props}/>
+    <Icon
+        testID={props.name}
+        {...props}
+    />
 );

@@ -4,10 +4,10 @@ import {getColorScheme} from '../helpers/getColorScheme';
 import {appStyles} from '../../styles';
 import {View} from 'react-native';
 import {Icon} from 'react-native-elements';
-import {factions} from '../types/consts';
+import {factions, Factions} from '../types/consts';
 
 export type FactionPickerProps = {
-    selectedFaction: string,
+    selectedFaction: Factions,
     onValueChange: (itemValue: string | number, itemIndex: number) => void
 }
 const colorScheme = getColorScheme();

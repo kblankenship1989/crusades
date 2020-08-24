@@ -3,9 +3,9 @@ import {SET_CURRENT_ORDER_OF_BATTLE, SET_ORDERS_OF_BATTLE} from '../../constants
 import {defaultOrderOfBattle, OrderOfBattle} from '../types/order-of-battle';
 import {createOrderOfBattle, loadSelectedOrderOfBattle, deleteSelectedOrderOfBattle, saveCurrentOrderOfBattle} from './current-order-of-battle';
 import {ThunkDispatch} from 'redux-thunk';
-import {OrdersOfBattleAction, SetOrdersOfBattleAction} from '../actions/orders-of-battle';
+import {SetOrdersOfBattleAction} from '../actions/orders-of-battle';
 import {mockState, mockOrderOfBattle} from '../../../__test_utils__/mockStates';
-import {SetCurrentOrderOfBattleAction, CurrentOrderOfBattleActions} from '../actions/current-order-of-battle';
+import {SetCurrentOrderOfBattleAction} from '../actions/current-order-of-battle';
 import {State} from '../types/state';
 import {AvailableActions} from '../actions';
 

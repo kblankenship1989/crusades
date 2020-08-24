@@ -1,24 +1,18 @@
 import React from 'react';
 import {
     View,
-    ListRenderItem,
-    Text,
-    ScrollView,
-    TouchableOpacity
+    ScrollView
 } from 'react-native';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import {Icon, Button} from 'react-native-elements';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList} from '../navigation/root-param-list';
-import {appStyles} from '../../styles';
 import {getColorScheme} from '../helpers/getColorScheme';
-import {OrderOfBattle} from '../redux/types/order-of-battle';
 import {homeScreenConnector} from './home-screen-connector';
 import {ConnectedProps} from 'react-redux';
 import {Factions, factions} from '../types/consts';
 import {FactionPicker} from '../components/faction-picker';
 import {TitleInput} from '../components/title-input';
-import {factionsIconMap} from '../configs/40k-icons';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {OrderOfBattleListItem} from '../components/order-of-battle-list-item';
 import {SwipeOutDeleteRight} from '../components/swipe-out-delete-right';

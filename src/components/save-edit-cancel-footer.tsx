@@ -2,21 +2,17 @@ import React from 'react';
 import {View, Button} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-type SaveEditCancelFooterProps = {
+type SaveCancelFooterProps = {
     isDirty: boolean,
     onSave: () => void,
-    isEditing: boolean,
-    onEdit: () => void,
     onCancel: () => void
 }
 
-export const SaveEditCancelFooter = ({
+export const SaveCancelFooter = ({
     onSave,
-    onEdit,
     onCancel,
-    isDirty,
-    isEditing
-} : SaveEditCancelFooterProps) : JSX.Element => {
+    isDirty
+} : SaveCancelFooterProps) : JSX.Element => {
     return(
         <View style={{
             position: 'absolute',
@@ -38,31 +34,18 @@ export const SaveEditCancelFooter = ({
                     type={'font-awesome'}
                 />
             </Button>
-            {isEditing ?
-                <Button
-                    onPress={onSave}
-                    title={'Save'}
-                    disabled={!isDirty}
-                    testID={'footer-save'}
-                >
-                    <Icon
-                        name={'save'}
-                        size={20}
-                        type={'font-awesome'}
-                    />
-                </Button> :
-                <Button
-                    onPress={onEdit}
-                    title={'Edit'}
-                    testID={'footer-edit'}
-                >
-                    <Icon
-                        name={'pencil'}
-                        size={20}
-                        type={'font-awesome'}
-                    />
-                </Button>
-            }
+            <Button
+                onPress={onSave}
+                title={'Save'}
+                disabled={!isDirty}
+                testID={'footer-save'}
+            >
+                <Icon
+                    name={'save'}
+                    size={20}
+                    type={'font-awesome'}
+                />
+            </Button>
         </View>
     );
 };

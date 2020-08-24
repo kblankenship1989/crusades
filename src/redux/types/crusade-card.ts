@@ -36,3 +36,12 @@ export const defaultCrusadeCard : CrusadeCard = {
     // rules: [],
     // combatTallies: defaultCombatTallies
 };
+
+export type CurrentCrusadeCard = CrusadeCard & {
+    index: number
+};
+
+export const defaultCurrentCrusadeCard : CurrentCrusadeCard = {
+    ...defaultCrusadeCard,
+    index: -1
+};
