@@ -11,7 +11,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList} from '../navigation/root-param-list';
 import {Icon, Card, Button} from 'react-native-elements';
 import {RequisitionPoints} from '../types/literals';
-import {SaveCancelFooter} from '../components/save-edit-cancel-footer';
+import {SaveCancelFooter} from '../components/save-cancel-footer';
 import {getColorScheme} from '../helpers/getColorScheme';
 import {TitleProvider} from '../providers/title-provider';
 import {FactionProvider} from '../providers/faction-provider';
@@ -54,7 +54,7 @@ export class OrderOfBattleSummary extends React.Component<OrderOfBattleSummaryPr
         });
     }
 
-    resetForm = () => {
+    resetForm = () : void => {
         this.setState({
             ...this.props.currentOrderOfBattle,
             isDirty: false

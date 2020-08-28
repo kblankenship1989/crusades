@@ -54,35 +54,37 @@ describe('Given the Order of Battle Summary Screen', () => {
 
         expect(await queryByText(testProps.currentOrderOfBattle.title)).toBeTruthy();
         expect(await queryByTestId('edit-faction')).toBeTruthy();
+    });
+
+    it('should disable the save button when nothing is changed', async () => {
+        const {
+            component: {
+                queryByText
+            }
+        } = renderComponent();
 
         const saveButton = await queryByText('Save');
         expect(saveButton).toBeTruthy();
         expect(saveButton).toBeDisabled();
     });
 
-    describe('and the page is in edit mode', () => {
-        it('should disable the save button until something changes', () => {
+    it('should enable the save button when the title is changed', () => {
+
+    });
+
+    it('should enable the save button when the faction is changed', () => {
+
+    });
+
+    describe('and the save button is clicked', () => {
+        it('should save the changes to the order of battle to state and change back to read-only mode', () => {
 
         });
+    });
 
-        it('should enable the save button when the title is changed', () => {
+    describe('and the cancel button is clicked', () => {
+        it('should change back to read-only mode and reset the data', () => {
 
-        });
-
-        it('should enable the save button when the faction is changed', () => {
-
-        });
-
-        describe('and the save button is clicked', () => {
-            it('should save the changes to the order of battle to state and change back to read-only mode', () => {
-
-            });
-        });
-
-        describe('and the cancel button is clicked', () => {
-            it('should change back to read-only mode and reset the data', () => {
-
-            });
         });
     });
 
