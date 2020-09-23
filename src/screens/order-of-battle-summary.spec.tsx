@@ -1,6 +1,6 @@
 import React from 'react';
 import '@testing-library/jest-native/extend-expect';
-import {render, RenderAPI, fireEvent} from '@testing-library/react-native';
+import {render, RenderAPI, fireEvent, act} from '@testing-library/react-native';
 import {OrderOfBattleSummary, OrderOfBattleSummaryProps} from './order-of-battle-summary';
 import {mockOrderOfBattle} from '../../__test_utils__/mockStates';
 import {mockNavigation} from '../../__test_utils__/mockNavigation';
@@ -53,7 +53,7 @@ describe('Given the Order of Battle Summary Screen', () => {
         });
 
         expect(await queryByText(testProps.currentOrderOfBattle.title)).toBeTruthy();
-        expect(await queryByTestId('edit-faction')).toBeTruthy();
+        expect(await queryByTestId('edit-title')).toBeTruthy();
     });
 
     it('should disable the save button when nothing is changed', async () => {
@@ -68,12 +68,67 @@ describe('Given the Order of Battle Summary Screen', () => {
         expect(saveButton).toBeDisabled();
     });
 
-    it('should enable the save button when the title is changed', () => {
+    it('should enable the save button when the title is changed', async () => {
+        const {
+            component: {
+                getByTestId,
+                queryByText,
+                getByDisplayValue
+            },
+            testProps
+        } = renderComponent({
+            currentOrderOfBattle: mockOrderOfBattle({
+                title: 'Some awesome title',
+                faction: factions[3]
+            })
+        });
 
+        expect(await queryByText('Save')).toBeDisabled();
+
+        const editButton = await getByTestId('edit-title');
+
+        act(() => {
+            fireEvent(editButton, 'onPress');
+        });
+
+        const titleInput = await getByDisplayValue(testProps.currentOrderOfBattle.title);
+
+        act(() => {
+            fireEvent(titleInput, 'onChangeText', 'someNewTitle');
+        });
+
+        expect(await queryByText('Save')).toBeEnabled();
     });
 
-    it('should enable the save button when the faction is changed', () => {
+    it('should enable the save button when the faction is changed', async () => {
+        const {
+            component: {
+                getByTestId,
+                queryByText
+            },
+            testProps
+        } = renderComponent({
+            currentOrderOfBattle: mockOrderOfBattle({
+                title: 'Some awesome title',
+                faction: factions[3]
+            })
+        });
 
+        expect(await queryByText('Save')).toBeDisabled();
+
+        const editButton = await getByTestId('edit-title');
+
+        act(() => {
+            fireEvent(editButton, 'onPress');
+        });
+
+        const factionPicker = await getByTestId('faction-picker');
+
+        act(() => {
+            fireEvent(factionPicker, 'onValueChange', null, 0);
+        });
+
+        expect(await queryByText('Save')).toBeEnabled();
     });
 
     describe('and the save button is clicked', () => {

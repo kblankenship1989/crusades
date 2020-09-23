@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import {State} from '../redux/types/state';
 import {OrderOfBattleSummary} from './order-of-battle-summary';
 import {saveCurrentOrderOfBattle} from '../redux/action-creators/current-order-of-battle';
-import {addCrusadeCard} from '../redux/action-creators/current-crusade-card';
+import {addCrusadeCard, deleteCrusadeCard, loadCurrentCrusadeCard} from '../redux/action-creators/current-crusade-card';
 
 const mapStateToProps = (state: State) => ({
     currentOrderOfBattle: state.currentOrderOfBattle,
@@ -10,7 +10,9 @@ const mapStateToProps = (state: State) => ({
 
 const mapDispatchToProps = {
     saveCurrentOrderOfBattle,
-    addCrusadeCard
+    deleteCrusadeCard,
+    addCrusadeCard,
+    loadCurrentCrusadeCard
 };
 
 export const orderOfBattleSummaryConnector = connect(mapStateToProps, mapDispatchToProps);
