@@ -5,6 +5,7 @@ import {OrderOfBattleSummary, OrderOfBattleSummaryProps} from './order-of-battle
 import {mockOrderOfBattle} from '../../__test_utils__/mockStates';
 import {mockNavigation} from '../../__test_utils__/mockNavigation';
 import {factions} from '../types/consts';
+import {OrderOfBattle} from '../redux/types/order-of-battle';
 
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
 
@@ -19,7 +20,9 @@ describe('Given the Order of Battle Summary Screen', () => {
             currentOrderOfBattle: mockOrderOfBattle(),
             navigation: mockNavigation,
             addCrusadeCard: jest.fn(),
-            saveCurrentOrderOfBattle: jest.fn()
+            saveCurrentOrderOfBattle: jest.fn(),
+            deleteCrusadeCard: jest.fn(),
+            loadCurrentCrusadeCard: jest.fn()
         };
 
         const testProps = {
@@ -73,6 +76,7 @@ describe('Given the Order of Battle Summary Screen', () => {
             component: {
                 getByTestId,
                 queryByText,
+                queryByTestId,
                 getByDisplayValue
             },
             testProps
@@ -98,6 +102,7 @@ describe('Given the Order of Battle Summary Screen', () => {
         });
 
         expect(await queryByText('Save')).toBeEnabled();
+        expect(await queryByTestId('edit-title')).toBeFalsy();
     });
 
     it('should enable the save button when the faction is changed', async () => {
@@ -106,7 +111,6 @@ describe('Given the Order of Battle Summary Screen', () => {
                 getByTestId,
                 queryByText
             },
-            testProps
         } = renderComponent({
             currentOrderOfBattle: mockOrderOfBattle({
                 title: 'Some awesome title',
@@ -132,14 +136,93 @@ describe('Given the Order of Battle Summary Screen', () => {
     });
 
     describe('and the save button is clicked', () => {
-        it('should save the changes to the order of battle to state and change back to read-only mode', () => {
+        it('should save the changes to the order of battle to state and change back to read-only mode', async () => {
+            const {
+                component: {
+                    getByTestId,
+                    getByText,
+                    getByDisplayValue,
+                    queryByTestId,
+                    queryByText
+                },
+                testProps
+            } = renderComponent({
+                currentOrderOfBattle: mockOrderOfBattle({
+                    title: 'Some awesome title',
+                    faction: factions[3]
+                })
+            });
 
+            const editButton = await getByTestId('edit-title');
+
+            act(() => {
+                fireEvent(editButton, 'onPress');
+            });
+
+            const titleInput = await getByDisplayValue(testProps.currentOrderOfBattle.title);
+            act(() => {
+                fireEvent(titleInput, 'onChangeText', 'someNewTitle');
+            });
+
+            const factionPicker = await getByTestId('faction-picker');
+            act(() => {
+                fireEvent(factionPicker, 'onValueChange', null, 0);
+            });
+
+            const saveButton = getByText('Save');
+            act(() => {
+                fireEvent(saveButton, 'onPress');
+            });
+
+            expect(await queryByTestId('edit-title')).toBeTruthy();
+            expect(await queryByText('someNewTitle')).toBeTruthy();
+            expect(await queryByTestId('unaligned')).toBeTruthy();
         });
     });
 
     describe('and the cancel button is clicked', () => {
-        it('should change back to read-only mode and reset the data', () => {
+        it('should change back to read-only mode and reset the data', async () => {
+            const {
+                component: {
+                    getByTestId,
+                    getByText,
+                    getByDisplayValue,
+                    queryByTestId,
+                    queryByText,
+                    debug
+                },
+                testProps
+            } = renderComponent({
+                currentOrderOfBattle: mockOrderOfBattle({
+                    title: 'Some awesome title',
+                    faction: factions[3]
+                })
+            });
 
+            const editButton = await getByTestId('edit-title');
+
+            act(() => {
+                fireEvent(editButton, 'onPress');
+            });
+
+            const titleInput = await getByDisplayValue(testProps.currentOrderOfBattle.title);
+            act(() => {
+                fireEvent(titleInput, 'onChangeText', 'someNewTitle');
+            });
+
+            const factionPicker = await getByTestId('faction-picker');
+            act(() => {
+                fireEvent(factionPicker, 'onValueChange', null, 0);
+            });
+
+            const cancelButton = getByText('Cancel');
+            act(() => {
+                fireEvent(cancelButton, 'onPress');
+            });
+
+            expect(await queryByTestId('edit-title')).toBeTruthy();
+            expect(await queryByText(testProps.currentOrderOfBattle.title)).toBeTruthy();
+            expect(await queryByTestId('aeldari')).toBeTruthy();
         });
     });
 

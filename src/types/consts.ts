@@ -46,7 +46,7 @@ export const battleOutcomes = [
     'Draw',
     'Minor Victory',
     'Major Victory',
-    'Annihalated'
+    'Annihalation'
 ] as const;
 
 export type BattleOutcomes = typeof battleOutcomes[number];
