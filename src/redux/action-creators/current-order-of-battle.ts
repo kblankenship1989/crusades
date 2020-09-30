@@ -1,6 +1,6 @@
 import {Factions} from '../../types/consts';
 import {SET_CURRENT_ORDER_OF_BATTLE, SET_ORDERS_OF_BATTLE} from '../../constants/action-list';
-import {defaultOrderOfBattle, OrderOfBattle} from '../types/order-of-battle';
+import {defaultOrderOfBattle, OrderOfBattle} from '../../types/state/order-of-battle';
 import {AppThunk} from '../thunk';
 import {SetCurrentOrderOfBattleAction} from '../actions/current-order-of-battle';
 import {SetOrdersOfBattleAction} from '../actions/orders-of-battle';

@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {State} from '../redux/types/state';
+import {State} from '../types/state';
 import {OrderOfBattleSummary} from './order-of-battle-summary';
 import {saveCurrentOrderOfBattle} from '../redux/action-creators/current-order-of-battle';
 import {addCrusadeCard, deleteCrusadeCard, loadCurrentCrusadeCard} from '../redux/action-creators/current-crusade-card';

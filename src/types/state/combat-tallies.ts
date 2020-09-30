@@ -1,4 +1,4 @@
-import {ObjectiveTallies, defaultObjectiveTallies} from "./objective-tallies";
+import {ObjectiveTallies, defaultObjectiveTallies} from './objective-tallies';
 
 export type CombatTallies = {
     battlesPlayed: number,

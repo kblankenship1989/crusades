@@ -1,4 +1,4 @@
-import {CurrentCrusadeCard, defaultCurrentCrusadeCard} from '../types/crusade-card';
+import {CurrentCrusadeCard, defaultCurrentCrusadeCard} from '../../types/state/crusade-card';
 import {CurrentCrusadeCardActions} from '../actions/current-crusade-card';
 import {SET_CURRENT_CRUSADE_CARD} from '../../constants/action-list';
 

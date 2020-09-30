@@ -1,13 +1,11 @@
 import React from 'react';
 import {TouchableOpacity, View, ListRenderItem, Text} from 'react-native';
-import {OrderOfBattle} from '../redux/types/order-of-battle';
+import {OrderOfBattle} from '../types/state/order-of-battle';
 import {appStyles} from '../../styles';
 import {getColorScheme} from '../helpers/getColorScheme';
 import {factionsIconMap} from '../configs/40k-icons';
+import {OrderOfBattleListItemProps} from '../types/components/props';
 
-type OrderOfBattleListItemProps = {
-    selectOrderOfBattle: (index: number) => void
-}
 export const OrderOfBattleListItem = ({selectOrderOfBattle} : OrderOfBattleListItemProps) : ListRenderItem<OrderOfBattle> => ({item, index}) : JSX.Element => {
     const IconToRender = factionsIconMap[item.faction];
     const styles = appStyles(getColorScheme());

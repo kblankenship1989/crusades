@@ -1,19 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
-import {CrusadeCard} from '../redux/types/crusade-card';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootParamList} from '../navigation/root-param-list';
-import {ConnectedProps} from 'react-redux';
-import {crusadeCardSummaryConnector} from './crusade-card-summary-connector';
-
-type CrusadeCardSummaryState = CrusadeCard & {
-    isDirty: boolean,
-    isEditing: boolean
-}
-
-export type CrusadeCardSummaryProps = ConnectedProps<typeof crusadeCardSummaryConnector> & {
-    navigation: StackNavigationProp<RootParamList, 'CrusadeCardSummary'>
-};
+import {CrusadeCardSummaryProps} from '../types/screens/props';
+import {CrusadeCardSummaryState} from '../types/screens/states';
 
 
 export class CrusadeCardSummary extends React.Component<CrusadeCardSummaryProps, CrusadeCardSummaryState> {

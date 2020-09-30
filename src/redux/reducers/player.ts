@@ -1,6 +1,6 @@
-import {Player, defaultPlayer} from "../types/player";
-import {PlayerAction} from "../actions/player";
-import {UPDATE_PLAYER} from "../../constants/action-list";
+import {Player, defaultPlayer} from '../../types/state/player';
+import {PlayerAction} from '../actions/player';
+import {UPDATE_PLAYER} from '../../constants/action-list';
 
 const updatePlayer = (state : Player, payload : Partial<Player>) : Player => ({
     ...state,

@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {State} from '../redux/types/state';
+import {State} from '../types/state';
 import {saveCurrentCrusadeCard} from '../redux/action-creators/current-crusade-card';
 import {CrusadeCardSummary} from './crusade-card-summary';
 

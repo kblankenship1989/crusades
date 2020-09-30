@@ -1,4 +1,4 @@
-import {Factions, factions} from '../../types/consts';
+import {Factions, factions} from '../consts';
 
 export type Player = {
     firstName: string,

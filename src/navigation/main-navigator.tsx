@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator, StackNavigationOptions} from '@react-navigation/stack';
-import {RootParamList} from './root-param-list';
+import {RootParamList} from '../types/root-param-list';
 import Colors from '../constants/Colors';
 import {ColorSchemeName} from 'react-native';
 import {useColorScheme} from '../hooks/useColorScheme';

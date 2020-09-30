@@ -1,13 +1,8 @@
 import React from 'react';
-import {ConnectedProps} from 'react-redux';
-
 import {View, ScrollView, Text/*, Alert*/} from 'react-native';
+
 import {RequisitionPointsSelector, IncrementorDecrementor} from '../components/requisition-points-selector';
-import {orderOfBattleSummaryConnector} from './order-of-battle-summary-connector';
-import {factions, BattleOutcomes, battleOutcomes} from '../types/consts';
-import {OrderOfBattle} from '../redux/types/order-of-battle';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootParamList} from '../navigation/root-param-list';
+import {factions, BattleOutcomes} from '../types/consts';
 import {Icon, Card, Button} from 'react-native-elements';
 import {RequisitionPoints} from '../types/literals';
 import {SaveCancelFooter} from '../components/save-cancel-footer';
@@ -16,17 +11,10 @@ import {TitleFactionProvider} from '../providers/title-faction-provider';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import {CrusadeCardListItem} from '../components/crusade-card-list-item';
 import {SwipeOutDeleteRight} from '../components/swipe-out-delete-right';
-import {CrusadeCard} from '../redux/types/crusade-card';
+import {CrusadeCard} from '../types/state/crusade-card';
 import {BattleSummary} from '../components/battle-summary';
-
-type OrderOfBattleSummaryState = OrderOfBattle & {
-    isDirty: boolean,
-    isEditing: boolean
-}
-
-export type OrderOfBattleSummaryProps = ConnectedProps<typeof orderOfBattleSummaryConnector> & {
-    navigation: StackNavigationProp<RootParamList, 'OrderOfBattleSummary'>
-};
+import {OrderOfBattleSummaryProps} from '../types/screens/props';
+import {OrderOfBattleSummaryState} from '../types/screens/states';
 
 export class OrderOfBattleSummary extends React.Component<OrderOfBattleSummaryProps, OrderOfBattleSummaryState> {
     constructor(props : OrderOfBattleSummaryProps) {

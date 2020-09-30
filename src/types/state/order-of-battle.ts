@@ -1,6 +1,6 @@
 // import {CrusadeCard} from './crusade-card';
-import {RequisitionPoints} from '../../types/literals';
-import {Factions, factions, BattleOutcomes} from '../../types/consts';
+import {RequisitionPoints} from '../literals';
+import {Factions, factions, BattleOutcomes} from '../consts';
 import {CrusadeCard} from './crusade-card';
 
 export type OrderOfBattle = {

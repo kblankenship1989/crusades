@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, View, StyleSheet} from 'react-native';
 
-export const LoadingGIF = () : JSX.Element => (
+export const LoadingGIF : React.FC = () => (
     <View style={styles.container}>
         <Image
             source={require('../assets/images/loading.gif')}

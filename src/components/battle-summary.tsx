@@ -5,16 +5,12 @@ import {Picker} from '@react-native-community/picker';
 import {getColorScheme} from '../helpers/getColorScheme';
 import {appStyles} from '../../styles';
 import {BattleOutcomes, battleOutcomes} from '../types/consts';
-
-export type BattleSummaryProps = {
-    battleTallies: BattleOutcomes[],
-    addBattleTally: (battleOutcome : BattleOutcomes) => void
-}
+import {BattleSummaryProps} from '../types/components/props';
 
 const colorScheme = getColorScheme();
 const styles = appStyles(colorScheme);
 
-export const BattleSummary = ({battleTallies, addBattleTally} : BattleSummaryProps) : JSX.Element => {
+export const BattleSummary : React.FC<BattleSummaryProps> = ({battleTallies, addBattleTally}) => {
     const [currentSelection, setCurrentSelection] = React.useState<BattleOutcomes | undefined>(undefined);
 
     const updateCurrentSelection = (itemValue: string | number, itemIndex : number) : void => {

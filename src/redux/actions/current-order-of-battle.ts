@@ -1,4 +1,4 @@
-import {OrderOfBattle} from '../types/order-of-battle';
+import {OrderOfBattle} from '../../types/state/order-of-battle';
 import {Action} from 'redux';
 import {SET_CURRENT_ORDER_OF_BATTLE} from '../../constants/action-list';
 

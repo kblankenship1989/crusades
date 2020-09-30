@@ -1,6 +1,6 @@
 // import {CombatTallies, defaultCombatTallies} from './combat-tallies';
 // import {Rank} from './rank';
-import {Factions, BattlefieldRoles, UnitTypes, factions, battlefieldRoles} from '../../types/consts';
+import {Factions, BattlefieldRoles, UnitTypes, factions, battlefieldRoles} from '../consts';
 
 export type CrusadeCard = {
     name?: string,

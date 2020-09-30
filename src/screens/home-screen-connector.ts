@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {State} from '../redux/types/state';
+import {State} from '../types/state';
 import {HomeScreen} from './home-screen';
 import {createOrderOfBattle, loadSelectedOrderOfBattle, deleteSelectedOrderOfBattle} from '../redux/action-creators/current-order-of-battle';
 

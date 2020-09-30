@@ -1,4 +1,4 @@
-import {OrderOfBattle, defaultOrderOfBattle} from '../types/order-of-battle';
+import {OrderOfBattle, defaultOrderOfBattle} from '../../types/state/order-of-battle';
 import {CurrentOrderOfBattleActions} from '../actions/current-order-of-battle';
 import {SET_CURRENT_ORDER_OF_BATTLE} from '../../constants/action-list';
 

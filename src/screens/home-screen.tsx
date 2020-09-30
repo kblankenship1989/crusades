@@ -5,27 +5,15 @@ import {
 } from 'react-native';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import {Icon, Button} from 'react-native-elements';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootParamList} from '../navigation/root-param-list';
 import {getColorScheme} from '../helpers/getColorScheme';
-import {homeScreenConnector} from './home-screen-connector';
-import {ConnectedProps} from 'react-redux';
-import {Factions, factions} from '../types/consts';
+import {factions} from '../types/consts';
 import {FactionPicker} from '../components/faction-picker';
 import {TitleInput} from '../components/title-input';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {OrderOfBattleListItem} from '../components/order-of-battle-list-item';
 import {SwipeOutDeleteRight} from '../components/swipe-out-delete-right';
-
-
-type HomeState = {
-    title: string,
-    faction: Factions
-}
-
-export type HomeProps = ConnectedProps<typeof homeScreenConnector> & {
-    navigation: StackNavigationProp<RootParamList, 'Home'>
-}
+import {HomeProps} from '../types/screens/props';
+import {HomeState} from '../types/screens/states';
 
 export class HomeScreen extends React.Component<HomeProps, HomeState> {
     constructor(props : HomeProps) {

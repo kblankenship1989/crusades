@@ -1,4 +1,4 @@
-import {CrusadeCard, defaultCrusadeCard} from '../types/crusade-card';
+import {CrusadeCard, defaultCrusadeCard} from '../../types/state/crusade-card';
 import {AppThunk} from '../thunk';
 import {SetCurrentCursadeCardAction} from '../actions/current-crusade-card';
 import {SET_CURRENT_CRUSADE_CARD, SET_CURRENT_ORDER_OF_BATTLE, SET_ORDERS_OF_BATTLE} from '../../constants/action-list';

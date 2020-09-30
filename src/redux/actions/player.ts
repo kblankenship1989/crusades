@@ -1,4 +1,4 @@
-import {Player} from './../types/player';
+import {Player} from '../../types/state/player';
 import {UPDATE_PLAYER} from './../../constants/action-list';
 import {Action, AnyAction} from 'redux';
 
