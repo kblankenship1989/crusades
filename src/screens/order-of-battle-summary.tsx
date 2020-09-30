@@ -17,6 +17,7 @@ import {SwipeListView} from 'react-native-swipe-list-view';
 import {CrusadeCardListItem} from '../components/crusade-card-list-item';
 import {SwipeOutDeleteRight} from '../components/swipe-out-delete-right';
 import {CrusadeCard} from '../redux/types/crusade-card';
+import {BattleSummary} from '../components/battle-summary';
 
 type OrderOfBattleSummaryState = OrderOfBattle & {
     isDirty: boolean,
@@ -122,29 +123,14 @@ export class OrderOfBattleSummary extends React.Component<OrderOfBattleSummaryPr
         }, 0);
     }
 
-    getWinLoseDraw = () : string => {
-        type WinLoseDraw = {win: number, lose: number, draw: number};
-        const wldSummary = this.state.battleTally.reduce((summary : WinLoseDraw, battleOutcome : BattleOutcomes) : WinLoseDraw => {
-            switch (battleOutcome) {
-            case battleOutcomes[0]:
-            case battleOutcomes[1]:
-            case battleOutcomes[2]:
-                summary.lose = summary.lose + 1;
-                break;
-            case battleOutcomes[4]:
-            case battleOutcomes[5]:
-            case battleOutcomes[6]:
-                summary.win = summary.win + 1;
-                break;
-            default:
-                summary.draw = summary.draw + 1;
-                break;
-            }
-
-            return summary;
-        }, {win: 0, lose: 0, draw: 0});
-
-        return `${wldSummary.win} / ${wldSummary.lose} / ${wldSummary.draw}`;
+    addBattleTally = (newBattleTally : BattleOutcomes) : void => {
+        this.setState({
+            battleTally: [
+                ...this.state.battleTally,
+                newBattleTally
+            ],
+            isDirty: true
+        });
     }
 
     render() : JSX.Element {
@@ -173,16 +159,10 @@ export class OrderOfBattleSummary extends React.Component<OrderOfBattleSummaryPr
                         currentPoints={this.state.requisitionPoints}
                         updateRequisitionPoints={this.updateRequisitionPoints}
                     />
-                    <Card
-                        title={'Battle Summary'}
-                    >
-                        <Text>W / L / D</Text>
-                        <Text>{this.getWinLoseDraw()}</Text>
-                        <Button
-                            onPress={() => null}
-                            title={'Add Battle'}
-                        />
-                    </Card>
+                    <BattleSummary
+                        battleTallies={this.state.battleTally}
+                        addBattleTally={this.addBattleTally}
+                    />
                     <Card
                         title={'Crusade Cards'}
                     >

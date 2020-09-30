@@ -13,7 +13,7 @@ export type FactionPickerProps = {
 const colorScheme = getColorScheme();
 const styles = appStyles(colorScheme);
 
-export const FactionPicker = (props : FactionPickerProps) : JSX.Element => (
+export const FactionPicker = ({selectedFaction, onValueChange} : FactionPickerProps) : JSX.Element => (
     <View style={styles.pickerRow}>
         <Icon
             size={18}
@@ -24,8 +24,8 @@ export const FactionPicker = (props : FactionPickerProps) : JSX.Element => (
             accessibilityLabel={'Faction'}
             testID={'faction-picker'}
             style={styles.picker}
-            selectedValue={props.selectedFaction}
-            onValueChange={props.onValueChange}
+            selectedValue={selectedFaction}
+            onValueChange={onValueChange}
         >
             {factions.map((faction) => (
                 <Picker.Item
