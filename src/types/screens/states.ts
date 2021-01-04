@@ -3,8 +3,7 @@ import {Factions} from '../consts';
 import {CrusadeCard} from '../state/crusade-card';
 
 export type OrderOfBattleSummaryState = OrderOfBattle & {
-    isDirty: boolean,
-    isEditing: boolean
+    isDirty: boolean
 }
 
 export type HomeState = {

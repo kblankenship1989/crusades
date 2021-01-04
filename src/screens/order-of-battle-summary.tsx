@@ -5,9 +5,7 @@ import {RequisitionPointsSelector, IncrementorDecrementor} from '../components/r
 import {factions, BattleOutcomes} from '../types/consts';
 import {Icon, Card, Button} from 'react-native-elements';
 import {RequisitionPoints} from '../types/literals';
-import {SaveCancelFooter} from '../components/save-cancel-footer';
 import {getColorScheme} from '../helpers/getColorScheme';
-import {TitleFactionProvider} from '../providers/title-faction-provider';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import {CrusadeCardListItem} from '../components/crusade-card-list-item';
 import {SwipeOutDeleteRight} from '../components/swipe-out-delete-right';
@@ -15,6 +13,8 @@ import {CrusadeCard} from '../types/state/crusade-card';
 import {BattleSummary} from '../components/battle-summary';
 import {OrderOfBattleSummaryProps} from '../types/screens/props';
 import {OrderOfBattleSummaryState} from '../types/screens/states';
+import {TitleInput} from '../components/title-input';
+import {FactionPicker} from '../components/faction-picker';
 
 export class OrderOfBattleSummary extends React.Component<OrderOfBattleSummaryProps, OrderOfBattleSummaryState> {
     constructor(props : OrderOfBattleSummaryProps) {
@@ -22,8 +22,7 @@ export class OrderOfBattleSummary extends React.Component<OrderOfBattleSummaryPr
 
         this.state = {
             ...props.currentOrderOfBattle,
-            isDirty: false,
-            isEditing: false
+            isDirty: false
         };
     }
 
@@ -44,23 +43,15 @@ export class OrderOfBattleSummary extends React.Component<OrderOfBattleSummaryPr
             this.props.saveCurrentOrderOfBattle(currentOrderOfBattle);
 
             this.setState({
-                isEditing: false,
                 isDirty: false
             });
         }
     }
 
-    handleEdit = () : void => {
-        this.setState({
-            isEditing: true
-        });
-    }
-
     resetForm = () : void => {
         this.setState({
             ...this.props.currentOrderOfBattle,
-            isDirty: false,
-            isEditing: false
+            isDirty: false
         });
     }
 
@@ -127,22 +118,17 @@ export class OrderOfBattleSummary extends React.Component<OrderOfBattleSummaryPr
         return (
             <View>
                 <ScrollView>
-                    <TitleFactionProvider
-                        title={this.state.title}
-                        onTitleChange={(title) => this.setState({title, isDirty: true})}
-                        onFactionChange={(itemValue, itemIndex) => this.setState({faction: factions[itemIndex], isDirty: true})}
-                        selectedFaction={this.state.faction}
-                        placeholder={'Order Of Battle'}
-                        isEditing={this.state.isEditing}
-                    />
-                    {!this.state.isEditing && <Icon
-                        name={'pencil'}
-                        type={'font-awesome'}
-                        size={18}
-                        color={'#8ba4c9'}
-                        testID={'edit-title'}
-                        onPress={() => this.handleEdit()}
-                    />}
+                    <View>
+                        <TitleInput
+                            value={this.state.title}
+                            placeholder={'Order Of Battle'}
+                            onChangeText={(title) => this.setState({title, isDirty: true})}
+                        />
+                        <FactionPicker
+                            selectedFaction={this.state.faction}
+                            onValueChange={(itemValue, itemIndex) => this.setState({faction: factions[itemIndex], isDirty: true})}
+                        />
+                    </View>
                     <RequisitionPointsSelector
                         currentPoints={this.state.requisitionPoints}
                         updateRequisitionPoints={this.updateRequisitionPoints}
@@ -179,11 +165,6 @@ export class OrderOfBattleSummary extends React.Component<OrderOfBattleSummaryPr
                         />
                     </Card>
                 </ScrollView>
-                <SaveCancelFooter
-                    isDirty={this.state.isDirty}
-                    onCancel={this.handleBack}
-                    onSave={this.handleSave}
-                />
             </View>
         );
     }
