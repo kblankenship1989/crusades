@@ -5,6 +5,7 @@ import {appStyles} from '../../styles';
 import {View} from 'react-native';
 import {Icon} from 'react-native-elements';
 import {FactionPickerProps} from '../types/components/props';
+import {factions} from '../types/consts';
 
 const colorScheme = getColorScheme();
 const styles = appStyles(colorScheme);

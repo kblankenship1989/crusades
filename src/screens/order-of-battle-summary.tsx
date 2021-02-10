@@ -165,6 +165,11 @@ export class OrderOfBattleSummary extends React.Component<OrderOfBattleSummaryPr
                         />
                     </Card>
                 </ScrollView>
+                <Button
+                    disabled={!this.state.isDirty}
+                    onPress={this.handleSave}
+                    title={'Save'}
+                />
             </View>
         );
     }
