@@ -1,10 +1,15 @@
-import {OrderOfBattle, defaultOrderOfBattle} from '../src/redux/types/order-of-battle';
-import {Player, defaultPlayer} from '../src/redux/types/player';
-import {State} from '../src/redux/types/state';
-import {CrusadeCard, defaultCrusadeCard} from '../src/redux/types/crusade-card';
+import { CrusadeCard, defaultCrusadeCard, CurrentCrusadeCard, defaultCurrentCrusadeCard } from "../src/types/state/crusade-card";
+import { OrderOfBattle, defaultOrderOfBattle } from "../src/types/state/order-of-battle";
+import { Player, defaultPlayer } from "../src/types/state/player";
+import { State } from "../src/types/state";
 
 export const mockCrusadeCard = (overrides? : Partial<CrusadeCard>) : CrusadeCard => ({
     ...defaultCrusadeCard,
+    ...overrides
+});
+
+export const mockCurrentCrusadeCard = (overrides? : Partial<CurrentCrusadeCard>) : CurrentCrusadeCard => ({
+    ...defaultCurrentCrusadeCard,
     ...overrides
 });
 
@@ -26,5 +31,6 @@ export const mockState = (overrides? : Partial<State>) : State => ({
         mockOrderOfBattle()
     ],
     currentOrderOfBattle: mockOrderOfBattle(),
+    currentCrusadeCard: mockCurrentCrusadeCard(),
     ...overrides
 });

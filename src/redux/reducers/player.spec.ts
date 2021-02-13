@@ -1,7 +1,7 @@
 import {player} from './player';
-import {defaultPlayer, Player} from '../types/player';
 import {UPDATE_PLAYER} from '../../constants/action-list';
 import {PlayerAction} from '../actions/player';
+import { Player, defaultPlayer } from '../../types/state/player';
 
 describe('Given the player reducer', () => {
     it('should initialize the state when no store is presisted', () => {

@@ -1,5 +1,4 @@
 import {mockCrusadeCard, mockState, mockOrderOfBattle} from '../../../__test_utils__/mockStates';
-import {State} from '../types/state';
 import {SetCurrentCursadeCardAction} from '../actions/current-crusade-card';
 import {SET_CURRENT_CRUSADE_CARD, SET_ORDERS_OF_BATTLE, SET_CURRENT_ORDER_OF_BATTLE} from '../../constants/action-list';
 import {SetCurrentOrderOfBattleAction} from '../actions/current-order-of-battle';
@@ -7,7 +6,9 @@ import {OrdersOfBattleAction} from '../actions/orders-of-battle';
 import {ThunkDispatch} from 'redux-thunk';
 import {AvailableActions} from '../actions';
 import {saveCurrentCrusadeCard, addCrusadeCard, deleteCrusadeCard, loadCurrentCrusadeCard} from './current-crusade-card';
-import {defaultCrusadeCard} from '../types/crusade-card';
+import { State } from '../../types/state';
+import { defaultCrusadeCard } from '../../types/state/crusade-card';
+
 
 describe('Given the action to save changes to the current crusade card', () => {
     it('should store the current crusade card to its provided index', () => {
@@ -17,7 +18,7 @@ describe('Given the action to save changes to the current crusade card', () => {
             }),
             index: 1
         };
-        const stateMock : State = mockState({
+        const stateMock = mockState({
             currentCrusadeCard: {
                 ...mockCrusadeCard({
                     name: 'Some lame name'

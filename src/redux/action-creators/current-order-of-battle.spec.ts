@@ -1,21 +1,18 @@
-import {Factions, factions} from '../../types/consts';
 import {SET_CURRENT_ORDER_OF_BATTLE, SET_ORDERS_OF_BATTLE} from '../../constants/action-list';
-import {defaultOrderOfBattle, OrderOfBattle} from '../types/order-of-battle';
 import {createOrderOfBattle, loadSelectedOrderOfBattle, deleteSelectedOrderOfBattle, saveCurrentOrderOfBattle} from './current-order-of-battle';
 import {ThunkDispatch} from 'redux-thunk';
 import {SetOrdersOfBattleAction} from '../actions/orders-of-battle';
 import {mockState, mockOrderOfBattle} from '../../../__test_utils__/mockStates';
 import {SetCurrentOrderOfBattleAction} from '../actions/current-order-of-battle';
-import {State} from '../types/state';
 import {AvailableActions} from '../actions';
+import { OrderOfBattle, defaultOrderOfBattle } from '../../types/state/order-of-battle';
+import { State } from '../../types/state';
 
 describe('Given the action to add a new order of battle', () => {
     it('should assign the provided title and faction to the current order of battle on state', () => {
-        const title = 'Some awesome title';
-        const faction : Factions = factions[3];
         const dispatchMock : ThunkDispatch<OrderOfBattle, unknown, AvailableActions> = jest.fn();
         const getStateMock = jest.fn();
-        const stateMock : State= mockState({
+        const stateMock : State = mockState({
             ordersOfBattle: [
                 mockOrderOfBattle({title: 'title 1'}),
                 mockOrderOfBattle({title: 'title 2'})
@@ -24,9 +21,7 @@ describe('Given the action to add a new order of battle', () => {
         getStateMock.mockReturnValue(stateMock);
 
         const newOrderOfBattle = {
-            ...defaultOrderOfBattle,
-            title,
-            faction
+            ...defaultOrderOfBattle
         };
 
         const expectedCurrentOrderOfBattleAction : SetCurrentOrderOfBattleAction = {
@@ -45,7 +40,7 @@ describe('Given the action to add a new order of battle', () => {
             }
         };
 
-        const action = createOrderOfBattle(title, faction);
+        const action = createOrderOfBattle();
         action(dispatchMock, getStateMock, undefined);
 
         expect(dispatchMock).toHaveBeenCalledTimes(2);

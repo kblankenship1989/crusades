@@ -17,3 +17,8 @@ export type FactionPickerProps = {
 export type OrderOfBattleListItemProps = {
     selectOrderOfBattle: (index: number) => void
 }
+
+export type ActionFooterProps = {
+    onAdd?: () => void,
+    onSave?: () => void
+}

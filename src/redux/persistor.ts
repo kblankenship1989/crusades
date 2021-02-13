@@ -1,5 +1,5 @@
 import {persistStore, Persistor, PersistConfig, persistReducer} from 'redux-persist';
-import storage from 'redux-persist/es/storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {configureStore} from './store';
 import {State} from '../types/state';
 import {AvailableActions} from './actions';
@@ -8,7 +8,7 @@ import {Store} from 'redux';
 
 const config : PersistConfig<State, AvailableActions> = {
     key: 'root',
-    storage,
+    storage: AsyncStorage,
     debug: true,
     whitelist: [
         'player',

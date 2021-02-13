@@ -1,82 +1,44 @@
 import React from 'react';
-import {
-    View,
-    ScrollView
-} from 'react-native';
+import {ScrollView} from 'react-native';
 import {SwipeListView} from 'react-native-swipe-list-view';
-import {Icon, Button} from 'react-native-elements';
-import {getColorScheme} from '../helpers/getColorScheme';
-import {factions} from '../types/consts';
-import {FactionPicker} from '../components/faction-picker';
-import {TitleInput} from '../components/title-input';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {OrderOfBattleListItem} from '../components/order-of-battle-list-item';
 import {SwipeOutDeleteRight} from '../components/swipe-out-delete-right';
 import {HomeProps} from '../types/screens/props';
-import {HomeState} from '../types/screens/states';
+import { ActionFooter } from '../components/action-footer';
 
-export class HomeScreen extends React.Component<HomeProps, HomeState> {
-    constructor(props : HomeProps) {
-        super(props);
+export const HomeScreen : React.FC<HomeProps> = ({
+    loadSelectedOrderOfBattle,
+    deleteSelectedOrderOfBattle,
+    createOrderOfBattle,
+    navigation,
+    ordersOfBattle
+}) => {
+    const selectOrderOfBattle = (index: number) : void => {
+        loadSelectedOrderOfBattle(index);
+        navigation.push('OrderOfBattleSummary');
+    };
 
-        this.state = {
-            title: '',
-            faction: factions[0]
-        };
+    const addOrderOfBattle = () : void => {
+        createOrderOfBattle();
+
+        navigation.push('OrderOfBattleSummary');
     }
 
-    selectOrderOfBattle = (index: number) : void => {
-        this.props.loadSelectedOrderOfBattle(index);
-        this.props.navigation.push('OrderOfBattleSummary');
-    }
-
-    addOrderOfBattle = () :void => {
-        this.props.createOrderOfBattle(this.state.title, this.state.faction);
-        this.setState({
-            title: '',
-            faction: factions[0]
-        });
-
-        this.props.navigation.push('OrderOfBattleSummary');
-    }
-
-    render() : JSX.Element {
-        const colorScheme = getColorScheme();
-
-        return (
-            <SafeAreaView>
-                <ScrollView>
-                    <View>
-                        <TitleInput
-                            value={this.state.title}
-                            onChangeText={(title) => this.setState({title})}
-                            placeholder={'Order Of Battle'}
-                        />
-                        <FactionPicker
-                            selectedFaction={this.state.faction}
-                            onValueChange={(itemValue, itemIndex) => this.setState({faction: factions[itemIndex]})}
-                        />
-                        <Button
-                            onPress={this.addOrderOfBattle}
-                            disabled={this.state.title === ''}
-                            testID={'create-button'}
-                            icon={<Icon
-                                name={'plus'}
-                                type={'font-awesome'}
-                                size={18}
-                                color={colorScheme === 'light' ? '#8ba4c9' : '#404040'}
-                            />}
-                        />
-                    </View>
-                    <SwipeListView
-                        renderItem={OrderOfBattleListItem({selectOrderOfBattle: this.selectOrderOfBattle})}
-                        renderHiddenItem={SwipeOutDeleteRight({onDelete: this.props.deleteSelectedOrderOfBattle})}
-                        keyExtractor={(orderOfBattle) => orderOfBattle.title}
-                        data={this.props.ordersOfBattle}
-                        rightOpenValue={-75}
-                    />
-                </ScrollView>
-            </SafeAreaView>
-        );
-    }
+    return (
+        <SafeAreaView>
+            <ScrollView>
+                <SwipeListView
+                    renderItem={OrderOfBattleListItem({selectOrderOfBattle})}
+                    renderHiddenItem={SwipeOutDeleteRight({onDelete: deleteSelectedOrderOfBattle})}
+                    keyExtractor={(orderOfBattle) => orderOfBattle.title}
+                    data={ordersOfBattle}
+                    rightOpenValue={-75}
+                />
+            </ScrollView>
+            <ActionFooter
+                onAdd={addOrderOfBattle}
+            />
+        </SafeAreaView>
+    );
 }

@@ -1,8 +1,8 @@
 import {ordersOfBattle} from './orders-of-battle';
-import {OrderOfBattle} from '../types/order-of-battle';
 import {mockOrderOfBattle} from '../../../__test_utils__/mockStates';
 import {SetOrdersOfBattleAction} from '../actions/orders-of-battle';
 import {SET_ORDERS_OF_BATTLE} from '../../constants/action-list';
+import {OrderOfBattle} from '../../types/state/order-of-battle';
 
 describe('Given the orders of battle reducer', () => {
     describe('and the list of orders of battle is updated', () => {
