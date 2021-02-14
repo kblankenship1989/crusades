@@ -33,70 +33,598 @@ exports[`Given the Faction Picker Component should render correctly 1`] = `
   </View>
   <View
     style={
-      Object {
-        "flex": 1,
-        "fontSize": 18,
-        "marginHorizontal": 10,
-      }
+      Array [
+        Object {
+          "height": 40,
+        },
+        Object {
+          "zIndex": 5000,
+        },
+      ]
     }
   >
-    <RNCPicker
-      items={
-        Array [
-          Object {
-            "label": "Unaligned",
-            "textColor": undefined,
-            "value": "Unaligned",
-          },
-          Object {
-            "label": "Imperium",
-            "textColor": undefined,
-            "value": "Imperium",
-          },
-          Object {
-            "label": "Chaos",
-            "textColor": undefined,
-            "value": "Chaos",
-          },
-          Object {
-            "label": "Aeldari",
-            "textColor": undefined,
-            "value": "Aeldari",
-          },
-          Object {
-            "label": "Tyranids",
-            "textColor": undefined,
-            "value": "Tyranids",
-          },
-          Object {
-            "label": "Orks",
-            "textColor": undefined,
-            "value": "Orks",
-          },
-          Object {
-            "label": "Necrons",
-            "textColor": undefined,
-            "value": "Necrons",
-          },
-          Object {
-            "label": "T'au Empire",
-            "textColor": undefined,
-            "value": "T'au Empire",
-          },
-        ]
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onLayout={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fafafa",
+          "borderBottomLeftRadius": 5,
+          "borderBottomRightRadius": 5,
+          "borderColor": "#dfdfdf",
+          "borderTopLeftRadius": 5,
+          "borderTopRightRadius": 5,
+          "borderWidth": 1,
+          "flex": 1,
+          "flexDirection": "row",
+          "opacity": 1,
+          "paddingHorizontal": 10,
+          "paddingVertical": 5,
+        }
       }
-      onChange={[Function]}
-      selectedIndex={3}
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#000",
+            },
+            Object {},
+            Object {
+              "flex": 1,
+              "opacity": 1,
+            },
+            Object {
+              "marginLeft": 5,
+              "marginRight": 0,
+            },
+            Object {
+              "marginLeft": 5,
+            },
+            Object {},
+            Object {},
+            false,
+          ]
+        }
+      >
+        Aeldari
+      </Text>
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "borderBottomLeftRadius": 0,
+              "borderTopLeftRadius": 0,
+              "flexDirection": "row",
+              "justifyContent": "center",
+              "paddingVertical": 8,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {},
+              Object {
+                "opacity": 1,
+              },
+            ]
+          }
+        >
+          <Text />
+        </View>
+      </View>
+    </View>
+    <View
       style={
         Array [
           Object {
-            "height": 216,
+            "alignItems": "center",
+            "backgroundColor": "#fff",
+            "borderBottomLeftRadius": 5,
+            "borderBottomRightRadius": 5,
+            "borderColor": "#dfdfdf",
+            "borderTopLeftRadius": 5,
+            "borderTopRightRadius": 5,
+            "borderWidth": 1,
+            "paddingHorizontal": 10,
+            "paddingVertical": 5,
           },
-          undefined,
+          Object {
+            "alignItems": "center",
+            "borderTopLeftRadius": 0,
+            "borderTopRightRadius": 0,
+            "justifyContent": "center",
+            "position": "absolute",
+            "width": "100%",
+          },
+          Object {
+            "backgroundColor": "#fafafa",
+          },
+          Object {
+            "borderWidth": 0,
+            "display": "none",
+            "position": "relative",
+          },
+          Object {
+            "maxHeight": 150,
+            "top": undefined,
+            "zIndex": 5000,
+          },
         ]
       }
-      testID="faction-picker"
-    />
+    >
+      <RCTScrollView
+        nestedScrollEnabled={true}
+        style={
+          Object {
+            "width": "100%",
+          }
+        }
+      >
+        <View>
+          <View
+            onLayout={[Function]}
+          >
+            <View
+              accessible={true}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "flex-start",
+                  "opacity": 1,
+                  "paddingVertical": 8,
+                  "width": "100%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "alignContent": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "flex-start",
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "justifyContent": "center",
+                    }
+                  }
+                />
+                <Text
+                  style={
+                    Array [
+                      Object {},
+                      Object {},
+                      undefined,
+                      false,
+                      Object {},
+                    ]
+                  }
+                >
+                  Unaligned
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View
+            onLayout={[Function]}
+          >
+            <View
+              accessible={true}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "flex-start",
+                  "opacity": 1,
+                  "paddingVertical": 8,
+                  "width": "100%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "alignContent": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "flex-start",
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "justifyContent": "center",
+                    }
+                  }
+                />
+                <Text
+                  style={
+                    Array [
+                      Object {},
+                      Object {},
+                      undefined,
+                      false,
+                      Object {},
+                    ]
+                  }
+                >
+                  Imperium
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View
+            onLayout={[Function]}
+          >
+            <View
+              accessible={true}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "flex-start",
+                  "opacity": 1,
+                  "paddingVertical": 8,
+                  "width": "100%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "alignContent": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "flex-start",
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "justifyContent": "center",
+                    }
+                  }
+                />
+                <Text
+                  style={
+                    Array [
+                      Object {},
+                      Object {},
+                      undefined,
+                      false,
+                      Object {},
+                    ]
+                  }
+                >
+                  Chaos
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View
+            onLayout={[Function]}
+          >
+            <View
+              accessible={true}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "flex-start",
+                  "opacity": 1,
+                  "paddingVertical": 8,
+                  "width": "100%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "alignContent": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "flex-start",
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "justifyContent": "center",
+                    }
+                  }
+                />
+                <Text
+                  style={
+                    Array [
+                      Object {},
+                      Object {},
+                      undefined,
+                      Object {},
+                      Object {},
+                    ]
+                  }
+                >
+                  Aeldari
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View
+            onLayout={[Function]}
+          >
+            <View
+              accessible={true}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "flex-start",
+                  "opacity": 1,
+                  "paddingVertical": 8,
+                  "width": "100%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "alignContent": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "flex-start",
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "justifyContent": "center",
+                    }
+                  }
+                />
+                <Text
+                  style={
+                    Array [
+                      Object {},
+                      Object {},
+                      undefined,
+                      false,
+                      Object {},
+                    ]
+                  }
+                >
+                  Tyranids
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View
+            onLayout={[Function]}
+          >
+            <View
+              accessible={true}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "flex-start",
+                  "opacity": 1,
+                  "paddingVertical": 8,
+                  "width": "100%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "alignContent": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "flex-start",
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "justifyContent": "center",
+                    }
+                  }
+                />
+                <Text
+                  style={
+                    Array [
+                      Object {},
+                      Object {},
+                      undefined,
+                      false,
+                      Object {},
+                    ]
+                  }
+                >
+                  Orks
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View
+            onLayout={[Function]}
+          >
+            <View
+              accessible={true}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "flex-start",
+                  "opacity": 1,
+                  "paddingVertical": 8,
+                  "width": "100%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "alignContent": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "flex-start",
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "justifyContent": "center",
+                    }
+                  }
+                />
+                <Text
+                  style={
+                    Array [
+                      Object {},
+                      Object {},
+                      undefined,
+                      false,
+                      Object {},
+                    ]
+                  }
+                >
+                  Necrons
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View
+            onLayout={[Function]}
+          >
+            <View
+              accessible={true}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "flex-start",
+                  "opacity": 1,
+                  "paddingVertical": 8,
+                  "width": "100%",
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "alignContent": "center",
+                    "flexDirection": "row",
+                    "justifyContent": "flex-start",
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "justifyContent": "center",
+                    }
+                  }
+                />
+                <Text
+                  style={
+                    Array [
+                      Object {},
+                      Object {},
+                      undefined,
+                      false,
+                      Object {},
+                    ]
+                  }
+                >
+                  T'au Empire
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </RCTScrollView>
+    </View>
   </View>
 </View>
 `;

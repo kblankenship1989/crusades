@@ -23,23 +23,6 @@ describe('Given the Title Input component', () => {
         });
     });
 
-    describe('And no placeholder value is provided', () => {
-        it('should render an input with the default placeholder text', async () => {
-            const testProps : TitleInputProps = {
-                value: 'Some title',
-                onChangeText: jest.fn()
-            };
-            const component = (<TitleInput
-                {...testProps}
-            />);
-            const {
-                queryByPlaceholderText
-            } = render(component);
-
-            expect(await queryByPlaceholderText('Title')).toBeTruthy();
-        });
-    });
-
     it('should render the component correctly', () => {
         const testProps : TitleInputProps = {
             placeholder: 'Some placeholder text',

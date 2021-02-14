@@ -1,82 +1,89 @@
-// import React from 'react';
-// import '@testing-library/jest-native/extend-expect';
-// import {render, fireEvent, RenderAPI} from '@testing-library/react-native';
-// import {HomeScreen, HomeProps} from './home-screen';
-// import {mockNavigation} from '../../__test_utils__/mockNavigation';
-// import {mockOrderOfBattle} from '../../__test_utils__/mockStates';
-// import {factions} from '../types/consts';
+import React from 'react';
+import '@testing-library/jest-native/extend-expect';
+import {render, fireEvent, RenderAPI} from '@testing-library/react-native';
+import {HomeScreen} from './home-screen';
+import {mockNavigation} from '../../__test_utils__/mockNavigation';
+import {mockOrderOfBattle} from '../../__test_utils__/mockStates';
+import {factions} from '../types/consts';
+import {HomeProps} from '../types/screens/props';
 
-// jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
+jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
 
-// type Test = {
-//     testProps: HomeProps,
-//     component: RenderAPI
-// };
+type Test = {
+    testProps: HomeProps,
+    component: RenderAPI
+};
 
-// describe('Given the Home Screen', () => {
-//     const renderComponent = (overrides? : Partial<HomeProps>) : Test => {
-//         const defaultTestProps : HomeProps = {
-//             navigation: mockNavigation,
-//             createOrderOfBattle: jest.fn(),
-//             loadSelectedOrderOfBattle: jest.fn(),
-//             deleteSelectedOrderOfBattle: jest.fn(),
-//             ordersOfBattle: [
-//                 mockOrderOfBattle({
-//                     title: 'title 1'
-//                 }),
-//                 mockOrderOfBattle({
-//                     title: 'title 2'
-//                 })
-//             ]
-//         };
+describe('Given the Home Screen', () => {
+    const renderComponent = (overrides? : Partial<HomeProps>) : Test => {
+        const defaultTestProps : HomeProps = {
+            navigation: mockNavigation,
+            createOrderOfBattle: jest.fn(),
+            loadSelectedOrderOfBattle: jest.fn(),
+            deleteSelectedOrderOfBattle: jest.fn(),
+            ordersOfBattle: [
+                mockOrderOfBattle({
+                    id: 7,
+                    title: 'title 1'
+                }),
+                mockOrderOfBattle({
+                    id: 9,
+                    title: 'title 2'
+                })
+            ]
+        };
 
-//         const testProps = {
-//             ...defaultTestProps,
-//             ...overrides
-//         };
+        const testProps = {
+            ...defaultTestProps,
+            ...overrides
+        };
 
-//         const component = render(<HomeScreen {...testProps} />);
+        const component = render(<HomeScreen {...testProps} />);
 
-//         return {component, testProps};
-//     };
+        return {component, testProps};
+    };
 
-//     // it('should render correctly', () => {
-//     //     const {component} = renderComponent();
+    // it('should render correctly', () => {
+    //     const {component} = renderComponent();
 
-//     //     expect(component.toJSON()).toMatchSnapshot();
-//     // });
+    //     expect(component.toJSON()).toMatchSnapshot();
+    // });
 
-//     it('should disable the create button when the title field is blank', async () => {
-//         const {component} = renderComponent();
+    describe('and there are no orders of battle available', () => {
+        it('should display a message telling the using to add a new order of battle', async () => {
+            const {component} = renderComponent({
+                ordersOfBattle: []
+            });
 
-//         const titleField = component.getByPlaceholderText('Order Of Battle');
-//         expect(titleField.props.value).toStrictEqual('');
+            expect(await component.getByText('Click + ADD to create a new Crusade Force')).toBeTruthy();
+        });
+    });
 
-//         const createButton = await component.getByTestId('create-button');
-//         expect(createButton).toBeDisabled();
-//     });
+    describe('and the ADD button is clicked', () => {
+        it('should create a new order of battle', async () => {
+            const {component, testProps} = renderComponent();
 
-//     it('should enable the create button once a value is entered into the title and faction fields', async () => {
-//         const {component} = renderComponent();
+            const addButton = await component.getByText('ADD');
 
-//         const title = 'test text';
-//         const selectedFactionIndex = 6;
-//         const selectedFaction = factions[selectedFactionIndex];
+            fireEvent(addButton, 'onPress');
 
-//         const titleField = component.getByPlaceholderText('Order Of Battle');
-//         expect(titleField.props.value).toStrictEqual('');
+            expect(testProps.createOrderOfBattle).toHaveBeenCalledTimes(1);
+        });
 
-//         fireEvent(titleField, 'onChangeText', title);
+        it('should navigate to the order of battle summary page', async () => {
+            const {component, testProps} = renderComponent({
+                navigation: {
+                    ...mockNavigation,
+                    push: jest.fn()
+                }
+            });
 
-//         expect(await component.getByDisplayValue(title)).toBeTruthy();
+            const addButton = await component.getByText('ADD');
 
-//         const factionField = await component.getByTestId('faction-picker');
+            fireEvent(addButton, 'onPress');
 
-//         fireEvent(factionField, 'onValueChange', selectedFaction, selectedFactionIndex);
-
-//         expect(await component.getByTestId('faction-picker')).toHaveProp('selectedIndex', selectedFactionIndex);
-
-//         const createButton = await component.getByTestId('create-button');
-//         expect(createButton).not.toBeDisabled();
-//     });
-// });
+            expect(testProps.navigation.push).toHaveBeenCalledTimes(1);
+            expect(testProps.navigation.push).toHaveBeenCalledWith('OrderOfBattleSummary');
+        });
+    });
+});

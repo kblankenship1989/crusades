@@ -73,7 +73,7 @@ exports[`Given the Title Input component should render the component correctly 1
               }
               testID="iconIcon"
             >
-              
+              󰗴
             </Text>
           </View>
         </View>

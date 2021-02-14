@@ -2,10 +2,9 @@
 import {RequisitionPoints} from '../literals';
 import {Factions, factions, BattleOutcomes} from '../consts';
 import {CrusadeCard} from './crusade-card';
-import {v1} from 'react-native-uuid';
 
 export type OrderOfBattle = {
-    id: string,
+    id: number,
     title?: string,
     faction: Factions,
     requisitionPoints: RequisitionPoints,
@@ -17,7 +16,7 @@ export type OrderOfBattle = {
 };
 
 export const defaultOrderOfBattle = () : OrderOfBattle => ({
-    id: v1(),
+    id: new Date().getTime(),
     faction: factions[0],
     requisitionPoints: 5,
     battleTally: [],

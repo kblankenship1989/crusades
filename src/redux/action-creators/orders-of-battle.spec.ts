@@ -1,15 +1,16 @@
-import {SET_CURRENT_ORDER_OF_BATTLE, SET_ORDERS_OF_BATTLE} from '../../constants/action-list';
-import {createOrderOfBattle, loadSelectedOrderOfBattle, deleteSelectedOrderOfBattle, saveCurrentOrderOfBattle} from './current-order-of-battle';
 import {ThunkDispatch} from 'redux-thunk';
+
+import {OrderOfBattle, defaultOrderOfBattle} from '../../types/state/order-of-battle';
+import {State} from '../../types/state';
+import {SET_CURRENT_ORDER_OF_BATTLE, SET_ORDERS_OF_BATTLE} from '../../constants/action-list';
 import {SetOrdersOfBattleAction} from '../actions/orders-of-battle';
-import {mockState, mockOrderOfBattle} from '../../../__test_utils__/mockStates';
-import {SetCurrentOrderOfBattleAction} from '../actions/current-order-of-battle';
 import {AvailableActions} from '../actions';
-import { OrderOfBattle, defaultOrderOfBattle } from '../../types/state/order-of-battle';
-import { State } from '../../types/state';
+import {mockState, mockOrderOfBattle} from '../../../__test_utils__/mockStates';
+
+import {createOrderOfBattle, loadSelectedOrderOfBattle, deleteSelectedOrderOfBattle, saveCurrentOrderOfBattle} from './orders-of-battle';
 
 describe('Given the action to add a new order of battle', () => {
-    it('should assign the provided title and faction to the current order of battle on state', () => {
+    it('should add a new default order of battle at the top of the list', () => {
         const dispatchMock : ThunkDispatch<OrderOfBattle, unknown, AvailableActions> = jest.fn();
         const getStateMock = jest.fn();
         const stateMock : State = mockState({
@@ -20,16 +21,8 @@ describe('Given the action to add a new order of battle', () => {
         });
         getStateMock.mockReturnValue(stateMock);
 
-        const newOrderOfBattle = {
-            ...defaultOrderOfBattle
-        };
+        const newOrderOfBattle = defaultOrderOfBattle();
 
-        const expectedCurrentOrderOfBattleAction : SetCurrentOrderOfBattleAction = {
-            type: SET_CURRENT_ORDER_OF_BATTLE,
-            payload: {
-                currentOrderOfBattle: newOrderOfBattle
-            }
-        };
         const expectedOrdersOfBattleAction : SetOrdersOfBattleAction = {
             type: SET_ORDERS_OF_BATTLE,
             payload: {
@@ -43,23 +36,25 @@ describe('Given the action to add a new order of battle', () => {
         const action = createOrderOfBattle();
         action(dispatchMock, getStateMock, undefined);
 
-        expect(dispatchMock).toHaveBeenCalledTimes(2);
-        expect(dispatchMock).toHaveBeenNthCalledWith(1, expectedCurrentOrderOfBattleAction);
-        expect(dispatchMock).toHaveBeenNthCalledWith(2, expectedOrdersOfBattleAction);
+        expect(dispatchMock).toHaveBeenCalledTimes(1);
+        expect(dispatchMock).toHaveBeenCalledWith(expectedOrdersOfBattleAction);
     });
 });
 
 describe('Given the action to load a selected order of battle', () => {
-    it('should move the selected order of battle to the top of the list and load its summary', () => {
+    it('should move the selected order of battle to the top of the list', () => {
         const selectedIndex = 1;
         const ordersOfBattle = [
             mockOrderOfBattle({
+                id: 5,
                 title: 'Title 1'
             }),
             mockOrderOfBattle({
+                id: 7,
                 title: 'Title 2'
             }),
             mockOrderOfBattle({
+                id: 9,
                 title: 'Title 3'
             })
         ];
@@ -71,12 +66,6 @@ describe('Given the action to load a selected order of battle', () => {
 
         getStateMock.mockReturnValue(state);
 
-        const expectedCurrentOrderOfBattleAction : SetCurrentOrderOfBattleAction = {
-            type: SET_CURRENT_ORDER_OF_BATTLE,
-            payload: {
-                currentOrderOfBattle: ordersOfBattle[1],
-            }
-        };
         const expectedOrdersOfBattleAction : SetOrdersOfBattleAction = {
             type: SET_ORDERS_OF_BATTLE,
             payload: {
@@ -91,9 +80,8 @@ describe('Given the action to load a selected order of battle', () => {
         const action = loadSelectedOrderOfBattle(selectedIndex);
         action(dispatchMock, getStateMock, undefined);
 
-        expect(dispatchMock).toHaveBeenCalledTimes(2);
-        expect(dispatchMock).toHaveBeenNthCalledWith(1, expectedCurrentOrderOfBattleAction);
-        expect(dispatchMock).toHaveBeenNthCalledWith(2, expectedOrdersOfBattleAction);
+        expect(dispatchMock).toHaveBeenCalledTimes(1);
+        expect(dispatchMock).toHaveBeenCalledWith(expectedOrdersOfBattleAction);
     });
 });
 
@@ -137,14 +125,16 @@ describe('Given the action to delete a selected order of battle', () => {
     });
 });
 
-describe('Given the action to save the current changes to the current Order of Battle', () => {
-    it('should dispatch the action with the currently updated order of battle and list of orders', () => {
-        const updatedOrderOfBattle = mockOrderOfBattle();
+describe('Given the action to save the current changes to an order of battle', () => {
+    it('should save the changes to the first order of battle in the list', () => {
+        const updatedOrderOfBattle : Partial<OrderOfBattle> = {
+            title: 'some cooler title'
+        };
 
         const stateMock = mockState({
             ordersOfBattle: [
-                mockOrderOfBattle(),
-                mockOrderOfBattle()
+                mockOrderOfBattle({title: 'some title'}),
+                mockOrderOfBattle({title: 'some other title'})
             ]
         });
         const getStateMock = jest.fn();
@@ -152,17 +142,14 @@ describe('Given the action to save the current changes to the current Order of B
 
         const dispatchMock: ThunkDispatch<OrderOfBattle, unknown, AvailableActions> = jest.fn();
 
-        const expectedCurrentOrderOfBattleAction : SetCurrentOrderOfBattleAction = {
-            type: SET_CURRENT_ORDER_OF_BATTLE,
-            payload: {
-                currentOrderOfBattle: updatedOrderOfBattle,
-            }
-        };
         const expectedOrdersOfBattleAction : SetOrdersOfBattleAction = {
             type: SET_ORDERS_OF_BATTLE,
             payload: {
                 ordersOfBattle: [
-                    updatedOrderOfBattle,
+                    {
+                        ...stateMock.ordersOfBattle[0],
+                        ...updatedOrderOfBattle
+                    },
                     stateMock.ordersOfBattle[1]
                 ]
             }
@@ -171,8 +158,7 @@ describe('Given the action to save the current changes to the current Order of B
         const action = saveCurrentOrderOfBattle(updatedOrderOfBattle);
         action(dispatchMock, getStateMock, undefined);
 
-        expect(dispatchMock).toHaveBeenCalledTimes(2);
-        expect(dispatchMock).toHaveBeenNthCalledWith(1, expectedCurrentOrderOfBattleAction);
-        expect(dispatchMock).toHaveBeenNthCalledWith(2, expectedOrdersOfBattleAction);
+        expect(dispatchMock).toHaveBeenCalledTimes(1);
+        expect(dispatchMock).toHaveBeenCalledWith(expectedOrdersOfBattleAction);
     });
 });

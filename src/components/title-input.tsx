@@ -4,8 +4,8 @@ import {getColorScheme} from '../helpers/getColorScheme';
 import {appStyles} from '../../styles';
 
 export type TitleInputProps = {
-    value: string,
-    placeholder?: string,
+    value?: string,
+    placeholder: string,
     onChangeText: (title: string) => void
 }
 const colorScheme = getColorScheme();
@@ -21,7 +21,7 @@ export const TitleInput = (props : TitleInputProps) : JSX.Element => (
                 type={'material-community'}
             />
         }
-        placeholder={props.placeholder || 'Title'}
+        placeholder={props.placeholder}
         onChangeText={props.onChangeText}
         value={props.value}
         style={styles.textInput}

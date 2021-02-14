@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Button} from 'react-native';
+import {View, Button, Text} from 'react-native';
 import {Icon, Card} from 'react-native-elements';
 import {getColorScheme} from '../helpers/getColorScheme';
 import {appStyles} from '../../styles';
@@ -28,9 +28,10 @@ const getIconToRender = (index : number, currentPoints : number) : JSX.Element =
 
 export const RequisitionPointsSelector = ({currentPoints, updateRequisitionPoints} : RequisitionPointsSelectorProps) : JSX.Element => {
     return (
-        <Card
-            title={'Requisition Points'}
-        >
+        <Card>
+            <Card.Title>
+                <Text>{'Requisition Points'}</Text>
+            </Card.Title>
             <View
                 style={styles.row}
                 accessibilityLabel={`Current Points: ${currentPoints}/5`}

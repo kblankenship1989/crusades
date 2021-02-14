@@ -27,31 +27,22 @@ exports[`Given the Requisition points selector should render correctly 1`] = `
       }
     }
   >
-    <View>
-      <Text
-        style={
-          Object {
-            "color": "#43484d",
-            "fontSize": 17.5,
-            "fontWeight": "bold",
-            "marginBottom": 15,
-            "textAlign": "center",
-          }
+    <Text
+      style={
+        Object {
+          "color": "#43484d",
+          "fontSize": 17.5,
+          "fontWeight": "bold",
+          "marginBottom": 15,
+          "textAlign": "center",
         }
-        testID="cardTitle"
-      >
+      }
+      testID="cardTitle"
+    >
+      <Text>
         Requisition Points
       </Text>
-      <View
-        style={
-          Object {
-            "backgroundColor": "#bcbbc1",
-            "height": 0.5,
-            "marginBottom": 15,
-          }
-        }
-      />
-    </View>
+    </Text>
     <View
       accessibilityLabel="Current Points: 3/5"
       style={

@@ -32,12 +32,12 @@ export const HomeScreen : React.FC<HomeProps> = ({
             {ordersOfBattle.length ?
                 <FlatList
                     renderItem={OrderOfBattleListItem({selectOrderOfBattle, deleteSelectedOrderOfBattle})}
-                    keyExtractor={(orderOfBattle) => orderOfBattle.id}
+                    keyExtractor={(orderOfBattle) => orderOfBattle.id.toString()}
                     data={ordersOfBattle}
                 />
                 :
                 <ScrollView>
-                    <Text>Click `&ldquo;` + ADD `&rdquo;` to create a new Crusade Force</Text>
+                    <Text>{'Click + ADD to create a new Crusade Force'}</Text>
                 </ScrollView>
             }
         </ActionFixedFooterContainer>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Picker} from '@react-native-picker/picker';
+import {default as DropDownPicker} from 'react-native-dropdown-picker';
 import {getColorScheme} from '../helpers/getColorScheme';
 import {appStyles} from '../../styles';
 import {View} from 'react-native';
@@ -10,10 +10,16 @@ import {factions} from '../types/consts';
 const colorScheme = getColorScheme();
 const styles = appStyles(colorScheme);
 
+const dropdwonValues = factions.map((faction) => ({
+    label: faction,
+    value: faction
+}));
+
 export const FactionPicker : React.FC<FactionPickerProps> = ({selectedFaction, onChange}) => {
-    const onValueChange = (itemValue: string | number, itemIndex: number) : void => {
-        onChange(factions[itemIndex]);
+    const onValueChange = (item : any, index : number) : void => {
+        onChange(factions[index]);
     };
+
     return (
         <View style={styles.pickerRow}>
             <Icon
@@ -21,21 +27,17 @@ export const FactionPicker : React.FC<FactionPickerProps> = ({selectedFaction, o
                 name={'sword-cross'}
                 type={'material-community'}
             />
-            <Picker
-                accessibilityLabel={'Faction'}
-                testID={'faction-picker'}
-                style={styles.picker}
-                selectedValue={selectedFaction}
-                onValueChange={onValueChange}
-            >
-                {factions.map((faction) => (
-                    <Picker.Item
-                        label={faction}
-                        value={faction}
-                        key={faction}
-                    />
-                ))}
-            </Picker>
+            <DropDownPicker
+                items={dropdwonValues}
+                defaultValue={selectedFaction}
+                containerStyle={{height: 40}}
+                style={{backgroundColor: '#fafafa'}}
+                itemStyle={{
+                    justifyContent: 'flex-start'
+                }}
+                dropDownStyle={{backgroundColor: '#fafafa'}}
+                onChangeItem={onValueChange}
+            />
         </View>
     );
 };
