@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card} from 'react-native-elements';
 import {Text, Button} from 'react-native';
-import {Picker} from '@react-native-community/picker';
+import {Picker} from '@react-native-picker/picker';
 import {getColorScheme} from '../helpers/getColorScheme';
 import {appStyles} from '../../styles';
 import {BattleOutcomes, battleOutcomes} from '../types/consts';

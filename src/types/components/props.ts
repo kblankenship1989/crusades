@@ -11,10 +11,11 @@ export type CrusadeCardListItemProps = {
 
 export type FactionPickerProps = {
     selectedFaction: Factions,
-    onValueChange: (itemValue: string | number, itemIndex: number) => void
+    onChange: (faction: Factions) => void
 }
 
 export type OrderOfBattleListItemProps = {
+    deleteSelectedOrderOfBattle: (index: number) => void,
     selectOrderOfBattle: (index: number) => void
 }
 

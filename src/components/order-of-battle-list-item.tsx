@@ -6,7 +6,7 @@ import {getColorScheme} from '../helpers/getColorScheme';
 import {factionsIconMap} from '../configs/40k-icons';
 import {OrderOfBattleListItemProps} from '../types/components/props';
 
-export const OrderOfBattleListItem = ({selectOrderOfBattle} : OrderOfBattleListItemProps) : ListRenderItem<OrderOfBattle> => ({item, index}) : JSX.Element => {
+export const OrderOfBattleListItem = ({selectOrderOfBattle, deleteSelectedOrderOfBattle} : OrderOfBattleListItemProps) : ListRenderItem<OrderOfBattle> => ({item, index}) : JSX.Element => {
     const IconToRender = factionsIconMap[item.faction];
     const styles = appStyles(getColorScheme());
 
@@ -14,6 +14,7 @@ export const OrderOfBattleListItem = ({selectOrderOfBattle} : OrderOfBattleListI
         <View style={styles.swipeOutRowFront}>
             <TouchableOpacity
                 onPress={() =>  selectOrderOfBattle(index)}
+                onLongPress={() => deleteSelectedOrderOfBattle(index)}
                 style={styles.row}
             >
                 <IconToRender

@@ -6,7 +6,7 @@ import {SetOrdersOfBattleAction} from '../actions/orders-of-battle';
 
 export const createOrderOfBattle = () : AppThunk => (dispatch, getState) : void => {
     const newOrderOfBattle = {
-        ...defaultOrderOfBattle,
+        ...defaultOrderOfBattle(),
     };
 
     const {
