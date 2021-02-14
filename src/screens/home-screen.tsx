@@ -5,6 +5,7 @@ import {OrderOfBattleListItem} from '../components/order-of-battle-list-item';
 import {HomeProps} from '../types/screens/props';
 import {ActionFixedFooterContainer} from '../containers/action-fixed-footer-container';
 import {Text} from 'react-native-elements';
+import {ScrollView} from 'react-native-gesture-handler';
 
 export const HomeScreen : React.FC<HomeProps> = ({
     loadSelectedOrderOfBattle,
@@ -35,7 +36,9 @@ export const HomeScreen : React.FC<HomeProps> = ({
                     data={ordersOfBattle}
                 />
                 :
-                <Text>Click `&ldquo;` + ADD `&rdquo;` to create a new Crusade Force</Text>
+                <ScrollView>
+                    <Text>Click `&ldquo;` + ADD `&rdquo;` to create a new Crusade Force</Text>
+                </ScrollView>
             }
         </ActionFixedFooterContainer>
     );

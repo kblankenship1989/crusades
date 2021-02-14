@@ -21,7 +21,7 @@ export const OrderOfBattleListItem = ({selectOrderOfBattle, deleteSelectedOrderO
                     size={18}
                     color={'#8ba4c9'}
                 />
-                <Text>{item.title}</Text>
+                <Text>{item.title || 'Untitled'}</Text>
             </TouchableOpacity>
         </View>
     );

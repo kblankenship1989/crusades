@@ -6,7 +6,7 @@ import {v1} from 'react-native-uuid';
 
 export type OrderOfBattle = {
     id: string,
-    title: string,
+    title?: string,
     faction: Factions,
     requisitionPoints: RequisitionPoints,
     battleTally: BattleOutcomes[],
@@ -18,7 +18,6 @@ export type OrderOfBattle = {
 
 export const defaultOrderOfBattle = () : OrderOfBattle => ({
     id: v1(),
-    title: 'Untitled',
     faction: factions[0],
     requisitionPoints: 5,
     battleTally: [],

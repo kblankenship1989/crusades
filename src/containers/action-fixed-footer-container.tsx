@@ -1,14 +1,12 @@
 import React from 'react';
 import {Icon, Button} from 'react-native-elements';
 import {ActionFooterProps} from '../types/components/props';
-import {SafeAreaView, ScrollView, View} from 'react-native';
+import {SafeAreaView, View} from 'react-native';
 
 export const ActionFixedFooterContainer : React.FC<ActionFooterProps> = ({children, onAdd, onSave}) => {
     return (
         <SafeAreaView style={{flex: 1}}>
-            <ScrollView>
-                {children}
-            </ScrollView>
+            {children}
             <View>
                 {onAdd && <Button
                     onPress={onAdd}
@@ -20,7 +18,7 @@ export const ActionFixedFooterContainer : React.FC<ActionFooterProps> = ({childr
                     title={'ADD'}
                 />}
                 {onSave && <Button
-                    onPress={onAdd}
+                    onPress={onSave}
                     icon={<Icon
                         name={'save'}
                         type={'font-awesome'}
