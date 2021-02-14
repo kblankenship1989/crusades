@@ -3,13 +3,7 @@ import {View, Button, Text} from 'react-native';
 import {Icon, Card} from 'react-native-elements';
 import {getColorScheme} from '../helpers/getColorScheme';
 import {appStyles} from '../../styles';
-
-export type IncrementorDecrementor = 1| -1;
-
-export type RequisitionPointsSelectorProps = {
-    currentPoints: number
-    updateRequisitionPoints: (changeValue: IncrementorDecrementor) => void
-};
+import {RequisitionPointsSelectorProps} from '../types/components/props';
 
 const colorScheme = getColorScheme();
 const styles = appStyles(colorScheme);
@@ -26,7 +20,7 @@ const getIconToRender = (index : number, currentPoints : number) : JSX.Element =
     );
 };
 
-export const RequisitionPointsSelector = ({currentPoints, updateRequisitionPoints} : RequisitionPointsSelectorProps) : JSX.Element => {
+export const RequisitionPointsSelector = ({currentPoints, onChange} : RequisitionPointsSelectorProps) : JSX.Element => {
     return (
         <Card>
             <Card.Title>
@@ -39,7 +33,7 @@ export const RequisitionPointsSelector = ({currentPoints, updateRequisitionPoint
                 <Button
                     title={'-'}
                     disabled={currentPoints===0}
-                    onPress={() => updateRequisitionPoints(-1)}
+                    onPress={() => onChange(currentPoints - 1)}
                 />
                 {getIconToRender(0, currentPoints)}
                 {getIconToRender(1, currentPoints)}
@@ -49,7 +43,7 @@ export const RequisitionPointsSelector = ({currentPoints, updateRequisitionPoint
                 <Button
                     title={'+'}
                     disabled={currentPoints === 5}
-                    onPress={() => updateRequisitionPoints(1)}
+                    onPress={() => onChange(currentPoints + 1)}
                 />
             </View>
         </Card>

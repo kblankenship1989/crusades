@@ -1,6 +1,7 @@
 import React from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
 import {FactionPicker} from '../components/faction-picker';
+import {RequisitionPointsSelector} from '../components/requisition-points-selector';
 import {TitleInput} from '../components/title-input';
 import {ActionFixedFooterContainer} from '../containers/action-fixed-footer-container';
 import {OrderOfBattleSummaryProps} from '../types/screens/props';
@@ -11,11 +12,13 @@ export const OrderOfBattleSummary : React.FC<OrderOfBattleSummaryProps> = ({
 }) => {
     const [title, setTitle] = React.useState(currentOrderOfBattle.title);
     const [faction, setFaction] = React.useState(currentOrderOfBattle.faction);
+    const [requisitionPoints, setRequisitionPoints] = React.useState(currentOrderOfBattle.requisitionPoints);
 
     const save = () => {
         saveCurrentOrderOfBattle({
             title,
-            faction
+            faction,
+            requisitionPoints
         });
     };
 
@@ -32,6 +35,10 @@ export const OrderOfBattleSummary : React.FC<OrderOfBattleSummaryProps> = ({
                 <FactionPicker
                     selectedFaction={faction}
                     onChange={setFaction}
+                />
+                <RequisitionPointsSelector
+                    currentPoints={requisitionPoints}
+                    onChange={setRequisitionPoints}
                 />
             </ScrollView>
         </ActionFixedFooterContainer>

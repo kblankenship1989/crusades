@@ -1,5 +1,4 @@
 // import {CrusadeCard} from './crusade-card';
-import {RequisitionPoints} from '../literals';
 import {Factions, factions, BattleOutcomes} from '../consts';
 import {CrusadeCard} from './crusade-card';
 
@@ -7,7 +6,7 @@ export type OrderOfBattle = {
     id: number,
     title?: string,
     faction: Factions,
-    requisitionPoints: RequisitionPoints,
+    requisitionPoints: number,
     battleTally: BattleOutcomes[],
     supplyLimit: number,
     crusadeCards: CrusadeCard[],

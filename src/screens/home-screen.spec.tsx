@@ -55,7 +55,35 @@ describe('Given the Home Screen', () => {
                 ordersOfBattle: []
             });
 
-            expect(await component.getByText('Click + ADD to create a new Crusade Force')).toBeTruthy();
+            expect(await component.queryByText('Click + ADD to create a new Crusade Force')).toBeTruthy();
+        });
+    });
+
+    describe('and there are orders of battle present', () => {
+        it('should render the orders of battle in a list with their titles', async () => {
+            const {component, testProps} = renderComponent();
+
+            expect(await component.queryByText('Click + ADD to create a new Crusade Force')).toBeFalsy();
+            expect(await component.queryByText(testProps.ordersOfBattle[0].title)).toBeTruthy();
+            expect(await component.queryByText(testProps.ordersOfBattle[1].title)).toBeTruthy();
+        });
+
+        it('should load the selected order of battle summary when one is clicked', async () => {
+            const {component, testProps} = renderComponent({
+                navigation: {
+                    ...mockNavigation,
+                    push: jest.fn()
+                }
+            });
+            const orderOfBattle = await component.getByText(testProps.ordersOfBattle[1].title);
+
+            fireEvent(orderOfBattle, 'onPress');
+
+            expect(testProps.navigation.push).toHaveBeenCalledTimes(1);
+            expect(testProps.navigation.push).toHaveBeenCalledWith('OrderOfBattleSummary');
+
+            expect(testProps.loadSelectedOrderOfBattle).toHaveBeenCalledTimes(1);
+            expect(testProps.loadSelectedOrderOfBattle).toHaveBeenCalledWith(1);
         });
     });
 

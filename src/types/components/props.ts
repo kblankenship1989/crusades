@@ -23,3 +23,8 @@ export type ActionFooterProps = {
     onAdd?: () => void,
     onSave?: () => void
 }
+
+export type RequisitionPointsSelectorProps = {
+    currentPoints: number
+    onChange: (points : number) => void
+}

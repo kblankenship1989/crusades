@@ -1,9 +1,7 @@
-import {SET_CURRENT_ORDER_OF_BATTLE, SET_ORDERS_OF_BATTLE} from '../../constants/action-list';
+import {SET_ORDERS_OF_BATTLE} from '../../constants/action-list';
 import {defaultOrderOfBattle, OrderOfBattle} from '../../types/state/order-of-battle';
 import {AppThunk} from '../thunk';
-import {SetCurrentOrderOfBattleAction} from '../actions/current-order-of-battle';
 import {SetOrdersOfBattleAction} from '../actions/orders-of-battle';
-import {ordersOfBattle} from '../reducers/orders-of-battle';
 
 export const createOrderOfBattle = () : AppThunk => (dispatch, getState) : void => {
     const newOrderOfBattle = {
@@ -14,12 +12,6 @@ export const createOrderOfBattle = () : AppThunk => (dispatch, getState) : void 
         ordersOfBattle
     } = getState();
 
-    // const currentOrderOfBattleAction : SetCurrentOrderOfBattleAction = {
-    //     type: SET_CURRENT_ORDER_OF_BATTLE,
-    //     payload: {
-    //         currentOrderOfBattle: newOrderOfBattle
-    //     }
-    // };
     const ordersOfBattleAction : SetOrdersOfBattleAction = {
         type: SET_ORDERS_OF_BATTLE,
         payload: {
@@ -30,7 +22,6 @@ export const createOrderOfBattle = () : AppThunk => (dispatch, getState) : void 
         }
     };
 
-    // dispatch(currentOrderOfBattleAction);
     dispatch(ordersOfBattleAction);
 };
 
@@ -42,13 +33,6 @@ export const loadSelectedOrderOfBattle = (selectedIndex : number) : AppThunk => 
     const newOrdersOfBattle = [...ordersOfBattle];
     const currentOrderOfBattle = newOrdersOfBattle.splice(selectedIndex, 1);
 
-    // const currentOrderOfBattleAction: SetCurrentOrderOfBattleAction = {
-    //     type: SET_CURRENT_ORDER_OF_BATTLE,
-    //     payload: {
-    //         currentOrderOfBattle: currentOrderOfBattle[0],
-    //     }
-    // };
-
     const ordersOfBattleAction : SetOrdersOfBattleAction = {
         type: SET_ORDERS_OF_BATTLE,
         payload: {
@@ -59,7 +43,6 @@ export const loadSelectedOrderOfBattle = (selectedIndex : number) : AppThunk => 
         }
     };
 
-    // dispatch(currentOrderOfBattleAction);
     dispatch(ordersOfBattleAction);
 };
 
@@ -95,13 +78,6 @@ export const saveCurrentOrderOfBattle = (updates : Partial<OrderOfBattle>) : App
         ...updates
     };
 
-    // const currentOrderOfBattleAction: SetCurrentOrderOfBattleAction = {
-    //     type: SET_CURRENT_ORDER_OF_BATTLE,
-    //     payload: {
-    //         currentOrderOfBattle,
-    //     }
-    // };
-
     const ordersOfBattleAction : SetOrdersOfBattleAction = {
         type: SET_ORDERS_OF_BATTLE,
         payload: {
@@ -109,6 +85,5 @@ export const saveCurrentOrderOfBattle = (updates : Partial<OrderOfBattle>) : App
         }
     };
 
-    // dispatch(currentOrderOfBattleAction);
     dispatch(ordersOfBattleAction);
 };

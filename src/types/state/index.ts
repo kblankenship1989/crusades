@@ -5,6 +5,5 @@ import {CurrentCrusadeCard} from './crusade-card';
 export type State = {
     player: Player,
     ordersOfBattle: OrderOfBattle[],
-    currentOrderOfBattle: OrderOfBattle,
     currentCrusadeCard: CurrentCrusadeCard
 };

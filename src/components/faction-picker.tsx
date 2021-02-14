@@ -29,7 +29,7 @@ export const FactionPicker : React.FC<FactionPickerProps> = ({selectedFaction, o
             />
             <DropDownPicker
                 items={dropdwonValues}
-                defaultValue={selectedFaction}
+                defaultValue={selectedFaction || factions[0]}
                 containerStyle={{height: 40}}
                 style={{backgroundColor: '#fafafa'}}
                 itemStyle={{

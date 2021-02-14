@@ -1,13 +1,14 @@
 import React from 'react';
 import '@testing-library/jest-native/extend-expect';
-import {RequisitionPointsSelector, RequisitionPointsSelectorProps} from './requisition-points-selector';
+import {RequisitionPointsSelector} from './requisition-points-selector';
 import {render} from '@testing-library/react-native';
+import {RequisitionPointsSelectorProps} from '../types/components/props';
 
 describe('Given the Requisition points selector', () => {
     it('should render correctly', () => {
         const testProps : RequisitionPointsSelectorProps = {
             currentPoints: 3,
-            updateRequisitionPoints: jest.fn()
+            onChange: jest.fn()
         };
         const component = (<RequisitionPointsSelector
             {...testProps}
@@ -19,7 +20,7 @@ describe('Given the Requisition points selector', () => {
         it('should disable the incrementor button', async () => {
             const testProps : RequisitionPointsSelectorProps = {
                 currentPoints: 5,
-                updateRequisitionPoints: jest.fn()
+                onChange: jest.fn()
             };
             const component = (<RequisitionPointsSelector
                 {...testProps}
@@ -40,7 +41,7 @@ describe('Given the Requisition points selector', () => {
         it('should disable the decrementor button', async () => {
             const testProps : RequisitionPointsSelectorProps = {
                 currentPoints: 0,
-                updateRequisitionPoints: jest.fn()
+                onChange: jest.fn()
             };
             const component = (<RequisitionPointsSelector
                 {...testProps}
@@ -61,7 +62,7 @@ describe('Given the Requisition points selector', () => {
         it('should enable both the incrementor and decrementor buttons', async () => {
             const testProps : RequisitionPointsSelectorProps = {
                 currentPoints: 4,
-                updateRequisitionPoints: jest.fn()
+                onChange: jest.fn()
             };
             const component = (<RequisitionPointsSelector
                 {...testProps}
