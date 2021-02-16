@@ -1,36 +1,28 @@
 import React from 'react';
-import {default as DropDownPicker} from 'react-native-dropdown-picker';
+import {Picker} from '@react-native-picker/picker';
 import {FactionPickerProps} from '../types/components/props';
-import {Factions, factions} from '../types/consts';
-
-type LocalItemType = {
-    label: Factions,
-    value: Factions,
-    icon?: () => JSX.Element
-}
-
-const dropdwonValues : LocalItemType[] = factions.map((faction) => ({
-    label: faction,
-    value: faction
-}));
+import {factions} from '../types/consts';
 
 export const FactionPicker : React.FC<FactionPickerProps> = ({selectedFaction, onChange}) => {
-    const onValueChange = (item : LocalItemType) : void => {
-        onChange(item.value);
+    const onValueChange = (item : React.ReactText, index : number) : void => {
+        onChange(factions[index]);
     };
 
     return (
-        <DropDownPicker
-            items={dropdwonValues}
-            defaultValue={selectedFaction || factions[0]}
-            containerStyle={{height: 40}}
-            style={{backgroundColor: '#fafafa'}}
-            itemStyle={{
-                justifyContent: 'flex-start'
-            }}
-            dropDownStyle={{backgroundColor: '#fafafa'}}
-            onChangeItem={onValueChange}
-        />
+        <Picker
+            selectedValue={selectedFaction}
+            mode={'dialog'}
+            prompt={'Select Faction'}
+            onValueChange={onValueChange}
+        >
+            {factions.map((faction) => (
+                <Picker.Item
+                    label={faction}
+                    value={faction}
+                    key={faction}
+                />
+            ))}
+        </Picker>
     );
 };
 
