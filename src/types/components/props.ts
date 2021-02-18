@@ -28,3 +28,7 @@ export type RequisitionPointsSelectorProps = {
     currentPoints: number
     onChange: (points : number) => void
 }
+
+export type FactionImageContainerProps = {
+    faction: Factions
+}
