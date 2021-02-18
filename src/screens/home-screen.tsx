@@ -1,11 +1,12 @@
 import React from 'react';
-import {FlatList} from 'react-native';
+import {FlatList, ListRenderItem} from 'react-native';
 
 import {OrderOfBattleListItem} from '../components/order-of-battle-list-item';
 import {HomeProps} from '../types/screens/props';
 import {ActionFixedFooterContainer} from '../containers/action-fixed-footer-container';
 import {Text} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
+import {OrderOfBattle} from '../types/state/order-of-battle';
 
 export const HomeScreen : React.FC<HomeProps> = ({
     loadSelectedOrderOfBattle,
@@ -25,13 +26,22 @@ export const HomeScreen : React.FC<HomeProps> = ({
         navigation.push('OrderOfBattleSummary');
     };
 
+    const renderListItem : ListRenderItem<OrderOfBattle> = ({item, index}) => (
+        <OrderOfBattleListItem
+            index={index}
+            orderOfBattle={item}
+            selectOrderOfBattle={selectOrderOfBattle}
+            deleteSelectedOrderOfBattle={deleteSelectedOrderOfBattle}
+        />
+    );
+
     return (
         <ActionFixedFooterContainer
             onAdd={addOrderOfBattle}
         >
             {ordersOfBattle.length ?
                 <FlatList
-                    renderItem={OrderOfBattleListItem({selectOrderOfBattle, deleteSelectedOrderOfBattle})}
+                    renderItem={renderListItem}
                     keyExtractor={(orderOfBattle) => orderOfBattle.id.toString()}
                     data={ordersOfBattle}
                 />

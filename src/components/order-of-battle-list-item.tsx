@@ -1,14 +1,16 @@
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable react/display-name */
 import React from 'react';
-import {TouchableOpacity, View, ListRenderItem, Text} from 'react-native';
-import {OrderOfBattle} from '../types/state/order-of-battle';
+import {TouchableOpacity, View, Text} from 'react-native';
 import {appStyles} from '../../styles';
 import {getColorScheme} from '../helpers/getColorScheme';
 import {OrderOfBattleListItemProps} from '../types/components/props';
-import { FactionImageContainer } from '../containers/faction-image-container';
+import {FactionImageContainer} from '../containers/faction-image-container';
 
-export const OrderOfBattleListItem = ({selectOrderOfBattle, deleteSelectedOrderOfBattle} : OrderOfBattleListItemProps) : ListRenderItem<OrderOfBattle> => ({item, index}) : JSX.Element => {
+export const OrderOfBattleListItem = ({
+    selectOrderOfBattle,
+    deleteSelectedOrderOfBattle,
+    index,
+    orderOfBattle
+} : OrderOfBattleListItemProps) : JSX.Element => {
     const styles = appStyles(getColorScheme());
 
     return (
@@ -19,13 +21,13 @@ export const OrderOfBattleListItem = ({selectOrderOfBattle, deleteSelectedOrderO
                 style={styles.row}
             >
                 <FactionImageContainer
-                    faction={item.faction}
+                    faction={orderOfBattle.faction}
                 >
                     <Text style={{
                         fontWeight: 'bold',
                         opacity: 1,
                         fontSize: 24
-                    }}>{item.title || 'Untitled'}</Text>
+                    }}>{orderOfBattle.title || 'Untitled'}</Text>
                 </FactionImageContainer>
             </TouchableOpacity>
         </View>

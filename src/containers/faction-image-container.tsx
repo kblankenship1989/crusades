@@ -1,19 +1,27 @@
 import React from 'react';
 import {ImageBackground, ImageSourcePropType} from 'react-native';
 
+import aeldari from '../assets/images/aeldari.png';
+import chaos from '../assets/images/chaos.png';
+import imperium from '../assets/images/imperium.png';
+import necrons from '../assets/images/necrons.png';
 import orks from '../assets/images/orks.png';
+import tau from '../assets/images/t_au.png';
+import tyranids from '../assets/images/tyranids.png';
+import unaligned from '../assets/images/unaligned.png';
+
 import {FactionImageContainerProps} from '../types/components/props';
 import {Factions} from '../types/consts';
 
 const factionImageMap : Record<Factions, ImageSourcePropType> = {
-    Unaligned: orks,
+    Unaligned: unaligned,
     Orks: orks,
-    Imperium: orks,
-    Aeldari: orks,
-    Tyranids: orks,
-    Chaos: orks,
-    Necrons: orks,
-    ['T\'au Empire']: orks
+    Imperium: imperium,
+    Aeldari: aeldari,
+    Tyranids: tyranids,
+    Chaos: chaos,
+    Necrons: necrons,
+    ['T\'au Empire']: tau
 };
 
 export const FactionImageContainer : React.FC<FactionImageContainerProps> = ({
