@@ -1,11 +1,22 @@
 import React from 'react';
 import {Icon, Button} from 'react-native-elements';
-import {ActionFooterProps} from '../types/components/props';
-import {SafeAreaView, View} from 'react-native';
+import {SafeAreaView, View, StyleSheet} from 'react-native';
 
-export const ActionFixedFooterContainer : React.FC<ActionFooterProps> = ({children, onAdd, onSave}) => {
+
+type ActionFixedFooterProps = {
+    onAdd?: () => void,
+    onSave?: () => void
+}
+
+const styles = StyleSheet.create({
+    safeAreaView: {
+        flex: 1
+    }
+});
+
+export const ActionFixedFooterContainer : React.FC<ActionFixedFooterProps> = ({children, onAdd, onSave}) => {
     return (
-        <SafeAreaView style={{flex: 1}}>
+        <SafeAreaView style={styles.safeAreaView}>
             {children}
             <View>
                 {onAdd && <Button

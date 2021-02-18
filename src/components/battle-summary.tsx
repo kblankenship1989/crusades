@@ -1,14 +1,19 @@
 import React from 'react';
 import {Card} from 'react-native-elements';
-import {Text, Button} from 'react-native';
+import {Text, Button, StyleSheet} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
-import {getColorScheme} from '../helpers/getColorScheme';
-import {appStyles} from '../../styles';
 import {BattleOutcomes, battleOutcomes} from '../types/consts';
-import {BattleSummaryProps} from '../types/components/props';
 
-const colorScheme = getColorScheme();
-const styles = appStyles(colorScheme);
+type BattleSummaryProps = {
+    battleTallies: BattleOutcomes[],
+    addBattleTally: (battleOutcome : BattleOutcomes) => void
+}
+
+const styles = StyleSheet.create({
+    picker: {
+        flex: 1
+    }
+});
 
 export const BattleSummary : React.FC<BattleSummaryProps> = ({battleTallies, addBattleTally}) => {
     const [currentSelection, setCurrentSelection] = React.useState<BattleOutcomes | undefined>(undefined);

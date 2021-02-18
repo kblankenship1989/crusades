@@ -2,11 +2,18 @@ import React from 'react';
 import {FlatList, ListRenderItem} from 'react-native';
 
 import {OrderOfBattleListItem} from '../components/order-of-battle-list-item';
-import {HomeProps} from '../types/screens/props';
 import {ActionFixedFooterContainer} from '../containers/action-fixed-footer-container';
 import {Text} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
 import {OrderOfBattle} from '../types/state/order-of-battle';
+import {ConnectedProps} from 'react-redux';
+import {homeScreenConnector} from './home-screen-connector';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootParamList} from '../types/root-param-list';
+
+type HomeProps = ConnectedProps<typeof homeScreenConnector> & {
+    navigation: StackNavigationProp<RootParamList, 'Home'>
+}
 
 export const HomeScreen : React.FC<HomeProps> = ({
     loadSelectedOrderOfBattle,

@@ -1,9 +1,25 @@
 import React from 'react';
-import {TouchableOpacity, View, Text} from 'react-native';
-import {appStyles} from '../../styles';
-import {getColorScheme} from '../helpers/getColorScheme';
-import {OrderOfBattleListItemProps} from '../types/components/props';
+import {TouchableOpacity, View, Text, StyleSheet} from 'react-native';
 import {FactionImageContainer} from '../containers/faction-image-container';
+import {OrderOfBattle} from '../types/state/order-of-battle';
+
+type OrderOfBattleListItemProps = {
+    deleteSelectedOrderOfBattle: (index: number) => void,
+    selectOrderOfBattle: (index: number) => void,
+    index: number,
+    orderOfBattle: OrderOfBattle
+}
+
+const styles = StyleSheet.create({
+    title: {
+        fontWeight: 'bold',
+        opacity: 1,
+        fontSize: 24
+    },
+    listItemContainer: {
+        flex: 1
+    }
+});
 
 export const OrderOfBattleListItem = ({
     selectOrderOfBattle,
@@ -11,25 +27,19 @@ export const OrderOfBattleListItem = ({
     index,
     orderOfBattle
 } : OrderOfBattleListItemProps) : JSX.Element => {
-    const styles = appStyles(getColorScheme());
-
     return (
-        <View style={styles.swipeOutRowFront}>
-            <TouchableOpacity
-                onPress={() =>  selectOrderOfBattle(index)}
-                onLongPress={() => deleteSelectedOrderOfBattle(index)}
-                style={styles.row}
+        <TouchableOpacity
+            onPress={() =>  selectOrderOfBattle(index)}
+            onLongPress={() => deleteSelectedOrderOfBattle(index)}
+            style={styles.listItemContainer}
+        >
+            <FactionImageContainer
+                faction={orderOfBattle.faction}
             >
-                <FactionImageContainer
-                    faction={orderOfBattle.faction}
-                >
-                    <Text style={{
-                        fontWeight: 'bold',
-                        opacity: 1,
-                        fontSize: 24
-                    }}>{orderOfBattle.title || 'Untitled'}</Text>
-                </FactionImageContainer>
-            </TouchableOpacity>
-        </View>
+                <Text style={styles.title}>
+                    {orderOfBattle.title || 'Untitled'}
+                </Text>
+            </FactionImageContainer>
+        </TouchableOpacity>
     );
 };

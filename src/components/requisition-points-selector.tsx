@@ -1,13 +1,17 @@
 import React from 'react';
-import {View, Button, Text} from 'react-native';
-import {Icon, Card} from 'react-native-elements';
-import {getColorScheme} from '../helpers/getColorScheme';
-import {appStyles} from '../../styles';
-import {RequisitionPointsSelectorProps} from '../types/components/props';
+import {View, Button, Text, StyleSheet} from 'react-native';
+import {Icon} from 'react-native-elements';
 
-const colorScheme = getColorScheme();
-const styles = appStyles(colorScheme);
+type RequisitionPointsSelectorProps = {
+    currentPoints: number
+    onChange: (points : number) => void
+}
 
+const styles = StyleSheet.create({
+    requisitionPointsContainer: {
+        flex: 1
+    }
+});
 
 const getIconToRender = (index : number, currentPoints : number) : JSX.Element => {
     return  (
@@ -22,30 +26,25 @@ const getIconToRender = (index : number, currentPoints : number) : JSX.Element =
 
 export const RequisitionPointsSelector = ({currentPoints, onChange} : RequisitionPointsSelectorProps) : JSX.Element => {
     return (
-        <Card>
-            <Card.Title>
-                <Text>{'Requisition Points'}</Text>
-            </Card.Title>
-            <View
-                style={styles.row}
-                accessibilityLabel={`Current Points: ${currentPoints}/5`}
-            >
-                <Button
-                    title={'-'}
-                    disabled={currentPoints===0}
-                    onPress={() => onChange(currentPoints - 1)}
-                />
-                {getIconToRender(0, currentPoints)}
-                {getIconToRender(1, currentPoints)}
-                {getIconToRender(2, currentPoints)}
-                {getIconToRender(3, currentPoints)}
-                {getIconToRender(4, currentPoints)}
-                <Button
-                    title={'+'}
-                    disabled={currentPoints === 5}
-                    onPress={() => onChange(currentPoints + 1)}
-                />
-            </View>
-        </Card>
+        <View
+            style={styles.requisitionPointsContainer}
+        >
+            <Text>{'Requisition Points'}</Text>
+            <Button
+                title={'-'}
+                disabled={currentPoints===0}
+                onPress={() => onChange(currentPoints - 1)}
+            />
+            {getIconToRender(0, currentPoints)}
+            {getIconToRender(1, currentPoints)}
+            {getIconToRender(2, currentPoints)}
+            {getIconToRender(3, currentPoints)}
+            {getIconToRender(4, currentPoints)}
+            <Button
+                title={'+'}
+                disabled={currentPoints === 5}
+                onPress={() => onChange(currentPoints + 1)}
+            />
+        </View>
     );
 };

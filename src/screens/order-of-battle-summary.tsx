@@ -4,7 +4,14 @@ import {FactionPicker} from '../components/faction-picker';
 import {RequisitionPointsSelector} from '../components/requisition-points-selector';
 import {TitleInput} from '../components/title-input';
 import {ActionFixedFooterContainer} from '../containers/action-fixed-footer-container';
-import {OrderOfBattleSummaryProps} from '../types/screens/props';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {ConnectedProps} from 'react-redux';
+import {orderOfBattleSummaryConnector} from './order-of-battle-summary-connector';
+import {RootParamList} from '../types/root-param-list';
+
+type OrderOfBattleSummaryProps = ConnectedProps<typeof orderOfBattleSummaryConnector> & {
+    navigation: StackNavigationProp<RootParamList, 'OrderOfBattleSummary'>
+}
 
 export const OrderOfBattleSummary : React.FC<OrderOfBattleSummaryProps> = ({
     currentOrderOfBattle,

@@ -1,8 +1,20 @@
 import React from 'react';
-import {TouchableOpacity, View, Text} from 'react-native';
-import {appStyles} from '../../styles';
-import {getColorScheme} from '../helpers/getColorScheme';
-import {CrusadeCardListItemProps} from '../types/components/props';
+import {TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {CrusadeCard} from '../types/state/crusade-card';
+
+type CrusadeCardListItemProps = {
+    selectCrusadeCard: (index: number) => void,
+    deleteCrusadeCard: (index: number) => void,
+    updateSelected: (index: number, isSelected: boolean) => void,
+    crusadeCard: CrusadeCard,
+    index: number
+}
+
+const styles = StyleSheet.create({
+    listItemContainer: {
+        flex: 1
+    }
+});
 
 export const CrusadeCardListItem = ({
     selectCrusadeCard,
@@ -11,17 +23,13 @@ export const CrusadeCardListItem = ({
     crusadeCard,
     index
 } : CrusadeCardListItemProps) : JSX.Element => {
-    const styles = appStyles(getColorScheme());
-
     return (
-        <View style={styles.swipeOutRowFront}>
-            <TouchableOpacity
-                onPress={() =>  selectCrusadeCard(index)}
-                onLongPress={() => deleteCrusadeCard(index)}
-                style={styles.row}
-            >
-                <Text>{crusadeCard.name || crusadeCard.unit}</Text>
-            </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+            onPress={() =>  selectCrusadeCard(index)}
+            onLongPress={() => deleteCrusadeCard(index)}
+            style={styles.listItemContainer}
+        >
+            <Text>{crusadeCard.name || crusadeCard.unit}</Text>
+        </TouchableOpacity>
     );
 };
