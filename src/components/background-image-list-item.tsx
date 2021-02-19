@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {TouchableOpacity, Text, StyleSheet, Alert} from 'react-native';
 import {BackgroundImageContainer} from '../containers/background-image-container';
 import {BattlefieldRoles, Factions} from '../types/enums';
 
@@ -19,6 +19,9 @@ const styles = StyleSheet.create({
     },
     listItemContainer: {
         flex: 1
+    },
+    imageContainer: {
+        flex: 1
     }
 });
 
@@ -30,20 +33,34 @@ export const BackgroundImageListItem = ({
     imageKey
 } : BackgroundImageListItemProps) : JSX.Element => {
 
-    const confirmDelete = () => {
-        onDelete(index);
+    const createConfirmDeleteAlert = () => {
+        Alert.alert(
+            'Confirm Delete',
+            'Are you sure you want to delete this item? There is no undo',
+            [
+                {
+                    text: 'Cancel',
+                    style: 'cancel'
+                },
+                {
+                    text: 'Delete',
+                    onPress: () => onDelete(index),
+                    style: 'destructive'
+                }
+            ],
+            {cancelable: true}
+        );
+
     };
 
     return (
         <TouchableOpacity
             onPress={() =>  onPress(index)}
-            onLongPress={confirmDelete}
+            onLongPress={createConfirmDeleteAlert}
             style={styles.listItemContainer}
         >
             <BackgroundImageContainer
-                containerStyle={{
-                    flex: 1
-                }}
+                containerStyle={styles.imageContainer}
                 imageKey={imageKey}
             >
                 <Text style={styles.title}>

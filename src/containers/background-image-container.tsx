@@ -1,7 +1,7 @@
 import React from 'react';
 import {ImageBackground, ImageSourcePropType, StyleSheet, StyleProp, ViewStyle} from 'react-native';
 
-import {FactionImages, BattleFieldRoleImages} from '../images';
+import {FactionImages, BattleFieldRoleImages} from '../assets/images';
 import {BattlefieldRoles, Factions} from '../types/enums';
 
 const factionImageMap : Record<Factions | BattlefieldRoles, ImageSourcePropType> = {

@@ -11,6 +11,6 @@
     "types": ["reflect-metadata", "jest"],
     "typeRoots": ["src/types", "node_modules/@types"]
   },
-  "exclude": ["node_modules", "./App.js"],
+  "exclude": ["node_modules", "./src/**/*.spec.tsx", "./src/**/*.spec.ts", "./App.js"],
   "include": ["./src/**/*.tsx", "./src/**/*.ts", "jest.d.ts", "jest.d.ts"]
 }

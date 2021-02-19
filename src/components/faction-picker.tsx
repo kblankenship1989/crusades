@@ -3,7 +3,7 @@ import {Picker} from '@react-native-picker/picker';
 import {enumKeys, isEnumKey} from '../helpers/enum-helpers';
 import {Factions} from '../types/enums';
 
-type FactionPickerProps = {
+export type FactionPickerProps = {
     selectedFaction: Factions,
     onChange: (faction: Factions) => void
 }

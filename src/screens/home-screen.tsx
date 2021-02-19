@@ -9,7 +9,7 @@ import {homeScreenConnector} from './home-screen-connector';
 import {ActionFixedFooterContainer} from '../containers/action-fixed-footer-container';
 import {BackgroundImageListItem} from '../components/background-image-list-item';
 
-type HomeProps = ConnectedProps<typeof homeScreenConnector> & {
+export type HomeProps = ConnectedProps<typeof homeScreenConnector> & {
     navigation: StackNavigationProp<RootParamList, 'Home'>
 }
 

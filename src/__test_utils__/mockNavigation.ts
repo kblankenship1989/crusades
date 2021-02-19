@@ -1,6 +1,6 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 
-export const mockNavigation : StackNavigationProp<RootParamList, any> = {
+export const mockHomeNavigation : StackNavigationProp<RootParamList, 'Home'> = {
     navigate: jest.fn(),
     dispatch: jest.fn(),
     goBack: jest.fn(),

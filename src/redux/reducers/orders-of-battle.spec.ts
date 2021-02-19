@@ -1,5 +1,6 @@
 import {ordersOfBattle} from './orders-of-battle';
 import {mockOrderOfBattle} from '../../__test_utils__/mockStates';
+import {ActionList} from '../../types/enums';
 
 describe('Given the orders of battle reducer', () => {
     describe('and the list of orders of battle is updated', () => {
@@ -9,8 +10,8 @@ describe('Given the orders of battle reducer', () => {
                 mockOrderOfBattle({title: 'Second Order'})
             ];
 
-            const action = {
-                type: 'SET_ORDERS_OF_BATTLE',
+            const action : OrdersOfBattleAction = {
+                type: ActionList.SET_ORDERS_OF_BATTLE,
                 payload: {
                     ordersOfBattle: [
                         mockOrderOfBattle({title: 'Added order'}),

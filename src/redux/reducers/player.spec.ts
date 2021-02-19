@@ -1,5 +1,6 @@
 import {player} from './player';
 import {defaultPlayer} from '../state/player';
+import {ActionList} from '../../types/enums';
 
 describe('Given the player reducer', () => {
     it('should initialize the state when no store is presisted', () => {
@@ -13,8 +14,8 @@ describe('Given the player reducer', () => {
                 preferredFaction: 'Orks'
             };
 
-            const action = {
-                type: 'UPDATE_PLAYER',
+            const action : UpdatePlayer = {
+                type: ActionList.UPDATE_PLAYER,
                 payload: {
                     firstName: 'test',
                     middleName: 'test 2'

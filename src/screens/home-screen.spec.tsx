@@ -1,8 +1,8 @@
 import React from 'react';
 import '@testing-library/jest-native/extend-expect';
 import {render, fireEvent, RenderAPI} from '@testing-library/react-native';
-import {HomeScreen} from './home-screen';
-import {mockNavigation} from '../__test_utils__/mockNavigation';
+import {HomeScreen, HomeProps} from './home-screen';
+import {mockHomeNavigation} from '../__test_utils__/mockNavigation';
 import {mockOrderOfBattle} from '../__test_utils__/mockStates';
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
 
@@ -14,7 +14,7 @@ type Test = {
 describe('Given the Home Screen', () => {
     const renderComponent = (overrides? : Partial<HomeProps>) : Test => {
         const defaultTestProps : HomeProps = {
-            navigation: mockNavigation,
+            navigation: mockHomeNavigation,
             createOrderOfBattle: jest.fn(),
             loadSelectedOrderOfBattle: jest.fn(),
             deleteSelectedOrderOfBattle: jest.fn(),
@@ -68,7 +68,7 @@ describe('Given the Home Screen', () => {
         it('should load the selected order of battle summary when one is clicked', async () => {
             const {component, testProps} = renderComponent({
                 navigation: {
-                    ...mockNavigation,
+                    ...mockHomeNavigation,
                     push: jest.fn()
                 }
             });
@@ -98,7 +98,7 @@ describe('Given the Home Screen', () => {
         it('should navigate to the order of battle summary page', async () => {
             const {component, testProps} = renderComponent({
                 navigation: {
-                    ...mockNavigation,
+                    ...mockHomeNavigation,
                     push: jest.fn()
                 }
             });

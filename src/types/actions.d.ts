@@ -1,5 +1,6 @@
 import {Action, AnyAction} from 'redux';
 import {ThunkAction} from 'redux-thunk';
+import {ActionList} from './enums';
 
 declare global {
     type SetCurrentCursadeCardIndexAction = Action<ActionList.SET_CURRENT_CRUSADE_CARD_INDEX> & {
