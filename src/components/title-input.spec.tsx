@@ -1,7 +1,7 @@
 import React from 'react';
 import {render} from '@testing-library/react-native';
 
-import {TitleInput, TitleInputProps} from './title-input';
+import {TitleInput} from './title-input';
 
 
 describe('Given the Title Input component', () => {

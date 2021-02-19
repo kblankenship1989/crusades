@@ -1,11 +1,6 @@
 import {ThunkDispatch} from 'redux-thunk';
 
-import {OrderOfBattle, defaultOrderOfBattle} from '../../types/state/order-of-battle';
-import {State} from '../../types/state';
-import {SET_CURRENT_ORDER_OF_BATTLE, SET_ORDERS_OF_BATTLE} from '../../constants/action-list';
-import {SetOrdersOfBattleAction} from '../actions/orders-of-battle';
-import {AvailableActions} from '../actions';
-import {mockState, mockOrderOfBattle} from '../../../__test_utils__/mockStates';
+import {mockState, mockOrderOfBattle} from '../../__test_utils__/mockStates';
 
 import {createOrderOfBattle, loadSelectedOrderOfBattle, deleteSelectedOrderOfBattle, saveCurrentOrderOfBattle} from './orders-of-battle';
 

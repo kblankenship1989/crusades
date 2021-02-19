@@ -2,11 +2,8 @@ import React from 'react';
 import '@testing-library/jest-native/extend-expect';
 import {render, fireEvent, RenderAPI} from '@testing-library/react-native';
 import {HomeScreen} from './home-screen';
-import {mockNavigation} from '../../__test_utils__/mockNavigation';
-import {mockOrderOfBattle} from '../../__test_utils__/mockStates';
-import {factions} from '../types/consts';
-import {HomeProps} from '../types/screens/props';
-
+import {mockNavigation} from '../__test_utils__/mockNavigation';
+import {mockOrderOfBattle} from '../__test_utils__/mockStates';
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper');
 
 type Test = {

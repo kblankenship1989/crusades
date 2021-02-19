@@ -15,8 +15,7 @@ export const useCachedResources = () : boolean => {
                 // Load fonts
                 await Font.loadAsync({
                     ...Ionicons.font,
-                    'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf'),
-                    'icons-40k': require('../assets/fonts/icons-40k.ttf')
+                    //'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf')
                 });
             } catch (e) {
                 // We might want to provide this error information to an error reporting service

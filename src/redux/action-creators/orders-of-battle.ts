@@ -1,7 +1,5 @@
-import {SET_ORDERS_OF_BATTLE} from '../../constants/action-list';
-import {defaultOrderOfBattle, OrderOfBattle} from '../../types/state/order-of-battle';
-import {AppThunk} from '../thunk';
-import {SetOrdersOfBattleAction} from '../actions/orders-of-battle';
+import {ActionList} from '../../types/enums';
+import {defaultOrderOfBattle} from '../state/order-of-battle';
 
 export const createOrderOfBattle = () : AppThunk => (dispatch, getState) : void => {
     const newOrderOfBattle = {
@@ -13,7 +11,7 @@ export const createOrderOfBattle = () : AppThunk => (dispatch, getState) : void 
     } = getState();
 
     const ordersOfBattleAction : SetOrdersOfBattleAction = {
-        type: SET_ORDERS_OF_BATTLE,
+        type: ActionList.SET_ORDERS_OF_BATTLE,
         payload: {
             ordersOfBattle: [
                 newOrderOfBattle,
@@ -34,7 +32,7 @@ export const loadSelectedOrderOfBattle = (selectedIndex : number) : AppThunk => 
     const currentOrderOfBattle = newOrdersOfBattle.splice(selectedIndex, 1);
 
     const ordersOfBattleAction : SetOrdersOfBattleAction = {
-        type: SET_ORDERS_OF_BATTLE,
+        type: ActionList.SET_ORDERS_OF_BATTLE,
         payload: {
             ordersOfBattle: [
                 ...currentOrderOfBattle,
@@ -55,7 +53,7 @@ export const deleteSelectedOrderOfBattle = (selectedIndex : number) : AppThunk =
     newOrdersOfBattle.splice(selectedIndex, 1);
 
     const action: SetOrdersOfBattleAction = {
-        type: SET_ORDERS_OF_BATTLE,
+        type: ActionList.SET_ORDERS_OF_BATTLE,
         payload: {
             ordersOfBattle: [
                 ...newOrdersOfBattle
@@ -79,7 +77,7 @@ export const saveCurrentOrderOfBattle = (updates : Partial<OrderOfBattle>) : App
     };
 
     const ordersOfBattleAction : SetOrdersOfBattleAction = {
-        type: SET_ORDERS_OF_BATTLE,
+        type: ActionList.SET_ORDERS_OF_BATTLE,
         payload: {
             ordersOfBattle: newOrdersOfBattle
         }

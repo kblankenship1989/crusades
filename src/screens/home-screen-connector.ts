@@ -1,6 +1,5 @@
 import {connect} from 'react-redux';
 
-import {State} from '../types/state';
 import {HomeScreen} from './home-screen';
 import {
     createOrderOfBattle,

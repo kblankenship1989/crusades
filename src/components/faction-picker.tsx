@@ -1,7 +1,7 @@
 import React from 'react';
 import {Picker} from '@react-native-picker/picker';
-import {factions, Factions} from '../types/consts';
-
+import {enumKeys, isEnumKey} from '../helpers/enum-helpers';
+import {Factions} from '../types/enums';
 
 type FactionPickerProps = {
     selectedFaction: Factions,
@@ -9,8 +9,10 @@ type FactionPickerProps = {
 }
 
 export const FactionPicker : React.FC<FactionPickerProps> = ({selectedFaction, onChange}) => {
-    const onValueChange = (item : React.ReactText, index : number) : void => {
-        onChange(factions[index]);
+    const onValueChange = (item : React.ReactText) : void => {
+        if (isEnumKey(Factions)(item)) {
+            onChange(item);
+        }
     };
 
     return (
@@ -20,10 +22,10 @@ export const FactionPicker : React.FC<FactionPickerProps> = ({selectedFaction, o
             prompt={'Select Faction'}
             onValueChange={onValueChange}
         >
-            {factions.map((faction) => (
+            {enumKeys(Factions).map((faction) => (
                 <Picker.Item
-                    label={faction}
-                    value={faction}
+                    label={Factions[faction]}
+                    value={Factions[faction]}
                     key={faction}
                 />
             ))}

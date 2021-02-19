@@ -7,7 +7,6 @@ import {ActionFixedFooterContainer} from '../containers/action-fixed-footer-cont
 import {StackNavigationProp} from '@react-navigation/stack';
 import {ConnectedProps} from 'react-redux';
 import {orderOfBattleSummaryConnector} from './order-of-battle-summary-connector';
-import {RootParamList} from '../types/root-param-list';
 
 type OrderOfBattleSummaryProps = ConnectedProps<typeof orderOfBattleSummaryConnector> & {
     navigation: StackNavigationProp<RootParamList, 'OrderOfBattleSummary'>

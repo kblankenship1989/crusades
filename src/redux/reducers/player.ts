@@ -1,6 +1,5 @@
-import {Player, defaultPlayer} from '../../types/state/player';
-import {PlayerAction} from '../actions/player';
-import {UPDATE_PLAYER} from '../../constants/action-list';
+import {ActionList} from '../../types/enums';
+import {defaultPlayer} from '../state/player';
 
 const updatePlayer = (state : Player, payload : Partial<Player>) : Player => ({
     ...state,
@@ -9,7 +8,7 @@ const updatePlayer = (state : Player, payload : Partial<Player>) : Player => ({
 
 export const player = (state : Player = defaultPlayer, action : PlayerAction) : Player => {
     switch (action.type) {
-    case UPDATE_PLAYER:
+    case ActionList.UPDATE_PLAYER:
         return updatePlayer(state, action.payload);
     default:
         return state;

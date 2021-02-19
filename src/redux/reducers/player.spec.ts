@@ -1,7 +1,5 @@
 import {player} from './player';
-import {UPDATE_PLAYER} from '../../constants/action-list';
-import {PlayerAction} from '../actions/player';
-import { Player, defaultPlayer } from '../../types/state/player';
+import {defaultPlayer} from '../state/player';
 
 describe('Given the player reducer', () => {
     it('should initialize the state when no store is presisted', () => {
@@ -15,8 +13,8 @@ describe('Given the player reducer', () => {
                 preferredFaction: 'Orks'
             };
 
-            const action : PlayerAction= {
-                type: UPDATE_PLAYER,
+            const action = {
+                type: 'UPDATE_PLAYER',
                 payload: {
                     firstName: 'test',
                     middleName: 'test 2'
