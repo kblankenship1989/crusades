@@ -5,7 +5,8 @@ import {SafeAreaView, View, StyleSheet} from 'react-native';
 
 type ActionFixedFooterProps = {
     onAdd?: () => void,
-    onSave?: () => void
+    onSave?: () => void,
+    isDirty?: boolean
 }
 
 const styles = StyleSheet.create({
@@ -14,7 +15,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export const ActionFixedFooterContainer : React.FC<ActionFixedFooterProps> = ({children, onAdd, onSave}) => {
+export const ActionFixedFooterContainer : React.FC<ActionFixedFooterProps> = ({children, onAdd, onSave, isDirty}) => {
     return (
         <SafeAreaView style={styles.safeAreaView}>
             {children}
@@ -35,6 +36,7 @@ export const ActionFixedFooterContainer : React.FC<ActionFixedFooterProps> = ({c
                         type={'font-awesome'}
                         size={18}
                     />}
+                    disabled={!isDirty}
                     title={'SAVE'}
                 />}
             </View>

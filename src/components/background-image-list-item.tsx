@@ -18,10 +18,15 @@ const styles = StyleSheet.create({
         fontSize: 24
     },
     listItemContainer: {
-        flex: 1
+        flex: 1,
+        height: 100,
+        borderColor: 'black',
+        borderWidth: 1,
+        alignItems: 'center'
     },
     imageContainer: {
-        flex: 1
+        flex: 1,
+        justifyContent: 'center'
     }
 });
 

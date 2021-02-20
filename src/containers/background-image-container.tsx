@@ -1,7 +1,8 @@
 import React from 'react';
-import {ImageBackground, ImageSourcePropType, StyleSheet, StyleProp, ViewStyle} from 'react-native';
+import {ImageBackground, ImageSourcePropType, StyleSheet, StyleProp, ViewStyle, RegisteredStyle} from 'react-native';
 
 import {FactionImages, BattleFieldRoleImages} from '../assets/images';
+import {BackgroundImageListItem} from '../components/background-image-list-item';
 import {BattlefieldRoles, Factions} from '../types/enums';
 
 const factionImageMap : Record<Factions | BattlefieldRoles, ImageSourcePropType> = {
@@ -32,7 +33,7 @@ type BackgroundImageContainerProps = {
 
 const styles = StyleSheet.create({
     imageStyle: {
-        resizeMode: 'contain',
+        resizeMode: 'center',
         opacity: .25,
     }
 });
