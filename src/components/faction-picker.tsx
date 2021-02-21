@@ -1,15 +1,26 @@
 import React from 'react';
-import {Picker} from '@react-native-picker/picker';
 import {enumKeys, isEnumKey} from '../helpers/enum-helpers';
 import {Factions} from '../types/enums';
-import {Text, View} from 'react-native';
+
+import {Picker} from './picker';
 
 export type FactionPickerProps = {
     selectedFaction: Factions,
+    title?: string
     onChange: (faction: Factions) => void
 }
 
-export const FactionPicker : React.FC<FactionPickerProps> = ({selectedFaction, onChange}) => {
+type Item = {
+    key: keyof typeof Factions,
+    value: Factions
+}
+
+const items : Item[] = enumKeys(Factions).map((key) => ({
+    key,
+    value: Factions[key]
+}));
+
+export const FactionPicker : React.FC<FactionPickerProps> = ({selectedFaction, onChange, title}) => {
     const onValueChange = (item : React.ReactText) : void => {
         if (isEnumKey(Factions)(item)) {
             onChange(item);
@@ -17,23 +28,13 @@ export const FactionPicker : React.FC<FactionPickerProps> = ({selectedFaction, o
     };
 
     return (
-        <View>
-            <Text style={{fontSize: 24, alignSelf: 'center'}}>{'Faction'}</Text>
-            <Picker
-                selectedValue={selectedFaction}
-                mode={'dialog'}
-                prompt={'Select Faction'}
-                onValueChange={onValueChange}
-            >
-                {enumKeys(Factions).map((faction) => (
-                    <Picker.Item
-                        label={Factions[faction]}
-                        value={Factions[faction]}
-                        key={faction}
-                    />
-                ))}
-            </Picker>
-        </View>
+        <Picker
+            selectedValue={selectedFaction}
+            prompt={title || 'Select Faction'}
+            items={items}
+            onChange={onValueChange}
+            title={'Faction'}
+        />
     );
 };
 

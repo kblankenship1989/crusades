@@ -44,7 +44,7 @@ export const RequisitionPointsSelector = ({currentPoints, onChange} : Requisitio
                     disabled={currentPoints===0}
                     onPress={() => onChange(currentPoints - 1)}
                 />
-                <View style={{flex: 3, flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-evenly'}}>
                     {getIconToRender(0, currentPoints)}
                     {getIconToRender(1, currentPoints)}
                     {getIconToRender(2, currentPoints)}

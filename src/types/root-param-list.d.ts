@@ -1,5 +1,10 @@
 declare type RootParamList = {
     Home: undefined;
-    OrderOfBattleSummary: undefined;
+    OrderOfBattleSummary: {
+        updatedBattleResults: BattleResults[]
+    };
     CrusadeCardSummary: undefined;
+    BattleSummary: {
+        battleResults: BattleResults[]
+    };
 };

@@ -4,8 +4,8 @@ import {BackgroundImageContainer} from '../containers/background-image-container
 import {BattlefieldRoles, Factions} from '../types/enums';
 
 type BackgroundImageListItemProps = {
-    onDelete: (index: number) => void,
-    onPress: (index: number) => void,
+    onDelete?: (index: number) => void,
+    onPress?: (index: number) => void,
     index: number,
     title: string,
     imageKey: Factions | BattlefieldRoles
@@ -49,7 +49,7 @@ export const BackgroundImageListItem = ({
                 },
                 {
                     text: 'Delete',
-                    onPress: () => onDelete(index),
+                    onPress: () => onDelete && onDelete(index),
                     style: 'destructive'
                 }
             ],
@@ -60,8 +60,8 @@ export const BackgroundImageListItem = ({
 
     return (
         <TouchableOpacity
-            onPress={() =>  onPress(index)}
-            onLongPress={createConfirmDeleteAlert}
+            onPress={() => onPress && onPress(index)}
+            onLongPress={onDelete && createConfirmDeleteAlert}
             style={styles.listItemContainer}
         >
             <BackgroundImageContainer
