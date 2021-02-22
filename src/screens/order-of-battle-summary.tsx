@@ -9,7 +9,7 @@ import {ConnectedProps} from 'react-redux';
 import {orderOfBattleSummaryConnector} from './order-of-battle-summary-connector';
 import {BackgroundImageContainer} from '../containers/background-image-container';
 import {Divider, Text} from 'react-native-elements';
-import {BattleOutcomes, Factions} from '../types/enums';
+import {BattleOutcomes, Factions} from '../enums';
 import {Button} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 

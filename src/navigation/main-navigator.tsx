@@ -7,6 +7,7 @@ import {OrderOfBattleSummaryConnector} from '../screens/order-of-battle-summary-
 import {HomeScreenConnector} from '../screens/home-screen-connector';
 import {NavigationContainer} from '@react-navigation/native';
 import {BattleSummary} from '../screens/battle-summary';
+import {RootParamList} from './root-param-list';
 
 const MainStack = createStackNavigator<RootParamList>();
 

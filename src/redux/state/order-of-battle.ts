@@ -1,10 +1,28 @@
-import {Factions} from '../../types/enums';
+import {v1} from 'react-native-uuid';
 
-export const defaultOrderOfBattle = () : OrderOfBattle => ({
-    id: new Date().getTime(),
+import {Factions} from '../../enums';
+import {CrusadeCard} from './order-of-battle/crusade-card';
+import {BattleResults} from './order-of-battle/battle-results';
+
+export type OrderOfBattle = {
+    id: string,
+    title?: string,
+    faction: Factions,
+    requisitionPoints: number,
+    battleTally: Record<string, BattleResults>,
+    supplyLimit: number,
+    crusadeCards: Record<string, CrusadeCard>,
+    lastAccessed: Date
+    // goals?: string,
+    // notableVictories?: string[]
+}
+
+export const getDefaultOrderOfBattle = () : OrderOfBattle => ({
+    id: v1(),
     faction: Factions.UNALIGNED,
     requisitionPoints: 5,
-    battleTally: [],
+    battleTally: {},
     supplyLimit: 50,
-    crusadeCards: []
+    crusadeCards: {},
+    lastAccessed: new Date()
 });

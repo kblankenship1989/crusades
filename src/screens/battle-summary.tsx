@@ -5,8 +5,8 @@ import {StackNavigationProp,} from '@react-navigation/stack';
 
 import {ActionFixedFooterContainer} from '../containers/action-fixed-footer-container';
 import {BackgroundImageListItem} from '../components/background-image-list-item';
-import {defaultBattleResults} from '../redux/state/battle-results';
-import {BattleOutcomes, Factions} from '../types/enums';
+import {defaultBattleResults} from '../redux/state/order-of-battle/battle-results';
+import {BattleOutcomes, Factions} from '../enums';
 import {FactionPicker} from '../components/faction-picker';
 import {BattleOutcomePicker} from '../components/battle-outcome-picker';
 import {RouteProp} from '@react-navigation/native';

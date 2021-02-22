@@ -1,6 +1,6 @@
 import React from 'react';
 import {enumKeys, isEnumKey} from '../helpers/enum-helpers';
-import {BattleOutcomes} from '../types/enums';
+import {BattleOutcomes} from '../enums';
 
 import {Picker} from './picker';
 

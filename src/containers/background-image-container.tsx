@@ -3,7 +3,7 @@ import {ImageBackground, ImageSourcePropType, StyleSheet, StyleProp, ViewStyle, 
 
 import {FactionImages, BattleFieldRoleImages} from '../assets/images';
 import {BackgroundImageListItem} from '../components/background-image-list-item';
-import {BattlefieldRoles, Factions} from '../types/enums';
+import {BattlefieldRoles, Factions} from '../enums';
 
 const factionImageMap : Record<Factions | BattlefieldRoles, ImageSourcePropType> = {
     [Factions.UNALIGNED]: FactionImages.Unaligned,
