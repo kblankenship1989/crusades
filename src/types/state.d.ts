@@ -1,4 +1,4 @@
-import {BattleOutcomes} from './enums';
+import {BattleOutcomes, BattleHonours, BattleScars} from './enums';
 
 declare global {
     declare type Rank = {
@@ -6,8 +6,8 @@ declare global {
         isBattleHardened: boolean,
         isHeroic: boolean,
         isLegendary: boolean,
-        battleHonours: string[],
-        battleScars: string[]
+        battleHonours: Record<string, BattleHonours>,
+        battleScars: Record<string, BattleScars>
     }
 
     declare type Player = {
@@ -25,7 +25,7 @@ declare global {
     }
 
     declare type OrderOfBattle = {
-        id: number,
+        id: string,
         title?: string,
         faction: Factions,
         requisitionPoints: number,
@@ -55,6 +55,7 @@ declare global {
 
 
     declare type CrusadeCard = {
+        id: string,
         name?: string,
         unit: string,
         faction: Factions,
@@ -74,9 +75,16 @@ declare global {
         // rank?: Rank
     }
 
-    declare type State = {
+    declare type PlayerAccount = {
+        accountId: string,
         player: Player,
-        ordersOfBattle: OrderOfBattle[],
-        currentCrusadeCardIndex: number
+        ordersOfBattle: OrderOfBattle[]
+    }
+
+    declare type State = {
+        accounts: PlayerAccount[],
+        selectedAccountId: string | null,
+        selectedOrderOfBattle: OrderOfBattle | null,
+        selectedCrusadeCard: CrusadeCard | null
     }
 }

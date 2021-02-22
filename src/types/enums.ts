@@ -48,3 +48,11 @@ export enum ActionList {
     SET_ORDERS_OF_BATTLE = 'SET_ORDERS_OF_BATTLE',
     SET_CURRENT_CRUSADE_CARD_INDEX = 'SET_CURRENT_CRUSADE_CARD_INDEX'
 }
+
+export enum BattleHonours {
+    SOME_HONOR = 'SOME_HONOR'
+}
+
+export enum BattleScars {
+    SOME_SCAR = 'SOME_SCAR'
+}

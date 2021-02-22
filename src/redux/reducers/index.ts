@@ -1,12 +1,14 @@
 import {combineReducers} from 'redux';
-
-import {player} from './player';
-import {ordersOfBattle} from './orders-of-battle';
 import {Reducer} from 'redux';
-import {currentCrusadeCardIndex} from './current-crusade-card-index';
+
+import {selectedOrderOfBattle} from './selected-order-of-battle';
+import {selectedCrusadeCard} from './selected-crusade-card';
+import {selectedAccountId} from './selected-account-id';
+import {accounts} from './accounts';
 
 export const rootReducer : Reducer<State, AvailableActions> = combineReducers({
-    player,
-    ordersOfBattle,
-    currentCrusadeCardIndex
+    accounts,
+    selectedAccountId,
+    selectedCrusadeCard,
+    selectedOrderOfBattle
 });

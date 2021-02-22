@@ -9,8 +9,8 @@ const config : PersistConfig<State, AvailableActions> = {
     storage: AsyncStorage,
     debug: true,
     whitelist: [
-        'player',
-        'ordersOfBattle'
+        'accounts',
+        'selectedAccount'
     ]
 };
 
