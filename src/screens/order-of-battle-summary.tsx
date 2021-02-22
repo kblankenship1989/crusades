@@ -8,10 +8,10 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {ConnectedProps} from 'react-redux';
 import {orderOfBattleSummaryConnector} from './order-of-battle-summary-connector';
 import {BackgroundImageContainer} from '../containers/background-image-container';
-import {Divider, Text} from 'react-native-elements';
-import {BattleOutcomes, Factions} from '../types/enums';
-import {Button} from 'react-native';
+import {Divider} from 'react-native-elements';
+import {Factions} from '../types/enums';
 import {RouteProp} from '@react-navigation/native';
+import {BattleSummaryButton} from '../components/battle-summary-button';
 
 type OrderOfBattleSummaryProps = ConnectedProps<typeof orderOfBattleSummaryConnector> & {
     navigation: StackNavigationProp<RootParamList, 'OrderOfBattleSummary'>,
@@ -21,18 +21,6 @@ type OrderOfBattleSummaryProps = ConnectedProps<typeof orderOfBattleSummaryConne
 type OrderOfBattleSummaryState = OrderOfBattle & {
     isDirty: boolean
 }
-
-type WinLoseDraw = 'WIN' | 'LOSE' | 'DRAW';
-
-const WinLoseDrawMap : Record<BattleOutcomes, WinLoseDraw> = {
-    [BattleOutcomes.TABLED]: 'LOSE',
-    [BattleOutcomes.MAJOR_LOSS]: 'LOSE',
-    [BattleOutcomes.MINOR_LOSS]: 'LOSE',
-    [BattleOutcomes.DRAW]: 'DRAW',
-    [BattleOutcomes.MINOR_VICTORY]: 'WIN',
-    [BattleOutcomes.MAJOR_VICTORY]: 'WIN',
-    [BattleOutcomes.ANNIHALATION]: 'WIN'
-};
 
 export class OrderOfBattleSummary extends React.Component<OrderOfBattleSummaryProps, OrderOfBattleSummaryState> {
     constructor(props: OrderOfBattleSummaryProps) {
@@ -45,7 +33,7 @@ export class OrderOfBattleSummary extends React.Component<OrderOfBattleSummaryPr
     }
 
     componentDidUpdate(prevProps: OrderOfBattleSummaryProps, prevState: OrderOfBattleSummaryState) : void {
-        if (this.props.route.params.updatedBattleResults && prevState.battleTally !== this.props.route.params.updatedBattleResults) {
+        if (this.props.route.params?.updatedBattleResults && prevState.battleTally !== this.props.route.params.updatedBattleResults) {
             this.setBattleTally(this.props.route.params.updatedBattleResults);
         }
     }
@@ -56,11 +44,13 @@ export class OrderOfBattleSummary extends React.Component<OrderOfBattleSummaryPr
             ...updatedOrderOfBattle
         } = this.state;
 
-        this.props.saveCurrentOrderOfBattle(updatedOrderOfBattle);
+        if (isDirty) {
+            this.props.saveCurrentOrderOfBattle(updatedOrderOfBattle);
 
-        this.setState({
-            isDirty: false
-        });
+            this.setState({
+                isDirty: false
+            });
+        }
     };
 
     setTitle = (title: string) : void => {
@@ -91,26 +81,6 @@ export class OrderOfBattleSummary extends React.Component<OrderOfBattleSummaryPr
         });
     }
 
-    navigateToBattleSummary = () : void => {
-        this.props.navigation.push('BattleSummary', {
-            battleResults: this.state.battleTally,
-        });
-    };
-
-    getWinLoseDrawCounts = () : string => {
-        const wldCounts : Record<WinLoseDraw, number> = this.state.battleTally.reduce((counts, battleResult) => {
-            counts[WinLoseDrawMap[battleResult.result]]++;
-
-            return counts;
-        }, {
-            WIN: 0,
-            LOSE: 0,
-            DRAW: 0
-        });
-
-        return `${wldCounts.WIN} / ${wldCounts.LOSE} / ${wldCounts.DRAW}`;
-    }
-
     render() : React.ReactNode {
         const {isDirty, title, faction, requisitionPoints} = this.state;
 
@@ -121,7 +91,6 @@ export class OrderOfBattleSummary extends React.Component<OrderOfBattleSummaryPr
             >
                 <BackgroundImageContainer
                     imageKey={faction}
-                    containerStyle={{flex: 1}}
                 >
                     <ScrollView>
                         <TitleInput
@@ -140,10 +109,8 @@ export class OrderOfBattleSummary extends React.Component<OrderOfBattleSummaryPr
                             onChange={this.setRequisitionPoints}
                         />
                         <Divider/>
-                        <Text h3>Battle Summary (W/L/D)</Text>
-                        <Button
-                            title={this.getWinLoseDrawCounts()}
-                            onPress={this.navigateToBattleSummary}
+                        <BattleSummaryButton
+                            battleTally={this.state.battleTally}
                         />
                     </ScrollView>
                 </BackgroundImageContainer>

@@ -1,6 +1,7 @@
 import React from 'react';
-import {Icon, Button} from 'react-native-elements';
-import {SafeAreaView, View, StyleSheet} from 'react-native';
+import {Container, Content, Header, Footer, StyleProvider, ListItem} from 'native-base';
+import {StyleSheet} from 'react-native';
+
 
 
 type ActionFixedFooterProps = {
@@ -17,29 +18,14 @@ const styles = StyleSheet.create({
 
 export const ActionFixedFooterContainer : React.FC<ActionFixedFooterProps> = ({children, onAdd, onSave, isDirty}) => {
     return (
-        <SafeAreaView style={styles.safeAreaView}>
-            {children}
-            <View>
-                {onAdd && <Button
-                    onPress={onAdd}
-                    icon={<Icon
-                        name={'plus'}
-                        type={'font-awesome'}
-                        size={18}
-                    />}
-                    title={'ADD'}
-                />}
-                {onSave && <Button
-                    onPress={onSave}
-                    icon={<Icon
-                        name={'save'}
-                        type={'font-awesome'}
-                        size={18}
-                    />}
-                    disabled={!isDirty}
-                    title={'SAVE'}
-                />}
-            </View>
-        </SafeAreaView>
+        <Container>
+            <Header>
+            </Header>
+            <Content>
+                {children}
+            </Content>
+            <Footer>
+            </Footer>
+        </Container>
     );
 };

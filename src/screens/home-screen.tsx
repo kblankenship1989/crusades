@@ -1,6 +1,6 @@
 import React from 'react';
 import {FlatList, ListRenderItem} from 'react-native';
-import {Overlay, Text} from 'react-native-elements';
+import {Text} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
 import {ConnectedProps} from 'react-redux';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -8,7 +8,6 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {homeScreenConnector} from './home-screen-connector';
 import {ActionFixedFooterContainer} from '../containers/action-fixed-footer-container';
 import {BackgroundImageListItem} from '../components/background-image-list-item';
-import {LoadingGIF} from '../components/loading';
 
 export type HomeProps = ConnectedProps<typeof homeScreenConnector> & {
     navigation: StackNavigationProp<RootParamList, 'Home'>

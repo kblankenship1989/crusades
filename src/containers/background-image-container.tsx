@@ -27,25 +27,26 @@ const factionImageMap : Record<Factions | BattlefieldRoles, ImageSourcePropType>
 };
 
 type BackgroundImageContainerProps = {
-    imageKey: Factions | BattlefieldRoles,
-    containerStyle: StyleProp<ViewStyle>
+    imageKey: Factions | BattlefieldRoles
 }
 
 const styles = StyleSheet.create({
     imageStyle: {
         resizeMode: 'center',
         opacity: .25,
+    },
+    containerStyle: {
+        flex: 1
     }
 });
 
 export const BackgroundImageContainer : React.FC<BackgroundImageContainerProps> = ({
     children,
-    imageKey,
-    containerStyle
+    imageKey
 }) => (
     <ImageBackground
         source={factionImageMap[imageKey]}
-        style={containerStyle}
+        style={styles.containerStyle}
         imageStyle={styles.imageStyle}
     >
         {children}
