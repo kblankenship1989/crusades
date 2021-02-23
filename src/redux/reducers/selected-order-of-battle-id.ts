@@ -1,8 +1,11 @@
-import {SelectOrderOfBattleAction} from '../action-creators/orders-of-battle';
-import {OrderOfBattleActions} from '../action-list';
+import {SelectOrderOfBattleAction, CreateOrderOfBattleAction} from '../action-creators/orders-of-battle';
+import {AvailableActions} from '../action-list';
 
-export const selectedOrderOfBattleId = (state: string | null = null, action : SelectOrderOfBattleAction) : string | null => {
-    return action.type === OrderOfBattleActions.SELECT_ORDER_OF_BATTLE ?
+type SelectedOrderOfBattleIdActions = SelectOrderOfBattleAction | CreateOrderOfBattleAction
+
+export const selectedOrderOfBattleId = (state: string | null = null, action : SelectedOrderOfBattleIdActions) : string | null => {
+    return action.type === AvailableActions.SELECT_ORDER_OF_BATTLE
+        || action.type === AvailableActions.CREATE_ORDER_OF_BATTLE ?
         action.payload.selectedOrderOfBattleId :
         state;
 };

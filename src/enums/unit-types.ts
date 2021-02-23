@@ -1,4 +1,4 @@
-export enum UnitTypes {
+export const enum UnitTypes {
     CHARACTER = 'Character',
     MONSTER = 'Monster',
     VEHICLE = 'Vehicle',

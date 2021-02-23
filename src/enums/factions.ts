@@ -1,4 +1,4 @@
-export enum  Factions {
+export const enum  Factions {
     UNALIGNED = 'Unaligned',
     IMPERIUM = 'Imperium',
     CHAOS = 'Chaos',

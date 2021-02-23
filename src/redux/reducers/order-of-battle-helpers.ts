@@ -5,22 +5,26 @@ import {
     CreateOrderOfBattleAction,
     UpdateOrderOfBattleAction
 } from '../action-creators/orders-of-battle';
-import {OrderOfBattleActions} from '../action-list';
+import {AvailableActions, CrusadeCardActions, OrderOfBattleActions} from '../action-list';
+import {CrusadeCardActionList, crusadeCardHelpers} from './crusade-card-helpers';
 
 export type OrderOfBattleActionList = SelectOrderOfBattleAction |
     DeleteOrderOfBattleAction |
     CreateOrderOfBattleAction |
-    UpdateOrderOfBattleAction
+    UpdateOrderOfBattleAction |
+    CrusadeCardActionList
 
-const deleteOrderOfBattle = (ordersOfBattle: Record<string, OrderOfBattle>, action : OrderOfBattleActionList) : Record<string, OrderOfBattle> => {
+type OrderOfBattleHelper = (ordersOfBattle: Record<string, OrderOfBattle>, action: OrderOfBattleActionList) => Record<string, OrderOfBattle>
+
+const deleteOrderOfBattle : OrderOfBattleHelper = (ordersOfBattle, action) => {
     const newOrdersOfBattle = {...ordersOfBattle};
 
     delete newOrdersOfBattle[(action as DeleteOrderOfBattleAction).payload.orderOfBattleId];
 
-    return ordersOfBattle;
+    return newOrdersOfBattle;
 };
 
-export const addOrderOfBattle = (ordersOfBattle: Record<string, OrderOfBattle>, action : OrderOfBattleActionList) : Record<string, OrderOfBattle> => {
+const addOrderOfBattle : OrderOfBattleHelper = (ordersOfBattle, action) => {
     const {
         newOrderOfBattle,
         selectedOrderOfBattleId
@@ -32,7 +36,7 @@ export const addOrderOfBattle = (ordersOfBattle: Record<string, OrderOfBattle>, 
 };
 
 
-const updateOrderOfBattle = (ordersOfBattle : Record<string, OrderOfBattle>, action: OrderOfBattleActionList) : Record<string, OrderOfBattle> => {
+const updateOrderOfBattle : OrderOfBattleHelper = (ordersOfBattle, action) => {
     const {
         selectedOrderOfBattleId,
         updates
@@ -48,11 +52,16 @@ const updateOrderOfBattle = (ordersOfBattle : Record<string, OrderOfBattle>, act
     };
 };
 
-const selectOrderOfBattle = (ordersOfBattle : Record<string, OrderOfBattle>, action: OrderOfBattleActionList) : Record<string, OrderOfBattle> => {
+const selectOrderOfBattle : OrderOfBattleHelper = (ordersOfBattle, action) => {
     const {
         lastAccessed,
         selectedOrderOfBattleId
     } = (action as SelectOrderOfBattleAction).payload;
+
+    if (selectedOrderOfBattleId === null) {
+        return ordersOfBattle;
+    }
+
     const newOrderOfBattle = {
         ...ordersOfBattle[selectedOrderOfBattleId],
         lastAccessed
@@ -64,13 +73,35 @@ const selectOrderOfBattle = (ordersOfBattle : Record<string, OrderOfBattle>, act
     };
 };
 
-export const ordersOfBattleHelper = (ordersOfBattle: Record<string, OrderOfBattle>, action: OrderOfBattleActionList) : Record<string, OrderOfBattle> => {
-    const actionMap : Record<OrderOfBattleActions, (ordersOfBattle: Record<string, OrderOfBattle>, action: OrderOfBattleActionList) => Record<string, OrderOfBattle>> = {
-        [OrderOfBattleActions.CREATE_ORDER_OF_BATTLE]: addOrderOfBattle,
-        [OrderOfBattleActions.DELETE_ORDER_OF_BATTLE]: deleteOrderOfBattle,
-        [OrderOfBattleActions.UPDATE_ORDER_OF_BATTLE]: updateOrderOfBattle,
-        [OrderOfBattleActions.SELECT_ORDER_OF_BATTLE]: selectOrderOfBattle
+const updateCrusadeCards : OrderOfBattleHelper = (ordersOfBattle, action) => {
+    const selectedOrderOfBattleId = (action as CrusadeCardActionList).payload.selectedOrderOfBattleId;
+    if (selectedOrderOfBattleId === null) {
+        return ordersOfBattle;
+    }
+    const newOrderOfBattle : OrderOfBattle = {
+        ...ordersOfBattle[selectedOrderOfBattleId],
+        crusadeCards: crusadeCardHelpers(ordersOfBattle[selectedOrderOfBattleId].crusadeCards, action as CrusadeCardActionList)
     };
 
-    return actionMap[action.type as OrderOfBattleActions] ? actionMap[action.type as OrderOfBattleActions](ordersOfBattle, action) : ordersOfBattle;
+    return {
+        ...ordersOfBattle,
+        [selectedOrderOfBattleId]: newOrderOfBattle
+    };
+};
+
+export const ordersOfBattleHelper : OrderOfBattleHelper = (ordersOfBattle, action) => {
+    const actionMap : Record<OrderOfBattleActions | CrusadeCardActions, OrderOfBattleHelper> = {
+        [AvailableActions.CREATE_ORDER_OF_BATTLE]: addOrderOfBattle,
+        [AvailableActions.DELETE_ORDER_OF_BATTLE]: deleteOrderOfBattle,
+        [AvailableActions.UPDATE_ORDER_OF_BATTLE]: updateOrderOfBattle,
+        [AvailableActions.SELECT_ORDER_OF_BATTLE]: selectOrderOfBattle,
+        [AvailableActions.CREATE_CRUSADE_CARD]: updateCrusadeCards,
+        [AvailableActions.DELETE_CRUSADE_CARD]: updateCrusadeCards,
+        [AvailableActions.UPDATE_CRUSADE_CARD]: updateCrusadeCards,
+        [AvailableActions.SELECT_CRUSADE_CARD]: updateCrusadeCards
+    };
+
+    return actionMap[action.type as OrderOfBattleActions] ?
+        actionMap[action.type as OrderOfBattleActions](ordersOfBattle, action) :
+        ordersOfBattle;
 };

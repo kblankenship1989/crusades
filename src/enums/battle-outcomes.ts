@@ -1,4 +1,4 @@
-export enum BattleOutcomes {
+export const enum BattleOutcomes {
     TABLED = 'Tabled',
     MAJOR_LOSS = 'Major Loss',
     MINOR_LOSS = 'Minor Loss',
