@@ -67,7 +67,7 @@ export const deleteAccount = (accountId : string) : AppThunk => (dispatch) : voi
     dispatch(action);
 };
 
-export const saveOrderOfBattle = (selectedAccountId: string, updates : Partial<PlayerAccount>) : AppThunk => (dispatch) : void => {
+export const saveAccount = (selectedAccountId: string, updates : Partial<PlayerAccount>) : AppThunk => (dispatch) : void => {
     const action : UpdateAccountAction = {
         type: AvailableActions.UPDATE_ACCOUNT,
         payload: {

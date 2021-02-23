@@ -12,3 +12,15 @@ export const defaultPlayer : Player = {
     lastName: '',
     preferredFaction: Factions.UNALIGNED
 };
+
+export const getPlayerName = (player : Player) : string => {
+    let name = player.firstName;
+
+    if (player.middleName) {
+        name += ` ${player.middleName}`;
+    }
+
+    name += ` ${player.lastName}`;
+
+    return name;
+};

@@ -18,27 +18,15 @@ import {
 import {ConnectedProps} from 'react-redux';
 import {loginConnector} from './login-connector';
 import {imageKeyMap} from '../../assets/images';
-import {Player} from '../../redux/state/player';
+import {Player, getPlayerName} from '../../redux/state/player';
 import {ListView} from 'react-native';
 import {PlayerAccount} from '../../redux/state/player-account';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {RootParamList} from '../../navigation/root-param-list';
+import {RootParamList, Screens} from '../../navigation/root-param-list';
 
 export type LoginProps = ConnectedProps<typeof loginConnector> & {
-    navigation: StackNavigationProp<RootParamList, 'Login'>
+    navigation: StackNavigationProp<RootParamList, Screens.LOGIN>
 }
-
-const getPlayerName = (player : Player) : string => {
-    let name = player.firstName;
-
-    if (player.middleName) {
-        name += ` ${player.middleName}`;
-    }
-
-    name += ` ${player.lastName}`;
-
-    return name;
-};
 
 export const Login = ({
     accounts,
@@ -55,12 +43,17 @@ export const Login = ({
 
     const navigateToAccount = (accountId : string) : void => {
         loadSelectedAccount(accountId);
-        navigation.push('Home');
+        navigation.push(Screens.ACCOUNT_SUMMARY);
+    };
+
+    const navigateToOrdersOfBattle = (accountId : string) : void => {
+        loadSelectedAccount(accountId);
+        navigation.push(Screens.ORDERS_OF_BATTLE);
     };
 
     const createAccountAndNavigate = () : void => {
         createAccount();
-        navigation.push('AddAccount');
+        navigation.push(Screens.EDIT_PLAYER, {isNew: true});
     };
 
     return (
@@ -68,13 +61,14 @@ export const Login = ({
             <Header />
             <Content>
                 <List
+                    leftOpenValue={75}
                     rightOpenValue={-75}
                     dataSource={dataSource.cloneWithRows(accountList)}
                     renderRow={(account : PlayerAccount) =>
                         <ListItem
                             avatar
                             button
-                            onPress={() => navigateToAccount(account.accountId)}
+                            onPress={() => navigateToOrdersOfBattle(account.accountId)}
                             key={account.accountId}
                         >
                             <Left>
@@ -87,6 +81,10 @@ export const Login = ({
                                 <Text note>{account.lastAccessed.toLocaleDateString()}</Text>
                             </Right>
                         </ListItem>}
+                    renderLeftHiddenRow={(account: PlayerAccount) =>
+                        <Button full onPress={() => navigateToAccount(account.accountId)}>
+                            <Icon active name="information-circle" />
+                        </Button>}
                     renderRightHiddenRow={(account: PlayerAccount) =>
                         <Button full danger onPress={() => deleteAccount(account.accountId)}>
                             <Icon active name="trash" />

@@ -16,24 +16,24 @@ import {
     FooterTab
 } from 'native-base';
 import {ConnectedProps} from 'react-redux';
-import {imageKeyMap} from '../assets/images';
+import {imageKeyMap} from '../../assets/images';
 import {ListView} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {RootParamList} from '../navigation/root-param-list';
-import {homeScreenConnector} from './home-screen-connector';
-import {OrderOfBattle} from '../redux/state/order-of-battle';
+import {RootParamList} from '../../navigation/root-param-list';
+import {ordersOfBattleListConnector} from './orders-of-battle-list-connector';
+import {OrderOfBattle} from '../../redux/state/order-of-battle';
 
-export type HomeScreenProps = ConnectedProps<typeof homeScreenConnector> & {
-    navigation: StackNavigationProp<RootParamList, 'Home'>
+export type OrdersOfBattleListProps = ConnectedProps<typeof ordersOfBattleListConnector> & {
+    navigation: StackNavigationProp<RootParamList, 'OrdersOfBattle'>
 }
 
-export const HomeScreen = ({
+export const OrdersOfBattleList = ({
     ordersOfBattle,
     createOrderOfBattle,
     loadSelectedOrderOfBattle,
     deleteOrderOfBattle,
     navigation
-} : HomeScreenProps) : JSX.Element => {
+} : OrdersOfBattleListProps) : JSX.Element => {
     const orderOfBattleList = Object.values(ordersOfBattle).sort((a, b) => b.lastAccessed.getTime() - a.lastAccessed.getTime());
 
     const dataSource = new ListView.DataSource({

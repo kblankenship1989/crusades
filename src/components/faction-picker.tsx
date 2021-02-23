@@ -30,10 +30,8 @@ export const FactionPicker : React.FC<FactionPickerProps> = ({selectedFaction, o
     return (
         <Picker
             selectedValue={selectedFaction}
-            prompt={title || 'Select Faction'}
             items={items}
             onChange={onValueChange}
-            title={'Faction'}
         />
     );
 };
