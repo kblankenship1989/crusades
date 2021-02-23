@@ -3,13 +3,14 @@ import {Button, FlatList, ListRenderItem, View} from 'react-native';
 import {Divider, Text} from 'react-native-elements';
 import {StackNavigationProp,} from '@react-navigation/stack';
 
-import {ActionFixedFooterContainer} from '../containers/action-fixed-footer-container';
-import {BackgroundImageListItem} from '../components/background-image-list-item';
-import {defaultBattleResults} from '../redux/state/order-of-battle/battle-results';
-import {BattleOutcomes, Factions} from '../enums';
-import {FactionPicker} from '../components/faction-picker';
-import {BattleOutcomePicker} from '../components/battle-outcome-picker';
+import {ActionFixedFooterContainer} from '../../containers/action-fixed-footer-container';
+import {BackgroundImageListItem} from '../../components/background-image-list-item';
+import {getDefaultBattleResults, BattleResults} from '../../redux/state/order-of-battle/battle-results';
+import {BattleOutcomes, Factions} from '../../enums';
+import {FactionPicker} from '../../components/faction-picker';
+import {BattleOutcomePicker} from '../../components/battle-outcome-picker';
 import {RouteProp} from '@react-navigation/native';
+import {RootParamList} from '../../navigation/root-param-list';
 
 export type BattleSummaryProps = {
     navigation: StackNavigationProp<RootParamList, 'BattleSummary'>
@@ -27,7 +28,7 @@ export class BattleSummary extends React.Component<BattleSummaryProps, BattleSum
         super(props);
 
         this.state = {
-            ...defaultBattleResults,
+            ...getDefaultBattleResults(),
             currentResults: props.route.params.battleResults,
             isDirty: false,
             isNewEntryDirty: false
@@ -59,7 +60,7 @@ export class BattleSummary extends React.Component<BattleSummaryProps, BattleSum
         newCurrentResults.splice(index,1);
         this.setState({
             currentResults: newCurrentResults,
-            ...defaultBattleResults,
+            ...getDefaultBattleResults(),
             isDirty: true
         });
     }
@@ -67,7 +68,7 @@ export class BattleSummary extends React.Component<BattleSummaryProps, BattleSum
     addCurrentResult = () : void => {
         const newBattleResult : BattleResults = {
             enemyFaction: this.state.enemyFaction,
-            date: new Date().toLocaleDateString(),
+            date: new Date(),
             result: this.state.result,
             markedForGreatness: this.state.markedForGreatness
         };
@@ -77,7 +78,7 @@ export class BattleSummary extends React.Component<BattleSummaryProps, BattleSum
 
         this.setState({
             currentResults: newCurrentResults,
-            ...defaultBattleResults,
+            ...getDefaultBattleResults(),
             isDirty: true,
             isNewEntryDirty: false
         });

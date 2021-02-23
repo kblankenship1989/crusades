@@ -1,5 +1,4 @@
-import {combineReducers, AnyAction} from 'redux';
-import {Reducer} from 'redux';
+import {combineReducers, AnyAction, Reducer} from 'redux';
 
 import {selectedOrderOfBattleId} from './selected-order-of-battle-id';
 import {selectedCrusadeCardId} from './selected-crusade-card-id';

@@ -5,11 +5,13 @@ import {OrderOfBattle} from './order-of-battle';
 export type PlayerAccount = {
     accountId: string,
     player: Player,
-    ordersOfBattle: Record<string, OrderOfBattle>
+    ordersOfBattle: Record<string, OrderOfBattle>,
+    lastAccessed: Date
 };
 
 export const getDefaultPlayerAccount = () : PlayerAccount => ({
     accountId: v1(),
     player: defaultPlayer,
-    ordersOfBattle: {}
+    ordersOfBattle: {},
+    lastAccessed: new Date()
 });

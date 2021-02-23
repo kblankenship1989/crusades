@@ -1,62 +1,95 @@
 import React from 'react';
-import {FlatList, ListRenderItem} from 'react-native';
-import {Overlay, Text} from 'react-native-elements';
-import {ScrollView} from 'react-native-gesture-handler';
+import {
+    Container,
+    Header,
+    Content,
+    List,
+    ListItem,
+    Left,
+    Body,
+    Right,
+    Thumbnail,
+    Text,
+    Button,
+    Icon,
+    Footer,
+    FooterTab
+} from 'native-base';
 import {ConnectedProps} from 'react-redux';
+import {imageKeyMap} from '../assets/images';
+import {ListView} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
-
+import {RootParamList} from '../navigation/root-param-list';
 import {homeScreenConnector} from './home-screen-connector';
-import {ActionFixedFooterContainer} from '../containers/action-fixed-footer-container';
-import {BackgroundImageListItem} from '../components/background-image-list-item';
-import {LoadingGIF} from '../components/loading';
+import {OrderOfBattle} from '../redux/state/order-of-battle';
 
-export type HomeProps = ConnectedProps<typeof homeScreenConnector> & {
+export type HomeScreenProps = ConnectedProps<typeof homeScreenConnector> & {
     navigation: StackNavigationProp<RootParamList, 'Home'>
 }
 
-export const HomeScreen : React.FC<HomeProps> = ({
-    loadSelectedOrderOfBattle,
-    deleteSelectedOrderOfBattle,
+export const HomeScreen = ({
+    ordersOfBattle,
     createOrderOfBattle,
-    navigation,
-    ordersOfBattle
-}) => {
-    const selectOrderOfBattle = (index: number) : void => {
-        loadSelectedOrderOfBattle(index);
+    loadSelectedOrderOfBattle,
+    deleteOrderOfBattle,
+    navigation
+} : HomeScreenProps) : JSX.Element => {
+    const orderOfBattleList = Object.values(ordersOfBattle).sort((a, b) => b.lastAccessed.getTime() - a.lastAccessed.getTime());
+
+    const dataSource = new ListView.DataSource({
+        rowHasChanged: (r1 : OrderOfBattle, r2 : OrderOfBattle) => r1 !== r2
+    });
+
+    const navigateToOrderOfBattleSummary = (orderOfBattleId : string) : void => {
+        loadSelectedOrderOfBattle(orderOfBattleId);
         navigation.push('OrderOfBattleSummary');
     };
 
-    const addOrderOfBattle = () : void => {
+    const createOrderOfBattleAndNavigate = () : void => {
         createOrderOfBattle();
-
         navigation.push('OrderOfBattleSummary');
     };
-
-    const renderListItem : ListRenderItem<OrderOfBattle> = ({item, index}) => (
-        <BackgroundImageListItem
-            index={index}
-            title={item.title || 'Untitled'}
-            onPress={selectOrderOfBattle}
-            onDelete={deleteSelectedOrderOfBattle}
-            imageKey={item.faction}
-        />
-    );
 
     return (
-        <ActionFixedFooterContainer
-            onAdd={addOrderOfBattle}
-        >
-            {ordersOfBattle.length ?
-                <FlatList
-                    renderItem={renderListItem}
-                    keyExtractor={(orderOfBattle) => orderOfBattle.id.toString()}
-                    data={ordersOfBattle}
+        <Container>
+            <Header />
+            <Content>
+                <List
+                    rightOpenValue={-75}
+                    dataSource={dataSource.cloneWithRows(orderOfBattleList)}
+                    renderRow={(orderOfBattle : OrderOfBattle) =>
+                        <ListItem
+                            avatar
+                            button
+                            onPress={() => navigateToOrderOfBattleSummary(orderOfBattle.id)}
+                            key={orderOfBattle.id}
+                        >
+                            <Left>
+                                <Thumbnail source={imageKeyMap[orderOfBattle.faction]} />
+                            </Left>
+                            <Body>
+                                <Text>{orderOfBattle.title || 'Untitled'}</Text>
+                            </Body>
+                            <Right>
+                                <Text note>{orderOfBattle.lastAccessed.toLocaleDateString()}</Text>
+                            </Right>
+                        </ListItem>}
+                    renderRightHiddenRow={(orderOfBattle: OrderOfBattle) =>
+                        <Button full danger onPress={() => deleteOrderOfBattle(orderOfBattle.id)}>
+                            <Icon active name="trash" />
+                        </Button>}
                 />
-                :
-                <ScrollView>
-                    <Text>{'Click + ADD to create a new Crusade Force'}</Text>
-                </ScrollView>
-            }
-        </ActionFixedFooterContainer>
+            </Content>
+            <Footer>
+                <FooterTab>
+                    <Button
+                        full
+                        onPress={createOrderOfBattleAndNavigate}
+                    >
+                        <Text>Create</Text>
+                    </Button>
+                </FooterTab>
+            </Footer>
+        </Container>
     );
 };

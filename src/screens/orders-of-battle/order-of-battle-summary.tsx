@@ -1,15 +1,15 @@
 import React from 'react';
 import {ScrollView} from 'react-native-gesture-handler';
-import {FactionPicker} from '../components/faction-picker';
-import {RequisitionPointsSelector} from '../components/requisition-points-selector';
-import {TitleInput} from '../components/title-input';
-import {ActionFixedFooterContainer} from '../containers/action-fixed-footer-container';
+import {FactionPicker} from '../../components/faction-picker';
+import {RequisitionPointsSelector} from '../../components/requisition-points-selector';
+import {TitleInput} from '../../components/title-input';
+import {ActionFixedFooterContainer} from '../../containers/action-fixed-footer-container';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {ConnectedProps} from 'react-redux';
 import {orderOfBattleSummaryConnector} from './order-of-battle-summary-connector';
-import {BackgroundImageContainer} from '../containers/background-image-container';
+import {BackgroundImageContainer} from '../../containers/background-image-container';
 import {Divider, Text} from 'react-native-elements';
-import {BattleOutcomes, Factions} from '../enums';
+import {BattleOutcomes, Factions} from '../../enums';
 import {Button} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 

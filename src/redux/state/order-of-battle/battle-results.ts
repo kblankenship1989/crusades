@@ -10,10 +10,10 @@ export type BattleResults = {
     date: Date
 }
 
-export const defaultBattleResults : BattleResults = {
+export const getDefaultBattleResults = () : BattleResults => ({
     id: v1(),
     enemyFaction: Factions.UNALIGNED,
     result: BattleOutcomes.DRAW,
     date: new Date(),
     markedForGreatness: undefined
-};
+});

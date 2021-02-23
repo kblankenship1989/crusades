@@ -1,20 +1,28 @@
 import {connect} from 'react-redux';
 
 import {HomeScreen} from './home-screen';
+import {State} from '../redux/state';
 import {
     createOrderOfBattle,
     loadSelectedOrderOfBattle,
-    deleteSelectedOrderOfBattle
+    deleteOrderOfBattle
 } from '../redux/action-creators/orders-of-battle';
 
-const mapStateToProps = (state: State) => ({
-    ordersOfBattle: state.ordersOfBattle
-});
+const mapStateToProps = (state: State) => {
+    const {
+        accounts,
+        selectedAccountId
+    } = state;
+
+    return {
+        ordersOfBattle: accounts[selectedAccountId as string].ordersOfBattle
+    };
+};
 
 const mapDispatchToProp = {
     createOrderOfBattle,
     loadSelectedOrderOfBattle,
-    deleteSelectedOrderOfBattle
+    deleteOrderOfBattle
 };
 
 export const homeScreenConnector = connect(mapStateToProps, mapDispatchToProp);
