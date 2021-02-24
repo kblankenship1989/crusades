@@ -18,7 +18,7 @@ import {
 import {ConnectedProps} from 'react-redux';
 import {loginConnector} from './login-connector';
 import {imageKeyMap} from '../../assets/images';
-import {Player, getPlayerName} from '../../redux/state/player';
+import {getPlayerName} from '../../redux/state/player';
 import {ListView} from 'react-native';
 import {PlayerAccount} from '../../redux/state/player-account';
 import {StackNavigationProp} from '@react-navigation/stack';

@@ -1,4 +1,4 @@
-export const enum BattlefieldRoles {
+export enum BattlefieldRoles {
     HQ = 'HQ',
     TROOPS = 'Troops',
     ELITES = 'Elites',

@@ -19,12 +19,12 @@ import {ConnectedProps} from 'react-redux';
 import {imageKeyMap} from '../../assets/images';
 import {ListView} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {RootParamList} from '../../navigation/root-param-list';
+import {RootParamList, Screens} from '../../navigation/root-param-list';
 import {ordersOfBattleListConnector} from './orders-of-battle-list-connector';
 import {OrderOfBattle} from '../../redux/state/order-of-battle';
 
 export type OrdersOfBattleListProps = ConnectedProps<typeof ordersOfBattleListConnector> & {
-    navigation: StackNavigationProp<RootParamList, 'OrdersOfBattle'>
+    navigation: StackNavigationProp<RootParamList, Screens.ORDERS_OF_BATTLE>
 }
 
 export const OrdersOfBattleList = ({
@@ -42,12 +42,12 @@ export const OrdersOfBattleList = ({
 
     const navigateToOrderOfBattleSummary = (orderOfBattleId : string) : void => {
         loadSelectedOrderOfBattle(orderOfBattleId);
-        navigation.push('OrderOfBattleSummary');
+        // navigation.push(Screens.ORDER_OF_BATTLE_SUMMARY);
     };
 
     const createOrderOfBattleAndNavigate = () : void => {
         createOrderOfBattle();
-        navigation.push('OrderOfBattleSummary');
+        // navigation.push(Screens.ORDER_OF_BATTLE_SUMMARY);
     };
 
     return (

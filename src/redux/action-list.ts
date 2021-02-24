@@ -1,4 +1,4 @@
-export const enum AvailableActions {
+export enum AvailableActions {
     CREATE_ACCOUNT = 'CREATE_ACCOUNT',
     UPDATE_ACCOUNT = 'UPDATE_ACCOUNT',
     DELETE_ACCOUNT = 'DELETE_ACCOUNT',

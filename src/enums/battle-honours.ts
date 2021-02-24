@@ -1,3 +1,3 @@
-export const enum BattleHonours {
+export enum BattleHonours {
     SOME_HONOR = 'SOME_HONOR'
 }

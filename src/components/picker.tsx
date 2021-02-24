@@ -29,8 +29,8 @@ export const Picker : React.FC<PickerProps> = ({
                 iosIcon={<Icon name="arrow-down" />}
                 style={{width: undefined}}
                 placeholder={placeholder || 'Select Faction'}
-                placeholderStyle={{color: '#bfc6ea'}}
-                placeholderIconColor="#007aff"
+                //placeholderStyle={{color: '#bfc6ea'}}
+                //placeholderIconColor="#007aff"
                 selectedValue={selectedValue}
                 onValueChange={onChange}
             >

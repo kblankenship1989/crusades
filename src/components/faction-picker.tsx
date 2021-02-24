@@ -6,7 +6,6 @@ import {Picker} from './picker';
 
 export type FactionPickerProps = {
     selectedFaction: Factions,
-    title?: string
     onChange: (faction: Factions) => void
 }
 
@@ -20,7 +19,7 @@ const items : Item[] = enumKeys(Factions).map((key) => ({
     value: Factions[key]
 }));
 
-export const FactionPicker : React.FC<FactionPickerProps> = ({selectedFaction, onChange, title}) => {
+export const FactionPicker : React.FC<FactionPickerProps> = ({selectedFaction, onChange}) => {
     const onValueChange = (item : React.ReactText) : void => {
         if (isEnumKey(Factions)(item)) {
             onChange(item);
