@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {Icon, Button, Divider} from 'react-native-elements';
+import {Icon, Button} from 'react-native-elements';
 
 type RequisitionPointsSelectorProps = {
     currentPoints: number

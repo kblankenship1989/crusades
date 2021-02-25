@@ -19,7 +19,6 @@ import {ConnectedProps} from 'react-redux';
 import {loginConnector} from './login-connector';
 import {imageKeyMap} from '../../assets/images';
 import {getPlayerName} from '../../redux/state/player';
-import {ListView} from 'react-native';
 import {PlayerAccount} from '../../redux/state/player-account';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList, Screens} from '../../navigation/root-param-list';
@@ -36,10 +35,6 @@ export const Login = ({
     navigation
 } : LoginProps) : JSX.Element => {
     const accountList = Object.values(accounts).sort((a, b) => b.lastAccessed.getTime() - a.lastAccessed.getTime());
-
-    const dataSource = new ListView.DataSource({
-        rowHasChanged: (r1 : PlayerAccount, r2 : PlayerAccount) => r1 !== r2
-    });
 
     const navigateToAccount = (accountId : string) : void => {
         loadSelectedAccount(accountId);
@@ -63,7 +58,7 @@ export const Login = ({
                 <List
                     leftOpenValue={75}
                     rightOpenValue={-75}
-                    dataSource={dataSource.cloneWithRows(accountList)}
+                    dataArray={accountList}
                     renderRow={(account : PlayerAccount) =>
                         <ListItem
                             avatar

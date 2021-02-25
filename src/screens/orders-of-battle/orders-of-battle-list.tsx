@@ -17,7 +17,6 @@ import {
 } from 'native-base';
 import {ConnectedProps} from 'react-redux';
 import {imageKeyMap} from '../../assets/images';
-import {ListView} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList, Screens} from '../../navigation/root-param-list';
 import {ordersOfBattleListConnector} from './orders-of-battle-list-connector';
@@ -36,10 +35,6 @@ export const OrdersOfBattleList = ({
 } : OrdersOfBattleListProps) : JSX.Element => {
     const orderOfBattleList = Object.values(ordersOfBattle).sort((a, b) => b.lastAccessed.getTime() - a.lastAccessed.getTime());
 
-    const dataSource = new ListView.DataSource({
-        rowHasChanged: (r1 : OrderOfBattle, r2 : OrderOfBattle) => r1 !== r2
-    });
-
     const navigateToOrderOfBattleSummary = (orderOfBattleId : string) : void => {
         loadSelectedOrderOfBattle(orderOfBattleId);
         // navigation.push(Screens.ORDER_OF_BATTLE_SUMMARY);
@@ -56,7 +51,7 @@ export const OrdersOfBattleList = ({
             <Content>
                 <List
                     rightOpenValue={-75}
-                    dataSource={dataSource.cloneWithRows(orderOfBattleList)}
+                    dataArray={orderOfBattleList}
                     renderRow={(orderOfBattle : OrderOfBattle) =>
                         <ListItem
                             avatar

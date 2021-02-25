@@ -3,10 +3,12 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import React from 'react';
 import {Button, View} from 'react-native';
 import {Text} from 'react-native-elements';
-import {BattleOutcomes} from '../types/enums';
+import {BattleOutcomes} from '../enums';
+import {RootParamList, Screens} from '../navigation/root-param-list';
+import {BattleResults} from '../redux/state/order-of-battle/battle-results';
 
 export type BattleSummaryButtonProps = {
-    battleTally: BattleResults[]
+    battleTally: Record<string, BattleResults>
 }
 
 type WinLoseDraw = 'WIN' | 'LOSE' | 'DRAW';
@@ -22,16 +24,16 @@ const WinLoseDrawMap : Record<BattleOutcomes, WinLoseDraw> = {
 };
 
 export const BattleSummaryButton : React.FC<BattleSummaryButtonProps> = ({battleTally}) : JSX.Element => {
-    const navigation : StackNavigationProp<RootParamList, 'OrderOfBattleSummary'> = useNavigation();
+    const navigation : StackNavigationProp<RootParamList, Screens.ORDER_OF_BATTLE_SUMMARY> = useNavigation();
 
     const navigateToBattleSummary = () : void => {
-        navigation.push('BattleSummary', {
+        navigation.push(Screens.BATTLE_SUMMARY, {
             battleResults: battleTally,
         });
     };
 
     const getWinLoseDrawCounts = () : string => {
-        const wldCounts : Record<WinLoseDraw, number> = battleTally.reduce((counts, battleResult) => {
+        const wldCounts : Record<WinLoseDraw, number> = Object.values(battleTally).reduce((counts, battleResult) => {
             counts[WinLoseDrawMap[battleResult.result]]++;
 
             return counts;

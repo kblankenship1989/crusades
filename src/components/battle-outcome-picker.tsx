@@ -29,10 +29,9 @@ export const BattleOutcomePicker : React.FC<BattleOutcomePickerProps> = ({select
     return (
         <Picker
             selectedValue={selectedBattleOutcome}
-            prompt={'Select Outcome'}
+            placeholder={'Select Outcome'}
             items={items}
             onChange={onValueChange}
-            title={'Battle Outcome'}
         />
     );
 };
