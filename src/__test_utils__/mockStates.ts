@@ -1,4 +1,4 @@
-import {defaultCrusadeCard} from '../redux/state/crusade-card';
+import {defaultCrusadeCard} from '../redux/state/order-of-battle/crusade-card';
 import {defaultOrderOfBattle} from '../redux/state/order-of-battle';
 import {defaultPlayer} from '../redux/state/player';
 

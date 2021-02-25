@@ -2,15 +2,16 @@ import {persistStore, Persistor, PersistConfig, persistReducer} from 'redux-pers
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {configureStore} from './store';
 import {rootReducer} from './reducers';
-import {Store} from 'redux';
+import {Store, AnyAction} from 'redux';
+import {State} from './state';
 
-const config : PersistConfig<State, AvailableActions> = {
+const config : PersistConfig<State, AnyAction> = {
     key: 'root',
     storage: AsyncStorage,
     debug: true,
     whitelist: [
-        'player',
-        'ordersOfBattle'
+        'accounts',
+        'selectedAccount'
     ]
 };
 
@@ -20,7 +21,7 @@ type AppStore = {
 }
 
 
-export const persistedRootReducer = persistReducer<State, AvailableActions>(config, rootReducer);
+export const persistedRootReducer = persistReducer<State, AnyAction>(config, rootReducer);
 
 
 export const configurePersistor = () : AppStore => {

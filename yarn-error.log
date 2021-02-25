@@ -5,13 +5,13 @@ PATH:
   C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Blankenship\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files (x86)\WinSCP;C:\Program Files (x86)\Notepad++;C:\Program Files\nodejs;C:\Program Files\PowerShell\6;C:\Program Files (x86)\Yarn\bin;C:\MinGW\bin;C:\Program Files (x86)\IVI Foundation\VISA\WinNT\Bin;C:\Program Files\PuTTY;C:\Program Files\Git\cmd;C:\Users\Blankenship\AppData\Local\Programs\Python\Python38\Scripts;C:\Users\Blankenship\AppData\Local\Programs\Python\Python38;C:\Users\Blankenship\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Blankenship\bin;C:\Users\Blankenship\AppData\Local\Microsoft\WindowsApps;C:\Users\Blankenship\AppData\Roaming\npm;C:\Users\Blankenship\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Blankenship\AppData\Local\Yarn\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl;C:\Users\Blankenship\AppData\Roaming\npm
 
 Yarn version: 
-  1.16.0
+  1.17.3
 
 Node version: 
   14.0.0
 
 Platform: 
-  win32 x64
+  darwin x64
 
 Trace: 
   Error: https://registry.yarnpkg.com/@types%2fnative-base: Not found

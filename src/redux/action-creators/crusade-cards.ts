@@ -1,125 +1,110 @@
-import {ActionList} from '../../types/enums';
-import {defaultCrusadeCard} from '../state/crusade-card';
+import {AppThunk} from './../store';
+import {Action} from 'redux';
+import {CrusadeCardActions} from '../action-list';
+import {CrusadeCard, getDefaultCrusadeCard} from '../state/order-of-battle/crusade-card';
 
-export const saveCurrentCrusadeCard = (updates : Partial<CrusadeCard>) : AppThunk => (dispatch, getState) => {
+export type CreateCrusadeCardAction = Action<CrusadeCardActions.CREATE_CRUSADE_CARD> & {
+    payload: {
+        newCrusadeCard: CrusadeCard,
+        selectedCrusadeCardId: string,
+        selectedOrderOfBattleId: string | null,
+        selectedAccountId: string | null
+    }
+}
+
+export type UpdateCrusdaeCArdAction = Action<CrusadeCardActions.UPDATE_CRUSADE_CARD> & {
+    payload: {
+        updates: Partial<CrusadeCard>,
+        selectedCrusadeCardId: string,
+        selectedOrderOfBattleId: string | null,
+        selectedAccountId: string | null
+    }
+}
+
+export type DeleteCrusdaeCardAction = Action<CrusadeCardActions.DELETE_CRUSADE_CARD> & {
+    payload: {
+        crusadeCardId: string,
+        selectedOrderOfBattleId: string | null,
+        selectedAccountId: string | null
+    }
+}
+
+export type SelectCrusadeCardAction = Action<CrusadeCardActions.SELECT_CRUSADE_CARD> & {
+    payload: {
+        selectedCrusadeCardId: string | null,
+        selectedOrderOfBattleId: string | null,
+        selectedAccountId: string | null
+    }
+}
+
+export const createCrusadeCard = () : AppThunk => (dispatch, getState) : void => {
     const {
-        ordersOfBattle,
-        currentCrusadeCardIndex
+        selectedAccountId,
+        selectedOrderOfBattleId
     } = getState();
+    const newCrusadeCard = getDefaultCrusadeCard();
 
-    const newOrdersOfBattle = [...ordersOfBattle];
-    const crusadeCards = ordersOfBattle[0].crusadeCards;
-    crusadeCards[currentCrusadeCardIndex] = {
-        ...crusadeCards[currentCrusadeCardIndex],
-        ...updates
-    };
-
-    const ordersOfBattleAction : SetOrdersOfBattleAction = {
-        type: ActionList.SET_ORDERS_OF_BATTLE,
+    const action : CreateCrusadeCardAction = {
+        type: CrusadeCardActions.CREATE_CRUSADE_CARD,
         payload: {
-            ordersOfBattle: newOrdersOfBattle
+            newCrusadeCard: newCrusadeCard,
+            selectedCrusadeCardId: newCrusadeCard.id,
+            selectedOrderOfBattleId,
+            selectedAccountId
         }
     };
 
-    dispatch(ordersOfBattleAction);
+    dispatch(action);
 };
 
-// export const addCrusadeCard = () : AppThunk => (dispatch, getState) => {
-//     const {
-//         currentOrderOfBattle,
-//         ordersOfBattle
-//     } = getState();
-//     const index = currentOrderOfBattle.crusadeCards.length;
-//     const crusadeCards = [
-//         ...currentOrderOfBattle.crusadeCards,
-//         defaultCrusadeCard
-//     ];
+export const loadSelectedCrusadeCard = (selectedCrusadeCardId : string | null) : AppThunk => (dispatch, getState) : void => {
+    const {
+        selectedAccountId,
+        selectedOrderOfBattleId
+    } = getState();
+    const action : SelectCrusadeCardAction = {
+        type: CrusadeCardActions.SELECT_CRUSADE_CARD,
+        payload: {
+            selectedCrusadeCardId,
+            selectedOrderOfBattleId,
+            selectedAccountId
+        }
+    };
 
-//     const newCurrentOrderOfBattle = {
-//         ...currentOrderOfBattle,
-//         crusadeCards
-//     };
+    dispatch(action);
+};
 
-//     const newOrdersOfBattle = [...ordersOfBattle];
-//     newOrdersOfBattle[0] = newCurrentOrderOfBattle;
+export const deleteCrusadeCard = (crusadeCardId : string) : AppThunk => (dispatch, getState) : void => {
+    const {
+        selectedAccountId,
+        selectedOrderOfBattleId
+    } = getState();
+    const action: DeleteCrusdaeCardAction = {
+        type: CrusadeCardActions.DELETE_CRUSADE_CARD,
+        payload: {
+            crusadeCardId,
+            selectedOrderOfBattleId,
+            selectedAccountId
+        }
+    };
 
-//     const currentCrusadeCardAction : SetCurrentCursadeCardAction = {
-//         type: SET_CURRENT_CRUSADE_CARD,
-//         payload: {
-//             currentCrusadeCard: {
-//                 index,
-//                 ...defaultCrusadeCard
-//             }
-//         }
-//     };
-//     const currentOrderOfBattleAction : SetCurrentOrderOfBattleAction = {
-//         type: SET_CURRENT_ORDER_OF_BATTLE,
-//         payload: {
-//             currentOrderOfBattle: newCurrentOrderOfBattle
-//         }
-//     };
-//     const ordersOfBattleAction : SetOrdersOfBattleAction = {
-//         type: SET_ORDERS_OF_BATTLE,
-//         payload: {
-//             ordersOfBattle: newOrdersOfBattle
-//         }
-//     };
+    dispatch(action);
+};
 
-//     dispatch(currentCrusadeCardAction);
-//     dispatch(currentOrderOfBattleAction);
-//     dispatch(ordersOfBattleAction);
-// };
+export const saveCrusadeCard = (selectedCrusadeCardId: string, updates : Partial<CrusadeCard>) : AppThunk => (dispatch, getState) : void => {
+    const {
+        selectedAccountId,
+        selectedOrderOfBattleId
+    } = getState();
+    const action : UpdateCrusdaeCArdAction = {
+        type: CrusadeCardActions.UPDATE_CRUSADE_CARD,
+        payload: {
+            updates,
+            selectedCrusadeCardId,
+            selectedOrderOfBattleId,
+            selectedAccountId
+        }
+    };
 
-// export const deleteCrusadeCard = (indexToDelete : number) : AppThunk => (dispatch, getState) => {
-//     const {
-//         currentOrderOfBattle,
-//         ordersOfBattle
-//     } = getState();
-//     const crusadeCards = [
-//         ...currentOrderOfBattle.crusadeCards
-//     ];
-
-//     crusadeCards.splice(indexToDelete, 1);
-
-//     const newCurrentOrderOfBattle = {
-//         ...currentOrderOfBattle,
-//         crusadeCards
-//     };
-
-//     const newOrdersOfBattle = [...ordersOfBattle];
-//     newOrdersOfBattle[0] = newCurrentOrderOfBattle;
-
-//     const currentOrderOfBattleAction : SetCurrentOrderOfBattleAction = {
-//         type: SET_CURRENT_ORDER_OF_BATTLE,
-//         payload: {
-//             currentOrderOfBattle: newCurrentOrderOfBattle
-//         }
-//     };
-//     const ordersOfBattleAction : SetOrdersOfBattleAction = {
-//         type: SET_ORDERS_OF_BATTLE,
-//         payload: {
-//             ordersOfBattle: newOrdersOfBattle
-//         }
-//     };
-
-//     dispatch(currentOrderOfBattleAction);
-//     dispatch(ordersOfBattleAction);
-// };
-
-// export const loadCurrentCrusadeCard = (selectedIndex : number) : AppThunk => (dispatch, getState) => {
-//     const {
-//         currentOrderOfBattle : {crusadeCards}
-//     } = getState();
-
-//     const action : SetCurrentCursadeCardAction = {
-//         type: SET_CURRENT_CRUSADE_CARD,
-//         payload: {
-//             currentCrusadeCard: {
-//                 index: selectedIndex,
-//                 ...[...crusadeCards][selectedIndex]
-//             }
-//         }
-//     };
-
-//     dispatch(action);
-// };
+    dispatch(action);
+};

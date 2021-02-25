@@ -1,12 +1,14 @@
-import {combineReducers} from 'redux';
+import {combineReducers, AnyAction, Reducer} from 'redux';
 
-import {player} from './player';
-import {ordersOfBattle} from './orders-of-battle';
-import {Reducer} from 'redux';
-import {currentCrusadeCardIndex} from './current-crusade-card-index';
+import {selectedOrderOfBattleId} from './selected-order-of-battle-id';
+import {selectedCrusadeCardId} from './selected-crusade-card-id';
+import {selectedAccountId} from './selected-account-id';
+import {accounts} from './accounts';
+import {State} from '../state';
 
-export const rootReducer : Reducer<State, AvailableActions> = combineReducers({
-    player,
-    ordersOfBattle,
-    currentCrusadeCardIndex
+export const rootReducer : Reducer<State, AnyAction> = combineReducers({
+    accounts,
+    selectedAccountId,
+    selectedCrusadeCardId,
+    selectedOrderOfBattleId
 });

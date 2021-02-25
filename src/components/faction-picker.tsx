@@ -1,12 +1,11 @@
 import React from 'react';
 import {enumKeys, isEnumKey} from '../helpers/enum-helpers';
-import {Factions} from '../types/enums';
+import {Factions} from '../enums';
 
 import {Picker} from './picker';
 
 export type FactionPickerProps = {
     selectedFaction: Factions,
-    title?: string
     onChange: (faction: Factions) => void
 }
 
@@ -20,7 +19,7 @@ const items : Item[] = enumKeys(Factions).map((key) => ({
     value: Factions[key]
 }));
 
-export const FactionPicker : React.FC<FactionPickerProps> = ({selectedFaction, onChange, title}) => {
+export const FactionPicker : React.FC<FactionPickerProps> = ({selectedFaction, onChange}) => {
     const onValueChange = (item : React.ReactText) : void => {
         if (isEnumKey(Factions)(item)) {
             onChange(item);
@@ -30,10 +29,8 @@ export const FactionPicker : React.FC<FactionPickerProps> = ({selectedFaction, o
     return (
         <Picker
             selectedValue={selectedFaction}
-            prompt={title || 'Select Faction'}
             items={items}
             onChange={onValueChange}
-            title={'Faction'}
         />
     );
 };

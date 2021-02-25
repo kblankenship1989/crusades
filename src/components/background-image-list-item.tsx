@@ -1,7 +1,7 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet, Alert} from 'react-native';
 import {BackgroundImageContainer} from '../containers/background-image-container';
-import {BattlefieldRoles, Factions} from '../types/enums';
+import {BattlefieldRoles, Factions} from '../enums';
 
 type BackgroundImageListItemProps = {
     onDelete?: (index: number) => void,

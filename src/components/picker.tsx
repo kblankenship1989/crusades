@@ -1,7 +1,7 @@
 import React from 'react';
-import {Picker as RNPPicker} from '@react-native-picker/picker';
 import {View} from 'react-native';
 import {Text} from 'react-native-elements';
+import {Item, Picker as NBPicker, Icon} from 'native-base';
 
 type PickerItem = {
     key: string,
@@ -12,36 +12,37 @@ type PickerItem = {
 export type PickerProps = {
     selectedValue: string,
     onChange: (value: React.ReactText, index: number) => void,
-    title: string,
     items: PickerItem[],
-    prompt: string
+    placeholder?: string
 }
 
 export const Picker : React.FC<PickerProps> = ({
     items,
     selectedValue,
     onChange,
-    title,
-    prompt
+    placeholder
 }) => {
     return (
-        <View>
-            <Text h3>{title}</Text>
-            <RNPPicker
+        <Item picker>
+            <NBPicker
+                mode="dropdown"
+                iosIcon={<Icon name="arrow-down" />}
+                style={{width: undefined}}
+                placeholder={placeholder || 'Select Faction'}
+                //placeholderStyle={{color: '#bfc6ea'}}
+                //placeholderIconColor="#007aff"
                 selectedValue={selectedValue}
-                mode={'dialog'}
-                prompt={prompt}
                 onValueChange={onChange}
             >
-                {items.map((item) => (
-                    <RNPPicker.Item
+                {items.map((item) => {
+                    <NBPicker.Item
                         label={item.label || item.value}
                         value={item.value}
                         key={item.key}
-                    />
-                ))}
-            </RNPPicker>
-        </View>
+                    />;
+                })}
+            </NBPicker>
+        </Item>
     );
 };
 
