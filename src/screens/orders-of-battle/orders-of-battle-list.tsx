@@ -33,7 +33,7 @@ export const OrdersOfBattleList = ({
     deleteOrderOfBattle,
     navigation
 } : OrdersOfBattleListProps) : JSX.Element => {
-    const orderOfBattleList = Object.values(ordersOfBattle).sort((a, b) => b.lastAccessed.getTime() - a.lastAccessed.getTime());
+    const orderOfBattleList = Object.values(ordersOfBattle).sort((a, b) => b.lastAccessed - a.lastAccessed);
 
     const navigateToOrderOfBattleSummary = (orderOfBattleId : string) : void => {
         loadSelectedOrderOfBattle(orderOfBattleId);
@@ -67,7 +67,7 @@ export const OrdersOfBattleList = ({
                                 <Text>{orderOfBattle.title || 'Untitled'}</Text>
                             </Body>
                             <Right>
-                                <Text note>{orderOfBattle.lastAccessed.toLocaleDateString()}</Text>
+                                <Text note>{new Date(orderOfBattle.lastAccessed).toLocaleDateString()}</Text>
                             </Right>
                         </ListItem>}
                     renderRightHiddenRow={(orderOfBattle: OrderOfBattle) =>

@@ -12,7 +12,7 @@ export type OrderOfBattle = {
     battleTally: Record<string, BattleResults>,
     supplyLimit: number,
     crusadeCards: Record<string, CrusadeCard>,
-    lastAccessed: Date
+    lastAccessed: number
     // goals?: string,
     // notableVictories?: string[]
 }
@@ -24,5 +24,5 @@ export const getDefaultOrderOfBattle = () : OrderOfBattle => ({
     battleTally: {},
     supplyLimit: 50,
     crusadeCards: {},
-    lastAccessed: new Date()
+    lastAccessed: new Date().getTime()
 });

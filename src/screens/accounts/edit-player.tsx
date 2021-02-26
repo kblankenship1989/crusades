@@ -16,6 +16,8 @@ type EditPlayerState = Player & {
     isDirty: boolean
 }
 
+type StringFields = 'firstName' | 'lastName' | 'middleName' | 'foo'
+
 export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState> {
     constructor(props:EditPlayerProps) {
         super(props);
@@ -25,11 +27,12 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
         };
     }
 
-    editFirstName = (firstName: string) : void => {
-        this.setState({
-            firstName,
+    editStringField = (fieldName : StringFields) => (value: string) : void => {
+        this.setState(prevState => ({
+            ...prevState,
+            [fieldName]: value,
             isDirty: true
-        });
+        }));
     }
 
     save = () : void => {
@@ -59,8 +62,22 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
                         <Item floatingLabel>
                             <Label>First Name</Label>
                             <Input
-                                onChangeText={this.editFirstName}
+                                onChangeText={this.editStringField('firstName').bind(this)}
                                 value={this.state.firstName}
+                            />
+                        </Item>
+                        <Item floatingLabel>
+                            <Label>Middle Name</Label>
+                            <Input
+                                onChangeText={this.editStringField('middleName').bind(this)}
+                                value={this.state.middleName}
+                            />
+                        </Item>
+                        <Item floatingLabel>
+                            <Label>Middle Name</Label>
+                            <Input
+                                onChangeText={this.editStringField('lastName').bind(this)}
+                                value={this.state.lastName}
                             />
                         </Item>
                     </Form>

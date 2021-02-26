@@ -7,6 +7,7 @@ import {ConnectedProps} from 'react-redux';
 import {mainNavigatorConnector} from './main-navigator-connector';
 import {LoginConnector} from '../screens/accounts/login-connector';
 import {EditPlayerConnector} from '../screens/accounts/edit-player-connector';
+import {AccountSummaryConnector} from '../screens/accounts/account-summary-connector';
 
 const MainStack = createStackNavigator<RootParamList>();
 
@@ -21,6 +22,7 @@ export const MainNavigator = ({selectedAccountId} : MainNavigatorProps) : JSX.El
                 {/* <MainStack.Screen name={Screens.BATTLE_SUMMARY} component={BattleSummary}/> */}
                 <MainStack.Screen name={Screens.LOGIN} component={LoginConnector}/>
                 <MainStack.Screen name={Screens.EDIT_PLAYER} component={EditPlayerConnector}/>
+                <MainStack.Screen name={Screens.ACCOUNT_SUMMARY} component={AccountSummaryConnector}/>
             </MainStack.Navigator>
         </NavigationContainer>
     );

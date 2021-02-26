@@ -2,8 +2,6 @@ import React from 'react';
 import {
     Container,
     Header,
-    Content,
-    List,
     ListItem,
     Left,
     Body,
@@ -14,7 +12,7 @@ import {
     Icon,
     Footer,
     FooterTab,
-    Row
+    View
 } from 'native-base';
 import {ConnectedProps} from 'react-redux';
 import {loginConnector} from './login-connector';
@@ -24,7 +22,7 @@ import {PlayerAccount} from '../../redux/state/player-account';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList, Screens} from '../../navigation/root-param-list';
 import {SwipeListView} from 'react-native-swipe-list-view';
-import {ListRenderItemInfo} from 'react-native';
+import {ListRenderItemInfo, ImageBackground} from 'react-native';
 
 export type LoginProps = ConnectedProps<typeof loginConnector> & {
     navigation: StackNavigationProp<RootParamList, Screens.LOGIN>
@@ -37,7 +35,7 @@ export const Login = ({
     deleteAccount,
     navigation
 } : LoginProps) : JSX.Element => {
-    const accountList = Object.values(accounts).sort((a, b) => new Date(b.lastAccessed).getTime() - new Date(a.lastAccessed).getTime());
+    const accountList = Object.values(accounts).sort((a, b) => b.lastAccessed - a.lastAccessed);
 
     const navigateToAccount = (accountId : string) : void => {
         loadSelectedAccount(accountId);
@@ -57,39 +55,39 @@ export const Login = ({
     return (
         <Container>
             <Header />
-            <Content scrollEnabled={false}>
-                <SwipeListView
-                    leftOpenValue={75}
-                    rightOpenValue={-75}
-                    data={accountList}
-                    keyExtractor={(account : PlayerAccount) => account.accountId}
-                    renderItem={(rowData: ListRenderItemInfo<PlayerAccount>) : JSX.Element =>
-                        <ListItem
-                            avatar
-                            button
-                            onPress={() => navigateToOrdersOfBattle(rowData.item.accountId)}
-                        >
-                            <Left>
-                                <Thumbnail source={imageKeyMap[rowData.item.player.preferredFaction]} />
-                            </Left>
+            <SwipeListView
+                leftOpenValue={75}
+                rightOpenValue={-75}
+                data={accountList}
+                keyExtractor={(account : PlayerAccount) => account.accountId}
+                renderItem={(rowData: ListRenderItemInfo<PlayerAccount>) : JSX.Element =>
+                    <ListItem
+                        button
+                        onPress={() => navigateToOrdersOfBattle(rowData.item.accountId)}
+                    >
+                        <ImageBackground source={imageKeyMap[rowData.item.player.preferredFaction]}>
                             <Body>
                                 <Text>{getPlayerName(rowData.item.player)}</Text>
                             </Body>
                             <Right>
-                                <Text note>{rowData.item.lastAccessed.toLocaleDateString()}</Text>
+                                <Text note>{new Date(rowData.item.lastAccessed).toLocaleDateString()}</Text>
                             </Right>
-                        </ListItem>}
-                    renderHiddenItem={(rowData: ListRenderItemInfo<PlayerAccount>) =>
-                        <Row>
+                        </ImageBackground>
+                    </ListItem>}
+                renderHiddenItem={(rowData: ListRenderItemInfo<PlayerAccount>) =>
+                    <View>
+                        <Left>
                             <Button full onPress={() => navigateToAccount(rowData.item.accountId)}>
                                 <Icon active name="information-circle" />
                             </Button>
+                        </Left>
+                        <Right>
                             <Button full danger onPress={() => deleteAccount(rowData.item.accountId)}>
                                 <Icon active name="trash" />
                             </Button>
-                        </Row>}
-                />
-            </Content>
+                        </Right>
+                    </View>}
+            />
             <Footer>
                 <FooterTab>
                     <Button

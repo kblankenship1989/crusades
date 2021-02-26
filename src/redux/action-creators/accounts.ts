@@ -25,7 +25,7 @@ export type DeleteAccountAction = Action<AvailableActions.DELETE_ACCOUNT> & {
 
 export type SelectAccountAction = Action<AvailableActions.SELECT_ACCOUNT> & {
     payload: {
-        lastAccessed: Date,
+        lastAccessed: number,
         selectedAccountId: string | null
     }
 }
@@ -48,7 +48,7 @@ export const loadSelectedAccount = (selectedAccountId : string | null) : AppThun
     const action : SelectAccountAction = {
         type: AvailableActions.SELECT_ACCOUNT,
         payload: {
-            lastAccessed: new Date(),
+            lastAccessed: new Date().getTime(),
             selectedAccountId
         }
     };

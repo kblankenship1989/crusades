@@ -29,7 +29,7 @@ export type DeleteOrderOfBattleAction = Action<AvailableActions.DELETE_ORDER_OF_
 export type SelectOrderOfBattleAction = Action<AvailableActions.SELECT_ORDER_OF_BATTLE> & {
     payload: {
         selectedOrderOfBattleId: string | null,
-        lastAccessed: Date,
+        lastAccessed: number,
         selectedAccountId: string | null
     }
 }
@@ -60,7 +60,7 @@ export const loadSelectedOrderOfBattle = (selectedOrderOfBattleId : string | nul
         type: AvailableActions.SELECT_ORDER_OF_BATTLE,
         payload: {
             selectedOrderOfBattleId,
-            lastAccessed: new Date(),
+            lastAccessed: new Date().getTime(),
             selectedAccountId
         }
     };

@@ -6,12 +6,12 @@ export type PlayerAccount = {
     accountId: string,
     player: Player,
     ordersOfBattle: Record<string, OrderOfBattle>,
-    lastAccessed: Date
+    lastAccessed: number
 };
 
 export const getDefaultPlayerAccount = () : PlayerAccount => ({
     accountId: v1(),
     player: defaultPlayer,
     ordersOfBattle: {},
-    lastAccessed: new Date()
+    lastAccessed: new Date().getTime()
 });
