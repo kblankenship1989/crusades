@@ -52,6 +52,7 @@ export const OrdersOfBattleList = ({
                 <List
                     rightOpenValue={-75}
                     dataArray={orderOfBattleList}
+                    keyExtractor={(orderOfBattle : OrderOfBattle) => orderOfBattle.id}
                     renderRow={(orderOfBattle : OrderOfBattle) =>
                         <ListItem
                             avatar

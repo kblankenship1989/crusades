@@ -10,8 +10,8 @@ const config : PersistConfig<State, AnyAction> = {
     storage: AsyncStorage,
     debug: true,
     whitelist: [
-        'accounts',
-        'selectedAccount'
+        // 'accounts',
+        // 'selectedAccountId'
     ]
 };
 

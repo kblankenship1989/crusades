@@ -1,18 +1,18 @@
 import React from 'react';
-import {Container, Header, Content, Form, Footer, FooterTab, Button, Text, Item} from 'native-base';
-import {PlayerAccount} from '../../redux/state/player-account';
+import {Container, Header, Content, Form, Footer, FooterTab, Button, Text, Item, Label, Input} from 'native-base';
 import {ConnectedProps} from 'react-redux';
 import {editPlayerConnector} from './edit-player-connector';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList, Screens} from '../../navigation/root-param-list';
 import {RouteProp} from '@react-navigation/native';
+import {Player} from '../../redux/state/player';
 
 export type EditPlayerProps = ConnectedProps<typeof editPlayerConnector> & {
     navigation: StackNavigationProp<RootParamList, Screens.EDIT_PLAYER>,
     route: RouteProp<RootParamList, Screens.EDIT_PLAYER>
 }
 
-type EditPlayerState = Partial<PlayerAccount> & {
+type EditPlayerState = Player & {
     isDirty: boolean
 }
 
@@ -20,15 +20,22 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
     constructor(props:EditPlayerProps) {
         super(props);
         this.state = {
-            player: props.player,
+            ...props.player,
             isDirty: props.route.params.isNew
         };
+    }
+
+    editFirstName = (firstName: string) : void => {
+        this.setState({
+            firstName,
+            isDirty: true
+        });
     }
 
     save = () : void => {
         const {
             isDirty,
-            player
+            ...player
         } = this.state;
         if (isDirty) {
             this.props.saveAccount(this.props.selectedAccountId, {player});
@@ -49,8 +56,12 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
                 <Header/>
                 <Content>
                     <Form>
-                        <Item>
-
+                        <Item floatingLabel>
+                            <Label>First Name</Label>
+                            <Input
+                                onChangeText={this.editFirstName}
+                                value={this.state.firstName}
+                            />
                         </Item>
                     </Form>
                 </Content>
