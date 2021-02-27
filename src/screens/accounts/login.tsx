@@ -65,14 +65,12 @@ export const Login = ({
                         button
                         onPress={() => navigateToOrdersOfBattle(rowData.item.accountId)}
                     >
-                        <ImageBackground source={imageKeyMap[rowData.item.player.preferredFaction]}>
-                            <Body>
-                                <Text>{getPlayerName(rowData.item.player)}</Text>
-                            </Body>
-                            <Right>
-                                <Text note>{new Date(rowData.item.lastAccessed).toLocaleDateString()}</Text>
-                            </Right>
-                        </ImageBackground>
+                        <Body>
+                            <Text>{getPlayerName(rowData.item.player)}</Text>
+                        </Body>
+                        <Right>
+                            <Text note>{new Date(rowData.item.lastAccessed).toLocaleDateString()}</Text>
+                        </Right>
                     </ListItem>}
                 renderHiddenItem={(rowData: ListRenderItemInfo<PlayerAccount>) =>
                     <View>

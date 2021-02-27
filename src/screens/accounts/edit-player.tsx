@@ -74,7 +74,7 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
                             />
                         </Item>
                         <Item floatingLabel>
-                            <Label>Middle Name</Label>
+                            <Label>Last Name</Label>
                             <Input
                                 onChangeText={this.editStringField('lastName').bind(this)}
                                 value={this.state.lastName}

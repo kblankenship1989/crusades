@@ -58,7 +58,7 @@ export default {
     badgePadding: platform === PLATFORM.IOS ? 3 : 0,
 
     // Button
-    buttonFontFamily: platform === PLATFORM.IOS ? 'System' : 'System',
+    buttonFontFamily: platform === PLATFORM.IOS ? 'System' : 'Roboto_medium',
     buttonDisabledBg: '#b5b5b5',
     buttonPadding: 6,
     get buttonPrimaryBg() {
@@ -273,7 +273,7 @@ export default {
     },
 
     // Title
-    titleFontfamily: platform === PLATFORM.IOS ? 'System' : 'System',
+    titleFontfamily: platform === PLATFORM.IOS ? 'System' : 'Roboto_medium',
     titleFontSize: platform === PLATFORM.IOS ? 17 : 19,
     subTitleFontSize: platform === PLATFORM.IOS ? 11 : 14,
     subtitleColor: platform === PLATFORM.IOS ? '#000' : '#fff',
