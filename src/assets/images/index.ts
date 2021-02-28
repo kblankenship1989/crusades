@@ -20,6 +20,5 @@ export const imageKeyMap : Record<Factions | BattlefieldRoles, ImageSourcePropTy
     [BattlefieldRoles.FAST_ATTACK]: BattleFieldRoleImages.FastAttack,
     [BattlefieldRoles.FLYER]: BattleFieldRoleImages.Flyer,
     [BattlefieldRoles.ELITES]: BattleFieldRoleImages.Elites,
-    [BattlefieldRoles.DEDICATED_TRANSPORT]: BattleFieldRoleImages.DedicatedTransport,
-    [BattlefieldRoles.SELECT]: FactionImages.Unaligned
+    [BattlefieldRoles.DEDICATED_TRANSPORT]: BattleFieldRoleImages.DedicatedTransport
 };

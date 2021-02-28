@@ -6,6 +6,8 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList, Screens} from '../../navigation/root-param-list';
 import {RouteProp} from '@react-navigation/native';
 import {Player} from '../../redux/state/player';
+import {FactionPicker} from '../../components/faction-picker';
+import {Factions} from '../../enums';
 
 export type EditPlayerProps = ConnectedProps<typeof editPlayerConnector> & {
     navigation: StackNavigationProp<RootParamList, Screens.EDIT_PLAYER>,
@@ -35,12 +37,23 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
         }));
     }
 
+    selectFaction = (preferredFaction: Factions) : void => {
+        this.setState(prevState => ({
+            ...prevState,
+            preferredFaction,
+            isDirty: true
+        }));
+    }
+
     save = () : void => {
         const {
             isDirty,
             ...player
         } = this.state;
         if (isDirty) {
+            if (!player.preferredFaction) {
+                player.preferredFaction = Factions.UNALIGNED;
+            }
             this.props.saveAccount(this.props.selectedAccountId, {player});
             this.setState({
                 isDirty: false
@@ -53,6 +66,7 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
             this.props.navigation.navigate(Screens.ACCOUNT_SUMMARY);
         }
     }
+
     render() : React.ReactNode {
         return (
             <Container>
@@ -78,6 +92,13 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
                             <Input
                                 onChangeText={this.editStringField('lastName').bind(this)}
                                 value={this.state.lastName}
+                            />
+                        </Item>
+                        <Item picker>
+                            <FactionPicker
+                                selectedFaction={this.state.preferredFaction}
+                                onChange={this.selectFaction}
+                                placeholder={'Select Preferred Faction'}
                             />
                         </Item>
                     </Form>

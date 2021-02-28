@@ -7,6 +7,5 @@ export enum BattlefieldRoles {
     DEDICATED_TRANSPORT = 'Dedicated Transport',
     FAST_ATTACK = 'Fast Attack',
     FORTIFICATION = 'Fortification',
-    LORD_OF_WAR = 'Lord Of War',
-    SELECT = 'Select Battlefield Role'
+    LORD_OF_WAR = 'Lord Of War'
 }

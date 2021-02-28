@@ -4,13 +4,12 @@ export type Player = {
     firstName: string,
     lastName: string,
     middleName?: string,
-    preferredFaction: Factions
+    preferredFaction?: Factions
 };
 
 export const defaultPlayer : Player = {
     firstName: '',
-    lastName: '',
-    preferredFaction: Factions.UNALIGNED
+    lastName: ''
 };
 
 export const getPlayerName = (player : Player) : string => {

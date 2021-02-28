@@ -1,6 +1,4 @@
 import React from 'react';
-import {View} from 'react-native';
-import {Text} from 'react-native-elements';
 import {Item, Picker as NBPicker, Icon} from 'native-base';
 
 type PickerItem = {
@@ -10,10 +8,10 @@ type PickerItem = {
 }
 
 export type PickerProps = {
-    selectedValue: string,
+    selectedValue?: string,
     onChange: (value: React.ReactText, index: number) => void,
     items: PickerItem[],
-    placeholder?: string
+    placeholder: string
 }
 
 export const Picker : React.FC<PickerProps> = ({
@@ -28,7 +26,7 @@ export const Picker : React.FC<PickerProps> = ({
                 mode="dropdown"
                 iosIcon={<Icon name="arrow-down" />}
                 style={{width: undefined}}
-                placeholder={placeholder || 'Select Faction'}
+                placeholder={placeholder}
                 //placeholderStyle={{color: '#bfc6ea'}}
                 //placeholderIconColor="#007aff"
                 selectedValue={selectedValue}

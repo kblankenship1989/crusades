@@ -5,8 +5,9 @@ import {Factions} from '../enums';
 import {Picker} from './picker';
 
 export type FactionPickerProps = {
-    selectedFaction: Factions,
-    onChange: (faction: Factions) => void
+    selectedFaction?: Factions,
+    onChange: (faction: Factions) => void,
+    placeholder?: string
 }
 
 type Item = {
@@ -19,7 +20,7 @@ const items : Item[] = enumKeys(Factions).map((key) => ({
     value: Factions[key]
 }));
 
-export const FactionPicker : React.FC<FactionPickerProps> = ({selectedFaction, onChange}) => {
+export const FactionPicker : React.FC<FactionPickerProps> = ({selectedFaction, onChange, placeholder}) => {
     const onValueChange = (item : React.ReactText) : void => {
         if (isEnumKey(Factions)(item)) {
             onChange(item);
@@ -31,6 +32,7 @@ export const FactionPicker : React.FC<FactionPickerProps> = ({selectedFaction, o
             selectedValue={selectedFaction}
             items={items}
             onChange={onValueChange}
+            placeholder={placeholder || 'Select Faction'}
         />
     );
 };

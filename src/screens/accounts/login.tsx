@@ -2,27 +2,17 @@ import React from 'react';
 import {
     Container,
     Header,
-    ListItem,
-    Left,
-    Body,
-    Right,
-    Thumbnail,
     Text,
     Button,
-    Icon,
     Footer,
     FooterTab,
-    View
 } from 'native-base';
 import {ConnectedProps} from 'react-redux';
 import {loginConnector} from './login-connector';
-import {imageKeyMap} from '../../assets/images';
 import {getPlayerName} from '../../redux/state/player';
-import {PlayerAccount} from '../../redux/state/player-account';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList, Screens} from '../../navigation/root-param-list';
-import {SwipeListView} from 'react-native-swipe-list-view';
-import {ListRenderItemInfo, ImageBackground} from 'react-native';
+import {SwipeListWrapper} from '../../components/swipe-list-background-image';
 
 export type LoginProps = ConnectedProps<typeof loginConnector> & {
     navigation: StackNavigationProp<RootParamList, Screens.LOGIN>
@@ -55,36 +45,14 @@ export const Login = ({
     return (
         <Container>
             <Header />
-            <SwipeListView
-                leftOpenValue={75}
-                rightOpenValue={-75}
+            <SwipeListWrapper
                 data={accountList}
-                keyExtractor={(account : PlayerAccount) => account.accountId}
-                renderItem={(rowData: ListRenderItemInfo<PlayerAccount>) : JSX.Element =>
-                    <ListItem
-                        button
-                        onPress={() => navigateToOrdersOfBattle(rowData.item.accountId)}
-                    >
-                        <Body>
-                            <Text>{getPlayerName(rowData.item.player)}</Text>
-                        </Body>
-                        <Right>
-                            <Text note>{new Date(rowData.item.lastAccessed).toLocaleDateString()}</Text>
-                        </Right>
-                    </ListItem>}
-                renderHiddenItem={(rowData: ListRenderItemInfo<PlayerAccount>) =>
-                    <View>
-                        <Left>
-                            <Button full onPress={() => navigateToAccount(rowData.item.accountId)}>
-                                <Icon active name="information-circle" />
-                            </Button>
-                        </Left>
-                        <Right>
-                            <Button full danger onPress={() => deleteAccount(rowData.item.accountId)}>
-                                <Icon active name="trash" />
-                            </Button>
-                        </Right>
-                    </View>}
+                onDelete={(item) => deleteAccount(item.id)}
+                onInfo={(item) => navigateToAccount(item.id)}
+                onPress={(item) => navigateToOrdersOfBattle(item.id)}
+                getTitle={(item) => getPlayerName(item.player)}
+                getSubtitle={(item) => new Date(item.lastAccessed).toLocaleDateString()}
+                imageKey={item => item.preferredFaction}
             />
             <Footer>
                 <FooterTab>

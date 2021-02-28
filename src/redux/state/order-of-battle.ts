@@ -7,7 +7,7 @@ import {BattleResults} from './order-of-battle/battle-results';
 export type OrderOfBattle = {
     id: string,
     title?: string,
-    faction: Factions,
+    faction?: Factions,
     requisitionPoints: number,
     battleTally: Record<string, BattleResults>,
     supplyLimit: number,
@@ -19,7 +19,6 @@ export type OrderOfBattle = {
 
 export const getDefaultOrderOfBattle = () : OrderOfBattle => ({
     id: v1(),
-    faction: Factions.UNALIGNED,
     requisitionPoints: 5,
     battleTally: {},
     supplyLimit: 50,
