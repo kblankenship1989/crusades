@@ -18,7 +18,7 @@ type EditPlayerState = Player & {
     isDirty: boolean
 }
 
-type StringFields = 'firstName' | 'lastName' | 'middleName' | 'foo'
+type StringFields = 'firstName' | 'lastName' | 'middleName'
 
 export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState> {
     constructor(props:EditPlayerProps) {
@@ -96,7 +96,7 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
                         </Item>
                         <Item picker>
                             <FactionPicker
-                                selectedFaction={this.state.preferredFaction}
+                                selectedFaction={this.props.route.params.isNew ? undefined : this.state.preferredFaction}
                                 onChange={this.selectFaction}
                                 placeholder={'Select Preferred Faction'}
                             />

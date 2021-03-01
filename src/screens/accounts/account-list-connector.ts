@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 
-import {Login} from './login';
+import {AccountList} from './account-list';
 import {State} from '../../redux/state';
 import {createAccount, loadSelectedAccount, deleteAccount} from '../../redux/action-creators/accounts';
 
@@ -14,5 +14,5 @@ const mapDispatchToProp = {
     deleteAccount
 };
 
-export const loginConnector = connect(mapStateToProps, mapDispatchToProp);
-export const LoginConnector = loginConnector(Login);
+export const accountListConnector = connect(mapStateToProps, mapDispatchToProp);
+export const AccountListConnector = accountListConnector(AccountList);

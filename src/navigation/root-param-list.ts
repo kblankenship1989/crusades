@@ -6,7 +6,8 @@ export enum Screens {
     LOGIN = 'LOGIN',
     ACCOUNT_SUMMARY = 'ACCOUNT_SUMMARY',
     EDIT_PLAYER = 'EDIT_PLAYER',
-    CRUSADE_CARD_SUMMARY = 'CRUSADE_CARD_SUMMARY'
+    CRUSADE_CARD_SUMMARY = 'CRUSADE_CARD_SUMMARY',
+    ACCOUNT_LIST = 'ACCOUNT_LIST'
 }
 
 export type RootParamList = Record<Screens, Record<string, any> | undefined> & {
