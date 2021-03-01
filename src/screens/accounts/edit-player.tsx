@@ -8,6 +8,8 @@ import {RouteProp} from '@react-navigation/native';
 import {Player} from '../../redux/state/player';
 import {FactionPicker} from '../../components/faction-picker';
 import {Factions} from '../../enums';
+import {ImagePickerButton} from '../../components/image-picker-button';
+import {imageKeyMap} from '../../assets/images';
 
 export type EditPlayerProps = ConnectedProps<typeof editPlayerConnector> & {
     navigation: StackNavigationProp<RootParamList, Screens.EDIT_PLAYER>,
@@ -15,7 +17,9 @@ export type EditPlayerProps = ConnectedProps<typeof editPlayerConnector> & {
 }
 
 type EditPlayerState = Player & {
-    isDirty: boolean
+    preferredFaction: Factions | null
+    isDirty: boolean,
+    isNew: boolean
 }
 
 type StringFields = 'firstName' | 'lastName' | 'middleName'
@@ -25,7 +29,8 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
         super(props);
         this.state = {
             ...props.player,
-            isDirty: props.route.params.isNew
+            isDirty: props.route.params.isNew,
+            isNew: props.route.params.isNew
         };
     }
 
@@ -41,6 +46,15 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
         this.setState(prevState => ({
             ...prevState,
             preferredFaction,
+            isDirty: true,
+            isNew: false
+        }));
+    }
+
+    selectAvatarImage = (avatarImageUri: string) : void => {
+        this.setState(prevState => ({
+            ...prevState,
+            avatarImageUri,
             isDirty: true
         }));
     }
@@ -48,6 +62,7 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
     save = () : void => {
         const {
             isDirty,
+            isNew,
             ...player
         } = this.state;
         if (isDirty) {
@@ -56,7 +71,8 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
             }
             this.props.saveAccount(this.props.selectedAccountId, {player});
             this.setState({
-                isDirty: false
+                isDirty: false,
+                isNew: false
             });
         }
 
@@ -95,9 +111,15 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
                             />
                         </Item>
                         <FactionPicker
-                            selectedFaction={this.props.route.params.isNew ? undefined : this.state.preferredFaction}
+                            selectedFaction={this.state.isNew ? undefined : this.state.preferredFaction}
                             onChange={this.selectFaction}
                             placeholder={'Select Preferred Faction'}
+                        />
+                        <ImagePickerButton
+                            defaultImage={imageKeyMap[this.state.preferredFaction]}
+                            imageUri={this.state.avatarImageUri}
+                            onImageSelect={this.selectAvatarImage}
+                            title={'Select Avatar Image'}
                         />
                     </Form>
                 </Content>

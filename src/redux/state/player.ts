@@ -1,4 +1,3 @@
-import {ImageSourcePropType} from 'react-native';
 import {Factions} from '../../enums';
 
 export type Player = {
@@ -6,7 +5,7 @@ export type Player = {
     lastName: string,
     middleName?: string,
     preferredFaction: Factions,
-    avatarImage?: ImageSourcePropType
+    avatarImageUri?: string
 };
 
 export const defaultPlayer : Player = {

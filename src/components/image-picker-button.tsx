@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {ImageSourcePropType, Platform} from 'react-native';
 import {Button, Text, Thumbnail, View} from 'native-base';
 import * as ImagePicker from 'expo-image-picker';
@@ -6,12 +6,11 @@ import * as ImagePicker from 'expo-image-picker';
 export type ImagePickerButtonProps = {
     imageUri?: string,
     title?: string,
-    defaultImage: ImageSourcePropType
+    defaultImage: ImageSourcePropType,
+    onImageSelect: (uri: string) => void
 }
 
-export const ImagePickerButton : React.FC<ImagePickerButtonProps> = ({imageUri, title, defaultImage}) : JSX.Element => {
-    const [image, setImage] = useState<string | undefined>(imageUri);
-
+export const ImagePickerButton : React.FC<ImagePickerButtonProps> = ({imageUri, title, defaultImage, onImageSelect}) : JSX.Element => {
     useEffect(() => {
         (async () => {
             if (Platform.OS !== 'web') {
@@ -39,7 +38,7 @@ export const ImagePickerButton : React.FC<ImagePickerButtonProps> = ({imageUri, 
                 console.log(result);
 
                 if (!result.cancelled) {
-                    setImage(result.uri);
+                    onImageSelect(result.uri);
                 }
             }
         }
@@ -50,7 +49,7 @@ export const ImagePickerButton : React.FC<ImagePickerButtonProps> = ({imageUri, 
             <Button onPress={pickImage}>
                 <Text>{title || 'Select Image'}</Text>
             </Button>
-            {image ? <Thumbnail large source={{uri: image}}/> : <Thumbnail large source={defaultImage}/>}
+            {imageUri ? <Thumbnail large source={{uri: imageUri}}/> : <Thumbnail large source={defaultImage}/>}
         </View>
     );
 };
