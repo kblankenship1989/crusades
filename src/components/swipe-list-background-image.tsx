@@ -1,13 +1,8 @@
 import React from 'react';
 import {SwipeListView} from 'react-native-swipe-list-view';
-import {PlayerAccount} from '../redux/state/player-account';
-import {OrderOfBattle} from '../redux/state/order-of-battle';
-import {CrusadeCard} from '../redux/state/order-of-battle/crusade-card';
-import {Text, Right, Body, ListItem, View, Left, Button, Icon} from 'native-base';
+import {Text, Right, Body, ListItem, View, Left, Button, Icon, Thumbnail} from 'native-base';
 import {ListRenderItemInfo} from 'react-native';
 import {imageKeyMap} from '../assets/images';
-
-export type SwipeListTypes = PlayerAccount | OrderOfBattle | CrusadeCard
 
 export type SwipeListWrapperProps<T> = {
     data: ReadonlyArray<T>,
@@ -16,15 +11,19 @@ export type SwipeListWrapperProps<T> = {
     onInfo?: (item: T) => void,
     getTitle: (item: T) => string,
     getSubtitle?: (item: T) => string,
-    imageKey?: (item: T) => (keyof typeof imageKeyMap | undefined)
+    imageKey: (item: T) => (keyof typeof imageKeyMap)
 }
 
-export const SwipeListWrapper = ({data, onPress, getTitle, getSubtitle, onInfo, onDelete} : SwipeListWrapperProps<any>) : JSX.Element=> {
+export const SwipeListWrapper = ({data, onPress, getTitle, getSubtitle, onInfo, onDelete, imageKey} : SwipeListWrapperProps<any>) : JSX.Element=> {
     const renderItem = (rowData: ListRenderItemInfo<any>) : JSX.Element =>(
         <ListItem
             button
+            avatar
             onPress={() => onPress(rowData.item)}
         >
+            <Left>
+                <Thumbnail source={imageKeyMap[imageKey(rowData.item)]}/>
+            </Left>
             <Body>
                 <Text>{getTitle(rowData.item)}</Text>
             </Body>
@@ -35,7 +34,7 @@ export const SwipeListWrapper = ({data, onPress, getTitle, getSubtitle, onInfo, 
     );
 
     const renderHiddenRow = (rowData: ListRenderItemInfo<any>) => (
-        <View>
+        <ListItem>
             {onInfo && <Left>
                 <Button full onPress={() => onInfo(rowData.item)}>
                     <Icon active name="information-circle" />
@@ -46,14 +45,14 @@ export const SwipeListWrapper = ({data, onPress, getTitle, getSubtitle, onInfo, 
                     <Icon active name="trash" />
                 </Button>
             </Right>
-        </View>
+        </ListItem>
     );
 
     return (<SwipeListView
         leftOpenValue={75}
         rightOpenValue={-75}
         data={data}
-        keyExtractor={(item : SwipeListTypes) => item.id}
+        keyExtractor={(item : any) => item.id}
         renderItem={renderItem}
         renderHiddenItem={renderHiddenRow}
     />);

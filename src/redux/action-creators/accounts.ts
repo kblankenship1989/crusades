@@ -37,7 +37,7 @@ export const createAccount = () : AppThunk => (dispatch) : void => {
         type: AvailableActions.CREATE_ACCOUNT,
         payload: {
             newAccount,
-            selectedAccountId: newAccount.accountId
+            selectedAccountId: newAccount.id
         }
     };
 

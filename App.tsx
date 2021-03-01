@@ -3,7 +3,7 @@ import React from 'react';
 import {LoadingGIF} from './src/components/loading';
 import {AppProvider} from './src/main/AppProvider';
 import {Main} from './src/main/Main';
-import getTheme from './native-base-theme/components';
+import getTheme from './src/themes';
 import {StyleProvider} from 'native-base';
 import {useFonts} from 'expo-font';
 import {Ionicons} from '@expo/vector-icons';

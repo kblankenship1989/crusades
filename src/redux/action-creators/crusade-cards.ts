@@ -1,9 +1,9 @@
 import {AppThunk} from './../store';
 import {Action} from 'redux';
-import {CrusadeCardActions} from '../action-list';
+import {AvailableActions} from '../action-list';
 import {CrusadeCard, getDefaultCrusadeCard} from '../state/order-of-battle/crusade-card';
 
-export type CreateCrusadeCardAction = Action<CrusadeCardActions.CREATE_CRUSADE_CARD> & {
+export type CreateCrusadeCardAction = Action<AvailableActions.CREATE_CRUSADE_CARD> & {
     payload: {
         newCrusadeCard: CrusadeCard,
         selectedCrusadeCardId: string,
@@ -12,7 +12,7 @@ export type CreateCrusadeCardAction = Action<CrusadeCardActions.CREATE_CRUSADE_C
     }
 }
 
-export type UpdateCrusdaeCArdAction = Action<CrusadeCardActions.UPDATE_CRUSADE_CARD> & {
+export type UpdateCrusdaeCArdAction = Action<AvailableActions.UPDATE_CRUSADE_CARD> & {
     payload: {
         updates: Partial<CrusadeCard>,
         selectedCrusadeCardId: string,
@@ -21,7 +21,7 @@ export type UpdateCrusdaeCArdAction = Action<CrusadeCardActions.UPDATE_CRUSADE_C
     }
 }
 
-export type DeleteCrusdaeCardAction = Action<CrusadeCardActions.DELETE_CRUSADE_CARD> & {
+export type DeleteCrusdaeCardAction = Action<AvailableActions.DELETE_CRUSADE_CARD> & {
     payload: {
         crusadeCardId: string,
         selectedOrderOfBattleId: string | null,
@@ -29,7 +29,7 @@ export type DeleteCrusdaeCardAction = Action<CrusadeCardActions.DELETE_CRUSADE_C
     }
 }
 
-export type SelectCrusadeCardAction = Action<CrusadeCardActions.SELECT_CRUSADE_CARD> & {
+export type SelectCrusadeCardAction = Action<AvailableActions.SELECT_CRUSADE_CARD> & {
     payload: {
         selectedCrusadeCardId: string | null,
         selectedOrderOfBattleId: string | null,
@@ -45,7 +45,7 @@ export const createCrusadeCard = () : AppThunk => (dispatch, getState) : void =>
     const newCrusadeCard = getDefaultCrusadeCard();
 
     const action : CreateCrusadeCardAction = {
-        type: CrusadeCardActions.CREATE_CRUSADE_CARD,
+        type: AvailableActions.CREATE_CRUSADE_CARD,
         payload: {
             newCrusadeCard: newCrusadeCard,
             selectedCrusadeCardId: newCrusadeCard.id,
@@ -63,7 +63,7 @@ export const loadSelectedCrusadeCard = (selectedCrusadeCardId : string | null) :
         selectedOrderOfBattleId
     } = getState();
     const action : SelectCrusadeCardAction = {
-        type: CrusadeCardActions.SELECT_CRUSADE_CARD,
+        type: AvailableActions.SELECT_CRUSADE_CARD,
         payload: {
             selectedCrusadeCardId,
             selectedOrderOfBattleId,
@@ -80,7 +80,7 @@ export const deleteCrusadeCard = (crusadeCardId : string) : AppThunk => (dispatc
         selectedOrderOfBattleId
     } = getState();
     const action: DeleteCrusdaeCardAction = {
-        type: CrusadeCardActions.DELETE_CRUSADE_CARD,
+        type: AvailableActions.DELETE_CRUSADE_CARD,
         payload: {
             crusadeCardId,
             selectedOrderOfBattleId,
@@ -97,7 +97,7 @@ export const saveCrusadeCard = (selectedCrusadeCardId: string, updates : Partial
         selectedOrderOfBattleId
     } = getState();
     const action : UpdateCrusdaeCArdAction = {
-        type: CrusadeCardActions.UPDATE_CRUSADE_CARD,
+        type: AvailableActions.UPDATE_CRUSADE_CARD,
         payload: {
             updates,
             selectedCrusadeCardId,

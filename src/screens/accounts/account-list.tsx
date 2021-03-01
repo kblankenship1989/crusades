@@ -52,7 +52,7 @@ export const AccountList = ({
                 onPress={(item) => navigateToOrdersOfBattle(item.id)}
                 getTitle={(item) => getPlayerName(item.player)}
                 getSubtitle={(item) => new Date(item.lastAccessed).toLocaleDateString()}
-                imageKey={item => item.preferredFaction}
+                imageKey={item => item.player.preferredFaction}
             />
             <Footer>
                 <FooterTab>

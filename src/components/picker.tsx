@@ -27,20 +27,19 @@ export const Picker : React.FC<PickerProps> = ({
                 iosIcon={<Icon name="arrow-down" />}
                 style={{width: undefined}}
                 placeholder={placeholder}
-                //placeholderStyle={{color: '#bfc6ea'}}
-                //placeholderIconColor="#007aff"
+                // placeholderStyle={{color: '#bfc6ea'}}
+                // placeholderIconColor="#007aff"
                 selectedValue={selectedValue}
                 onValueChange={onChange}
             >
-                {items.map((item) => {
+                {items.map((item) => (
                     <NBPicker.Item
                         label={item.label || item.value}
                         value={item.value}
                         key={item.key}
-                    />;
-                })}
+                    />
+                ))}
             </NBPicker>
         </Item>
     );
 };
-

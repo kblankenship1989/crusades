@@ -94,13 +94,11 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
                                 value={this.state.lastName}
                             />
                         </Item>
-                        <Item picker>
-                            <FactionPicker
-                                selectedFaction={this.props.route.params.isNew ? undefined : this.state.preferredFaction}
-                                onChange={this.selectFaction}
-                                placeholder={'Select Preferred Faction'}
-                            />
-                        </Item>
+                        <FactionPicker
+                            selectedFaction={this.props.route.params.isNew ? undefined : this.state.preferredFaction}
+                            onChange={this.selectFaction}
+                            placeholder={'Select Preferred Faction'}
+                        />
                     </Form>
                 </Content>
                 <Footer>
