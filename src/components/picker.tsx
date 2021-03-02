@@ -1,16 +1,16 @@
 import React from 'react';
 import {Item, Picker as NBPicker, Icon} from 'native-base';
 
-type PickerItem = {
-    key: string,
-    value: string,
+export type PickerItem<T> = {
+    key: T,
+    value: T,
     label?: string
 }
 
-export type PickerProps = {
-    selectedValue?: string,
-    onChange: (value: React.ReactText, index: number) => void,
-    items: PickerItem[],
+export type PickerProps<T = any> = {
+    selectedValue?: T,
+    onChange: (value: T, index: number) => void,
+    items: PickerItem<T>[],
     placeholder: string
 }
 
@@ -34,7 +34,7 @@ export const Picker : React.FC<PickerProps> = ({
             >
                 {items.map((item) => (
                     <NBPicker.Item
-                        label={item.label || item.value}
+                        label={item.label || item.value.toString()}
                         value={item.value}
                         key={item.key}
                     />
