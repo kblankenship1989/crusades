@@ -11,7 +11,7 @@ export type PickerProps<T = any> = {
     selectedValue?: T,
     onChange: (value: T, index: number) => void,
     items: PickerItem<T>[],
-    placeholder: string
+    placeholder?: string
 }
 
 export const Picker : React.FC<PickerProps> = ({

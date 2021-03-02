@@ -7,7 +7,6 @@ export type QuantitySelectorProps = {
     min: number,
     max: number,
     multiplier: number,
-    placeholder: string,
     selectedValue: number,
     onQuantityChange: (quantity: number) => void
 }
@@ -18,8 +17,7 @@ export const QuantitySelector : React.FC<QuantitySelectorProps> = ({
     max,
     multiplier,
     onQuantityChange,
-    selectedValue,
-    placeholder
+    selectedValue
 }) => {
     const getAvailableOptions = () : PickerItem<number>[] => {
 
@@ -43,20 +41,27 @@ export const QuantitySelector : React.FC<QuantitySelectorProps> = ({
                 <Text>{title}</Text>
             </Separator>
             <Left>
-                <Button rounded icon>
+                <Button
+                    transparent
+                    icon
+                    disabled={selectedValue <= min}
+                >
                     <Icon type={'MaterialCommunityIcons'} name={'minus-circle'}/>
                 </Button>
             </Left>
             <Body>
                 <Picker
                     items={getAvailableOptions()}
-                    placeholder={placeholder}
                     onChange={onQuantityChange}
                     selectedValue={selectedValue}
                 />
             </Body>
             <Right>
-                <Button rounded icon>
+                <Button
+                    transparent
+                    icon
+                    disabled={selectedValue >= max}
+                >
                     <Icon type={'MaterialCommunityIcons'} name={'plus-circle'}/>
                 </Button>
             </Right>

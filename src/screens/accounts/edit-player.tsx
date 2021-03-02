@@ -114,6 +114,7 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
                             selectedFaction={this.state.isNew ? undefined : this.state.preferredFaction}
                             onChange={this.selectFaction}
                             placeholder={'Select Preferred Faction'}
+                            title={'Preferred Faction'}
                         />
                         <ImagePickerButton
                             defaultImage={imageKeyMap[this.state.preferredFaction]}
