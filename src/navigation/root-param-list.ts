@@ -14,7 +14,7 @@ export type RootParamList = Record<Screens, Record<string, any> | undefined> & {
     [Screens.EDIT_PLAYER]: {
         isNew: boolean
     };
-    [Screens.ORDER_OF_BATTLE_SUMMARY]: {
+    [Screens.EDIT_ORDER_OF_BATTLE]: {
         isNew: boolean
     }
 };

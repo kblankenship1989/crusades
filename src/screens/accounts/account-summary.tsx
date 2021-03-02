@@ -7,15 +7,13 @@ import {
     Button,
     Footer,
     FooterTab,
-    Item,
-    Label,
-    Thumbnail
+    Thumbnail,
+    Separator
 } from 'native-base';
 import {ConnectedProps} from 'react-redux';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList, Screens} from '../../navigation/root-param-list';
 import {accountSummaryConnector} from './account-summary-connector';
-import {PlayerAccount} from '../../redux/state/player-account';
 import {getPlayerName} from '../../redux/state/player';
 import {imageKeyMap} from '../../assets/images';
 
@@ -32,19 +30,19 @@ export const AccountSummary : React.FC<AccountSummaryProps> = ({account, navigat
         <Container>
             <Header />
             <Content>
-                {account.player.avatarImage ? <Thumbnail large source={account.player.avatarImage}/> : <Thumbnail large source={imageKeyMap[account.player.preferredFaction]}/>}
-                <Item fixedLabel>
-                    <Label>{'Player Name'}</Label>
-                    <Text>{getPlayerName(account.player)}</Text>
-                </Item>
-                <Item fixedLabel>
-                    <Label>{'Preferred Faction'}</Label>
-                    <Text>{account.player.preferredFaction}</Text>
-                </Item>
-                <Item fixedLabel>
-                    <Label>{'Stats'}</Label>
-                    <Text>{'Some stats here'}</Text>
-                </Item>
+                {account.player.avatarImageUri ? <Thumbnail large source={{uri: account.player.avatarImageUri}}/> : <Thumbnail large source={imageKeyMap[account.player.preferredFaction]}/>}
+                <Separator bordered>
+                    <Text>Player Name</Text>
+                </Separator>
+                <Text>{getPlayerName(account.player)}</Text>
+                <Separator bordered>
+                    <Text>Preferred Faction</Text>
+                </Separator>
+                <Text>{account.player.preferredFaction}</Text>
+                <Separator bordered>
+                    <Text>Statistics</Text>
+                </Separator>
+                <Text>{'Some stats here'}</Text>
             </Content>
             <Footer>
                 <FooterTab>

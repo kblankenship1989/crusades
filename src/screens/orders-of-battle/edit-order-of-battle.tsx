@@ -1,26 +1,27 @@
 import React from 'react';
-import {Content, Header, Container, Footer, FooterTab, Button, Text, Form, Item} from 'native-base';
+import {Content, Header, Container, Footer, FooterTab, Button, Text, Form, Item, Label} from 'native-base';
 import {ConnectedProps} from 'react-redux';
-import {orderOfBattleSummaryConnector} from './order-of-battle-summary-connector';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList, Screens} from '../../navigation/root-param-list';
+import {editOrderOfBattleConnector} from './edit-order-of-battle-connector';
 import {RouteProp} from '@react-navigation/native';
 import {OrderOfBattle} from '../../redux/state/order-of-battle';
 import {FactionPicker} from '../../components/faction-picker';
 import {Factions} from '../../enums';
+import {TextInput} from '../../components/text-input';
 
-export type OrderOfBattleSummaryProps = ConnectedProps<typeof orderOfBattleSummaryConnector> & {
-    navigation: StackNavigationProp<RootParamList, Screens.ORDER_OF_BATTLE_SUMMARY>,
-    route: RouteProp<RootParamList, Screens.ORDER_OF_BATTLE_SUMMARY>
+export type EditOrderOfBattleProps = ConnectedProps<typeof editOrderOfBattleConnector> & {
+    navigation: StackNavigationProp<RootParamList, Screens.EDIT_ORDER_OF_BATTLE>,
+    route: RouteProp<RootParamList, Screens.EDIT_ORDER_OF_BATTLE>
 }
 
-type OrderOfBattleSummaryState = OrderOfBattle & {
+type EditOrderOfBattleState = OrderOfBattle & {
     isDirty: boolean,
     isNew: boolean
 }
 
-export class OrderOfBattleSummary extends React.Component<OrderOfBattleSummaryProps, OrderOfBattleSummaryState> {
-    constructor(props: OrderOfBattleSummaryProps) {
+export class EditOrderOfBattle extends React.Component<EditOrderOfBattleProps, EditOrderOfBattleState> {
+    constructor(props: EditOrderOfBattleProps) {
         super(props);
 
         this.state = {
@@ -36,6 +37,14 @@ export class OrderOfBattleSummary extends React.Component<OrderOfBattleSummaryPr
             preferredFaction,
             isDirty: true,
             isNew: false
+        }));
+    }
+
+    setTitle = (title: string) : void => {
+        this.setState(prevState => ({
+            ...prevState,
+            title,
+            isDirty: true
         }));
     }
 
@@ -62,9 +71,11 @@ export class OrderOfBattleSummary extends React.Component<OrderOfBattleSummaryPr
                 <Header />
                 <Content>
                     <Form>
-                        <Item>
-
-                        </Item>
+                        <TextInput
+                            label={'Title'}
+                            value={this.state.title}
+                            onChangeText={this.setTitle}
+                        />
                         <FactionPicker
                             selectedFaction={this.state.isNew ? undefined : this.state.faction}
                             onChange={this.selectFaction}

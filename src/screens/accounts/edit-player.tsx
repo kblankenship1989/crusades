@@ -10,6 +10,7 @@ import {FactionPicker} from '../../components/faction-picker';
 import {Factions} from '../../enums';
 import {ImagePickerButton} from '../../components/image-picker-button';
 import {imageKeyMap} from '../../assets/images';
+import {TextInput} from '../../components/text-input';
 
 export type EditPlayerProps = ConnectedProps<typeof editPlayerConnector> & {
     navigation: StackNavigationProp<RootParamList, Screens.EDIT_PLAYER>,
@@ -59,27 +60,30 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
         }));
     }
 
+    isFormValid = () : boolean => {
+        return [
+            this.state.firstName,
+            this.state.lastName
+        ].every((value) => !!value);
+    }
+
     save = () : void => {
         const {
             isDirty,
             isNew,
             ...player
         } = this.state;
-        if (isDirty) {
-            if (!player.preferredFaction) {
-                player.preferredFaction = Factions.UNALIGNED;
-            }
+        if (this.isFormValid()) {
             this.props.saveAccount(this.props.selectedAccountId, {player});
             this.setState({
                 isDirty: false,
                 isNew: false
             });
-        }
 
-        if (this.props.route.params.isNew) {
-            this.props.navigation.navigate(Screens.ORDERS_OF_BATTLE);
+            const newScreen = this.props.route.params.isNew ? Screens.ORDERS_OF_BATTLE : Screens.ACCOUNT_SUMMARY;
+            this.props.navigation.replace(newScreen);
         } else {
-            this.props.navigation.navigate(Screens.ACCOUNT_SUMMARY);
+            alert('One or more required fields are missing.');
         }
     }
 
@@ -89,27 +93,23 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
                 <Header/>
                 <Content>
                     <Form>
-                        <Item floatingLabel>
-                            <Label>First Name</Label>
-                            <Input
-                                onChangeText={this.editStringField('firstName').bind(this)}
-                                value={this.state.firstName}
-                            />
-                        </Item>
-                        <Item floatingLabel>
-                            <Label>Middle Name</Label>
-                            <Input
-                                onChangeText={this.editStringField('middleName').bind(this)}
-                                value={this.state.middleName}
-                            />
-                        </Item>
-                        <Item floatingLabel>
-                            <Label>Last Name</Label>
-                            <Input
-                                onChangeText={this.editStringField('lastName').bind(this)}
-                                value={this.state.lastName}
-                            />
-                        </Item>
+                        <TextInput
+                            label={'First Name'}
+                            value={this.state.firstName}
+                            onChangeText={this.editStringField('firstName').bind(this)}
+                            isRequired
+                        />
+                        <TextInput
+                            label={'Middle Name'}
+                            value={this.state.middleName}
+                            onChangeText={this.editStringField('middleName').bind(this)}
+                        />
+                        <TextInput
+                            label={'Last Name'}
+                            value={this.state.lastName}
+                            onChangeText={this.editStringField('lastName').bind(this)}
+                            isRequired
+                        />
                         <FactionPicker
                             selectedFaction={this.state.isNew ? undefined : this.state.preferredFaction}
                             onChange={this.selectFaction}
@@ -128,7 +128,7 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
                         <Button
                             full
                             onPress={this.save}
-                            disabled={!this.state.isDirty}
+                            disabled={!this.state.isDirty || !this.isFormValid()}
                         >
                             <Text>Save</Text>
                         </Button>
