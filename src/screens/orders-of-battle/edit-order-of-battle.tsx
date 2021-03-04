@@ -1,5 +1,5 @@
 import React from 'react';
-import {Content, Header, Container, Footer, FooterTab, Button, Text, Form, Item, Label} from 'native-base';
+import {Content, Header, Container, Footer, FooterTab, Button, Text, Form} from 'native-base';
 import {ConnectedProps} from 'react-redux';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList, Screens} from '../../navigation/root-param-list';
