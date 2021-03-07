@@ -80,8 +80,11 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
                 isNew: false
             });
 
-            const newScreen = this.props.route.params.isNew ? Screens.ORDERS_OF_BATTLE : Screens.ACCOUNT_SUMMARY;
-            this.props.navigation.replace(newScreen);
+            if (this.props.route.params.isNew) {
+                this.props.navigation.replace(Screens.ORDERS_OF_BATTLE);
+            } else {
+                this.props.navigation.pop();
+            }
         } else {
             alert('One or more required fields are missing.');
         }

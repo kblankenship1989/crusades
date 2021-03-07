@@ -1,5 +1,5 @@
 import React from 'react';
-import {SwipeListView} from 'react-native-swipe-list-view';
+import {RowMap, SwipeListView} from 'react-native-swipe-list-view';
 import {Text, Right, Body, ListItem, View, Left, Button, Icon, Thumbnail} from 'native-base';
 import {ListRenderItemInfo} from 'react-native';
 import {imageKeyMap} from '../assets/images';
@@ -33,10 +33,13 @@ export const SwipeListWrapper = ({data, onPress, getTitle, getSubtitle, onInfo, 
         </ListItem>
     );
 
-    const renderHiddenRow = (rowData: ListRenderItemInfo<any>) => (
+    const renderHiddenRow = (rowData: ListRenderItemInfo<any>, rowMap: RowMap<any>) => (
         <ListItem>
             {onInfo && <Left>
-                <Button full onPress={() => onInfo(rowData.item)}>
+                <Button full onPress={() => {
+                    rowMap[rowData.item.id].closeRow();
+                    onInfo(rowData.item);
+                }}>
                     <Icon active name="information-circle" />
                 </Button>
             </Left>}
@@ -55,5 +58,6 @@ export const SwipeListWrapper = ({data, onPress, getTitle, getSubtitle, onInfo, 
         keyExtractor={(item : any) => item.id}
         renderItem={renderItem}
         renderHiddenItem={renderHiddenRow}
+        closeOnRowPress
     />);
 };
