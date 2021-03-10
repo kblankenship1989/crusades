@@ -1,8 +1,7 @@
 import {connect} from 'react-redux';
-import {saveOrderOfBattle, deleteOrderOfBattle} from '../../redux/action-creators/orders-of-battle';
-import {OrderOfBattleSummary} from './order-of-battle-summary';
 import {State} from '../../redux/state';
-// import {addCrusadeCard, deleteCrusadeCard, loadCurrentCrusadeCard} from '../redux/action-creators/current-crusade-card';
+import {BattleResultsList} from './battle-results-list';
+import {loadSelectedBattleResult, deleteBattleResult, createBattleResult} from '../../redux/action-creators/battle-results';
 
 const mapStateToProps = (state: State) => {
     const {
@@ -12,15 +11,15 @@ const mapStateToProps = (state: State) => {
     } = state;
 
     return {
-        orderOfBattle: accounts[selectedAccountId as string].ordersOfBattle[selectedOrderOfBattleId as string],
-        selectedOrderOfBattleId: selectedOrderOfBattleId as string
+        battleResults: accounts[selectedAccountId as string].ordersOfBattle[selectedOrderOfBattleId as string].battleTally
     };
 };
 
 const mapDispatchToProps = {
-    saveOrderOfBattle,
-    deleteOrderOfBattle
+    createBattleResult,
+    loadSelectedBattleResult,
+    deleteBattleResult
 };
 
 export const battleResultsListConnector = connect(mapStateToProps, mapDispatchToProps);
-export const OrderOfBattleSummaryConnector = battleResultsListConnector(OrderOfBattleSummary);
+export const OrderOfBattleSummaryConnector = battleResultsListConnector(BattleResultsList);
