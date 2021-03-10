@@ -1,12 +1,12 @@
 import {BattleHonours, BattleScars} from '../../../../enums';
 
 export class Rank {
-    public isBlooded: boolean;
-    public isBattleHardened: boolean;
-    public isHeroic: boolean;
-    public isLegendary: boolean;
-    public battleHonours: Record<string, BattleHonours>;
-    public battleScars: Record<string, BattleScars>;
+    isBlooded: boolean;
+    isBattleHardened: boolean;
+    isHeroic: boolean;
+    isLegendary: boolean;
+    battleHonours: Record<string, BattleHonours>;
+    battleScars: Record<string, BattleScars>;
 
     constructor() {
         this.isBattleHardened = false;

@@ -1,11 +1,11 @@
 export class ObjectiveTallies {
-    public enemyUnitsDestroyed: number;
-    public enemyUnitsDestroyedWithPsychic: number;
-    public enemyUnitsDestroyedWithRanged: number;
-    public enemyUnitsDestroyedWithMelee: number;
-    public agenda1?: number;
-    public agenda2?: number;
-    public agenda3?: number;
+    enemyUnitsDestroyed: number;
+    enemyUnitsDestroyedWithPsychic: number;
+    enemyUnitsDestroyedWithRanged: number;
+    enemyUnitsDestroyedWithMelee: number;
+    agenda1?: number;
+    agenda2?: number;
+    agenda3?: number;
 
     constructor(includeAgendas: boolean) {
         this.enemyUnitsDestroyed = 0;

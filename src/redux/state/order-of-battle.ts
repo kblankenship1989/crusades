@@ -6,16 +6,16 @@ import {BattleResults} from './order-of-battle/battle-results';
 import {BattleOutcomesSummary, battleOutcomesSummaryMap} from '../../enums/battle-outcomes';
 
 export class OrderOfBattle {
-    public id:string;
-    public title?:string;
-    public faction:Factions;
-    public requisitionPoints:number;
-    public battleTally:Record<string,BattleResults>;
-    public supplyLimit:number;
-    public crusadeCards:Record<string,CrusadeCard>;
-    public lastAccessed:number;
-    // public goals?: string;
-    // public notableVictories?: string[];
+    id:string;
+    title?:string;
+    faction:Factions;
+    requisitionPoints:number;
+    battleTally:Record<string,BattleResults>;
+    supplyLimit:number;
+    crusadeCards:Record<string,CrusadeCard>;
+    lastAccessed:number;
+    // goals?: string;
+    // notableVictories?: string[];
 
     constructor(preferredFaction: Factions) {
         this.id = v1();

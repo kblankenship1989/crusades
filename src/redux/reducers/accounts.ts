@@ -43,10 +43,10 @@ const updateAccount : AccountReducer = (state, action) => {
         selectedAccountId,
         updates
     } = (action as UpdateAccountAction).payload;
-    const newAccount = new PlayerAccount(state[selectedAccountId]);
-    Object.keys(updates).forEach((key: keyof PlayerAccount) => {
-        newAccount[key] = updates[key];
-    });
+    const newAccount = {
+        ...state[selectedAccountId],
+        ...updates
+    };
 
     return {
         ...state,
@@ -64,8 +64,10 @@ const selectAccount : AccountReducer = (state, action) => {
         return state;
     }
 
-    const newAccount = new PlayerAccount(state[selectedAccountId]);
-    newAccount.lastAccessed = lastAccessed;
+    const newAccount = {
+        ...state[selectedAccountId],
+        lastAccessed
+    };
 
     return {
         ...state,
