@@ -7,33 +7,33 @@ export type CreateCrusadeCardAction = Action<AvailableActions.CREATE_CRUSADE_CAR
     payload: {
         newCrusadeCard: CrusadeCard,
         selectedCrusadeCardId: string,
-        selectedOrderOfBattleId: string | null,
-        selectedAccountId: string | null
+        selectedOrderOfBattleId: string,
+        selectedAccountId: string
     }
 }
 
-export type UpdateCrusdaeCArdAction = Action<AvailableActions.UPDATE_CRUSADE_CARD> & {
+export type UpdateCrusadeCardAction = Action<AvailableActions.UPDATE_CRUSADE_CARD> & {
     payload: {
         updates: Partial<CrusadeCard>,
         selectedCrusadeCardId: string,
-        selectedOrderOfBattleId: string | null,
-        selectedAccountId: string | null
+        selectedOrderOfBattleId: string,
+        selectedAccountId: string
     }
 }
 
-export type DeleteCrusdaeCardAction = Action<AvailableActions.DELETE_CRUSADE_CARD> & {
+export type DeleteCrusadeCardAction = Action<AvailableActions.DELETE_CRUSADE_CARD> & {
     payload: {
         crusadeCardId: string,
-        selectedOrderOfBattleId: string | null,
-        selectedAccountId: string | null
+        selectedOrderOfBattleId: string,
+        selectedAccountId: string
     }
 }
 
 export type SelectCrusadeCardAction = Action<AvailableActions.SELECT_CRUSADE_CARD> & {
     payload: {
         selectedCrusadeCardId: string | null,
-        selectedOrderOfBattleId: string | null,
-        selectedAccountId: string | null
+        selectedOrderOfBattleId: string,
+        selectedAccountId: string
     }
 }
 
@@ -50,8 +50,8 @@ export const createCrusadeCard = () : AppThunk => (dispatch, getState) : void =>
         payload: {
             newCrusadeCard: newCrusadeCard,
             selectedCrusadeCardId: newCrusadeCard.id,
-            selectedOrderOfBattleId,
-            selectedAccountId
+            selectedOrderOfBattleId: selectedOrderOfBattleId as string,
+            selectedAccountId: selectedAccountId as string
         }
     };
 
@@ -67,8 +67,8 @@ export const loadSelectedCrusadeCard = (selectedCrusadeCardId : string | null) :
         type: AvailableActions.SELECT_CRUSADE_CARD,
         payload: {
             selectedCrusadeCardId,
-            selectedOrderOfBattleId,
-            selectedAccountId
+            selectedOrderOfBattleId: selectedOrderOfBattleId as string,
+            selectedAccountId: selectedAccountId as string
         }
     };
 
@@ -80,12 +80,12 @@ export const deleteCrusadeCard = (crusadeCardId : string) : AppThunk => (dispatc
         selectedAccountId,
         selectedOrderOfBattleId
     } = getState();
-    const action: DeleteCrusdaeCardAction = {
+    const action: DeleteCrusadeCardAction = {
         type: AvailableActions.DELETE_CRUSADE_CARD,
         payload: {
             crusadeCardId,
-            selectedOrderOfBattleId,
-            selectedAccountId
+            selectedOrderOfBattleId: selectedOrderOfBattleId as string,
+            selectedAccountId: selectedAccountId as string
         }
     };
 
@@ -97,13 +97,13 @@ export const saveCrusadeCard = (selectedCrusadeCardId: string, updates : Partial
         selectedAccountId,
         selectedOrderOfBattleId
     } = getState();
-    const action : UpdateCrusdaeCArdAction = {
+    const action : UpdateCrusadeCardAction = {
         type: AvailableActions.UPDATE_CRUSADE_CARD,
         payload: {
             updates,
             selectedCrusadeCardId,
-            selectedOrderOfBattleId,
-            selectedAccountId
+            selectedOrderOfBattleId: selectedOrderOfBattleId as string,
+            selectedAccountId: selectedAccountId as string
         }
     };
 
