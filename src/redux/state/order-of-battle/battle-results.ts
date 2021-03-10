@@ -7,12 +7,21 @@ export class BattleResults {
     enemyFaction: Factions;
     result: BattleOutcomes;
     markedForGreatness?: string;
-    date: Date;
+    date: number;
+    enemyName?: string;
 
     constructor() {
         this.id = v1();
         this.enemyFaction = Factions.UNALIGNED;
         this.result = BattleOutcomes.DRAW;
-        this.date = new Date();
+        this.date = new Date().getTime();
+    }
+
+    getDateString = ():string => {
+        return new Date(this.date).toLocaleDateString();
+    }
+
+    getTitle = ():string => {
+        return `${this.enemyName || this.enemyFaction} - ${this.result}`;
     }
 }

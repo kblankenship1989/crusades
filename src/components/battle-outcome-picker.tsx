@@ -5,7 +5,7 @@ import {BattleOutcomes} from '../enums';
 import {Picker} from './picker';
 
 export type BattleOutcomePickerProps = {
-    selectedBattleOutcome: BattleOutcomes,
+    selectedBattleOutcome?: BattleOutcomes,
     onChange: (faction: BattleOutcomes) => void
 }
 

@@ -11,7 +11,7 @@ const mapStateToProps = (state: State) => {
     } = state;
 
     return {
-        battleResults: accounts[selectedAccountId as string].ordersOfBattle[selectedOrderOfBattleId as string].battleTally
+        battleResults: accounts[selectedAccountId as string].ordersOfBattle[selectedOrderOfBattleId as string].battleResults
     };
 };
 
@@ -22,4 +22,4 @@ const mapDispatchToProps = {
 };
 
 export const battleResultsListConnector = connect(mapStateToProps, mapDispatchToProps);
-export const OrderOfBattleSummaryConnector = battleResultsListConnector(BattleResultsList);
+export const BattleResultsListConnector = battleResultsListConnector(BattleResultsList);

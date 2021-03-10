@@ -10,7 +10,7 @@ export class OrderOfBattle {
     title?:string;
     faction:Factions;
     requisitionPoints:number;
-    battleTally:Record<string,BattleResults>;
+    battleResults:Record<string,BattleResults>;
     supplyLimit:number;
     crusadeCards:Record<string,CrusadeCard>;
     lastAccessed:number;
@@ -21,7 +21,7 @@ export class OrderOfBattle {
         this.id = v1();
         this.faction = preferredFaction;
         this.requisitionPoints = 0;
-        this.battleTally = {};
+        this.battleResults = {};
         this.crusadeCards = {};
         this.supplyLimit = 50;
         this.lastAccessed = new Date().getTime();
@@ -38,9 +38,9 @@ export class OrderOfBattle {
     };
 
     getWinLoseDrawStats = ():Record<BattleOutcomesSummary, number> => {
-        return Object.values(this.battleTally).reduce<Record<BattleOutcomesSummary, number>>(
-            (stats, battleTally):Record<BattleOutcomesSummary, number> => {
-                const summary = battleOutcomesSummaryMap[battleTally.result];
+        return Object.values(this.battleResults).reduce<Record<BattleOutcomesSummary, number>>(
+            (stats, battleResults):Record<BattleOutcomesSummary, number> => {
+                const summary = battleOutcomesSummaryMap[battleResults.result];
 
                 return {
                     ...stats,

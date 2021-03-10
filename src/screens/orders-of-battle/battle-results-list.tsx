@@ -9,54 +9,50 @@ import {
 } from 'native-base';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList, Screens} from '../../navigation/root-param-list';
-import {OrderOfBattle} from '../../redux/state/order-of-battle';
 import {SwipeListWrapper} from '../../components/swipe-list-background-image';
+import {ConnectedProps} from 'react-redux';
+import {battleResultsListConnector} from './battle-results-list-connector';
+import {BattleResults} from '../../redux/state/order-of-battle/battle-results';
 
-export type  BattleResultsListProps = {
+export type  BattleResultsListProps = ConnectedProps<typeof battleResultsListConnector> & {
     navigation: StackNavigationProp<RootParamList, Screens.ORDERS_OF_BATTLE>
 }
 
 export const BattleResultsList = ({
-    ordersOfBattle,
-    createOrderOfBattle,
-    loadSelectedOrderOfBattle,
-    deleteOrderOfBattle,
+    loadSelectedBattleResult,
+    deleteBattleResult,
+    createBattleResult,
+    battleResults,
     navigation
 } : BattleResultsListProps) : JSX.Element => {
-    const orderOfBattleList = Object.values(ordersOfBattle).sort((a, b) => b.lastAccessed - a.lastAccessed);
+    const battleResultsList = Object.values(battleResults).sort((a, b) => b.date - a.date);
 
-    const navigateToOrderOfBattleSummary = (orderOfBattleId : string) : void => {
-        loadSelectedOrderOfBattle(orderOfBattleId);
-        navigation.push(Screens.ORDER_OF_BATTLE_SUMMARY, {isNew: false});
+    const navigateToBattleResultSummary = (battleResultId : string) : void => {
+        loadSelectedBattleResult(battleResultId);
+        navigation.push(Screens.BATTLE_RESULT_SUMMARY);
     };
 
-    const navigateToCrusadeCards = (orderOfBattleId : string) : void => {
-        loadSelectedOrderOfBattle(orderOfBattleId);
-        navigation.push(Screens.CRUSADE_CARDS);
-    };
-
-    const createOrderOfBattleAndNavigate = () : void => {
-        createOrderOfBattle();
-        navigation.push(Screens.EDIT_ORDER_OF_BATTLE, {isNew: true});
+    const createBattleResultAndNavigate = () : void => {
+        createBattleResult();
+        navigation.push(Screens.EDIT_BATTLE_RESULT, {isNew: true});
     };
 
     return (
         <Container>
             <Header />
             <SwipeListWrapper
-                data={orderOfBattleList}
-                onDelete={(item: OrderOfBattle) => deleteOrderOfBattle(item.id)}
-                onInfo={(item: OrderOfBattle) => navigateToOrderOfBattleSummary(item.id)}
-                onPress={(item: OrderOfBattle) => navigateToCrusadeCards(item.id)}
-                getTitle={(item: OrderOfBattle) => item.title || 'Untitled'}
-                getSubtitle={(item: OrderOfBattle) => new Date(item.lastAccessed).toLocaleDateString()}
-                imageKey={(item : OrderOfBattle) => item.faction}
+                data={battleResultsList}
+                onDelete={(item: BattleResults) => deleteBattleResult(item.id)}
+                onPress={(item: BattleResults) => navigateToBattleResultSummary(item.id)}
+                getTitle={(item: BattleResults) => item.getTitle()}
+                getSubtitle={(item: BattleResults) => item.getDateString()}
+                imageKey={(item : BattleResults) => item.enemyFaction}
             />
             <Footer>
                 <FooterTab>
                     <Button
                         full
-                        onPress={createOrderOfBattleAndNavigate}
+                        onPress={createBattleResultAndNavigate}
                     >
                         <Text>Create</Text>
                     </Button>
