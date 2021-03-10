@@ -1,27 +1,27 @@
 import {Factions} from '../../enums';
 
-export type Player = {
-    firstName: string,
-    lastName: string,
-    middleName?: string,
-    preferredFaction: Factions,
-    avatarImageUri?: string
-};
+export class Player {
+    public firstName: string;
+    public lastName: string;
+    public middleName?: string;
+    public preferredFaction: Factions;
+    public avatarImageUri?: string;
 
-export const defaultPlayer : Player = {
-    firstName: '',
-    lastName: '',
-    preferredFaction: Factions.UNALIGNED
-};
-
-export const getPlayerName = (player : Player) : string => {
-    let name = player.firstName;
-
-    if (player.middleName) {
-        name += ` ${player.middleName}`;
+    constructor() {
+        this.firstName = '';
+        this.lastName = '';
+        this.preferredFaction = Factions.UNALIGNED;
     }
 
-    name += ` ${player.lastName}`;
+    getPlayerName = () : string => {
+        let name = this.firstName;
 
-    return name;
-};
+        if (this.middleName) {
+            name += ` ${this.middleName}`;
+        }
+
+        name += ` ${this.lastName}`;
+
+        return name;
+    };
+}

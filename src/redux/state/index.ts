@@ -1,15 +1,15 @@
 import {PlayerAccount} from './player-account';
 
-export type State = {
-    accounts: Record<string, PlayerAccount>,
-    selectedAccountId: string | null,
-    selectedOrderOfBattleId: string | null,
-    selectedCrusadeCardId: string | null
-};
+export class State {
+    public accounts: Record<string, PlayerAccount>;
+    public selectedAccountId: string | null;
+    public selectedOrderOfBattleId: string | null;
+    public selectedCrusadeCardId: string | null;
 
-export const defaultState : State = {
-    accounts: {},
-    selectedAccountId: null,
-    selectedOrderOfBattleId: null,
-    selectedCrusadeCardId: null
-};
+    constructor() {
+        this.accounts = {};
+        this.selectedAccountId = null;
+        this.selectedCrusadeCardId = null;
+        this.selectedOrderOfBattleId = null;
+    }
+}

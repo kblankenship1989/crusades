@@ -1,10 +1,10 @@
 import {OrderOfBattleActionList, ordersOfBattleHelper} from './order-of-battle-helpers';
 import {PlayerAccount} from '../state/player-account';
-import {defaultState} from '../state';
 import {OrderOfBattleActions, AvailableActions, CrusadeCardActions, AccountActions} from '../action-list';
 import {CrusadeCardActionList} from './crusade-card-helpers';
 import {CreateAccountAction, UpdateAccountAction, DeleteAccountAction, SelectAccountAction} from '../action-creators/accounts';
 import {AnyAction} from 'redux';
+import {State} from '../state';
 
 type AccountsActions = OrderOfBattleActions | CrusadeCardActions | AccountActions
 
@@ -91,7 +91,7 @@ const updateOrdersOfBattle : AccountReducer = (state, action) => {
     };
 };
 
-export const accounts = (state : Record<string, PlayerAccount> = defaultState.accounts, action : AccountsActionList) : Record<string, PlayerAccount> => {
+export const accounts = (state : Record<string, PlayerAccount> = new State().accounts, action : AccountsActionList) : Record<string, PlayerAccount> => {
     const actionsMap : Record<AccountsActions, AccountReducer> = {
         [AvailableActions.CREATE_ACCOUNT]: addAccount,
         [AvailableActions.DELETE_ACCOUNT]: deleteAccount,

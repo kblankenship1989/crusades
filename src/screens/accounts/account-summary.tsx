@@ -14,7 +14,6 @@ import {ConnectedProps} from 'react-redux';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList, Screens} from '../../navigation/root-param-list';
 import {accountSummaryConnector} from './account-summary-connector';
-import {getPlayerName} from '../../redux/state/player';
 import {imageKeyMap} from '../../assets/images';
 
 export type AccountSummaryProps = ConnectedProps<typeof accountSummaryConnector> & {
@@ -34,7 +33,7 @@ export const AccountSummary : React.FC<AccountSummaryProps> = ({account, navigat
                 <Separator bordered>
                     <Text>Player Name</Text>
                 </Separator>
-                <Text>{getPlayerName(account.player)}</Text>
+                <Text>{account.player.getPlayerName()}</Text>
                 <Separator bordered>
                     <Text>Preferred Faction</Text>
                 </Separator>

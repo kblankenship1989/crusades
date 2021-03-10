@@ -1,7 +1,7 @@
 import {AppThunk} from './../store';
 import {Action} from 'redux';
 import {AvailableActions} from '../action-list';
-import {CrusadeCard, getDefaultCrusadeCard} from '../state/order-of-battle/crusade-card';
+import {CrusadeCard} from '../state/order-of-battle/crusade-card';
 
 export type CreateCrusadeCardAction = Action<AvailableActions.CREATE_CRUSADE_CARD> & {
     payload: {
@@ -40,9 +40,10 @@ export type SelectCrusadeCardAction = Action<AvailableActions.SELECT_CRUSADE_CAR
 export const createCrusadeCard = () : AppThunk => (dispatch, getState) : void => {
     const {
         selectedAccountId,
-        selectedOrderOfBattleId
+        selectedOrderOfBattleId,
+        accounts
     } = getState();
-    const newCrusadeCard = getDefaultCrusadeCard();
+    const newCrusadeCard = new CrusadeCard(accounts[selectedAccountId as string].player.preferredFaction);
 
     const action : CreateCrusadeCardAction = {
         type: AvailableActions.CREATE_CRUSADE_CARD,

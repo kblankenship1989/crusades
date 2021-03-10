@@ -1,19 +1,19 @@
 import {BattleHonours, BattleScars} from '../../../../enums';
 
-export type Rank = {
-    isBlooded: boolean,
-    isBattleHardened: boolean,
-    isHeroic: boolean,
-    isLegendary: boolean,
-    battleHonours: Record<string, BattleHonours>,
-    battleScars: Record<string, BattleScars>
-};
+export class Rank {
+    public isBlooded: boolean;
+    public isBattleHardened: boolean;
+    public isHeroic: boolean;
+    public isLegendary: boolean;
+    public battleHonours: Record<string, BattleHonours>;
+    public battleScars: Record<string, BattleScars>;
 
-export const defaultRank : Rank = {
-    isBlooded: false,
-    isBattleHardened: false,
-    isHeroic: false,
-    isLegendary: false,
-    battleHonours: {},
-    battleScars: {}
-};
+    constructor() {
+        this.isBattleHardened = false;
+        this.isBlooded = false;
+        this.isHeroic = false;
+        this.isLegendary = false;
+        this.battleHonours = {};
+        this.battleScars = {};
+    }
+}

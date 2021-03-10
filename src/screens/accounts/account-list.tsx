@@ -9,7 +9,6 @@ import {
 } from 'native-base';
 import {ConnectedProps} from 'react-redux';
 import {accountListConnector} from './account-list-connector';
-import {getPlayerName} from '../../redux/state/player';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList, Screens} from '../../navigation/root-param-list';
 import {SwipeListWrapper} from '../../components/swipe-list-background-image';
@@ -50,7 +49,7 @@ export const AccountList = ({
                 onDelete={(item) => deleteAccount(item.id)}
                 onInfo={(item) => navigateToAccount(item.id)}
                 onPress={(item) => navigateToOrdersOfBattle(item.id)}
-                getTitle={(item) => getPlayerName(item.player)}
+                getTitle={(item) => item.player.getPlayerName()}
                 getSubtitle={(item) => new Date(item.lastAccessed).toLocaleDateString()}
                 imageKey={item => item.player.preferredFaction}
             />

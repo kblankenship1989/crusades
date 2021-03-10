@@ -1,6 +1,6 @@
 import {AppThunk} from './../store';
 import {AvailableActions} from './../action-list';
-import {getDefaultOrderOfBattle, OrderOfBattle} from '../state/order-of-battle';
+import {OrderOfBattle} from '../state/order-of-battle';
 import {Action} from 'redux';
 
 export type CreateOrderOfBattleAction = Action<AvailableActions.CREATE_ORDER_OF_BATTLE> & {
@@ -36,9 +36,10 @@ export type SelectOrderOfBattleAction = Action<AvailableActions.SELECT_ORDER_OF_
 
 export const createOrderOfBattle = () : AppThunk => (dispatch, getState) : void => {
     const {
-        selectedAccountId
+        selectedAccountId,
+        accounts
     } = getState();
-    const newOrderOfBattle = getDefaultOrderOfBattle();
+    const newOrderOfBattle = new OrderOfBattle(accounts[selectedAccountId as string].player.preferredFaction);
 
     const action : CreateOrderOfBattleAction = {
         type: AvailableActions.CREATE_ORDER_OF_BATTLE,

@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {saveOrderOfBattle} from '../../redux/action-creators/orders-of-battle';
+import {saveOrderOfBattle, deleteOrderOfBattle} from '../../redux/action-creators/orders-of-battle';
 import {OrderOfBattleSummary} from './order-of-battle-summary';
 import {State} from '../../redux/state';
 // import {addCrusadeCard, deleteCrusadeCard, loadCurrentCrusadeCard} from '../redux/action-creators/current-crusade-card';
@@ -18,11 +18,8 @@ const mapStateToProps = (state: State) => {
 };
 
 const mapDispatchToProps = {
-    saveOrderOfBattle
-    // ,
-    // deleteCrusadeCard,
-    // addCrusadeCard,
-    // loadCurrentCrusadeCard
+    saveOrderOfBattle,
+    deleteOrderOfBattle
 };
 
 export const orderOfBattleSummaryConnector = connect(mapStateToProps, mapDispatchToProps);

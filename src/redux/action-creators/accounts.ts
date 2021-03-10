@@ -1,7 +1,7 @@
 import {AppThunk} from '../store';
 import {AvailableActions} from '../action-list';
 import {Action} from 'redux';
-import {PlayerAccount, getDefaultPlayerAccount} from '../state/player-account';
+import {PlayerAccount} from '../state/player-account';
 
 export type CreateAccountAction = Action<AvailableActions.CREATE_ACCOUNT> & {
     payload: {
@@ -31,7 +31,7 @@ export type SelectAccountAction = Action<AvailableActions.SELECT_ACCOUNT> & {
 }
 
 export const createAccount = () : AppThunk => (dispatch) : void => {
-    const newAccount = getDefaultPlayerAccount();
+    const newAccount = new PlayerAccount();
 
     const action : CreateAccountAction = {
         type: AvailableActions.CREATE_ACCOUNT,

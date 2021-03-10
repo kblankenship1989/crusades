@@ -1,17 +1,35 @@
 import {v1} from 'react-native-uuid';
-import {defaultPlayer, Player} from './player';
+import {Player} from './player';
 import {OrderOfBattle} from './order-of-battle';
+import {BattleOutcomesSummary} from '../../enums/battle-outcomes';
 
-export type PlayerAccount = {
-    id: string,
-    player: Player,
-    ordersOfBattle: Record<string, OrderOfBattle>,
-    lastAccessed: number
-};
+export class PlayerAccount {
+    public id: string;
+    public player: Player;
+    public ordersOfBattle: Record<string, OrderOfBattle>;
+    public lastAccessed: number;
 
-export const getDefaultPlayerAccount = () : PlayerAccount => ({
-    id: v1(),
-    player: defaultPlayer,
-    ordersOfBattle: {},
-    lastAccessed: new Date().getTime()
-});
+    constructor() {
+        this.id = v1();
+        this.player = new Player();
+        this.ordersOfBattle = {};
+        this.lastAccessed = new Date().getTime();
+    }
+
+    getWinLoseDrawStats = ():Record<BattleOutcomesSummary, number> => {
+        return Object.values(this.ordersOfBattle).reduce<Record<BattleOutcomesSummary, number>>(
+            (stats, orderOfBattle):Record<BattleOutcomesSummary, number> => {
+                const orderOfBattleStats = orderOfBattle.getWinLoseDrawStats();
+
+                return {
+                    [BattleOutcomesSummary.DRAW]: stats[BattleOutcomesSummary.DRAW] + orderOfBattleStats[BattleOutcomesSummary.DRAW],
+                    [BattleOutcomesSummary.WIN]: stats[BattleOutcomesSummary.WIN] + orderOfBattleStats[BattleOutcomesSummary.WIN],
+                    [BattleOutcomesSummary.LOSE]: stats[BattleOutcomesSummary.LOSE] + orderOfBattleStats[BattleOutcomesSummary.LOSE],
+                };
+            }, {
+                [BattleOutcomesSummary.DRAW]: 0,
+                [BattleOutcomesSummary.LOSE]: 0,
+                [BattleOutcomesSummary.WIN]: 0
+            });
+    }
+}

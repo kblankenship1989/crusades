@@ -1,17 +1,16 @@
 
-import {ObjectiveTallies, defaultObjectiveTallies, defaultObjectiveTalliesWithAgendas} from './objective-tallies';
+import {ObjectiveTallies} from './objective-tallies';
 
-export type CombatTallies = {
-    battlesPlayed: number,
-    battlesSurvived: number,
-    currentBattleTally: ObjectiveTallies,
-    totalTally: ObjectiveTallies
-};
+export class CombatTallies {
+    public battlesPlayed: number;
+    public battlesSurvived: number;
+    public currentBattleTally: ObjectiveTallies;
+    public totalTally: ObjectiveTallies;
 
-export const defaultCombatTallies : CombatTallies = {
-    battlesPlayed: 0,
-    battlesSurvived:0,
-    currentBattleTally: defaultObjectiveTalliesWithAgendas,
-    totalTally: defaultObjectiveTallies
+    constructor() {
+        this.battlesPlayed = 0;
+        this.battlesSurvived = 0;
+        this.currentBattleTally = new ObjectiveTallies(true);
+        this.totalTally = new ObjectiveTallies(false);
+    }
 }
-;

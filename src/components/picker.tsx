@@ -1,5 +1,5 @@
 import React from 'react';
-import {Item, Picker as NBPicker, Icon} from 'native-base';
+import {Item, Picker as NBPicker} from 'native-base';
 
 export type PickerItem<T> = {
     key: T,
@@ -23,12 +23,9 @@ export const Picker : React.FC<PickerProps> = ({
     return (
         <Item picker>
             <NBPicker
-                mode="dropdown"
-                iosIcon={<Icon name="arrow-down" />}
+                mode={'dropdown'}
                 style={{width: undefined}}
                 placeholder={placeholder}
-                // placeholderStyle={{color: '#bfc6ea'}}
-                // placeholderIconColor="#007aff"
                 selectedValue={selectedValue}
                 onValueChange={onChange}
             >
