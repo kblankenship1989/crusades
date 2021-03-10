@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Separator, Text, Button, Icon, Grid, Col} from 'native-base';
+import {View, Separator, Text, Button, Icon, Grid, Col, H2} from 'native-base';
 import {Picker, PickerItem} from './picker';
 
 export type QuantitySelectorProps = {
@@ -25,7 +25,7 @@ export const QuantitySelector : React.FC<QuantitySelectorProps> = ({
 
         let i : number;
 
-        for (i = min; i < max; i += multiplier) {
+        for (i = min; i <= max; i += multiplier) {
             availableOptions.push({
                 key: i,
                 value: i
@@ -38,20 +38,20 @@ export const QuantitySelector : React.FC<QuantitySelectorProps> = ({
     return (
         <View>
             <Separator bordered>
-                <Text>{title}</Text>
+                <H2>{title}</H2>
             </Separator>
             <Grid>
                 <Col>
                     <Button
-                        transparent
                         icon
+                        full
                         disabled={selectedValue <= min}
-                        onPress={() => onQuantityChange(selectedValue - 1)}
+                        onPress={() => onQuantityChange(selectedValue - multiplier)}
                     >
                         <Icon type={'MaterialCommunityIcons'} name={'minus-circle'}/>
                     </Button>
                 </Col>
-                <Col>
+                <Col size={3}>
                     <Picker
                         items={getAvailableOptions()}
                         onChange={onQuantityChange}
@@ -60,10 +60,10 @@ export const QuantitySelector : React.FC<QuantitySelectorProps> = ({
                 </Col>
                 <Col>
                     <Button
-                        transparent
                         icon
+                        full
                         disabled={selectedValue >= max}
-                        onPress={() => onQuantityChange(selectedValue + 1)}
+                        onPress={() => onQuantityChange(selectedValue + multiplier)}
                     >
                         <Icon type={'MaterialCommunityIcons'} name={'plus-circle'}/>
                     </Button>

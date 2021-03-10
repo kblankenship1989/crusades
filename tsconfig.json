@@ -9,7 +9,8 @@
     "resolveJsonModule": true,
     "strict": true,
     "types": ["reflect-metadata", "jest"],
-    "typeRoots": ["src/types", "node_modules/@types"]
+    "typeRoots": ["src/types", "node_modules/@types"],
+    "target": "es6"
   },
   "exclude": ["node_modules", "./src/**/*.spec.tsx", "./src/**/*.spec.ts", "./src/themes/**/*.js"],
   "include": ["./src/**/*.tsx", "./src/**/*.ts", "jest.d.ts", "jest.d.ts", "App.tsx"]

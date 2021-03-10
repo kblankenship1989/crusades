@@ -25,6 +25,7 @@ export const AccountSummary : React.FC<AccountSummaryProps> = ({account, navigat
     const navigateToEditPlayer = () : void => {
         navigation.push(Screens.EDIT_PLAYER, {isNew: false});
     };
+
     return (
         <Container>
             <Header />
@@ -33,7 +34,7 @@ export const AccountSummary : React.FC<AccountSummaryProps> = ({account, navigat
                 <Separator bordered>
                     <Text>Player Name</Text>
                 </Separator>
-                <Text>{account.player.getPlayerName()}</Text>
+                <Text>{account.player.playerName}</Text>
                 <Separator bordered>
                     <Text>Preferred Faction</Text>
                 </Separator>

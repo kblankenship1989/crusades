@@ -4,7 +4,7 @@
     "slug": "crusades",
     "version": "0.0.1",
     "orientation": "portrait",
-    "icon": "./src/assets/images/unaligned.png",
+    "icon": "./assets/images/ewar.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {

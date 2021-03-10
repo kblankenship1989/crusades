@@ -12,6 +12,7 @@ import {accountListConnector} from './account-list-connector';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList, Screens} from '../../navigation/root-param-list';
 import {SwipeListWrapper} from '../../components/swipe-list-background-image';
+import {PlayerAccount} from '../../redux/state/player-account';
 
 export type AccountListProps = ConnectedProps<typeof accountListConnector> & {
     navigation: StackNavigationProp<RootParamList, Screens.ACCOUNT_LIST>
@@ -46,11 +47,11 @@ export const AccountList = ({
             <Header />
             <SwipeListWrapper
                 data={accountList}
-                onDelete={(item) => deleteAccount(item.id)}
-                onInfo={(item) => navigateToAccount(item.id)}
-                onPress={(item) => navigateToOrdersOfBattle(item.id)}
-                getTitle={(item) => item.player.getPlayerName()}
-                getSubtitle={(item) => new Date(item.lastAccessed).toLocaleDateString()}
+                onDelete={(item: PlayerAccount) => deleteAccount(item.id)}
+                onInfo={(item: PlayerAccount) => navigateToAccount(item.id)}
+                onPress={(item: PlayerAccount) => navigateToOrdersOfBattle(item.id)}
+                getTitle={(item: PlayerAccount) => item.player.playerName}
+                getSubtitle={(item: PlayerAccount) => item.lastAccessedDate}
                 imageKey={item => item.player.preferredFaction}
             />
             <Footer>
