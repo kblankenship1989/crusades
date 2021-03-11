@@ -50,8 +50,8 @@ export const AccountList = ({
                 onDelete={(item: PlayerAccount) => deleteAccount(item.id)}
                 onInfo={(item: PlayerAccount) => navigateToAccount(item.id)}
                 onPress={(item: PlayerAccount) => navigateToOrdersOfBattle(item.id)}
-                getTitle={(item: PlayerAccount) => item.player.playerName}
-                getSubtitle={(item: PlayerAccount) => item.lastAccessedDate}
+                getTitle={(item: PlayerAccount) => item.player.getPlayerName()}
+                getSubtitle={(item: PlayerAccount) => item.getLastAccessedDate()}
                 imageKey={item => item.player.preferredFaction}
             />
             <Footer>

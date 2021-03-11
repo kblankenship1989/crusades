@@ -36,7 +36,7 @@ export const OrderOfBattleSummary : React.FC<OrderOfBattleSummaryProps> = ({navi
     };
 
     const navigateToBattleResultsList = ():void => {
-        navigation.push(Screens.BATTLE_TALLIES);
+        navigation.push(Screens.BATTLE_RESULTS);
     };
 
     const onActionSelect = (buttonIndex:number):void => {
@@ -47,7 +47,7 @@ export const OrderOfBattleSummary : React.FC<OrderOfBattleSummaryProps> = ({navi
             [ActionList.CANCEL]: () => {console.log('canceled');}
         };
 
-        actionsMap[actionsOrdered[buttonIndex]];
+        actionsMap[actionsOrdered[buttonIndex]]();
     };
 
     const openActions = ():void => {
@@ -85,7 +85,7 @@ export const OrderOfBattleSummary : React.FC<OrderOfBattleSummaryProps> = ({navi
                     <H2>{'Battle Summary'}</H2>
                     <Text>{'(W / L / D)'}</Text>
                 </Separator>
-                <Text>{getWinLoseDrawString}</Text>
+                <Text>{getWinLoseDrawString()}</Text>
             </Content>
             <Footer>
                 <FooterTab>

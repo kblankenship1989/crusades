@@ -34,7 +34,7 @@ export const AccountSummary : React.FC<AccountSummaryProps> = ({account, navigat
                 <Separator bordered>
                     <Text>Player Name</Text>
                 </Separator>
-                <Text>{account.player.playerName}</Text>
+                <Text>{account.player.getPlayerName()}</Text>
                 <Separator bordered>
                     <Text>Preferred Faction</Text>
                 </Separator>
