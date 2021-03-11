@@ -6,11 +6,12 @@ import {RootParamList, Screens} from '../../navigation/root-param-list';
 import {editBattleResultConnector} from './edit-battle-result-connector';
 import {RouteProp} from '@react-navigation/native';
 import {FactionPicker} from '../../components/faction-picker';
-import {Factions} from '../../enums';
+import {Factions, BattleOutcomes} from '../../enums';
 import {TextInput} from '../../components/text-input';
-import {QuantitySelector} from '../../components/quantity-selector';
 import {BattleResults} from '../../redux/state/order-of-battle/battle-results';
 import {BattleOutcomePicker} from '../../components/battle-outcome-picker';
+import {PickerItem, Picker} from '../../components/picker';
+import {CrusadeCard} from '../../redux/state/order-of-battle/crusade-card';
 
 export type EditBattleResultProps = ConnectedProps<typeof editBattleResultConnector> & {
     navigation: StackNavigationProp<RootParamList, Screens.EDIT_BATTLE_RESULT>,
@@ -19,7 +20,9 @@ export type EditBattleResultProps = ConnectedProps<typeof editBattleResultConnec
 
 type EditBattleResultState = BattleResults & {
     isDirty: boolean,
-    isNew: boolean
+    isBattleOutcomeSelected: boolean,
+    isEnemyFactionSelected: boolean,
+    unitsToMarkForGreatness: PickerItem<string>[]
 }
 
 type NumberFields = 'requisitionPoints' | 'supplyLimit'
@@ -31,7 +34,9 @@ export class EditBattleResult extends React.Component<EditBattleResultProps, Edi
         this.state = {
             ...props.battleResult,
             isDirty: props.route.params.isNew,
-            isNew: props.route.params.isNew
+            isBattleOutcomeSelected: !props.route.params.isNew,
+            isEnemyFactionSelected: !props.route.params.isNew,
+            unitsToMarkForGreatness: this.getUnitsToMarkForGreatness(props.crusadeCards)
         };
     }
 
@@ -40,7 +45,24 @@ export class EditBattleResult extends React.Component<EditBattleResultProps, Edi
             ...prevState,
             enemyFaction,
             isDirty: true,
-            isNew: false
+            isEnemyFactionSelected: true
+        }));
+    }
+
+    selectBattleOutcome = (result: BattleOutcomes) : void => {
+        this.setState(prevState => ({
+            ...prevState,
+            result,
+            isDirty: true,
+            isBattleOutcomeSelected: true
+        }));
+    }
+
+    selectMarkedForGreatness = (crusadeCardId: string) : void => {
+        this.setState(prevState => ({
+            ...prevState,
+            isDirty: true,
+            markedForGreatness: crusadeCardId
         }));
     }
 
@@ -63,7 +85,8 @@ export class EditBattleResult extends React.Component<EditBattleResultProps, Edi
     save = () : void => {
         const {
             isDirty,
-            isNew,
+            isBattleOutcomeSelected,
+            isEnemyFactionSelected,
             ...battleResult
         } = this.state;
 
@@ -80,9 +103,20 @@ export class EditBattleResult extends React.Component<EditBattleResultProps, Edi
         }
     }
 
+    getUnitsToMarkForGreatness = (crusadeCards: Record<string, CrusadeCard>) : PickerItem<string>[] => {
+        return Object.entries(crusadeCards)
+            .filter((entry) => entry[1].selected)
+            .map((entry) : PickerItem<string> => ({
+                key: entry[0],
+                value: entry[0],
+                label: entry[1].getDisplayName()
+            }));
+    }
+
     render(): React.ReactNode {
         return (
             <Container>
+
                 <Header />
                 <Content>
                     <Form>
@@ -92,14 +126,20 @@ export class EditBattleResult extends React.Component<EditBattleResultProps, Edi
                             onChangeText={this.setEnemyName}
                         />
                         <FactionPicker
-                            selectedFaction={this.state.isNew ? undefined : this.state.enemyFaction}
+                            selectedFaction={this.state.isEnemyFactionSelected ? this.state.enemyFaction : undefined}
                             onChange={this.selectFaction}
                             placeholder={'Select Enemy Faction'}
                             title={'Enemy Faction'}
                         />
                         <BattleOutcomePicker
-                            selectedBattleOutcome={this.state.isNew ? undefined : this.state.result}
+                            selectedBattleOutcome={this.state.isBattleOutcomeSelected ? this.state.result : undefined}
                             onChange={this.selectBattleOutcome}
+                        />
+                        <Picker
+                            placeholder={'Select Unit'}
+                            items={this.state.unitsToMarkForGreatness}
+                            onChange={this.selectMarkedForGreatness}
+                            selectedValue={this.state.markedForGreatness}
                         />
                     </Form>
                 </Content>

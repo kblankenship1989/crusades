@@ -11,8 +11,13 @@ const mapStateToProps = (state: State) => {
         accounts
     } = state;
 
+    const {
+        battleResults,
+        crusadeCards
+    } = accounts[selectedAccountId as string].ordersOfBattle[selectedOrderOfBattleId as string];
     return {
-        battleResult: accounts[selectedAccountId as string].ordersOfBattle[selectedOrderOfBattleId as string].battleResults[selectedBattleResultId as string],
+        battleResult: battleResults[selectedBattleResultId as string],
+        crusadeCards,
         selectedBattleResultId: selectedBattleResultId as string
     };
 };

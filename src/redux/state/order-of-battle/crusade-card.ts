@@ -38,4 +38,6 @@ export class CrusadeCard {
         // this.rules = [];
         // this.combatTallies =defaultCombatTallies;
     }
+
+    getDisplayName = ():string => this.name || this.unit;
 }
