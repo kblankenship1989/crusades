@@ -82,6 +82,12 @@ export const BattleResultDetails : React.FC<BattleResultDetailsProps> = ({
                     <H2>{'Battle Result'}</H2>
                 </Separator>
                 <Text>{battleResult.result}</Text>
+                {battleResult.markedForGreatness &&(<>
+                    <Separator>
+                        <H2>{'Marked For Greatness'}</H2>
+                    </Separator>
+                    <Text>{crusadeCards[battleResult.markedForGreatness].getDisplayName()}</Text>
+                </>)}
             </Content>
             <Footer>
                 <FooterTab>
