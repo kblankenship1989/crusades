@@ -4,11 +4,9 @@ import {ConnectedProps} from 'react-redux';
 import {orderOfBattleSummaryConnector} from './order-of-battle-summary-connector';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList, Screens} from '../../navigation/root-param-list';
-import {RouteProp} from '@react-navigation/native';
 
 export type OrderOfBattleSummaryProps = ConnectedProps<typeof orderOfBattleSummaryConnector> & {
-    navigation: StackNavigationProp<RootParamList, Screens.ORDER_OF_BATTLE_SUMMARY>,
-    route: RouteProp<RootParamList, Screens.ORDER_OF_BATTLE_SUMMARY>
+    navigation: StackNavigationProp<RootParamList, Screens.ORDER_OF_BATTLE_SUMMARY>
 }
 
 enum ActionList {
@@ -25,14 +23,21 @@ const actionsOrdered = [
     ActionList.CANCEL
 ];
 
-export const OrderOfBattleSummary : React.FC<OrderOfBattleSummaryProps> = ({navigation, orderOfBattle, deleteOrderOfBattle, selectedOrderOfBattleId}) => {
+export const OrderOfBattleSummary : React.FC<OrderOfBattleSummaryProps> = ({
+    navigation,
+    orderOfBattle,
+    deleteOrderOfBattle,
+    loadSelectedOrderOfBattle,
+    selectedOrderOfBattleId
+}) => {
     const navigateToEditOrderOfBattle = ():void => {
         navigation.push(Screens.EDIT_ORDER_OF_BATTLE, {isNew: false});
     };
 
     const deleteCurrentOrderOfBattle = (): void => {
-        deleteOrderOfBattle(selectedOrderOfBattleId);
         navigation.pop();
+        loadSelectedOrderOfBattle(null);
+        deleteOrderOfBattle(selectedOrderOfBattleId);
     };
 
     const navigateToBattleResultsList = ():void => {
