@@ -26,7 +26,8 @@ export const CrusadeCardList = ({
     createCrusadeCard,
     loadSelectedCrusadeCard,
     deleteCrusadeCard,
-    navigation
+    navigation,
+    isBattleInProgress
 } : OrdersOfBattleListProps) : JSX.Element => {
     const crusadeCardSectionedList = Object.values(crusadeCards).reduce<Record<BattlefieldRoles, CrusadeCard[]>>((battefieldRoleLists, crusadeCard) : Record<BattlefieldRoles, CrusadeCard[]> => {
         battefieldRoleLists[crusadeCard.battleFieldRole].push(crusadeCard);
@@ -50,7 +51,7 @@ export const CrusadeCardList = ({
 
     const navigateToBattleTallies = (crusadeCardId : string) : void => {
         loadSelectedCrusadeCard(crusadeCardId);
-        navigation.push(Screens.BATTLE_TALLIES);
+        navigation.push(Screens.EDIT_COMBAT_TALLIES, {isBattleInProgress});
     };
 
     const createOrderOfBattleAndNavigate = () : void => {

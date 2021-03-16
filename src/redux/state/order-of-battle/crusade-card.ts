@@ -1,6 +1,7 @@
 import {v1} from 'react-native-uuid';
 
 import {BattlefieldRoles, Factions} from '../../../enums';
+import {CombatTallies} from './crusade-card/combat-tallies';
 
 export class CrusadeCard {
     id: string;
@@ -10,6 +11,7 @@ export class CrusadeCard {
     battleFieldRole: BattlefieldRoles;
     selected: boolean;
     powerRating: number;
+    combatTallies: CombatTallies;
     // experiencePoints: number;
     // crusadePoints: number;
     // selectableKeywords: string[];
@@ -20,7 +22,6 @@ export class CrusadeCard {
     // relics?: string[];
     // upgrades?: string[];
     // rules: string[];
-    // combatTallies: CombatTallies;
     // rank?: Rank;
 
     constructor(preferredFaction: Factions) {
@@ -30,13 +31,13 @@ export class CrusadeCard {
         this.selected = true;
         this.faction = preferredFaction;
         this.battleFieldRole = BattlefieldRoles.TROOPS;
+        this.combatTallies = new CombatTallies();
         // this.experiencePoints = 0;
         // this.crusadePoints = 0;
         // this.selectableKeywords = [];
         // this.unitType = [];
         // this.equipment = [];
         // this.rules = [];
-        // this.combatTallies =defaultCombatTallies;
     }
 
     getDisplayName = ():string => this.name || this.unit;

@@ -6,6 +6,7 @@ export class State {
     selectedOrderOfBattleId: string | null;
     selectedCrusadeCardId: string | null;
     selectedBattleResultId: string | null;
+    isBattleInProgress: boolean;
 
     constructor() {
         this.accounts = {};
@@ -13,5 +14,6 @@ export class State {
         this.selectedCrusadeCardId = null;
         this.selectedOrderOfBattleId = null;
         this.selectedBattleResultId = null;
+        this.isBattleInProgress = false;
     }
 }

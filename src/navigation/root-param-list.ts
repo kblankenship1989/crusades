@@ -11,7 +11,8 @@ export enum Screens {
     EDIT_CRUSADE_CARD = 'EDIT_CRUSADE_CARD',
     BATTLE_RESULT_SUMMARY = 'BATTLE_RESULT_SUMMARY',
     BATTLE_RESULTS = 'BATTLE_RESULTS',
-    EDIT_BATTLE_RESULT = 'EDIT_BATTLE_RESULT'
+    EDIT_BATTLE_RESULT = 'EDIT_BATTLE_RESULT',
+    EDIT_COMBAT_TALLIES = 'EDIT_COMBAT_TALLES'
 }
 
 export type RootParamList = Record<Screens, Record<string, any> | undefined> & {
@@ -26,5 +27,8 @@ export type RootParamList = Record<Screens, Record<string, any> | undefined> & {
     }
     [Screens.EDIT_BATTLE_RESULT]: {
         isNew: boolean
+    }
+    [Screens.EDIT_COMBAT_TALLIES]: {
+        isBattleInProgress: boolean
     }
 };

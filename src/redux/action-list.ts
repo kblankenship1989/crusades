@@ -14,7 +14,8 @@ export enum AvailableActions {
     CREATE_BATTLE_RESULT = 'CREATE_BATTLE_RESULT',
     UPDATE_BATTLE_RESULT = 'UPDATE_BATTLE_RESULT',
     DELETE_BATTLE_RESULT = 'DELETE_BATTLE_RESULT',
-    SELECT_BATTLE_RESULT = 'SELECT_BATTLE_RESULT'
+    SELECT_BATTLE_RESULT = 'SELECT_BATTLE_RESULT',
+    SET_BATTLE_IN_PRGRESS = 'SET_BATTLE_IN_PROGRESS'
 }
 
 export type OrderOfBattleActions =
@@ -40,3 +41,6 @@ export type BattleResultActions =
     AvailableActions.DELETE_BATTLE_RESULT |
     AvailableActions.SELECT_BATTLE_RESULT |
     AvailableActions.UPDATE_BATTLE_RESULT
+
+export type BattleInProgressActions =
+    AvailableActions.SET_BATTLE_IN_PRGRESS
