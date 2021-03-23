@@ -1,12 +1,13 @@
 import {OrderOfBattleActionList, ordersOfBattleHelper} from './order-of-battle-helpers';
 import {PlayerAccount} from '../state/player-account';
-import {OrderOfBattleActions, AvailableActions, CrusadeCardActions, AccountActions} from '../action-list';
+import {OrderOfBattleActions, AvailableActions, CrusadeCardActions, AccountActions, BattleResultActions} from '../action-list';
 import {CrusadeCardActionList} from './crusade-card-helpers';
 import {CreateAccountAction, UpdateAccountAction, DeleteAccountAction, SelectAccountAction} from '../action-creators/accounts';
 import {AnyAction} from 'redux';
 import {State} from '../state';
+import {BattleResultActionList} from './battle-result-helpers';
 
-type AccountsActions = OrderOfBattleActions | CrusadeCardActions | AccountActions
+type AccountsActions = OrderOfBattleActions | CrusadeCardActions | AccountActions | BattleResultActions
 
 export type AccountsActionList =
     CreateAccountAction |
@@ -14,7 +15,9 @@ export type AccountsActionList =
     DeleteAccountAction |
     SelectAccountAction |
     OrderOfBattleActionList |
-    CrusadeCardActionList | AnyAction
+    CrusadeCardActionList |
+    BattleResultActionList |
+    AnyAction
 
 type AccountReducer = (state: Record<string, PlayerAccount>, action: AccountsActionList) => Record<string, PlayerAccount>
 
@@ -103,7 +106,11 @@ export const accounts = (state : Record<string, PlayerAccount> = new State().acc
         [AvailableActions.CREATE_CRUSADE_CARD]: updateOrdersOfBattle,
         [AvailableActions.UPDATE_CRUSADE_CARD]: updateOrdersOfBattle,
         [AvailableActions.DELETE_CRUSADE_CARD]: updateOrdersOfBattle,
-        [AvailableActions.SELECT_CRUSADE_CARD]: updateOrdersOfBattle
+        [AvailableActions.SELECT_CRUSADE_CARD]: updateOrdersOfBattle,
+        [AvailableActions.CREATE_BATTLE_RESULT]: updateOrdersOfBattle,
+        [AvailableActions.UPDATE_BATTLE_RESULT]: updateOrdersOfBattle,
+        [AvailableActions.DELETE_BATTLE_RESULT]: updateOrdersOfBattle,
+        [AvailableActions.SELECT_BATTLE_RESULT]: updateOrdersOfBattle
     };
 
     return action.type in actionsMap ?

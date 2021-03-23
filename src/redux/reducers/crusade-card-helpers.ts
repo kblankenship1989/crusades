@@ -1,21 +1,21 @@
 import {CrusadeCard} from '../state/order-of-battle/crusade-card';
 import {
-    DeleteCrusdaeCardAction,
+    DeleteCrusadeCardAction,
     CreateCrusadeCardAction,
-    UpdateCrusdaeCArdAction
+    UpdateCrusadeCardAction
 } from '../action-creators/crusade-cards';
 import {AvailableActions, CrusadeCardActions} from '../action-list';
 
-export type CrusadeCardActionList = DeleteCrusdaeCardAction |
+export type CrusadeCardActionList = DeleteCrusadeCardAction |
     CreateCrusadeCardAction |
-    UpdateCrusdaeCArdAction
+    UpdateCrusadeCardAction
 
 type CrusadeCardHelper = (crusadeCards: Record<string, CrusadeCard>, action: CrusadeCardActionList) => Record<string, CrusadeCard>
 
 const deleteCrusadeCard : CrusadeCardHelper = (crusadeCards, action) => {
     const newCrusadeCards = {...crusadeCards};
 
-    delete newCrusadeCards[(action as DeleteCrusdaeCardAction).payload.crusadeCardId];
+    delete newCrusadeCards[(action as DeleteCrusadeCardAction).payload.crusadeCardId];
 
     return newCrusadeCards;
 };
@@ -36,7 +36,7 @@ const updateCrusadeCard : CrusadeCardHelper = (crusadeCards, action) => {
     const {
         selectedCrusadeCardId,
         updates
-    } = (action as UpdateCrusdaeCArdAction).payload;
+    } = (action as UpdateCrusadeCardAction).payload;
     const newCrusadeCard = {
         ...crusadeCards[selectedCrusadeCardId],
         ...updates
@@ -48,12 +48,14 @@ const updateCrusadeCard : CrusadeCardHelper = (crusadeCards, action) => {
     };
 };
 
+const selectCrusadeCard : CrusadeCardHelper = (crusadeCards) => crusadeCards;
+
 export const crusadeCardHelpers : CrusadeCardHelper = (crusadeCards, action) => {
     const actionMap : Record<CrusadeCardActions, CrusadeCardHelper> = {
         [AvailableActions.CREATE_CRUSADE_CARD]: addCrusadeCard,
         [AvailableActions.DELETE_CRUSADE_CARD]: deleteCrusadeCard,
         [AvailableActions.UPDATE_CRUSADE_CARD]: updateCrusadeCard,
-        [AvailableActions.SELECT_CRUSADE_CARD]: () => crusadeCards
+        [AvailableActions.SELECT_CRUSADE_CARD]: selectCrusadeCard
     };
 
     return actionMap[action.type as CrusadeCardActions] ?
