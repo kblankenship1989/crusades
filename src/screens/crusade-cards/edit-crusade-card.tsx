@@ -6,10 +6,11 @@ import {RootParamList, Screens} from '../../navigation/root-param-list';
 import {editCrusadeCardConnector} from './edit-crusdae-card-connector';
 import {RouteProp} from '@react-navigation/native';
 import {FactionPicker} from '../../components/faction-picker';
-import {Factions} from '../../enums';
+import {Factions, BattlefieldRoles} from '../../enums';
 import {TextInput} from '../../components/text-input';
 import {QuantitySelector} from '../../components/quantity-selector';
 import {CrusadeCard} from '../../redux/state/order-of-battle/crusade-card';
+import {BattlefieldRolePicker} from '../../components/battlefield-role-picker';
 
 export type EditCrusadeCardProps = ConnectedProps<typeof editCrusadeCardConnector> & {
     navigation: StackNavigationProp<RootParamList, Screens.EDIT_CRUSADE_CARD>,
@@ -17,8 +18,7 @@ export type EditCrusadeCardProps = ConnectedProps<typeof editCrusadeCardConnecto
 }
 
 type EditCrusadeCardState = CrusadeCard & {
-    isDirty: boolean,
-    isNew: boolean
+    isDirty: boolean
 }
 
 export class EditCrusadeCard extends React.Component<EditCrusadeCardProps, EditCrusadeCardState> {
@@ -27,17 +27,23 @@ export class EditCrusadeCard extends React.Component<EditCrusadeCardProps, EditC
 
         this.state = {
             ...props.crusadeCard,
-            isDirty: props.route.params.isNew,
-            isNew: props.route.params.isNew
+            isDirty: props.route.params.isNew
         };
     }
 
-    selectFaction = (preferredFaction: Factions) : void => {
+    selectFaction = (faction: Factions) : void => {
         this.setState(prevState => ({
             ...prevState,
-            preferredFaction,
-            isDirty: true,
-            isNew: false
+            faction,
+            isDirty: true
+        }));
+    }
+
+    selectBattlefieldRole = (battlefieldRole: BattlefieldRoles) : void => {
+        this.setState(prevState => ({
+            ...prevState,
+            battlefieldRole,
+            isDirty: true
         }));
     }
 
@@ -49,10 +55,25 @@ export class EditCrusadeCard extends React.Component<EditCrusadeCardProps, EditC
         }));
     }
 
+    setUnit = (unit: string) : void => {
+        this.setState(prevState => ({
+            ...prevState,
+            unit,
+            isDirty: true
+        }));
+    }
+
+    setPowerRating = (powerRating: number) : void => {
+        this.setState(prevState => ({
+            ...prevState,
+            powerRating,
+            isDirty: true
+        }));
+    }
+
     save = () : void => {
         const {
             isDirty,
-            isNew,
             ...crusadeCard
         } = this.state;
 
@@ -68,6 +89,12 @@ export class EditCrusadeCard extends React.Component<EditCrusadeCardProps, EditC
         }
     }
 
+    isFormValid = () : boolean => {
+        return [
+            this.state.unit
+        ].every((value) => !!value);
+    }
+
     render(): React.ReactNode {
         return (
             <Container>
@@ -75,15 +102,35 @@ export class EditCrusadeCard extends React.Component<EditCrusadeCardProps, EditC
                 <Content>
                     <Form>
                         <TextInput
+                            label={'Unit Description'}
+                            value={this.state.unit}
+                            onChangeText={this.setUnit}
+                            isRequired
+                        />
+                        <TextInput
                             label={'Name'}
                             value={this.state.name}
                             onChangeText={this.setName}
                         />
                         <FactionPicker
-                            selectedFaction={this.state.isNew ? undefined : this.state.faction}
+                            selectedFaction={this.state.faction}
                             onChange={this.selectFaction}
                             placeholder={'Select Faction'}
                             title={'Faction'}
+                        />
+                        <BattlefieldRolePicker
+                            selectedRole={this.state.battlefieldRole}
+                            onChange={this.selectBattlefieldRole}
+                            placeholder={'Select Faction'}
+                            title={'Faction'}
+                        />
+                        <QuantitySelector
+                            title={'Power Rating'}
+                            min={1}
+                            max={50}
+                            multiplier={1}
+                            selectedValue={this.state.powerRating}
+                            onQuantityChange={this.setPowerRating}
                         />
                     </Form>
                 </Content>
@@ -92,6 +139,7 @@ export class EditCrusadeCard extends React.Component<EditCrusadeCardProps, EditC
                         <Button
                             full
                             onPress={this.save}
+                            disabled={!this.isFormValid()}
                         >
                             <Text>Save</Text>
                         </Button>

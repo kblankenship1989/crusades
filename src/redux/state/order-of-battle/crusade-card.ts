@@ -8,7 +8,7 @@ export class CrusadeCard {
     name?: string;
     unit: string;
     faction: Factions;
-    battleFieldRole: BattlefieldRoles;
+    battlefieldRole: BattlefieldRoles;
     selected: boolean;
     powerRating: number;
     combatTallies: CombatTallies;
@@ -27,10 +27,10 @@ export class CrusadeCard {
     constructor(preferredFaction: Factions) {
         this.id = v1();
         this.unit = '';
-        this.powerRating = 0;
+        this.powerRating = 1;
         this.selected = true;
         this.faction = preferredFaction;
-        this.battleFieldRole = BattlefieldRoles.TROOPS;
+        this.battlefieldRole = BattlefieldRoles.TROOPS;
         this.combatTallies = new CombatTallies();
         // this.experiencePoints = 0;
         // this.crusadePoints = 0;
