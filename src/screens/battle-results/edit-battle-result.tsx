@@ -122,11 +122,11 @@ export class EditBattleResult extends React.Component<EditBattleResultProps, Edi
                     <Form>
                         <TextInput
                             label={'Enemy Name'}
-                            value={this.state.enemyName}
+                            value={this.state.opponent.name}
                             onChangeText={this.setEnemyName}
                         />
                         <FactionPicker
-                            selectedFaction={this.state.isEnemyFactionSelected ? this.state.enemyFaction : undefined}
+                            selectedFaction={this.state.isEnemyFactionSelected ? this.state.opponent.faction : undefined}
                             onChange={this.selectFaction}
                             placeholder={'Select Enemy Faction'}
                             title={'Enemy Faction'}

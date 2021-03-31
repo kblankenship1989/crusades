@@ -7,8 +7,7 @@ export type CreateBattleResultAction = Action<AvailableActions.CREATE_BATTLE_RES
     payload: {
         newBattleResult: BattleResults,
         selectedBattleResultId: string,
-        selectedOrderOfBattleId: string,
-        selectedAccountId: string
+        selectedOrderOfBattleId: string
     }
 }
 
@@ -16,30 +15,26 @@ export type UpdateBattleResultAction = Action<AvailableActions.UPDATE_BATTLE_RES
     payload: {
         updates: Partial<BattleResults>,
         selectedBattleResultId: string,
-        selectedOrderOfBattleId: string,
-        selectedAccountId: string
+        selectedOrderOfBattleId: string
     }
 }
 
 export type DeleteBattleResultAction = Action<AvailableActions.DELETE_BATTLE_RESULT> & {
     payload: {
         battleResultId: string,
-        selectedOrderOfBattleId: string,
-        selectedAccountId: string
+        selectedOrderOfBattleId: string
     }
 }
 
 export type SelectBattleResultAction = Action<AvailableActions.SELECT_BATTLE_RESULT> & {
     payload: {
         selectedBattleResultId: string | null,
-        selectedOrderOfBattleId: string,
-        selectedAccountId: string
+        selectedOrderOfBattleId: string
     }
 }
 
 export const createBattleResult = () : AppThunk => (dispatch, getState) : void => {
     const {
-        selectedAccountId,
         selectedOrderOfBattleId
     } = getState();
     const newBattleResult = new BattleResults();
@@ -49,8 +44,7 @@ export const createBattleResult = () : AppThunk => (dispatch, getState) : void =
         payload: {
             newBattleResult,
             selectedBattleResultId: newBattleResult.id,
-            selectedOrderOfBattleId: selectedOrderOfBattleId as string,
-            selectedAccountId: selectedAccountId as string
+            selectedOrderOfBattleId: selectedOrderOfBattleId as string
         }
     };
 
@@ -59,15 +53,13 @@ export const createBattleResult = () : AppThunk => (dispatch, getState) : void =
 
 export const loadSelectedBattleResult = (selectedBattleResultId : string | null) : AppThunk => (dispatch, getState) : void => {
     const {
-        selectedAccountId,
         selectedOrderOfBattleId
     } = getState();
     const action : SelectBattleResultAction = {
         type: AvailableActions.SELECT_BATTLE_RESULT,
         payload: {
             selectedBattleResultId,
-            selectedOrderOfBattleId: selectedOrderOfBattleId as string,
-            selectedAccountId: selectedAccountId as string
+            selectedOrderOfBattleId: selectedOrderOfBattleId as string
         }
     };
 
@@ -76,15 +68,13 @@ export const loadSelectedBattleResult = (selectedBattleResultId : string | null)
 
 export const deleteBattleResult = (battleResultId : string) : AppThunk => (dispatch, getState) : void => {
     const {
-        selectedAccountId,
         selectedOrderOfBattleId
     } = getState();
     const action: DeleteBattleResultAction = {
         type: AvailableActions.DELETE_BATTLE_RESULT,
         payload: {
             battleResultId,
-            selectedOrderOfBattleId: selectedOrderOfBattleId as string,
-            selectedAccountId: selectedAccountId as string
+            selectedOrderOfBattleId: selectedOrderOfBattleId as string
         }
     };
 
@@ -93,7 +83,6 @@ export const deleteBattleResult = (battleResultId : string) : AppThunk => (dispa
 
 export const saveBattleResult = (selectedBattleResultId: string, updates : Partial<BattleResults>) : AppThunk => (dispatch, getState) : void => {
     const {
-        selectedAccountId,
         selectedOrderOfBattleId
     } = getState();
     const action : UpdateBattleResultAction = {
@@ -101,8 +90,7 @@ export const saveBattleResult = (selectedBattleResultId: string, updates : Parti
         payload: {
             updates,
             selectedBattleResultId,
-            selectedOrderOfBattleId: selectedOrderOfBattleId as string,
-            selectedAccountId: selectedAccountId as string
+            selectedOrderOfBattleId: selectedOrderOfBattleId as string
         }
     };
 

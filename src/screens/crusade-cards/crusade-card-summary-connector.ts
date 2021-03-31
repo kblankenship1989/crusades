@@ -4,14 +4,13 @@ import {State} from '../../redux/state';
 
 const mapStateToProps = (state: State) => {
     const {
-        selectedAccountId,
         selectedOrderOfBattleId,
         selectedCrusadeCardId,
-        accounts
+        account
     } = state;
 
     return {
-        crusadeCard: accounts[selectedAccountId as string].ordersOfBattle[selectedOrderOfBattleId as string].crusadeCards[selectedCrusadeCardId as string],
+        crusadeCard: account.ordersOfBattle[selectedOrderOfBattleId as string].crusadeCards[selectedCrusadeCardId as string],
         selectedCrusadeCardId: selectedCrusadeCardId as string
     };
 };

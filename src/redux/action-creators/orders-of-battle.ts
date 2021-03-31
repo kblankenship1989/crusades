@@ -6,94 +6,76 @@ import {Action} from 'redux';
 export type CreateOrderOfBattleAction = Action<AvailableActions.CREATE_ORDER_OF_BATTLE> & {
     payload: {
         newOrderOfBattle: OrderOfBattle,
-        selectedOrderOfBattleId: string,
-        selectedAccountId: string | null
+        selectedOrderOfBattleId: string
     }
 }
 
 export type UpdateOrderOfBattleAction = Action<AvailableActions.UPDATE_ORDER_OF_BATTLE> & {
     payload: {
         updates: Partial<OrderOfBattle>,
-        selectedOrderOfBattleId: string,
-        selectedAccountId: string | null
+        selectedOrderOfBattleId: string
     }
 }
 
 export type DeleteOrderOfBattleAction = Action<AvailableActions.DELETE_ORDER_OF_BATTLE> & {
     payload: {
-        orderOfBattleId: string,
-        selectedAccountId: string | null
+        orderOfBattleId: string
     }
 }
 
 export type SelectOrderOfBattleAction = Action<AvailableActions.SELECT_ORDER_OF_BATTLE> & {
     payload: {
         selectedOrderOfBattleId: string | null,
-        lastAccessed: number,
-        selectedAccountId: string | null
+        lastAccessed: number
     }
 }
 
 export const createOrderOfBattle = () : AppThunk => (dispatch, getState) : void => {
     const {
-        selectedAccountId,
-        accounts
+        account
     } = getState();
-    const newOrderOfBattle = new OrderOfBattle(accounts[selectedAccountId as string].player.preferredFaction);
+    const newOrderOfBattle = new OrderOfBattle(account.player.preferredFaction);
 
     const action : CreateOrderOfBattleAction = {
         type: AvailableActions.CREATE_ORDER_OF_BATTLE,
         payload: {
             newOrderOfBattle: newOrderOfBattle,
-            selectedOrderOfBattleId: newOrderOfBattle.id,
-            selectedAccountId
+            selectedOrderOfBattleId: newOrderOfBattle.id
         }
     };
 
     dispatch(action);
 };
 
-export const loadSelectedOrderOfBattle = (selectedOrderOfBattleId : string | null) : AppThunk => (dispatch, getState) : void => {
-    const {
-        selectedAccountId
-    } = getState();
+export const loadSelectedOrderOfBattle = (selectedOrderOfBattleId : string | null) : AppThunk => (dispatch) : void => {
     const action : SelectOrderOfBattleAction = {
         type: AvailableActions.SELECT_ORDER_OF_BATTLE,
         payload: {
             selectedOrderOfBattleId,
-            lastAccessed: new Date().getTime(),
-            selectedAccountId
+            lastAccessed: new Date().getTime()
         }
     };
 
     dispatch(action);
 };
 
-export const deleteOrderOfBattle = (orderOfBattleId : string) : AppThunk => (dispatch, getState) : void => {
-    const {
-        selectedAccountId
-    } = getState();
+export const deleteOrderOfBattle = (orderOfBattleId : string) : AppThunk => (dispatch) : void => {
     const action: DeleteOrderOfBattleAction = {
         type: AvailableActions.DELETE_ORDER_OF_BATTLE,
         payload: {
-            orderOfBattleId,
-            selectedAccountId
+            orderOfBattleId
         }
     };
 
     dispatch(action);
 };
 
-export const saveOrderOfBattle = (selectedOrderOfBattleId: string, updates : Partial<OrderOfBattle>) : AppThunk => (dispatch, getState) : void => {
-    const {
-        selectedAccountId
-    } = getState();
+export const saveOrderOfBattle = (selectedOrderOfBattleId: string, updates : Partial<OrderOfBattle>) : AppThunk => (dispatch) : void => {
     const action : UpdateOrderOfBattleAction = {
         type: AvailableActions.UPDATE_ORDER_OF_BATTLE,
         payload: {
             updates,
-            selectedOrderOfBattleId,
-            selectedAccountId
+            selectedOrderOfBattleId
         }
     };
 

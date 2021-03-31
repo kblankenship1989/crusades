@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {AccountSummary} from './account-summary';
 
 const mapStateToProps = (state: State) => ({
-    account: state.accounts[state.selectedAccountId as string]
+    account: state.account
 });
 
 export const accountSummaryConnector = connect(mapStateToProps);

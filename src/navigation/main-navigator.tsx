@@ -4,8 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {RootParamList, Screens} from './root-param-list';
 import {ConnectedProps} from 'react-redux';
 import {mainNavigatorConnector} from './main-navigator-connector';
-import {AccountListConnector,
-    EditPlayerConnector,
+import {EditPlayerConnector,
     AccountSummaryConnector,
     EditOrderOfBattleConnector,
     OrderOfBattleSummaryConnector,
@@ -19,11 +18,10 @@ const MainStack = createStackNavigator<RootParamList>();
 
 export type MainNavigatorProps = ConnectedProps<typeof mainNavigatorConnector>
 
-export const MainNavigator = ({selectedAccountId} : MainNavigatorProps) : JSX.Element => {
+export const MainNavigator = ({account} : MainNavigatorProps) : JSX.Element => {
     return (
         <NavigationContainer>
-            <MainStack.Navigator initialRouteName={selectedAccountId ? Screens.ORDERS_OF_BATTLE : Screens.ACCOUNT_LIST}>
-                <MainStack.Screen name={Screens.ACCOUNT_LIST} component={AccountListConnector}/>
+            <MainStack.Navigator initialRouteName={account.player.firstName ? Screens.ORDERS_OF_BATTLE : Screens.EDIT_PLAYER}>
                 <MainStack.Screen name={Screens.EDIT_PLAYER} component={EditPlayerConnector}/>
                 <MainStack.Screen name={Screens.ACCOUNT_SUMMARY} component={AccountSummaryConnector}/>
                 <MainStack.Screen name={Screens.ORDERS_OF_BATTLE} component={OrdersOfBattleListConnector}/>

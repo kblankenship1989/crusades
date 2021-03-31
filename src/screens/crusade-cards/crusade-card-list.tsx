@@ -30,7 +30,7 @@ export const CrusadeCardList = ({
     isBattleInProgress
 } : OrdersOfBattleListProps) : JSX.Element => {
     const crusadeCardSectionedList = Object.values(crusadeCards).reduce<Record<BattlefieldRoles, CrusadeCard[]>>((battefieldRoleLists, crusadeCard) : Record<BattlefieldRoles, CrusadeCard[]> => {
-        battefieldRoleLists[crusadeCard.battleFieldRole].push(crusadeCard);
+        battefieldRoleLists[crusadeCard.battlefieldRole].push(crusadeCard);
         return battefieldRoleLists;
     }, {
         [BattlefieldRoles.DEDICATED_TRANSPORT]: [],
@@ -72,7 +72,7 @@ export const CrusadeCardList = ({
                     onInfo={(item: CrusadeCard) => navigateToCrusadeCardSummary(item.id)}
                     onPress={(item: CrusadeCard) => navigateToBattleTallies(item.id)}
                     getTitle={(item: CrusadeCard) => item.name || 'Untitled'}
-                    imageKey={(item : CrusadeCard) => item.battleFieldRole}
+                    imageKey={(item : CrusadeCard) => item.battlefieldRole}
                 />
                 <Separator bordered>
                     <Text>{BattlefieldRoles.TROOPS}</Text>
@@ -83,7 +83,7 @@ export const CrusadeCardList = ({
                     onInfo={(item: CrusadeCard) => navigateToCrusadeCardSummary(item.id)}
                     onPress={(item: CrusadeCard) => navigateToBattleTallies(item.id)}
                     getTitle={(item: CrusadeCard) => item.name || 'Untitled'}
-                    imageKey={(item : CrusadeCard) => item.battleFieldRole}
+                    imageKey={(item : CrusadeCard) => item.battlefieldRole}
                 />
                 <Separator bordered>
                     <Text>{BattlefieldRoles.ELITES}</Text>
@@ -94,7 +94,7 @@ export const CrusadeCardList = ({
                     onInfo={(item: CrusadeCard) => navigateToCrusadeCardSummary(item.id)}
                     onPress={(item: CrusadeCard) => navigateToBattleTallies(item.id)}
                     getTitle={(item: CrusadeCard) => item.name || 'Untitled'}
-                    imageKey={(item : CrusadeCard) => item.battleFieldRole}
+                    imageKey={(item : CrusadeCard) => item.battlefieldRole}
                 />
                 <Separator bordered>
                     <Text>{BattlefieldRoles.FAST_ATTACK}</Text>
@@ -105,7 +105,7 @@ export const CrusadeCardList = ({
                     onInfo={(item: CrusadeCard) => navigateToCrusadeCardSummary(item.id)}
                     onPress={(item: CrusadeCard) => navigateToBattleTallies(item.id)}
                     getTitle={(item: CrusadeCard) => item.name || 'Untitled'}
-                    imageKey={(item : CrusadeCard) => item.battleFieldRole}
+                    imageKey={(item : CrusadeCard) => item.battlefieldRole}
                 />
                 <Separator bordered>
                     <Text>{BattlefieldRoles.HEAVY_SUPPORT}</Text>
@@ -116,7 +116,7 @@ export const CrusadeCardList = ({
                     onInfo={(item: CrusadeCard) => navigateToCrusadeCardSummary(item.id)}
                     onPress={(item: CrusadeCard) => navigateToBattleTallies(item.id)}
                     getTitle={(item: CrusadeCard) => item.name || 'Untitled'}
-                    imageKey={(item : CrusadeCard) => item.battleFieldRole}
+                    imageKey={(item : CrusadeCard) => item.battlefieldRole}
                 />
                 <Separator bordered>
                     <Text>{BattlefieldRoles.FLYER}</Text>
@@ -127,7 +127,7 @@ export const CrusadeCardList = ({
                     onInfo={(item: CrusadeCard) => navigateToCrusadeCardSummary(item.id)}
                     onPress={(item: CrusadeCard) => navigateToBattleTallies(item.id)}
                     getTitle={(item: CrusadeCard) => item.name || 'Untitled'}
-                    imageKey={(item : CrusadeCard) => item.battleFieldRole}
+                    imageKey={(item : CrusadeCard) => item.battlefieldRole}
                 />
                 <Separator bordered>
                     <Text>{BattlefieldRoles.DEDICATED_TRANSPORT}</Text>
@@ -138,7 +138,7 @@ export const CrusadeCardList = ({
                     onInfo={(item: CrusadeCard) => navigateToCrusadeCardSummary(item.id)}
                     onPress={(item: CrusadeCard) => navigateToBattleTallies(item.id)}
                     getTitle={(item: CrusadeCard) => item.name || 'Untitled'}
-                    imageKey={(item : CrusadeCard) => item.battleFieldRole}
+                    imageKey={(item : CrusadeCard) => item.battlefieldRole}
                 />
                 <Separator bordered>
                     <Text>{BattlefieldRoles.LORD_OF_WAR}</Text>
@@ -149,7 +149,7 @@ export const CrusadeCardList = ({
                     onInfo={(item: CrusadeCard) => navigateToCrusadeCardSummary(item.id)}
                     onPress={(item: CrusadeCard) => navigateToBattleTallies(item.id)}
                     getTitle={(item: CrusadeCard) => item.name || 'Untitled'}
-                    imageKey={(item : CrusadeCard) => item.battleFieldRole}
+                    imageKey={(item : CrusadeCard) => item.battlefieldRole}
                 />
             </View>
             <Footer>

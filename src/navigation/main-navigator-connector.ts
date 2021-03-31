@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {MainNavigator} from './main-navigator';
 
 const mapStateToProps = (state: State) => ({
-    selectedAccountId: state.selectedAccountId
+    account: state.account
 });
 
 export const mainNavigatorConnector = connect(mapStateToProps);

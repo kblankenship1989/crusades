@@ -1,20 +1,25 @@
 import {v1} from 'react-native-uuid';
 
-import {BattleOutcomes, Factions} from '../../../enums';
+import {BattleOutcomes} from '../../../enums';
+import {Opponent} from './battle-results/opponent';
 
 export class BattleResults {
     id: string;
-    enemyFaction: Factions;
+    opponent: Opponent;
     result: BattleOutcomes;
     markedForGreatness?: string;
     date: number;
-    enemyName?: string;
+    agendas: string[];
+    mission?: string;
+    victoryPoints: number
 
     constructor() {
         this.id = v1();
-        this.enemyFaction = Factions.UNALIGNED;
+        this.opponent = new Opponent;
         this.result = BattleOutcomes.DRAW;
         this.date = new Date().getTime();
+        this.agendas = [];
+        this.victoryPoints = 0;
     }
 
     getDateString = ():string => {
@@ -22,6 +27,6 @@ export class BattleResults {
     }
 
     getTitle = ():string => {
-        return `${this.enemyName || this.enemyFaction} - ${this.result}`;
+        return `${this.opponent.name || this.opponent.faction} - ${this.result}`;
     }
 }

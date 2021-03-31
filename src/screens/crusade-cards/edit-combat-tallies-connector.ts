@@ -5,12 +5,11 @@ import {EditCombatTallies} from './edit-combat-tallies';
 
 const mapStateToProps = (state: State) => {
     const {
-        selectedAccountId,
         selectedCrusadeCardId,
         selectedOrderOfBattleId,
-        accounts
+        account
     } = state;
-    const combatTallies = accounts[selectedAccountId as string].ordersOfBattle[selectedOrderOfBattleId as string].crusadeCards[selectedCrusadeCardId as string].combatTallies;
+    const combatTallies = account.ordersOfBattle[selectedOrderOfBattleId as string].crusadeCards[selectedCrusadeCardId as string].combatTallies;
 
     return {
         selectedCrusadeCardId,

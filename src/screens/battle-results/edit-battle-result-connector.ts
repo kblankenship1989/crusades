@@ -5,16 +5,15 @@ import {saveBattleResult} from '../../redux/action-creators/battle-results';
 
 const mapStateToProps = (state: State) => {
     const {
-        selectedAccountId,
         selectedOrderOfBattleId,
         selectedBattleResultId,
-        accounts
+        account
     } = state;
 
     const {
         battleResults,
         crusadeCards
-    } = accounts[selectedAccountId as string].ordersOfBattle[selectedOrderOfBattleId as string];
+    } = account.ordersOfBattle[selectedOrderOfBattleId as string];
     return {
         battleResult: battleResults[selectedBattleResultId as string],
         crusadeCards,

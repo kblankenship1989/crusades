@@ -3,7 +3,7 @@ import {Content, Header, Container, Footer, FooterTab, Button, Text, Form} from 
 import {ConnectedProps} from 'react-redux';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList, Screens} from '../../navigation/root-param-list';
-import {editCrusadeCardConnector} from './edit-crusdae-card-connector';
+import {editCrusadeCardConnector} from './edit-crusade-card-connector';
 import {RouteProp} from '@react-navigation/native';
 import {FactionPicker} from '../../components/faction-picker';
 import {Factions, BattlefieldRoles} from '../../enums';

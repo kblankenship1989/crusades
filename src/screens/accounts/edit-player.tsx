@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Header, Content, Form, Footer, FooterTab, Button, Text} from 'native-base';
+import {Container, Content, Form, Fab, Icon} from 'native-base';
 import {ConnectedProps} from 'react-redux';
 import {editPlayerConnector} from './edit-player-connector';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -10,7 +10,8 @@ import {Factions} from '../../enums';
 import {ImagePickerButton} from '../../components/image-picker-button';
 import {imageKeyMap} from '../../assets/images';
 import {TextInput} from '../../components/text-input';
-import Player from '../../redux/state/player';
+import {Player} from '../../redux/state/player';
+import {AppHeader} from '../../components/app-header';
 
 export type EditPlayerProps = ConnectedProps<typeof editPlayerConnector> & {
     navigation: StackNavigationProp<RootParamList, Screens.EDIT_PLAYER>,
@@ -74,7 +75,7 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
 
     save = () : void => {
         if (this.isFormValid()) {
-            this.props.saveAccount(this.props.selectedAccountId, {player: this.state.player});
+            this.props.saveAccount({player: this.state.player});
             this.setState({
                 isDirty: false,
                 isNew: false
@@ -93,7 +94,9 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
     render() : React.ReactNode {
         return (
             <Container>
-                <Header/>
+                <AppHeader
+                    title={'Edit Account'}
+                />
                 <Content>
                     <Form>
                         <TextInput
@@ -125,19 +128,14 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
                             onImageSelect={this.selectAvatarImage}
                             title={'Select Avatar Image'}
                         />
+                        <Fab
+                            containerStyle={{ }}
+                            position={'bottomRight'}
+                            onPress={this.save}>
+                            <Icon type={'MaterialCommunityIcons'} name={'save'} />
+                        </Fab>
                     </Form>
                 </Content>
-                <Footer>
-                    <FooterTab>
-                        <Button
-                            full
-                            onPress={this.save}
-                            disabled={!this.state.isDirty || !this.isFormValid()}
-                        >
-                            <Text>Save</Text>
-                        </Button>
-                    </FooterTab>
-                </Footer>
             </Container>
         );
     }

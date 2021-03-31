@@ -77,7 +77,7 @@ export const BattleResultDetails : React.FC<BattleResultDetailsProps> = ({
                 <Separator>
                     <H2>{'Enemy Faction'}</H2>
                 </Separator>
-                <Text>{battleResult.enemyFaction}</Text>
+                <Text>{battleResult.opponent.faction}</Text>
                 <Separator>
                     <H2>{'Battle Result'}</H2>
                 </Separator>

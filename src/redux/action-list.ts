@@ -1,8 +1,5 @@
 export enum AvailableActions {
-    CREATE_ACCOUNT = 'CREATE_ACCOUNT',
     UPDATE_ACCOUNT = 'UPDATE_ACCOUNT',
-    DELETE_ACCOUNT = 'DELETE_ACCOUNT',
-    SELECT_ACCOUNT = 'SELECT_ACCOUNT',
     CREATE_ORDER_OF_BATTLE = 'CREATE_ORDER_OF_BATTLE',
     UPDATE_ORDER_OF_BATTLE = 'UPDATE_ORDER_OF_BATTLE',
     DELETE_ORDER_OF_BATTLE = 'DELETE_ORDER_OF_BATTLE',
@@ -31,9 +28,6 @@ export type CrusadeCardActions =
     AvailableActions.UPDATE_CRUSADE_CARD
 
 export type AccountActions =
-    AvailableActions.CREATE_ACCOUNT |
-    AvailableActions.DELETE_ACCOUNT |
-    AvailableActions.SELECT_ACCOUNT |
     AvailableActions.UPDATE_ACCOUNT
 
 export type BattleResultActions =

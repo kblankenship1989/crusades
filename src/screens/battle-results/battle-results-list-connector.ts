@@ -5,13 +5,12 @@ import {loadSelectedBattleResult, deleteBattleResult, createBattleResult} from '
 
 const mapStateToProps = (state: State) => {
     const {
-        selectedAccountId,
         selectedOrderOfBattleId,
-        accounts
+        account
     } = state;
 
     return {
-        battleResults: accounts[selectedAccountId as string].ordersOfBattle[selectedOrderOfBattleId as string].battleResults
+        battleResults: account.ordersOfBattle[selectedOrderOfBattleId as string].battleResults
     };
 };
 

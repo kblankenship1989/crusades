@@ -46,7 +46,7 @@ export const BattleResultsList = ({
                 onPress={(item: BattleResults) => navigateToBattleResultSummary(item.id)}
                 getTitle={(item: BattleResults) => item.getTitle()}
                 getSubtitle={(item: BattleResults) => item.getDateString()}
-                imageKey={(item : BattleResults) => item.enemyFaction}
+                imageKey={(item : BattleResults) => item.opponent.faction}
             />
             <Footer>
                 <FooterTab>

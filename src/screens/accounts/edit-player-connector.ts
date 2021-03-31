@@ -4,8 +4,7 @@ import {connect} from 'react-redux';
 import {EditPlayer} from './edit-player';
 
 const mapStateToProps = (state: State) => ({
-    selectedAccountId: state.selectedAccountId as string,
-    player: state.accounts[state.selectedAccountId as string].player
+    player: state.account.player
 });
 
 const mapDispatchToProps = {
