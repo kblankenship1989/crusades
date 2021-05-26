@@ -11,7 +11,8 @@ import {EditPlayerConnector,
     CrusadeCardListConnector,
     EditCrusadeCardConnector,
     OrdersOfBattleListConnector,
-    CrusadeCardSummaryConnector
+    CrusadeCardSummaryConnector,
+    EditCombatTalliesConnector
 } from '../screens';
 
 const MainStack = createStackNavigator<RootParamList>();
@@ -30,6 +31,7 @@ export const MainNavigator = ({account} : MainNavigatorProps) : JSX.Element => {
                 <MainStack.Screen name={Screens.CRUSADE_CARDS} component={CrusadeCardListConnector}/>
                 <MainStack.Screen name={Screens.EDIT_CRUSADE_CARD} component={EditCrusadeCardConnector}/>
                 <MainStack.Screen name={Screens.CRUSADE_CARD_SUMMARY} component={CrusadeCardSummaryConnector}/>
+                <MainStack.Screen name={Screens.EDIT_COMBAT_TALLIES} component={EditCombatTalliesConnector}/>
             </MainStack.Navigator>
         </NavigationContainer>
     );

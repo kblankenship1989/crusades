@@ -1,5 +1,5 @@
 import React from 'react';
-import {Header, Button, Body, Right, Left, Icon} from 'native-base';
+import {Header, Button, Body, Right, Left, Icon, Text} from 'native-base';
 
 export type Action = {
     icon: string,
@@ -21,7 +21,7 @@ export const AppHeader : React.FC<AppHeaderProps> = ({
         <Header>
             <Left/>
             <Body>
-                {title}
+                <Text>{title}</Text>
             </Body>
             {action &&
                 <Right>

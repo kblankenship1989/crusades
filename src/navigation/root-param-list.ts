@@ -12,11 +12,11 @@ export enum Screens {
     BATTLE_RESULTS = 'BATTLE_RESULTS',
     EDIT_BATTLE_RESULT = 'EDIT_BATTLE_RESULT',
     START_BATTLE = 'START_BATTLE',
-    EDIT_COMBAT_TALLIES = 'EDIT_COMBAT_TALLES'
+    EDIT_COMBAT_TALLIES = 'EDIT_COMBAT_TALLIES'
 }
 
 export type RootParamList = Record<Screens, Record<string, any> | undefined> & {
-    [Screens.EDIT_PLAYER]: {
+    [Screens.EDIT_PLAYER]: undefined | {
         isNew: boolean
     }
     [Screens.EDIT_ORDER_OF_BATTLE]: {

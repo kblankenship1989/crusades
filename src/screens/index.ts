@@ -6,3 +6,4 @@ export {EditCrusadeCardConnector} from './crusade-cards/edit-crusade-card-connec
 export {EditOrderOfBattleConnector} from './orders-of-battle/edit-order-of-battle-connector';
 export {OrderOfBattleSummaryConnector} from './orders-of-battle/order-of-battle-summary-connector';
 export {OrdersOfBattleListConnector} from './orders-of-battle/orders-of-battle-list-connector';
+export {EditCombatTalliesConnector} from './crusade-cards/edit-combat-tallies-connector';

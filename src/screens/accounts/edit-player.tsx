@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Content, Form, Fab, Icon} from 'native-base';
+import {Container, Content, Form, Fab, Icon, Footer} from 'native-base';
 import {ConnectedProps} from 'react-redux';
 import {editPlayerConnector} from './edit-player-connector';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -31,8 +31,8 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
         super(props);
         this.state = {
             player: props.player,
-            isDirty: props.route.params.isNew,
-            isNew: props.route.params.isNew
+            isDirty: props.route?.params?.isNew ?? true,
+            isNew: props.route?.params?.isNew ?? true
         };
     }
 
@@ -76,12 +76,13 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
     save = () : void => {
         if (this.isFormValid()) {
             this.props.saveAccount({player: this.state.player});
+            const isNew = this.state.isNew;
             this.setState({
                 isDirty: false,
                 isNew: false
             });
 
-            if (this.props.route.params.isNew) {
+            if (isNew) {
                 this.props.navigation.replace(Screens.ORDERS_OF_BATTLE);
             } else {
                 this.props.navigation.pop();
@@ -128,14 +129,14 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
                             onImageSelect={this.selectAvatarImage}
                             title={'Select Avatar Image'}
                         />
-                        <Fab
-                            containerStyle={{ }}
-                            position={'bottomRight'}
-                            onPress={this.save}>
-                            <Icon type={'MaterialCommunityIcons'} name={'save'} />
-                        </Fab>
                     </Form>
                 </Content>
+                <Fab
+                    containerStyle={{ }}
+                    position={'bottomRight'}
+                    onPress={this.save}>
+                    <Icon type={'MaterialCommunityIcons'} name={'content-save'} />
+                </Fab>
             </Container>
         );
     }

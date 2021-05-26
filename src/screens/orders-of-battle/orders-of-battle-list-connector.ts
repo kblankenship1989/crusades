@@ -10,12 +10,11 @@ import {
 
 const mapStateToProps = (state: State) => {
     const {
-        accounts,
-        selectedAccountId
+        account
     } = state;
 
     return {
-        ordersOfBattle: accounts[selectedAccountId as string].ordersOfBattle
+        ordersOfBattle: account.ordersOfBattle
     };
 };
 
