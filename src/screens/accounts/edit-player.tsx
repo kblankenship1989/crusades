@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Content, Form, Fab, Icon, Footer} from 'native-base';
+import {Container, Fab, Icon, Stack} from 'native-base';
 import {ConnectedProps} from 'react-redux';
 import {editPlayerConnector} from './edit-player-connector';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -98,42 +98,39 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
                 <AppHeader
                     title={'Edit Account'}
                 />
-                <Content>
-                    <Form>
-                        <TextInput
-                            label={'First Name'}
-                            value={this.state.player.firstName}
-                            onChangeText={this.editStringField('firstName').bind(this)}
-                            isRequired
-                        />
-                        <TextInput
-                            label={'Middle Name'}
-                            value={this.state.player.middleName}
-                            onChangeText={this.editStringField('middleName').bind(this)}
-                        />
-                        <TextInput
-                            label={'Last Name'}
-                            value={this.state.player.lastName}
-                            onChangeText={this.editStringField('lastName').bind(this)}
-                            isRequired
-                        />
-                        <FactionPicker
-                            selectedFaction={this.state.isNew ? undefined : this.state.player.preferredFaction}
-                            onChange={this.selectFaction}
-                            placeholder={'Select Preferred Faction'}
-                            title={'Preferred Faction'}
-                        />
-                        <ImagePickerButton
-                            defaultImage={imageKeyMap[this.state.player.preferredFaction]}
-                            imageUri={this.state.player.avatarImageUri}
-                            onImageSelect={this.selectAvatarImage}
-                            title={'Select Avatar Image'}
-                        />
-                    </Form>
-                </Content>
+                <Stack space={4} w={'80%'}>
+                    <TextInput
+                        label={'First Name'}
+                        value={this.state.player.firstName}
+                        onChangeText={this.editStringField('firstName').bind(this)}
+                        isRequired
+                    />
+                    <TextInput
+                        label={'Middle Name'}
+                        value={this.state.player.middleName}
+                        onChangeText={this.editStringField('middleName').bind(this)}
+                    />
+                    <TextInput
+                        label={'Last Name'}
+                        value={this.state.player.lastName}
+                        onChangeText={this.editStringField('lastName').bind(this)}
+                        isRequired
+                    />
+                    <FactionPicker
+                        selectedFaction={this.state.isNew ? undefined : this.state.player.preferredFaction}
+                        onChange={this.selectFaction}
+                        placeholder={'Select Preferred Faction'}
+                        title={'Preferred Faction'}
+                    />
+                    {/* <ImagePickerButton
+                        defaultImage={imageKeyMap[this.state.player.preferredFaction]}
+                        imageUri={this.state.player.avatarImageUri}
+                        onImageSelect={this.selectAvatarImage}
+                        title={'Select Avatar Image'}
+                    /> */}
+                </Stack>
                 <Fab
-                    containerStyle={{ }}
-                    position={'bottomRight'}
+                    placement={'bottom-right'}
                     onPress={this.save}>
                     <Icon type={'MaterialCommunityIcons'} name={'content-save'} />
                 </Fab>

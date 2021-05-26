@@ -1,5 +1,5 @@
 import React from 'react';
-import {Item, Label, Input, Text} from 'native-base';
+import {Input, FormControl, Stack} from 'native-base';
 
 export type TextInputProps = {
     label: string,
@@ -10,13 +10,16 @@ export type TextInputProps = {
 export const TextInput : React.FC<TextInputProps> = ({label, value, onChangeText, isRequired}) => {
     const hasError = isRequired && !value;
     return (
-        <Item floatingLabel error={hasError}>
-            <Label>{label}</Label>
-            <Input
-                onChangeText={onChangeText}
-                value={value}
-            />
-            {hasError && <Text>Required</Text>}
-        </Item>
+        <FormControl isRequired={isRequired} isInvalid={hasError} p={2}>
+            <Stack mx={4}>
+                <FormControl.ErrorMessage>{'Required'}</FormControl.ErrorMessage>
+                <Input
+                    placeholder={label}
+                    onChangeText={onChangeText}
+                    value={value}
+                    my={2}
+                />
+            </Stack>
+        </FormControl>
     );
 };

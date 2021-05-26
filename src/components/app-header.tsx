@@ -1,5 +1,6 @@
 import React from 'react';
-import {Header, Button, Body, Right, Left, Icon, Text} from 'native-base';
+import {Icon, IconButton} from 'native-base';
+import {AppBar} from 'native-base/src/components/composites/AppBar';
 
 export type Action = {
     icon: string,
@@ -18,25 +19,23 @@ export const AppHeader : React.FC<AppHeaderProps> = ({
 }) => {
 
     return (
-        <Header>
-            <Left/>
-            <Body>
-                <Text>{title}</Text>
-            </Body>
+        <AppBar>
+            <AppBar.Left/>
+            <AppBar.Content>{title}</AppBar.Content>
             {action &&
-                <Right>
-                    <Button
+                <AppBar.Right>
+                    <IconButton
                         onPress={action.onPress}
-                        transparent
                         disabled={action.isDisabled}
-                    >
-                        <Icon
-                            type={'MaterialCommunityIcons'}
-                            name={action.icon}
-                        />
-                    </Button>
-                </Right>
+                        icon={
+                            <Icon
+                                type={'MaterialCommunityIcons'}
+                                name={action.icon}
+                            />
+                        }
+                    />
+                </AppBar.Right>
             }
-        </Header>
+        </AppBar>
     );
 };

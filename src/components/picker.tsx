@@ -1,5 +1,5 @@
 import React from 'react';
-import {Item, Picker as NBPicker} from 'native-base';
+import {FormControl, Select,} from 'native-base';
 
 export type PickerItem<T> = {
     key: T,
@@ -9,34 +9,38 @@ export type PickerItem<T> = {
 
 export type PickerProps<T = any> = {
     selectedValue?: T,
-    onChange: (value: T, index: number) => void,
+    onChange: (value: T) => void,
     items: PickerItem<T>[],
-    placeholder?: string
+    placeholder?: string,
+    title: string
+    isRequired: boolean
 }
 
 export const Picker : React.FC<PickerProps> = ({
     items,
     selectedValue,
     onChange,
-    placeholder
+    placeholder,
+    isRequired,
+    title
 }) => {
     return (
-        <Item picker>
-            <NBPicker
-                mode={'dropdown'}
-                style={{width: undefined}}
+        <FormControl isRequired={isRequired}>
+            <FormControl.Label>{title}</FormControl.Label>
+            <Select
+                minWidth={200}
                 placeholder={placeholder}
                 selectedValue={selectedValue}
                 onValueChange={onChange}
             >
                 {items.map((item) => (
-                    <NBPicker.Item
+                    <Select.Item
                         label={item.label || item.value.toString()}
                         value={item.value}
                         key={item.key}
                     />
                 ))}
-            </NBPicker>
-        </Item>
+            </Select>
+        </FormControl>
     );
 };

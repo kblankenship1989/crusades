@@ -3,7 +3,6 @@ import {enumKeys, isEnumKey} from '../helpers/enum-helpers';
 import {Factions} from '../enums';
 
 import {Picker} from './picker';
-import {View, Separator, Text} from 'native-base';
 
 export type FactionPickerProps = {
     selectedFaction?: Factions,
@@ -30,17 +29,14 @@ export const FactionPicker : React.FC<FactionPickerProps> = ({selectedFaction, o
     };
 
     return (
-        <View>
-            <Separator>
-                <Text>{title}</Text>
-            </Separator>
-            <Picker
-                selectedValue={selectedFaction}
-                items={items}
-                onChange={onValueChange}
-                placeholder={placeholder || 'Select Faction'}
-            />
-        </View>
+        <Picker
+            title={title}
+            isRequired={true}
+            selectedValue={selectedFaction}
+            items={items}
+            onChange={onValueChange}
+            placeholder={placeholder || 'Select Faction'}
+        />
     );
 };
 
