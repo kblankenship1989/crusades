@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {ImageSourcePropType, Platform} from 'react-native';
-import {Button, Text, Thumbnail, View} from 'native-base';
+import {Avatar, Button, VStack} from 'native-base';
 import * as ImagePicker from 'expo-image-picker';
 
 export type ImagePickerButtonProps = {
@@ -44,12 +44,14 @@ export const ImagePickerButton : React.FC<ImagePickerButtonProps> = ({imageUri, 
         }
     };
 
+    const source = imageUri ? {uri: imageUri} : defaultImage;
+
     return (
-        <View>
+        <VStack space={2} alignItems={'center'}>
             <Button onPress={pickImage}>
-                <Text>{title || 'Select Image'}</Text>
+                {title || 'Select Image'}
             </Button>
-            {imageUri ? <Thumbnail large source={{uri: imageUri}}/> : <Thumbnail large source={defaultImage}/>}
-        </View>
+            <Avatar size={'lg'} source={source}/>
+        </VStack>
     );
 };

@@ -1,24 +1,11 @@
+import {Container, Image} from 'native-base';
 import React from 'react';
-import {Image, View, StyleSheet} from 'react-native';
 
 export const LoadingGIF : React.FC = () => (
-    <View style={styles.container}>
+    <Container>
         <Image
+            alt={'Loading...'}
             source={require('../assets/images/loading.gif')}
-
-            style={styles.image}
         />
-    </View>
+    </Container>
 );
-
-const styles = StyleSheet.create({
-    image: {
-        flex: 1,
-        width: '60%',
-        resizeMode: 'contain'
-    },
-    container: {
-        flex: 1,
-        alignItems: 'center',
-    }
-});

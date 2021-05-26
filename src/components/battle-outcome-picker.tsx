@@ -28,6 +28,8 @@ export const BattleOutcomePicker : React.FC<BattleOutcomePickerProps> = ({select
 
     return (
         <Picker
+            isRequired={true}
+            title={'Battle Outcome'}
             selectedValue={selectedBattleOutcome}
             placeholder={'Select Outcome'}
             items={items}

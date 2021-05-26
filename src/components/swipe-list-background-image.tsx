@@ -1,6 +1,5 @@
 import React from 'react';
-import {RowMap, SwipeListView} from 'react-native-swipe-list-view';
-import {Text, Right, Body, ListItem, View, Left, Button, Icon, Thumbnail} from 'native-base';
+import {Text, List, Avatar, Actionsheet} from 'native-base';
 import {ListRenderItemInfo} from 'react-native';
 import {imageKeyMap} from '../assets/images';
 
@@ -15,49 +14,34 @@ export type SwipeListWrapperProps<T> = {
 }
 
 export const SwipeListWrapper = ({data, onPress, getTitle, getSubtitle, onInfo, onDelete, imageKey} : SwipeListWrapperProps<any>) : JSX.Element=> {
+    const [isActionSheetOpen, setActionSheetOpen] = React.useState(false);
+    const [selectedItem, setSelectedItem] = React.useState<any | null>(null);
+
     const renderItem = (rowData: ListRenderItemInfo<any>) : JSX.Element =>(
-        <ListItem
-            button
-            avatar
+        <List.Item
             onPress={() => onPress(rowData.item)}
+            onLongPress={() => {
+                setSelectedItem(rowData.item);
+                setActionSheetOpen(true);
+            }}
         >
-            <Left>
-                <Thumbnail source={imageKeyMap[imageKey(rowData.item)]}/>
-            </Left>
-            <Body>
-                <Text>{getTitle(rowData.item)}</Text>
-            </Body>
-            {getSubtitle && <Right>
-                <Text note>{getSubtitle(rowData.item)}</Text>
-            </Right>}
-        </ListItem>
+            <Avatar source={imageKeyMap[imageKey(rowData.item)]}/>
+            {getTitle(rowData.item)}
+            {getSubtitle && <Text size={'sm'} italic>{getSubtitle(rowData.item)}</Text>}
+        </List.Item>
     );
 
-    const renderHiddenRow = (rowData: ListRenderItemInfo<any>, rowMap: RowMap<any>) => (
-        <ListItem>
-            {onInfo && <Left>
-                <Button full onPress={() => {
-                    rowMap[rowData.item.id].closeRow();
-                    onInfo(rowData.item);
-                }}>
-                    <Icon active name="information-circle" />
-                </Button>
-            </Left>}
-            <Right>
-                <Button full danger onPress={() => onDelete(rowData.item)}>
-                    <Icon active name="trash" />
-                </Button>
-            </Right>
-        </ListItem>
+    return (
+        <>
+            <Actionsheet isOpen={isActionSheetOpen} onClose={() => setActionSheetOpen(false)}>
+                <Actionsheet.Content>
+                    {onInfo && <Actionsheet.Item onPress={() => onInfo(selectedItem)}>{'Open Details'}</Actionsheet.Item>}
+                    <Actionsheet.Item onPress={() => onDelete(selectedItem)}>{'Delete'}</Actionsheet.Item>
+                </Actionsheet.Content>
+            </Actionsheet>
+            <List my={2} py={0}>
+                {data.map((rowData) => renderItem(rowData))}
+            </List>
+        </>
     );
-
-    return (<SwipeListView
-        leftOpenValue={75}
-        rightOpenValue={-75}
-        data={data}
-        keyExtractor={(item : any) => item.id}
-        renderItem={renderItem}
-        renderHiddenItem={renderHiddenRow}
-        closeOnRowPress
-    />);
 };

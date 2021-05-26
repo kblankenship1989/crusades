@@ -1,5 +1,4 @@
 import React from 'react';
-import {View, Separator, Text, Button, Icon, Grid, Col, H2} from 'native-base';
 import {Picker, PickerItem} from './picker';
 
 export type QuantitySelectorProps = {
@@ -36,39 +35,12 @@ export const QuantitySelector : React.FC<QuantitySelectorProps> = ({
     };
 
     return (
-        <View>
-            <Separator bordered>
-                <H2>{title}</H2>
-            </Separator>
-            <Grid>
-                <Col>
-                    <Button
-                        icon
-                        full
-                        disabled={selectedValue <= min}
-                        onPress={() => onQuantityChange(selectedValue - multiplier)}
-                    >
-                        <Icon type={'MaterialCommunityIcons'} name={'minus-circle'}/>
-                    </Button>
-                </Col>
-                <Col size={3}>
-                    <Picker
-                        items={getAvailableOptions()}
-                        onChange={onQuantityChange}
-                        selectedValue={selectedValue}
-                    />
-                </Col>
-                <Col>
-                    <Button
-                        icon
-                        full
-                        disabled={selectedValue >= max}
-                        onPress={() => onQuantityChange(selectedValue + multiplier)}
-                    >
-                        <Icon type={'MaterialCommunityIcons'} name={'plus-circle'}/>
-                    </Button>
-                </Col>
-            </Grid>
-        </View>
+        <Picker
+            title={title}
+            isRequired={false}
+            items={getAvailableOptions()}
+            onChange={onQuantityChange}
+            selectedValue={selectedValue}
+        />
     );
 };

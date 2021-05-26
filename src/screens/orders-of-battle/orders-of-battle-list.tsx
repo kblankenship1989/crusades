@@ -1,11 +1,11 @@
 import React from 'react';
 import {
     Container,
-    Header,
     Text,
     Button,
-    Footer,
-    FooterTab
+    Tabs,
+    Icon,
+    Fab,
 } from 'native-base';
 import {ConnectedProps} from 'react-redux';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -13,6 +13,9 @@ import {RootParamList, Screens} from '../../navigation/root-param-list';
 import {ordersOfBattleListConnector} from './orders-of-battle-list-connector';
 import {OrderOfBattle} from '../../redux/state/order-of-battle';
 import {SwipeListWrapper} from '../../components/swipe-list-background-image';
+import TabBar from 'native-base/src/components/composites/Tabs/TabBar';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
+import {AppHeader} from '../../components/app-header';
 
 export type OrdersOfBattleListProps = ConnectedProps<typeof ordersOfBattleListConnector> & {
     navigation: StackNavigationProp<RootParamList, Screens.ORDERS_OF_BATTLE>
@@ -44,7 +47,7 @@ export const OrdersOfBattleList = ({
 
     return (
         <Container>
-            <Header />
+            <AppHeader title={'Orders of Battle'}/>
             <SwipeListWrapper
                 data={orderOfBattleList}
                 onDelete={(item: OrderOfBattle) => deleteOrderOfBattle(item.id)}
@@ -54,16 +57,11 @@ export const OrdersOfBattleList = ({
                 getSubtitle={(item: OrderOfBattle) => new Date(item.lastAccessed).toLocaleDateString()}
                 imageKey={(item : OrderOfBattle) => item.faction}
             />
-            <Footer>
-                <FooterTab>
-                    <Button
-                        full
-                        onPress={createOrderOfBattleAndNavigate}
-                    >
-                        <Text>Create</Text>
-                    </Button>
-                </FooterTab>
-            </Footer>
+            <Fab
+                placement={'bottom-right'}
+                onPress={createOrderOfBattleAndNavigate}>
+                <Icon as={<MaterialCommunityIcons name={'pencil'}/>}/>
+            </Fab>
         </Container>
     );
 };

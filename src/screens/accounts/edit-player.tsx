@@ -12,6 +12,7 @@ import {imageKeyMap} from '../../assets/images';
 import {TextInput} from '../../components/text-input';
 import {Player} from '../../redux/state/player';
 import {AppHeader} from '../../components/app-header';
+import {Ionicons, MaterialCommunityIcons} from '@expo/vector-icons';
 
 export type EditPlayerProps = ConnectedProps<typeof editPlayerConnector> & {
     navigation: StackNavigationProp<RootParamList, Screens.EDIT_PLAYER>,
@@ -122,17 +123,17 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
                         placeholder={'Select Preferred Faction'}
                         title={'Preferred Faction'}
                     />
-                    {/* <ImagePickerButton
+                    <ImagePickerButton
                         defaultImage={imageKeyMap[this.state.player.preferredFaction]}
                         imageUri={this.state.player.avatarImageUri}
                         onImageSelect={this.selectAvatarImage}
                         title={'Select Avatar Image'}
-                    /> */}
+                    />
                 </Stack>
                 <Fab
                     placement={'bottom-right'}
                     onPress={this.save}>
-                    <Icon type={'MaterialCommunityIcons'} name={'content-save'} />
+                    <Icon as={<MaterialCommunityIcons name={'content-save'}/>}/>
                 </Fab>
             </Container>
         );

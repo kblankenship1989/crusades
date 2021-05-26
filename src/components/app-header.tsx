@@ -1,9 +1,10 @@
 import React from 'react';
 import {Icon, IconButton} from 'native-base';
 import {AppBar} from 'native-base/src/components/composites/AppBar';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 
 export type Action = {
-    icon: string,
+    icon: typeof MaterialCommunityIcons,
     onPress: () => void,
     isDisabled: boolean
 }
@@ -29,8 +30,7 @@ export const AppHeader : React.FC<AppHeaderProps> = ({
                         disabled={action.isDisabled}
                         icon={
                             <Icon
-                                type={'MaterialCommunityIcons'}
-                                name={action.icon}
+                                as={action.icon}
                             />
                         }
                     />

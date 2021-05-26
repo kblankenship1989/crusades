@@ -3,7 +3,6 @@ import {enumKeys, isEnumKey} from '../helpers/enum-helpers';
 import {BattlefieldRoles} from '../enums';
 
 import {Picker} from './picker';
-import {View, Separator, Text} from 'native-base';
 
 export type BattlefieldRolePickerProps = {
     selectedRole?: BattlefieldRoles,
@@ -30,17 +29,14 @@ export const BattlefieldRolePicker : React.FC<BattlefieldRolePickerProps> = ({se
     };
 
     return (
-        <View>
-            <Separator>
-                <Text>{title}</Text>
-            </Separator>
-            <Picker
-                selectedValue={selectedRole}
-                items={items}
-                onChange={onValueChange}
-                placeholder={placeholder || 'Select Battlefield Role'}
-            />
-        </View>
+        <Picker
+            isRequired={true}
+            title={title}
+            selectedValue={selectedRole}
+            items={items}
+            onChange={onValueChange}
+            placeholder={placeholder || 'Select Battlefield Role'}
+        />
     );
 };
 
