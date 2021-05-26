@@ -1,5 +1,5 @@
 import React from 'react';
-import {Content, Header, Container, Footer, FooterTab, Button, Text, Form} from 'native-base';
+import {Container, Fab, Icon, Stack} from 'native-base';
 import {ConnectedProps} from 'react-redux';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList, Screens} from '../../navigation/root-param-list';
@@ -10,6 +10,8 @@ import {FactionPicker} from '../../components/faction-picker';
 import {Factions} from '../../enums';
 import {TextInput} from '../../components/text-input';
 import {QuantitySelector} from '../../components/quantity-selector';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
+import {AppHeader} from '../../components/app-header';
 
 export type EditOrderOfBattleProps = ConnectedProps<typeof editOrderOfBattleConnector> & {
     navigation: StackNavigationProp<RootParamList, Screens.EDIT_ORDER_OF_BATTLE>,
@@ -82,48 +84,41 @@ export class EditOrderOfBattle extends React.Component<EditOrderOfBattleProps, E
     render(): React.ReactNode {
         return (
             <Container>
-                <Header />
-                <Content>
-                    <Form>
-                        <TextInput
-                            label={'Title'}
-                            value={this.state.title}
-                            onChangeText={this.setTitle}
-                        />
-                        <FactionPicker
-                            selectedFaction={this.state.isNew ? undefined : this.state.faction}
-                            onChange={this.selectFaction}
-                            placeholder={'Select Faction'}
-                            title={'Faction'}
-                        />
-                        <QuantitySelector
-                            title={'Requisition Points'}
-                            min={0}
-                            max={5}
-                            multiplier={1}
-                            onQuantityChange={this.setNumber('requisitionPoints').bind(this)}
-                            selectedValue={this.state.requisitionPoints}
-                        />
-                        <QuantitySelector
-                            title={'Supply Limit'}
-                            min={50}
-                            max={200}
-                            multiplier={5}
-                            onQuantityChange={this.setNumber('supplyLimit').bind(this)}
-                            selectedValue={this.state.supplyLimit}
-                        />
-                    </Form>
-                </Content>
-                <Footer>
-                    <FooterTab>
-                        <Button
-                            full
-                            onPress={this.save}
-                        >
-                            <Text>Save</Text>
-                        </Button>
-                    </FooterTab>
-                </Footer>
+                <AppHeader title={'Edit Order of Battle'} />
+                <Stack space={4} w={'80%'}>
+                    <TextInput
+                        label={'Title'}
+                        value={this.state.title}
+                        onChangeText={this.setTitle}
+                    />
+                    <FactionPicker
+                        selectedFaction={this.state.isNew ? undefined : this.state.faction}
+                        onChange={this.selectFaction}
+                        placeholder={'Select Faction'}
+                        title={'Faction'}
+                    />
+                    <QuantitySelector
+                        title={'Requisition Points'}
+                        min={0}
+                        max={5}
+                        multiplier={1}
+                        onQuantityChange={this.setNumber('requisitionPoints').bind(this)}
+                        selectedValue={this.state.requisitionPoints}
+                    />
+                    <QuantitySelector
+                        title={'Supply Limit'}
+                        min={50}
+                        max={200}
+                        multiplier={5}
+                        onQuantityChange={this.setNumber('supplyLimit').bind(this)}
+                        selectedValue={this.state.supplyLimit}
+                    />
+                </Stack>
+                <Fab
+                    placement={'bottom-right'}
+                    onPress={this.save}>
+                    <Icon as={<MaterialCommunityIcons name={'content-save'}/>}/>
+                </Fab>
             </Container>
         );
     }

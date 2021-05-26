@@ -1,20 +1,12 @@
 import React from 'react';
-import {
-    Container,
-    Header,
-    Content,
-    Text,
-    Button,
-    Footer,
-    FooterTab,
-    Thumbnail,
-    Separator
-} from 'native-base';
 import {ConnectedProps} from 'react-redux';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList, Screens} from '../../navigation/root-param-list';
 import {accountSummaryConnector} from './account-summary-connector';
 import {imageKeyMap} from '../../assets/images';
+import {Avatar, Container, Fab, Heading, Icon, Text} from 'native-base';
+import {AppHeader} from '../../components/app-header';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 
 export type AccountSummaryProps = ConnectedProps<typeof accountSummaryConnector> & {
     navigation: StackNavigationProp<RootParamList, Screens.ACCOUNT_SUMMARY>
@@ -26,34 +18,23 @@ export const AccountSummary : React.FC<AccountSummaryProps> = ({account, navigat
         navigation.push(Screens.EDIT_PLAYER, {isNew: false});
     };
 
+    const source = account.player.avatarImageUri ? {uri: account.player.avatarImageUri} : imageKeyMap[account.player.preferredFaction];
+
     return (
         <Container>
-            <Header />
-            <Content>
-                {account.player.avatarImageUri ? <Thumbnail large source={{uri: account.player.avatarImageUri}}/> : <Thumbnail large source={imageKeyMap[account.player.preferredFaction]}/>}
-                <Separator bordered>
-                    <Text>Player Name</Text>
-                </Separator>
-                <Text>{account.player.getPlayerName()}</Text>
-                <Separator bordered>
-                    <Text>Preferred Faction</Text>
-                </Separator>
-                <Text>{account.player.preferredFaction}</Text>
-                <Separator bordered>
-                    <Text>Statistics</Text>
-                </Separator>
-                <Text>{'Some stats here'}</Text>
-            </Content>
-            <Footer>
-                <FooterTab>
-                    <Button
-                        full
-                        onPress={navigateToEditPlayer}
-                    >
-                        <Text>{'Edit'}</Text>
-                    </Button>
-                </FooterTab>
-            </Footer>
+            <AppHeader title={'Account Summary'}/>
+            <Avatar size={'lg'} source={source}/>
+            <Heading size={'sm'}>{'Player Name'}</Heading>
+            <Text>{account.player.getPlayerName()}</Text>
+            <Heading size={'sm'}>Preferred Faction</Heading>
+            <Text>{account.player.preferredFaction}</Text>
+            <Heading size={'sm'}>Statistics</Heading>
+            <Text>{'Some stats here'}</Text>
+            <Fab
+                placement={'bottom-right'}
+                onPress={navigateToEditPlayer}>
+                <Icon as={<MaterialCommunityIcons name={'pencil'}/>}/>
+            </Fab>
         </Container>
     );
 };
