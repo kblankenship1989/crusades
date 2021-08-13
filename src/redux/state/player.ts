@@ -4,13 +4,13 @@ export class Player {
     firstName: string;
     lastName: string;
     middleName?: string;
-    preferredFaction: Factions;
+    preferredFaction: Factions | undefined;
     avatarImageUri?: string;
 
     constructor() {
         this.firstName = '';
         this.lastName = '';
-        this.preferredFaction = Factions.UNALIGNED;
+        this.preferredFaction = undefined;
     }
 
     getPlayerName() : string {

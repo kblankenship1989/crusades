@@ -13,7 +13,6 @@ import {RootParamList, Screens} from '../../navigation/root-param-list';
 import {ordersOfBattleListConnector} from './orders-of-battle-list-connector';
 import {OrderOfBattle} from '../../redux/state/order-of-battle';
 import {SwipeListWrapper} from '../../components/swipe-list-background-image';
-import TabBar from 'native-base/src/components/composites/Tabs/TabBar';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 import {AppHeader} from '../../components/app-header';
 

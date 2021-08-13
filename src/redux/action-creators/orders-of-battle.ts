@@ -2,6 +2,7 @@ import {AppThunk} from './../store';
 import {AvailableActions} from './../action-list';
 import {OrderOfBattle} from '../state/order-of-battle';
 import {Action} from 'redux';
+import {Factions} from '../../enums';
 
 export type CreateOrderOfBattleAction = Action<AvailableActions.CREATE_ORDER_OF_BATTLE> & {
     payload: {
@@ -34,7 +35,7 @@ export const createOrderOfBattle = () : AppThunk => (dispatch, getState) : void 
     const {
         account
     } = getState();
-    const newOrderOfBattle = new OrderOfBattle(account.player.preferredFaction);
+    const newOrderOfBattle = new OrderOfBattle(account.player.preferredFaction as Factions);
 
     const action : CreateOrderOfBattleAction = {
         type: AvailableActions.CREATE_ORDER_OF_BATTLE,
@@ -43,6 +44,8 @@ export const createOrderOfBattle = () : AppThunk => (dispatch, getState) : void 
             selectedOrderOfBattleId: newOrderOfBattle.id
         }
     };
+
+    console.log(action);
 
     dispatch(action);
 };

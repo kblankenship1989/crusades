@@ -12,7 +12,7 @@ import {imageKeyMap} from '../../assets/images';
 import {TextInput} from '../../components/text-input';
 import {Player} from '../../redux/state/player';
 import {AppHeader} from '../../components/app-header';
-import {Ionicons, MaterialCommunityIcons} from '@expo/vector-icons';
+import {MaterialCommunityIcons} from '@expo/vector-icons';
 
 export type EditPlayerProps = ConnectedProps<typeof editPlayerConnector> & {
     navigation: StackNavigationProp<RootParamList, Screens.EDIT_PLAYER>,
@@ -54,8 +54,7 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
         player.preferredFaction = preferredFaction;
         this.setState({
             player,
-            isDirty: true,
-            isNew: false
+            isDirty: true
         });
     }
 
@@ -70,11 +69,13 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
     isFormValid = () : boolean => {
         return [
             this.state.player.firstName,
-            this.state.player.lastName
+            this.state.player.lastName,
+            this.state.player.preferredFaction
         ].every((value) => !!value);
     }
 
     save = () : void => {
+        console.log(this.state);
         if (this.isFormValid()) {
             this.props.saveAccount({player: this.state.player});
             const isNew = this.state.isNew;
@@ -118,13 +119,13 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
                         isRequired
                     />
                     <FactionPicker
-                        selectedFaction={this.state.isNew ? undefined : this.state.player.preferredFaction}
+                        selectedFaction={this.state.player.preferredFaction}
                         onChange={this.selectFaction}
                         placeholder={'Select Preferred Faction'}
                         title={'Preferred Faction'}
                     />
                     <ImagePickerButton
-                        defaultImage={imageKeyMap[this.state.player.preferredFaction]}
+                        defaultImage={imageKeyMap[this.state.player.preferredFaction as Factions]}
                         imageUri={this.state.player.avatarImageUri}
                         onImageSelect={this.selectAvatarImage}
                         title={'Select Avatar Image'}
@@ -133,7 +134,7 @@ export class EditPlayer extends React.Component<EditPlayerProps, EditPlayerState
                 <Fab
                     placement={'bottom-right'}
                     onPress={this.save}>
-                    <Icon as={<MaterialCommunityIcons name={'content-save'}/>}/>
+                    <Icon size={'sm'} as={<MaterialCommunityIcons name={'content-save'}/>}/>
                 </Fab>
             </Container>
         );

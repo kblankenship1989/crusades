@@ -1,3 +1,4 @@
+import {StatusBar} from 'expo-status-bar';
 import {NativeBaseProvider} from 'native-base';
 import React from 'react';
 
@@ -10,6 +11,7 @@ const App = () : JSX.Element => {
             <AppProvider>
                 <Main/>
             </AppProvider>
+            <StatusBar style="auto" />
         </NativeBaseProvider>
     );
 };
